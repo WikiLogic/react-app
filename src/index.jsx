@@ -11,19 +11,23 @@ import api from './API/api.js';
 
 import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
+
 class Wikilogic extends React.Component {
 
 	constructor (props) {
 		super(props)
-		//this is pretty much the same as the location data object that comes from the location API
+		
 		this.state = {
-            
+			search_results: []
 		};
 	}
 
 	componentWillMount(){
-        eventManager.subscribe(actions.API_RETURNED_CLAIMS, function(data){
+        eventManager.subscribe(actions.API_RETURNED_CLAIMS, (data) => {
 			console.log('API returned alcims!', data);
+			this.setState({
+				search_results: data.claims
+			});
 		});
 	}
 
@@ -80,9 +84,10 @@ class Wikilogic extends React.Component {
 						{/* the home page: search results */}
 						<Route path="/" exact render={() => (
 							<div>
-								<SearchResults blurb={this.state.location_body_content}/>
+								<SearchResults search_results={this.state.search_results}/>
 							</div>
 						)}/>
+						{/*
 						<section className="sidebar-layout">
 							<div className="sidebar-layout__main">
 								chart in here!
@@ -96,6 +101,7 @@ class Wikilogic extends React.Component {
 								</div>
 							</div>
 						</section>
+						*/}
 					</main>
 					<footer className="footer main-layout__footer">
 						<div className="footer__col">
