@@ -27,3 +27,116 @@ Single responsability classes. for those times when it makes life easier to just
 COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
 */
+
+//a linking to root
+.site-flag {
+    color: white;
+    margin: rem(9) 0;
+    text-align: center;
+    display: block;
+    &:hover {
+        //border-bottom: 0;
+    }
+
+    &__title {
+        font-family: $serif;
+        font-size: rem(24);
+    }
+    &__tagline {
+        font-size: rem(15);
+    }
+}
+
+.search {
+    
+    &__input {
+        border-radius: 2px;
+    }
+}
+
+.language-selector {
+
+    &__current {
+        font-family: $serif;
+        color: white;
+    }
+
+    &__dropdown {
+        display: none;
+    }
+}
+
+.footer {
+    margin-top: auto; //pushes it to the bottom of the screen
+    display: flex;
+    justify-content: space-between;
+    font-size: rem(14);
+
+
+    &__col {
+        padding: rem($pad-small);
+        flex-grow: 1;
+
+        text-align: left;
+        + .footer__col {
+            text-align: right;
+        }
+    }   
+}
+
+.search-results {
+
+    padding-top: rem($pad);
+
+    &__title {
+
+    }
+    
+    &__list {
+
+    }
+}
+
+.search-result {
+    
+    border: 1px solid #eee;
+    padding: rem($pad / 2);
+    cursor: pointer;
+
+    &:hover {
+        border-color: $WL_Blue;
+    }
+
+    &:nth-child(n+1){
+        margin-bottom: rem($pad);
+    }
+
+    &__body {
+        margin-bottom: rem($pad / 2);
+    }
+
+    &__status-wrap {
+        width: 100%;
+        height: 6px;
+        border-radius: 5px;
+        position: relative;
+        background-color: #eee;
+        -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.15);
+        -moz-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.15);
+        box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.15);
+    }
+        &__status-bar {
+            position: absolute;
+            top: 1px; bottom: 1px;
+            left: 1px;
+            border-radius: 3px;
+            background-color: #039c15;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(34,255,0,0.3);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(34,255,0,0.3);
+            box-shadow: 0px 0px 5px 0px rgba(34,255,0,0.3);
+
+            @for $i from 1 through 100 {
+                &--#{$i} { width: $i * 1%; }
+            }
+        }
+}
