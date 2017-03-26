@@ -1,0 +1,13 @@
+.claim-chain {
+    width: 100%;
+    
+    &__top-claim { //inside a row
+        text-align: center;
+    }
+
+    &__row {
+        padding: rem($pad);
+        overflow-x: scroll;
+    }
+
+}

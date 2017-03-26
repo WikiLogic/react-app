@@ -52,7 +52,12 @@ eventManager.subscribe(actions.ARG_REQUEST_BY_ID_SUBMITTED, function (claimid) {
     //tell the world we're submitting a search (for spinners and the like)
     eventManager.fire(actions.API_REQUEST_BY_ID_SUBMITTED, claimid);
 
-    fetch("http://localhost:3030/claims/" + claimid)
+    getClaimDetailById(claimid);
+});
+
+function getClaimDetailById(claimId){
+
+    fetch("http://localhost:3030/claims/" + claimId)
     .then(checkStatus)
     .then(parseJSON)
     .then(function (res) {
@@ -61,14 +66,16 @@ eventManager.subscribe(actions.ARG_REQUEST_BY_ID_SUBMITTED, function (claimid) {
             return;
         }
 
-        var dataAndOriginalId = { data: res.data, claimid: claimid };
-        eventManager.fire(actions.API_ARG_REQUEST_BY_ID_RETURNED, dataAndOriginalId);
+        var dataAndOriginalId = { data: res.data, claimid: claimId };
+
+        eventManager.fire(actions.API_RETURNED_CLAIM_DETAIL, res.data);
     })
     .catch(function (err) {
         eventManager.fire(actions.API_ERRORED, err);
         console.error('API error', err);
     });
-});
+
+}
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -85,5 +92,6 @@ function parseJSON(response) {
 export default {
     init: function(){
         //ping the API & see if it's alive
-    }
+    },
+    getClaimDetailById
 }

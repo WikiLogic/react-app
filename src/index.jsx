@@ -12,29 +12,34 @@ import api from './API/api.js';
 import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
 
+import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
+
 class Wikilogic extends React.Component {
 
 	constructor (props) {
 		super(props)
 		
 		this.state = {
-			search_results: []
+			search_results: [],
+			focused_claim: {}
 		};
+		this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
 	}
 
 	componentWillMount(){
         eventManager.subscribe(actions.API_RETURNED_CLAIMS, (data) => {
 			console.log('API returned alcims!', data);
-			this.setState({
-				search_results: data.claims
-			});
+			this.setState({ search_results: data.claims });
 		});
 	}
 
-	componentWillUnmount(){
-        
-	}
+	setNewClaimFocus(claim){
+		api.getClaimDetailById(claim.id);
 
+		this.setState({
+			focused_claim: claim
+		})
+	}
 
 	render() {
 		return (
@@ -80,29 +85,28 @@ class Wikilogic extends React.Component {
 							*/}
 						</div>
 					</header>
+					
 					<main className="main main-layout__body">
 						{/* the home page: search results */}
 						<Route path="/" exact render={() => (
-							<div>
-								<SearchResults search_results={this.state.search_results}/>
+							<div className="sidebar-layout">
+								<div className="sidebar-layout__main">
+
+									<ClaimChain focused_claim={this.state.focused_claim}/>
+
+								</div>
+								<div className="sidebar-layout__side">
+
+									<SearchResults search_results={this.state.search_results} resultClick={(resultClicked) => {
+										
+										this.setNewClaimFocus(resultClicked);
+									}}/>
+
+								</div>	
 							</div>
 						)}/>
-						{/*
-						<section className="sidebar-layout">
-							<div className="sidebar-layout__main">
-								chart in here!
-							</div>
-							<div className="sidebar-layout__side">
-								<div className="search-results">
-									<div className="search-results__title"></div>
-									<div className="search-results__list">
-										<div className="js-search-results-list">search results here!</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						*/}
 					</main>
+
 					<footer className="footer main-layout__footer">
 						<div className="footer__col">
 							Wikilogic is maintainted by the <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>, a non-profit organisation...
