@@ -4,7 +4,10 @@ import { Router, Link, Route } from 'react-router-dom'; //BrowserRouter as
 import createBrowserHistory from 'history/createBrowserHistory';
 const history = createBrowserHistory();
 
-import App from './components/App.jsx';
+import eventManager from './js-helpers/eventManager.js';
+import actions from './js-helpers/actions.js';
+
+import SearchInput from './components/SearchInput/SearchInput.jsx';
 
 class Wikilogic extends React.Component {
 
@@ -43,7 +46,13 @@ class Wikilogic extends React.Component {
 					</div>
 					<div className="header__col header__col--search">
 						<div className="search">
-							<input type="text" className="search__input js-search-input" placeholder="Search claims"/>
+							<SearchInput submissionHandler={(term) => {
+								if (isNaN(this.state.value)) {
+									eventManager.fire(actions.SEARCH_TERM_SUBMITTED, term);
+								} else {
+									eventManager.fire(actions.SEARCH_NUMBER_SUBMITTED, term);
+								}
+							}}/>
 						</div>
 					</div>
 					<div className="header__col">

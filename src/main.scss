@@ -27,6 +27,7 @@ Single responsability classes. for those times when it makes life easier to just
 COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
 */
+@import "components/**/*.scss";
 
 //a linking to root
 .site-flag {
@@ -47,12 +48,6 @@ styles are set in sass alongside the components. (in the components folder).
     }
 }
 
-.search {
-    
-    &__input {
-        border-radius: 2px;
-    }
-}
 
 .language-selector {
 
