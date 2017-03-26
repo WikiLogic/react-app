@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    background-color: $dark-blue;
+    color: white;
+
+    a {
+        @include occluded-underline($dark-blue, $link-blue, $link-blue);
+    }
+
+    //padding between matches side padding
+    padding: 0 rem($pad-small / 2);
+    &__col {
+        padding: 0 rem($pad-small / 2);
+        text-align: center;
+
+        +.header__col {
+            text-align: right;
+        }
+
+        &--search {
+            margin-left: auto; //pushes the search over to the right
+        }
+    }
+}

@@ -1,4 +1,4 @@
-##Set up
+## Set up
 
  - install - `npm i`
  - develop - `npm start`

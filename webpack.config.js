@@ -6,8 +6,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
       app: [
-        './src/index.js',
-        './src/sass/main.scss'
+        './src/index.jsx',
+        './src/main.scss'
       ]
   },
   output: {
@@ -16,12 +16,20 @@ module.exports = {
   },
   module: {
     rules: [
-        { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
-        { test: /\.jsx$/, use: 'babel-loader', exclude: /node_modules/ },
+        { 
+            test: /\.js$/, 
+            use: 'babel-loader', 
+            exclude: /node_modules/ 
+        },
+        { 
+            test: /\.jsx$/, 
+            use: 'babel-loader', 
+            exclude: /node_modules/ 
+        },
         {
             test: /\.scss$/,
             use: ExtractTextPlugin.extract({
-                use: ['css-loader', 'sass-loader'],
+                use: ['css-loader', 'sass-loader', 'import-glob-loader'],
                 fallback: 'style-loader',
             }),
             exclude: /node_modules/

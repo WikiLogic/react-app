@@ -1,0 +1,7 @@
+.a, a {
+	text-decoration: none;
+	color: $link-blue;
+	padding-bottom: 2px;
+	
+	@include occluded-underline(white, $link-blue, $link-blue);
+}
