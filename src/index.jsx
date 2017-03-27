@@ -23,28 +23,35 @@ class Wikilogic extends React.Component {
 			search_results: [],
 			focused_claim: {}
 		};
+		this.searchClaims = this.searchClaims.bind(this);
 		this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
 	}
 
-	componentWillMount(){
-        eventManager.subscribe(actions.API_RETURNED_CLAIMS, (data) => {
-			console.log('API returned alcims!', data);
-			this.setState({ search_results: data.claims });
-		});
-		eventManager.subscribe(actions.API_RETURNED_CLAIM_DETAIL, (data) => {
-            console.log('CLAIM DEEEEETAIL!', data);
-            this.setState({
-                focused_claim: data.claim
-            });
-        });
+	searchClaims(search){
+		if (isNaN(search)) {
+			api.searchClaimsByTerm(search)
+			.then((data) => {
+				this.setState({ search_results: data.claims });
+			}).catch((err) => {
+				console.error('search term error', err);
+			});
+		} else {
+			api.getClaimDetailById(search)
+			.then((data) => {
+				console.log("got claim by ID", data);
+			}).catch((err) => {
+				console.error('search term error', err);
+			});
+		}
 	}
 
 	setNewClaimFocus(claim){
-		api.getClaimDetailById(claim.id);
-
-		this.setState({
-			focused_claim: claim
-		})
+		api.getClaimDetailById(claim.id)
+		.then((data) => {
+			this.setState({ focused_claim: data.claim });
+		}).catch((err) => {
+			console.error('errrrererrr', err);
+		});
 	}
 
 	render() {
@@ -67,13 +74,7 @@ class Wikilogic extends React.Component {
 						</div>
 						<div className="header__col header__col--search">
 							<div className="search">
-								<SearchInput submissionHandler={(term) => {
-									if (isNaN(this.state.value)) {
-										eventManager.fire(actions.SEARCH_TERM_SUBMITTED, term);
-									} else {
-										eventManager.fire(actions.SEARCH_NUMBER_SUBMITTED, term);
-									}
-								}}/>
+								<SearchInput submissionHandler={this.searchClaims}/>
 							</div>
 						</div>
 						<div className="header__col">
@@ -103,10 +104,7 @@ class Wikilogic extends React.Component {
 								</div>
 								<div className="sidebar-layout__side">
 
-									<SearchResults search_results={this.state.search_results} resultClick={(resultClicked) => {
-										
-										this.setNewClaimFocus(resultClicked);
-									}}/>
+									<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
 
 								</div>	
 							</div>

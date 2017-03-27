@@ -55,26 +55,46 @@ eventManager.subscribe(actions.ARG_REQUEST_BY_ID_SUBMITTED, function (claimid) {
     getClaimDetailById(claimid);
 });
 
-function getClaimDetailById(claimId){
+function searchClaimsByTerm(searchTerm){
 
-    fetch("http://localhost:3030/claims/" + claimId)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(function (res) {
-        if (!res.data.hasOwnProperty('claim')) {
-            eventManager.fire(actions.API_REQUEST_BY_ID_ERRORED, '404');
-            return;
-        }
-
-        var dataAndOriginalId = { data: res.data, claimid: claimId };
-
-        eventManager.fire(actions.API_RETURNED_CLAIM_DETAIL, res.data);
-    })
-    .catch(function (err) {
-        eventManager.fire(actions.API_ERRORED, err);
-        console.error('API error', err);
+    let searchResultsPromies = new Promise((resolve, reject) => {
+        fetch( "http://localhost:3030/claims?search=" + searchTerm)
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(function(res) {
+            resolve(res.data);
+        })
+        .catch(function(err){
+            reject(err);
+            console.error('API error', err);
+        });
     });
 
+    return searchResultsPromies;
+}
+
+function getClaimDetailById(claimId){
+
+    let claimDetailPromise = new Promise((resolve, reject) => {
+        fetch("http://localhost:3030/claims/" + claimId)
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(function (res) {
+            if (!res.data.hasOwnProperty('claim')) {
+                reject('404');
+                //eventManager.fire(actions.API_REQUEST_BY_ID_ERRORED, '404');
+                return;
+            }
+            resolve(res.data);
+        })
+        .catch(function (err) {
+            reject(err);
+            //eventManager.fire(actions.API_ERRORED, err);
+            console.error('API error', err);
+        });
+    });
+
+    return claimDetailPromise;
 }
 
 function checkStatus(response) {
@@ -93,5 +113,6 @@ export default {
     init: function(){
         //ping the API & see if it's alive
     },
+    searchClaimsByTerm,
     getClaimDetailById
 }
