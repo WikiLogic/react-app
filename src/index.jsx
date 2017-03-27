@@ -31,6 +31,12 @@ class Wikilogic extends React.Component {
 			console.log('API returned alcims!', data);
 			this.setState({ search_results: data.claims });
 		});
+		eventManager.subscribe(actions.API_RETURNED_CLAIM_DETAIL, (data) => {
+            console.log('CLAIM DEEEEETAIL!', data);
+            this.setState({
+                focused_claim: data.claim
+            });
+        });
 	}
 
 	setNewClaimFocus(claim){

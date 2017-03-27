@@ -2,6 +2,8 @@ import React from 'react';
 import eventManager from '../../eventManager/eventManager.js';
 import actions from '../../eventManager/actions.js';
 
+import Argument from './Argument.jsx';
+
 /* A chain going down from the claim of interest
  * Only one line for this version
  */
@@ -10,30 +12,18 @@ export default class ClaimChain extends React.Component {
 
 	constructor (props) {
 		super(props)
-		this.state = {
-            apiReturnedClaimDetailSubscription: {}
-        };
-		this.handleChange = this.handleChange.bind(this);
 	}
-
-	handleChange(event) {
-		/* Change handler is required otherwise the state wouldn't update and nothing will show up in the input when typing
-		 * https://facebook.github.io/react/docs/forms.html
-		 */
-		this.setState({value: event.target.value});
-	}
-
-    componentWillMount(){
-        let apiReturnedClaimDetailSubscription = eventManager.subscribe(actions.API_RETURNED_CLAIM_DETAIL, function(data){
-            console.log('CLAIM DEEEEETAIL!', data);
-        });
-    }
-
-    componentWillUnmount(){
-        eventManager.unsubscribe(apiReturnedClaimDetailSubscription);
-    }
 
 	render() {
+        if (typeof this.props.focused_claim.body == 'undefined') { return null; }
+
+        let focusArguments = null;
+        if (typeof this.props.focused_claim.arguments != 'undefined') {
+            focusArguments = this.props.focused_claim.arguments.map(function(argumentObject, index){
+                return <Argument argumentObject={argumentObject} key={index} />
+            });
+        }
+
 		return (
 			<div className="claim-chain">
                 <div className="claim-chain__row">
@@ -42,7 +32,8 @@ export default class ClaimChain extends React.Component {
                     </div>   
                 </div>
                 <div className="claim-chain__row">
-                    row
+                    {/* loop through the focus claims's arguments */}
+                    {focusArguments}
                 </div>
                 <div className="claim-chain__row">
                     row

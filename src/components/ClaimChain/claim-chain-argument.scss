@@ -1,0 +1,11 @@
+.claim-chain-argument {
+    padding: rem($pad);
+    //text-align: center;
+
+    &__premis {
+        cursor: pointer;
+        &:hover {
+            color: blue;
+        }
+    }
+}
