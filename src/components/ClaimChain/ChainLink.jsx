@@ -9,13 +9,10 @@ export default class ChainLink extends React.Component {
 
 	constructor (props) {
 		super(props)
-		this.state = {
-        };
 		this.premisClickHandler = this.premisClickHandler.bind(this);
 	}
 
 	premisClickHandler(premis) {
-        console.log("this.props.premisClickHandler", this.props);
 		this.props.premisClickHandler(premis);
 	}
 
@@ -24,7 +21,7 @@ export default class ChainLink extends React.Component {
         let linkArguments = null;
         if (typeof this.props.claim.arguments != 'undefined') {
             linkArguments = this.props.claim.arguments.map(function(argumentObject, index){
-                return <Argument argumentObject={argumentObject} key={index} premisClickHandler={this.premisClickHandler} />
+                return <Argument argumentObject={argumentObject} key={index} highlightedPremisId={this.props.highlightedPremisId} premisClickHandler={this.premisClickHandler} />
             }.bind(this));
         }
 
