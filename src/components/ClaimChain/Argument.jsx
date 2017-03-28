@@ -1,5 +1,5 @@
 import React from 'react';
-
+import StatusBar from '../StatusBar/StatusBar.jsx';
 /* A chain going down from the claim of interest
  * Only one line for this version
  */
@@ -21,12 +21,18 @@ export default class ClaimChain extends React.Component {
 
         let premises = this.props.argumentObject.premises.map(function(premis, index){
 			let className = "claim-chain-argument__premis";
+			
 			if (premis.id == this.props.highlightedPremisId) {
 				className += " claim-chain-argument__premis--highlighted";
 			}
-            return <div className={className} key={index} onClick={() => { this.handleClick(premis); }}>
-                {premis.body}
-            </div>;
+            
+			return (
+				<div className={className} key={index} onClick={() => { this.handleClick(premis); }}>
+					{premis.body}
+					<StatusBar state={premis.state}/>
+				</div>
+			);
+
         }.bind(this));
 
 		return (

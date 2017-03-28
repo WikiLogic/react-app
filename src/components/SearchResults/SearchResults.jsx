@@ -25,7 +25,7 @@ export default class SearchResults extends React.Component {
 		}
 		
         let searchResults = this.props.search_results.map(function(search_result, index){
-            return <SearchResult search_result={search_result} key={index} handleClick={this.handleClick}/>;
+            return <SearchResult claim={search_result} key={index} handleClick={this.handleClick}/>;
         }.bind(this));
 
 		return (
