@@ -1,17 +1,18 @@
+//React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Link, Route } from 'react-router-dom'; //BrowserRouter as 
+import { Router, Link, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 const history = createBrowserHistory();
 
+//JS
 import eventManager from './eventManager/eventManager.js';
 import actions from './eventManager/actions.js';
-
 import api from './API/api.js';
 
+//React components
 import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
-
 import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
 
 class Wikilogic extends React.Component {
@@ -23,6 +24,7 @@ class Wikilogic extends React.Component {
 			search_results: [],
 			focused_claim: {}
 		};
+
 		this.searchClaims = this.searchClaims.bind(this);
 		this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
 	}
@@ -33,14 +35,14 @@ class Wikilogic extends React.Component {
 			.then((data) => {
 				this.setState({ search_results: data.claims });
 			}).catch((err) => {
-				console.error('search term error', err);
+				console.error('search term api call error', err);
 			});
 		} else {
 			api.getClaimDetailById(search)
 			.then((data) => {
 				console.log("got claim by ID", data);
 			}).catch((err) => {
-				console.error('search term error', err);
+				console.error('search claim api call error', err);
 			});
 		}
 	}
@@ -50,7 +52,7 @@ class Wikilogic extends React.Component {
 		.then((data) => {
 			this.setState({ focused_claim: data.claim });
 		}).catch((err) => {
-			console.error('errrrererrr', err);
+			console.error('claim focus api call error', err);
 		});
 	}
 

@@ -3,58 +3,9 @@ import eventManager from '../eventManager/eventManager.js';
 import actions from '../eventManager/actions.js';
 import 'whatwg-fetch';
 
-/* This is where we talk to the WikiLogic API
- *
+/* The functions that call the API
+ * Each returns a promise
  */
-
-eventManager.subscribe(actions.SEARCH_TERM_SUBMITTED, function(term){
-
-    //tell the world we're submitting a search (for spinners and the like)
-    eventManager.fire(actions.API_SEARCH_SUBMITTED, term);
-
-    fetch( "http://localhost:3030/claims?search=" + term)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(function(res) {
-        eventManager.fire(actions.API_RETURNED_CLAIMS, res.data);
-    })
-    .catch(function(err){
-        eventManager.fire(actions.API_ERRORED, err);
-        console.error('API error', err);
-    });
-});
-
-eventManager.subscribe(actions.SEARCH_NUMBER_SUBMITTED, function(claimid){
-    //going to assume it's a claim ID for now
-
-    //tell the world we're submitting a search (for spinners and the like)
-    eventManager.fire(actions.API_REQUEST_BY_ID_SUBMITTED, claimid);
-
-    fetch( "http://localhost:3030/claims/" + claimid)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(function(res) {
-        if (!res.data.hasOwnProperty('claim')) {
-            eventManager.fire(actions.API_REQUEST_BY_ID_ERRORED, '404');
-            return;
-        }
-        //console.error('res.data', res.data);
-        eventManager.fire(actions.API_REQUEST_BY_ID_RETURNED, res.data);
-    })
-    .catch(function(err){
-        eventManager.fire(actions.API_ERRORED, err);
-        console.error('API error', err);
-    });
-});
-
-eventManager.subscribe(actions.ARG_REQUEST_BY_ID_SUBMITTED, function (claimid) {
-
-    //tell the world we're submitting a search (for spinners and the like)
-    eventManager.fire(actions.API_REQUEST_BY_ID_SUBMITTED, claimid);
-
-    getClaimDetailById(claimid);
-});
-
 function searchClaimsByTerm(searchTerm){
 
     let searchResultsPromies = new Promise((resolve, reject) => {
@@ -110,9 +61,6 @@ function parseJSON(response) {
 }
 
 export default {
-    init: function(){
-        //ping the API & see if it's alive
-    },
     searchClaimsByTerm,
     getClaimDetailById
 }

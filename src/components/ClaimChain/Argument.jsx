@@ -10,24 +10,21 @@ export default class ClaimChain extends React.Component {
 		super(props)
 		this.state = {
         };
-		this.handleChange = this.handleChange.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
-	handleChange(event) {
-		/* Change handler is required otherwise the state wouldn't update and nothing will show up in the input when typing
-		 * https://facebook.github.io/react/docs/forms.html
-		 */
-		//this.setState({value: event.target.value});
-	}
+	handleClick(premis) {
 
+		this.props.premisClickHandler(premis);
+	}
 
 	render() {
 
         let premises = this.props.argumentObject.premises.map(function(premis, index){
-            return <div className="claim-chain-argument__premis" key={index}>
+            return <div className="claim-chain-argument__premis" key={index} onClick={() => { this.handleClick(premis); }}>
                 {premis.body}
             </div>;
-        });
+        }.bind(this));
 
 		return (
 			<div className="claim-chain-argument">
