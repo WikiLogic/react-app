@@ -19,11 +19,14 @@ export default class ChainLink extends React.Component {
 	render() {
 
         let linkArguments = null;
+		console.log("ARGUMENTS: ", this.props.claim.arguments);
         if (typeof this.props.claim.arguments != 'undefined') {
             linkArguments = this.props.claim.arguments.map(function(argumentObject, index){
                 return <Argument argumentObject={argumentObject} key={index} highlightedPremisId={this.props.highlightedPremisId} premisClickHandler={this.premisClickHandler} />
             }.bind(this));
-        }
+        } else {
+			linkArguments = <div>No arguments - sign up to add your own!</div>;
+		}
 
 		return (
 			<div className="claim-chain__row">
