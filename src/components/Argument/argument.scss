@@ -1,0 +1,29 @@
+.argument {
+    padding: rem($pad / 2);
+    border-width: 1px;
+    border-style: solid;
+
+    &__premis {
+        cursor: pointer;
+        
+        + .argument__premis {
+            margin-top: rem($pad / 2);
+        }
+
+        &:hover {
+            color: blue;
+        }
+
+        &--highlighted {
+            font-weight: bold;
+        }
+    }
+
+    &--SUPPORTS {
+        border-color: green;
+    }
+    
+    &--OPPOSES {
+        border-color: red;
+    }
+}

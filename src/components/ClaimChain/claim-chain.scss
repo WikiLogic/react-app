@@ -4,6 +4,7 @@
     &__top-claim { //inside a row
         text-align: center;
         width: 100%;
+        font-size: rem(28);
     }
 
     &__row {
@@ -11,6 +12,8 @@
         overflow-x: scroll;
         display: flex;
         justify-content: space-around;
+
+        .argument { width: 300px; }
     }
 
 }

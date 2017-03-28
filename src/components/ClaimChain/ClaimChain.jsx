@@ -1,6 +1,7 @@
 import React from 'react';
 import api from '../../API/api.js';
 import ChainLink from './ChainLink.jsx';
+import StatusBar from '../StatusBar/StatusBar.jsx';
 
 /* A chain going down from the claim of interest
  * Only one line for this version
@@ -91,6 +92,7 @@ export default class ClaimChain extends React.Component {
                 <div className="claim-chain__row">
                     <div className="claim-chain__top-claim">
                         {this.props.focused_claim.body}
+                        <StatusBar state={this.props.focused_claim.state}/>
                     </div>   
                 </div>
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import StatusBar from '../StatusBar/StatusBar.jsx';
-/* A chain going down from the claim of interest
- * Only one line for this version
+
+/* An argument group
  */
 
-export default class ClaimChain extends React.Component {
+export default class Argument extends React.Component {
 
 	constructor (props) {
 		super(props)
@@ -18,12 +18,12 @@ export default class ClaimChain extends React.Component {
 	}
 
 	render() {
-
+        console.log("this.props.highlightedPremisId", this.props.highlightedPremisId);
         let premises = this.props.argumentObject.premises.map(function(premis, index){
-			let className = "claim-chain-argument__premis";
+			let className = "argument__premis";
 			
 			if (premis.id == this.props.highlightedPremisId) {
-				className += " claim-chain-argument__premis--highlighted";
+				className += " argument__premis--highlighted";
 			}
             
 			return (
@@ -32,14 +32,12 @@ export default class ClaimChain extends React.Component {
 					<StatusBar state={premis.state}/>
 				</div>
 			);
-
         }.bind(this));
 
 		return (
-			<div className="claim-chain-argument">
+			<div className={`argument argument--${this.props.argumentObject.type}`}>
                 {premises}
 			</div>
 		);
 	}
-
 }

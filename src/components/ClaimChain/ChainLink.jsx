@@ -1,5 +1,5 @@
 import React from 'react';
-import Argument from './Argument.jsx';
+import Argument from '../Argument/Argument.jsx';
 
 /* A chain going down from the claim of interest
  * Only one line for this version
