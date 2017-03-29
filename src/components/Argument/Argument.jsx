@@ -1,5 +1,6 @@
 import React from 'react';
 import StatusBar from '../StatusBar/StatusBar.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* An argument group
  */
@@ -28,8 +29,7 @@ export default class Argument extends React.Component {
             
 			return (
 				<div className={className} key={index} onClick={() => { this.handleClick(premis); }}>
-					{premis.body}
-					<StatusBar state={premis.state}/>
+					<Claim claim={premis}/>
 				</div>
 			);
         }.bind(this));

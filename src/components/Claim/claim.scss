@@ -1,0 +1,19 @@
+.claim {
+    border: 2px solid #eee;
+    border-radius: 15px;
+    padding: rem($pad / 2);
+    cursor: pointer;
+    display: block;
+
+    &:hover {
+        border-color: $WL_Blue;
+    }
+
+    &:nth-child(n+1){
+        margin-bottom: rem($pad);
+    }
+
+    &__body {
+        margin-bottom: rem($pad / 2);
+    }
+}
