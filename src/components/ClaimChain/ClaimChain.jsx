@@ -85,7 +85,7 @@ export default class ClaimChain extends React.Component {
     
 
 	render() {
-        if (typeof this.props.focused_claim.body == 'undefined') { return null; }
+        if (typeof this.props.focused_claim.text == 'undefined') { return null; }
 
         let theChain = null;
         if (this.state.chain.length > 0){
@@ -100,7 +100,7 @@ export default class ClaimChain extends React.Component {
 			<div className="claim-chain">
                 <div className="claim-chain__row">
                     <div className="claim-chain__top-claim">
-                        {this.props.focused_claim.body}
+                        {this.props.focused_claim.text}
                         <StatusBar state={this.props.focused_claim.state}/>
                     </div>   
                 </div>
