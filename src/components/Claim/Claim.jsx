@@ -8,14 +8,14 @@ export default class Claim extends React.Component {
 
 	constructor (props) {
 		super(props)
-		this.state = {};
 	}
 
 	render() {
-        let status = Math.floor((Math.random() * 100) + 1);
+		let cssClass = "claim";
+		if (this.props.isSelected) { cssClass += " claim--selected"; }
 
 		return (
-			<div className="claim" onClick={() => this.props.handleClick(this.props.claim)}>
+			<div className={cssClass} onClick={() => this.props.handleClick(this.props.claim)}>
 				<div className="claim__body">
                     {this.props.claim.body}
                 </div>

@@ -5,9 +5,6 @@
     cursor: pointer;
     display: block;
 
-    &:hover {
-        border-color: $WL_Blue;
-    }
 
     &:nth-child(n+1){
         margin-bottom: rem($pad);
@@ -15,5 +12,15 @@
 
     &__body {
         margin-bottom: rem($pad / 2);
+    }
+
+
+    &:hover {
+        border-color: $WL_Blue;
+    }
+
+    &--selected {
+        background-color: $WL_Blue;
+        color: white;
     }
 }

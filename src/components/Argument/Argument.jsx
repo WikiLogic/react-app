@@ -19,17 +19,15 @@ export default class Argument extends React.Component {
 	}
 
 	render() {
-        console.log("this.props.highlightedPremisId", this.props.highlightedPremisId);
+		
+		//loop through the premises in this argument
         let premises = this.props.argumentObject.premises.map(function(premis, index){
-			let className = "argument__premis";
 			
-			if (premis.id == this.props.highlightedPremisId) {
-				className += " argument__premis--highlighted";
-			}
+			let isSelected = (premis.id == this.props.highlightedPremisId);
             
 			return (
-				<div className={className} key={index} onClick={() => { this.handleClick(premis); }}>
-					<Claim claim={premis}/>
+				<div className="argument__premis" key={index} onClick={() => { this.handleClick(premis); }}>
+					<Claim claim={premis} isSelected={isSelected}/>
 				</div>
 			);
         }.bind(this));
