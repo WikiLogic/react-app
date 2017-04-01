@@ -17,7 +17,7 @@ export default class Claim extends React.Component {
 		return (
 			<div className={cssClass} onClick={() => this.props.handleClick(this.props.claim)}>
 				<div className="claim__body">
-                    {this.props.claim.body}
+                    {this.props.claim.text}
                 </div>
                 <StatusBar state={this.props.claim.state}/>
 			</div>
