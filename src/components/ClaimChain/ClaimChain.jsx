@@ -22,6 +22,15 @@ export default class ClaimChain extends React.Component {
         //chain: [ claim{ id:1, arguments: [ { premises: [ {...} ] } ] } ]
 	}
 
+    //When this claim chain recieves new props that means there's a new focus argument. So this clears out the state
+    componentWillReceiveProps(){
+        console.log('new props');
+        this.setState({
+            focus_highlight_premis_id: "",
+            chain: []
+        });
+    }
+
     //the focus premises get their own click handler as the logic is a bit different
     focusPremisClickHandler(premis){
         //as it's a focus premis, we're starting the chain from scratch

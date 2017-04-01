@@ -19,7 +19,7 @@ export default class ChainLink extends React.Component {
 	render() {
 
         let linkArguments = null;
-		console.log("ARGUMENTS: ", this.props.claim.arguments);
+		
         if (this.props.claim.arguments.length > 0) {
             linkArguments = this.props.claim.arguments.map(function(argumentObject, index){
                 return <Argument argumentObject={argumentObject} key={index} highlightedPremisId={this.props.highlightedPremisId} premisClickHandler={this.premisClickHandler} />

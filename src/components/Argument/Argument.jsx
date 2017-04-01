@@ -26,8 +26,8 @@ export default class Argument extends React.Component {
 			let isSelected = (premis.id == this.props.highlightedPremisId);
             
 			return (
-				<div className="argument__premis" key={index} onClick={() => { this.handleClick(premis); }}>
-					<Claim claim={premis} isSelected={isSelected}/>
+				<div className="argument__premis" key={index}>
+					<Claim claim={premis} isSelected={isSelected} handleClick={() => { this.handleClick(premis); }}/>
 				</div>
 			);
         }.bind(this));
