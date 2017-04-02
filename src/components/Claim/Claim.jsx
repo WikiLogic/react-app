@@ -13,6 +13,10 @@ export default class Claim extends React.Component {
 	render() {
 		let cssClass = "claim";
 		if (this.props.isSelected) { cssClass += " claim--selected"; }
+		console.log("this.props.claim", this.props.claim);
+		if (this.props.claim.labels.includes('Axiom')) { 
+			cssClass += " claim--axiom"; 
+		}
 
 		return (
 			<div className={cssClass} onClick={() => this.props.handleClick(this.props.claim)}>
