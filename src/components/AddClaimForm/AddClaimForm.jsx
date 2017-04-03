@@ -13,22 +13,19 @@ export default class AddClaimForm extends React.Component {
 
 		return (
 			<form className="form">
-                <div className="form__header">
-                    Add a new claim
-                </div>
-                <div className="form__body">
-                    <label className="form__row">
-                        <textarea className="form__input">
-                            text area
-                        </textarea>
-                    </label>
-                    <label className="form__row">
-                        <span className="form__label">Claim: </span>
-                        <input type="text" name="text" className="form__input"/>
-                    </label>
-                    <div className="form__row">
-                        <input type="submit" value="submit"/>
-                    </div>
+                <h4 className="form__title">
+                    Create a new claim
+                </h4>
+
+                <label className="form__label">
+                    <div className="form__label-text">Claim text</div>
+                    <textarea className="form__input">
+                        text area
+                    </textarea>
+                </label>
+                
+                <div className="form__submit">
+                    <input className="form__submit-button" type="submit" value="submit"/>
                 </div>
 			</form>
 		);

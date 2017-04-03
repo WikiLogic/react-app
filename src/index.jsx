@@ -69,7 +69,7 @@ class Wikilogic extends React.Component {
 							</a>
 						</div>
 						<div className="header__col">
-							<Link to="/add">Add claim</Link>
+							<Link to="/new-claim">New claim</Link>
 							{/*
 							<a href="/alchemy">Alchemy</a>
 							<a href="/d3">D3</a>
@@ -114,7 +114,7 @@ class Wikilogic extends React.Component {
 							</div>
 						)}/>
 
-						<Route path="/add" exact render={() => (
+						<Route path="/new-claim" exact render={() => (
 							<div className="sidebar-layout">
 								<div className="sidebar-layout__main">
 

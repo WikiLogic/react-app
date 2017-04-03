@@ -10,7 +10,10 @@
 		flex: none;
 	}
 	
-	&__main { flex-grow: 1; }
+	&__main { 
+		flex-grow: 1; 
+		padding: rem($pad / 2);
+	}
 
 	&--left {
 		#{$block}__side { order: 1; }

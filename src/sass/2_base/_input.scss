@@ -1,8 +1,13 @@
-input[type='text'], input[type='password'], input[type='search'] {
+input[type='text'], input[type='password'], input[type='search'], textarea {
 	background-color: white;
 	padding: rem(7) rem(10);
 	outline: none;
 	color: black;
-	border: 1px solid $WL_Blue;
+	border: 3px solid $grey-d;
 	max-width: 100%;
+
+	&:active,
+	&:focus {
+		border-color: $WL_Blue;
+	}
 }
