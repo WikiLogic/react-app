@@ -15,6 +15,7 @@ import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
 import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
 import AddClaimForm from './components/AddClaimForm/AddClaimForm.jsx';
+import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 
 class Wikilogic extends React.Component {
 
@@ -119,6 +120,21 @@ class Wikilogic extends React.Component {
 								<div className="sidebar-layout__main">
 
 									<AddClaimForm /> 
+
+								</div>
+								<div className="sidebar-layout__side">
+
+									<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
+
+								</div>	
+							</div>
+						)}/>
+
+						<Route path="/edit-claim" exact render={() => (
+							<div className="sidebar-layout">
+								<div className="sidebar-layout__main">
+
+									<EditClaimForm /> 
 
 								</div>
 								<div className="sidebar-layout__side">
