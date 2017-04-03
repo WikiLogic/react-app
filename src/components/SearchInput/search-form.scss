@@ -1,7 +1,8 @@
 .search-form { //form
     
-    &__input { //input
+    &__input.search-form__input  { //input
         border-radius: 2px;
+        border: none;
     }
 
     &__submit { //button

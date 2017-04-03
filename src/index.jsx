@@ -14,6 +14,7 @@ import api from './API/api.js';
 import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
 import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
+import AddClaimForm from './components/AddClaimForm/AddClaimForm.jsx';
 
 class Wikilogic extends React.Component {
 
@@ -68,6 +69,7 @@ class Wikilogic extends React.Component {
 							</a>
 						</div>
 						<div className="header__col">
+							<Link to="/add">Add claim</Link>
 							{/*
 							<a href="/alchemy">Alchemy</a>
 							<a href="/d3">D3</a>
@@ -102,6 +104,21 @@ class Wikilogic extends React.Component {
 								<div className="sidebar-layout__main">
 
 									<ClaimChain focused_claim={this.state.focused_claim}/>
+
+								</div>
+								<div className="sidebar-layout__side">
+
+									<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
+
+								</div>	
+							</div>
+						)}/>
+
+						<Route path="/add" exact render={() => (
+							<div className="sidebar-layout">
+								<div className="sidebar-layout__main">
+
+									<AddClaimForm /> 
 
 								</div>
 								<div className="sidebar-layout__side">

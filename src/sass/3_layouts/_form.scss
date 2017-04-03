@@ -1,0 +1,31 @@
+.form {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid $grey-c;
+
+    &__header {
+        background-color: $grey-c;
+        padding: rem($pad);
+
+    }
+
+    &__body {
+        padding: rem($pad);
+    }
+        &__row { //most of the time this is a label wrapping a span and an input
+            display: table;
+            width: 100%;
+
+            + .form__row { margin-top: rem($pad); }
+        }
+            &__label { //span wrapped by the row label
+                display: table-cell;
+                vertical-align: top;
+            }
+
+            &__input {
+                display: table-cell;
+                vertical-align: top;
+                width: 100%;
+            }
+}

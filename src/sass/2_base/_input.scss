@@ -3,6 +3,6 @@ input[type='text'], input[type='password'], input[type='search'] {
 	padding: rem(7) rem(10);
 	outline: none;
 	color: black;
-	border: 0;
+	border: 1px solid $WL_Blue;
 	max-width: 100%;
 }
