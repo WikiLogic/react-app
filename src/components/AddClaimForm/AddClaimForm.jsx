@@ -25,7 +25,7 @@ export default class AddClaimForm extends React.Component {
                 </label>
                 
                 <div className="form__submit">
-                    <input className="form__submit-button" type="submit" value="submit"/>
+                    <input className="form__submit-button" type="submit" value="publish"/>
                 </div>
 			</form>
 		);

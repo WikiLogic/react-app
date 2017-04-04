@@ -3,6 +3,7 @@ import api from '../../API/api.js';
 import Argument from '../Argument/Argument.jsx';
 import StatusBar from '../StatusBar/StatusBar.jsx';
 import Modal from '../Modal/Modal.jsx';
+import AddArgumentForm from '../AddArgumentForm/AddArgumentForm.jsx';
 
 /* A claim
  * and all it's arguments
@@ -75,7 +76,7 @@ export default class ClaimDetail extends React.Component {
                 
                 {/* The new argument modal */}
                 <Modal show={this.state.new_argument_modal_open} title="New Argument" onClose={this.closeNewArgumentModal}>
-                    modal content
+                    <AddArgumentForm />
                 </Modal>
 
                 <div className="claim-detail__status">   
