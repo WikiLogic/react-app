@@ -14,6 +14,7 @@ import api from './API/api.js';
 import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
 import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
+import ClaimDetail from './components/ClaimDetail/ClaimDetail.jsx';
 import AddClaimForm from './components/AddClaimForm/AddClaimForm.jsx';
 import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 
@@ -103,8 +104,8 @@ class Wikilogic extends React.Component {
 						<Route path="/" exact render={() => (
 							<div className="sidebar-layout">
 								<div className="sidebar-layout__main">
-
-									<ClaimChain focused_claim={this.state.focused_claim}/>
+									
+									<ClaimChain top_claim={this.state.focused_claim}/>
 
 								</div>
 								<div className="sidebar-layout__side">

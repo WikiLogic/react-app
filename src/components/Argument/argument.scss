@@ -1,25 +1,35 @@
 .argument {
     padding: rem($pad / 2);
-    border-width: 1px;
-    border-style: solid;
+    margin: rem($pad / 2);
+    border-radius: 20px;
 
-    &__premis {
-        cursor: pointer;
-        
-        + .argument__premis {
-            margin-top: rem($pad / 2);
-        }
-
-        &:hover {
-            //color: blue;
-        }
+    &__header {
+        margin-bottom: rem($pad / 2);
     }
 
+    &__body {
+
+    }
+
+        &__premis {
+            cursor: pointer;
+            
+            + .argument__premis {
+                margin-top: rem($pad / 2);
+            }
+
+            &:hover {
+                //color: blue;
+            }
+        }
+
     &--SUPPORTS {
-        border-color: green;
+        //border-color: green;
+        background-color: rgba($WL_Green, 0.2);
     }
     
     &--OPPOSES {
-        border-color: red;
+        //border-color: red;
+        background-color: rgba($WL_Red, 0.2);
     }
 }

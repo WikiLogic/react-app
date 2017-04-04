@@ -1,21 +1,28 @@
-.claim-chain {
+.claim-detail {
     width: 100%;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    padding: rem($pad / 2);
+
+    + .claim-detail {
+        margin-top: rem($pad);
+    }
     
-    &__top-claim { //inside a row
+    &__header { //inside a row
         text-align: center;
         width: 100%;
+    }
 
-        &-text {
-            font-size: rem(28);
-        }
+    &__text {
+        font-size: rem(28);
+    }
 
-        &-status {
-
-        }
+    &__status {
+        margin-top: rem($pad / 2);
     }
 
     //css only dos scroll properly vertically. so we're going to do a bit of rotation :P
-    &__row {
+    &__arguments {
         padding: rem($pad);
         overflow-x: auto;
         display: flex;

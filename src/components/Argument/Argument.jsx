@@ -15,6 +15,7 @@ export default class Argument extends React.Component {
 	}
 
 	handleClick(premis) {
+		console.log('Argument: premis click');
 		this.props.premisClickHandler(premis);
 	}
 
@@ -34,7 +35,12 @@ export default class Argument extends React.Component {
 
 		return (
 			<div className={`argument argument--${this.props.argumentObject.type}`}>
-                {premises}
+				<div className="argument__header">
+					{this.props.argumentObject.type}
+				</div>
+				<div className="argument__body">
+                	{premises}
+				</div>
 			</div>
 		);
 	}

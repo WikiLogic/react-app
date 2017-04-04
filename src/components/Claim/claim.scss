@@ -1,13 +1,14 @@
 .claim {
     border: 2px solid #eee;
+    background-color: white;
     border-radius: 15px;
     padding: rem($pad / 2);
     cursor: pointer;
     display: block;
 
 
-    &:nth-child(n+1){
-        margin-bottom: rem($pad);
+    + .claim{
+        margin-top: rem($pad);
     }
 
     &__body {
