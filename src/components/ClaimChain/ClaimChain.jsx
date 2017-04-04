@@ -1,7 +1,5 @@
 import React from 'react';
 import api from '../../API/api.js';
-import ChainLink from './ChainLink.jsx';
-import StatusBar from '../StatusBar/StatusBar.jsx';
 import ClaimDetail from '../ClaimDetail/ClaimDetail.jsx';
 
 /* A chain of claims so the user can explore a line of argument
