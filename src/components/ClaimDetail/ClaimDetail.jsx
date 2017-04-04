@@ -2,6 +2,7 @@ import React from 'react';
 import api from '../../API/api.js';
 import Argument from '../Argument/Argument.jsx';
 import StatusBar from '../StatusBar/StatusBar.jsx';
+import Modal from '../Modal/Modal.jsx';
 
 /* A claim
  * and all it's arguments
@@ -13,15 +14,19 @@ export default class ClaimDetail extends React.Component {
 	constructor (props) {
 		super(props);
         this.state = {
-            highlight_premis_id: ""
+            highlight_premis_id: "",
+            new_argument_modal_open: false
         };
         this.premisClickHandler = this.premisClickHandler.bind(this);
+        this.openNewArgumentModal = this.openNewArgumentModal.bind(this);
+        this.closeNewArgumentModal = this.closeNewArgumentModal.bind(this);
 	}
 
     //When this claim chain recieves new props that means there's a new focus argument. So this clears out the state
     componentWillReceiveProps(){
         this.setState({
-            highlight_premis_id: ""
+            highlight_premis_id: "",
+            new_argument_modal_open: false
         });
     }
 
@@ -29,6 +34,18 @@ export default class ClaimDetail extends React.Component {
     premisClickHandler(premis){
         console.log("Claim detail: premis click");
         this.props.premisClickHandler(premis);
+    }
+
+    openNewArgumentModal(claim){
+        this.setState({
+            new_argument_modal_open: true
+        });
+    }
+
+    closeNewArgumentModal(){
+        this.setState({
+            new_argument_modal_open: false
+        });
     }
 
 	render() {
@@ -50,12 +67,17 @@ export default class ClaimDetail extends React.Component {
                         {this.props.claim.text}
                     </div>
                     <div className="claim-detail__add-argument">
-                        <div className="button">
+                        <div className="button" onClick={this.openNewArgumentModal}>
                             New Argument +
                         </div>
                     </div>
                 </div>
                 
+                {/* The new argument modal */}
+                <Modal show={this.state.new_argument_modal_open} title="New Argument" onClose={this.closeNewArgumentModal}>
+                    modal content
+                </Modal>
+
                 <div className="claim-detail__status">   
                     <StatusBar state={this.props.claim.state}/>
                 </div>
