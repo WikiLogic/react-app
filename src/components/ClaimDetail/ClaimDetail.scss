@@ -1,7 +1,7 @@
 .claim-detail {
     width: 100%;
-    border: 2px solid #eee;
-    border-radius: 15px;
+    border: 1px solid $grey-d;
+    border-radius: 5px;
     padding: rem($pad / 2);
 
     + .claim-detail {
@@ -11,11 +11,18 @@
     &__header { //inside a row
         text-align: center;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    &__text {
-        font-size: rem(28);
-    }
+        &__text {
+            font-size: rem(28);
+        }
+
+        &__add-argument {
+            font-size: rem(15);
+        }
 
     &__status {
         margin-top: rem($pad / 2);

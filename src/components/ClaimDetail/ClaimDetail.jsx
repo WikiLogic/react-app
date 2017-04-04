@@ -49,9 +49,15 @@ export default class ClaimDetail extends React.Component {
                     <div className="claim-detail__text">
                         {this.props.claim.text}
                     </div>
-                    <div className="claim-detail__status">   
-                        <StatusBar state={this.props.claim.state}/>
+                    <div className="claim-detail__add-argument">
+                        <div className="button">
+                            New Argument +
+                        </div>
                     </div>
+                </div>
+                
+                <div className="claim-detail__status">   
+                    <StatusBar state={this.props.claim.state}/>
                 </div>
 
                 <div className="claim-detail__arguments">

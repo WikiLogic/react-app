@@ -1,6 +1,7 @@
 .search-results {
 
-    padding-top: rem($pad);
+    padding: rem($pad / 2);
+    background-color: $grey-e;
 
     &__title {
 

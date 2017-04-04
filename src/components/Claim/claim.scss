@@ -1,14 +1,14 @@
 .claim {
-    border: 2px solid #eee;
+    border: 1px solid $grey-c;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: rem($pad / 2);
     cursor: pointer;
     display: block;
 
 
     + .claim{
-        margin-top: rem($pad);
+        margin-top: rem($pad / 2);
     }
 
     &__body {
