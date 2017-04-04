@@ -48,6 +48,54 @@ function getClaimDetailById(claimId){
     return claimDetailPromise;
 }
 
+function postNewClaim(claim){
+    let newClaimPromise = new Promise((resolve, reject) => {
+        fetch("http://localhost:3030/create/claim", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(claim)
+        })
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(function (res) {
+            resolve(res);
+        })
+        .catch(function (err) {
+            reject(err);
+            //eventManager.fire(actions.API_ERRORED, err);
+            console.error('API error', err);
+        });
+    });
+
+    return newClaimPromise;
+}
+
+function postNewArgument(argument){
+    let newArgumentPromise = new Promise((resolve, reject) => {
+        fetch("http://localhost:3030/create/argument", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(argument)
+        })
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(function (res) {
+            resolve(res);
+        })
+        .catch(function (err) {
+            reject(err);
+            //eventManager.fire(actions.API_ERRORED, err);
+            console.error('API error', err);
+        });
+    });
+
+    return newArgumentPromise;
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -62,5 +110,7 @@ function parseJSON(response) {
 
 export default {
     searchClaimsByTerm,
-    getClaimDetailById
+    getClaimDetailById,
+    postNewClaim,
+    postNewArgument
 }
