@@ -76,7 +76,7 @@ export default class ClaimDetail extends React.Component {
                 
                 {/* The new argument modal */}
                 <Modal show={this.state.new_argument_modal_open} title="New Argument" onClose={this.closeNewArgumentModal}>
-                    <AddArgumentForm />
+                    <AddArgumentForm parentClaim={this.props.claim}/>
                 </Modal>
 
                 <div className="claim-detail__status">   

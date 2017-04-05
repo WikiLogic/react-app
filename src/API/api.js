@@ -79,7 +79,11 @@ function postNewArgument(argument){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(argument)
+            body: {
+                parent_claim: argument.parent_claim,
+                type: argument.type,
+                premises: argument.premises
+            }
         })
         .then(checkStatus)
         .then(parseJSON)

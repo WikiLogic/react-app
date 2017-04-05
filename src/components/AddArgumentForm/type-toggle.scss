@@ -1,0 +1,19 @@
+.type-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__label {
+        cursor: pointer;
+        background-color: $grey-e;
+        border: 1px solid $grey-d;
+        text-align: center;
+        padding: rem($pad / 2); 
+    }
+        &__input {
+
+        }
+        &__text {
+
+        }
+}
