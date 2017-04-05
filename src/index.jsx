@@ -8,7 +8,7 @@ const history = createBrowserHistory();
 //JS
 import eventManager from './eventManager/eventManager.js';
 import actions from './eventManager/actions.js';
-import api from './API/api.js';
+import API from './API/api.js';
 
 //React components
 import SearchInput from './components/SearchInput/SearchInput.jsx';
@@ -34,16 +34,19 @@ class Wikilogic extends React.Component {
 
 	searchClaims(search){
 		if (isNaN(search)) {
-			api.searchClaimsByTerm(search)
+			API.searchClaimsByTerm(search)
 			.then((data) => {
 				this.setState({ search_results: data.claims });
 			}).catch((err) => {
 				console.error('search term api call error', err);
 			});
 		} else {
-			api.getClaimDetailById(search)
+			API.getClaimDetailById(search)
 			.then((data) => {
-				console.log("got claim by ID", data);
+				console.log("TODO: set claim found by ID as the claim detail", data);
+				this.setState({
+					focused_claim: data.claim
+				});
 			}).catch((err) => {
 				console.error('search claim api call error', err);
 			});
@@ -51,7 +54,7 @@ class Wikilogic extends React.Component {
 	}
 
 	setNewClaimFocus(claim){
-		api.getClaimDetailById(claim.id)
+		API.getClaimDetailById(claim.id)
 		.then((data) => {
 			this.setState({ focused_claim: data.claim });
 		}).catch((err) => {
@@ -80,7 +83,7 @@ class Wikilogic extends React.Component {
 						</div>
 						<div className="header__col header__col--search">
 							<div className="search">
-								<SearchInput submissionHandler={this.searchClaims}/>
+								<SearchInput submissionHandler={this.searchClaims} placeholder="Search Claims"/>
 							</div>
 						</div>
 						<div className="header__col">

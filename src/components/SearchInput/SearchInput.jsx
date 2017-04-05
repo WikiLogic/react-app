@@ -31,7 +31,7 @@ export default class SearchInput extends React.Component {
 	render() {
 		return (
 			<form className="search-form" onSubmit={this.handleSubmit}>
-				<input className="search-form__input" type="text" placeholder="Search Claims" value={this.state.value} onChange={this.handleChange}/>
+				<input className="search-form__input" type="text" placeholder={this.props.placeholder} value={this.state.value} onChange={this.handleChange}/>
 				<button className="search-form__submit" onClick={this.handleSubmit}>
 					<SearchIcon/>
 				</button>

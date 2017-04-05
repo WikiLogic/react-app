@@ -6,7 +6,7 @@ button,
 input[type='submit'],
 input[type='button'],
 .button { 
-	padding: rem(10) rem(15);
+	padding: rem(6) rem(15) rem(7); //trying to keep buttons and inputs the same height - not really enforced though
 	line-height: 1;
 	border: 0;
 	text-align: center;
