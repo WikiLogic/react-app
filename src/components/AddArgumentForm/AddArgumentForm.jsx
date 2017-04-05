@@ -26,7 +26,9 @@ export default class AddArgumentForm extends React.Component {
         this.setState({ argument: newArgument });
     }
 
-    handleSubmit(){
+    handleSubmit(event){
+        event.preventDefault();
+        
         API.postNewArgument({
             parent_claim: this.props.parentClaim.id,
             type: 'OPPOSES',
@@ -41,29 +43,41 @@ export default class AddArgumentForm extends React.Component {
 	render() {
 
 		return (
-			<form className="form" onSubmit={this.handleSubmit}>
-                <h4 className="form__title">
+			<form className="add-argument-form" onSubmit={this.handleSubmit}>
+                <h4 className="add-argument-form__parent-claim">
                     {this.props.parentClaim.text}
                 </h4>
 
-                <div className="type-toggle">
-                    <label className="type-toggle__label">
-                        <input className="type-toggle__input" type="radio" value="SUPPORTS" checked={this.state.argument.type == 'SUPPORTS'} onChange={() => this.handleTypeToggle('SUPPORTS')} />
-                        <div className="type-toggle__text">SUPPORTS</div>
-                    </label>
+                <div className="add-argument-form__type-toggle">
+                    <div className="type-toggle">
+                        <label className="type-toggle__label">
+                            <input className="type-toggle__input" type="radio" value="SUPPORTS" checked={this.state.argument.type == 'SUPPORTS'} onChange={() => this.handleTypeToggle('SUPPORTS')} />
+                            <div className="type-toggle__text">SUPPORTS</div>
+                        </label>
 
-                    <label className="type-toggle__label">
-                        <input className="type-toggle__input" type="radio" value="OPPOSES" checked={this.state.argument.type == 'OPPOSES'} onChange={() => this.handleTypeToggle('OPPOSES')} />
-                        <div className="type-toggle__text">OPPOSES</div>
-                    </label>
+                        <label className="type-toggle__label">
+                            <input className="type-toggle__input" type="radio" value="OPPOSES" checked={this.state.argument.type == 'OPPOSES'} onChange={() => this.handleTypeToggle('OPPOSES')} />
+                            <div className="type-toggle__text">OPPOSES</div>
+                        </label>
+                    </div>
                 </div>
 
-                <div>some kind of claim selector</div>
+                <div className="add-argument-form__premis-finder">
+                    <div className="premis-finder">
+                        <input className="premis-finder__input" type="text" placeholder="search premises"/>
+                    
+                        <div className="premis-finder__results">
+                            mini search results
+                        </div>
+                    </div>
+                </div>
 
-                <Argument argumentObject={this.state.argument}/>
-                
-                <div className="form__submit">
-                    <input className="form__submit-button" type="submit" value="publish"/>
+                <div className="add-argument-form__argument-simulator">
+                    <Argument argumentObject={this.state.argument}/>
+                </div>
+
+                <div className="add-argument-form__submit">
+                    <input className="button" type="submit" value="publish"/>
                 </div>
 			</form>
 		);
