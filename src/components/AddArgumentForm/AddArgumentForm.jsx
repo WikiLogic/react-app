@@ -2,6 +2,7 @@ import React from 'react';
 import Argument from '../Argument/Argument.jsx';
 import API from '../../API/api.js';
 import SearchInput from '../SearchInput/SearchInput.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* Search & select claims to add as premises to an argument
  */
@@ -20,6 +21,7 @@ export default class AddArgumentForm extends React.Component {
         }
         this.handleTypeToggle = this.handleTypeToggle.bind(this);
         this.handlePremisSearch = this.handlePremisSearch.bind(this);
+        this.handlePremisResultClick = this.handlePremisResultClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -49,6 +51,10 @@ export default class AddArgumentForm extends React.Component {
 		}
     }
 
+    handlePremisResultClick(){
+        console.log("premis serach result clicked!");
+    }
+
     handleSubmit(event){
         event.preventDefault();
         
@@ -65,8 +71,15 @@ export default class AddArgumentForm extends React.Component {
 
 	render() {
 
+        let premisSearchResults = null;
+        if (this.state.premis_search_results.length > 0){
+            premisSearchResults =this.state.premis_search_results.map(function(premis, index){
+                return <Claim claim={premis} key={index} handleClick={this.handlePremisResultClick} isSelected={false}/>;
+            }.bind(this));
+        }
+
 		return (
-			<form className="add-argument-form" onSubmit={this.handleSubmit}>
+			<div className="add-argument-form">
                 <h4 className="add-argument-form__parent-claim">
                     {this.props.parentClaim.text}
                 </h4>
@@ -90,7 +103,7 @@ export default class AddArgumentForm extends React.Component {
                         <SearchInput submissionHandler={this.handlePremisSearch} placeholder="Search Premises"/>
                     
                         <div className="premis-finder__results">
-                            mini search results
+                            {premisSearchResults}
                         </div>
                     </div>
                 </div>
@@ -100,9 +113,9 @@ export default class AddArgumentForm extends React.Component {
                 </div>
 
                 <div className="add-argument-form__submit">
-                    <input className="button" type="submit" value="publish"/>
+                    <button onClick={this.handleSubmit}>Publish</button>
                 </div>
-			</form>
+			</div>
 		);
 	}
 }

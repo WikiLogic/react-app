@@ -2,5 +2,8 @@
 
     &__results {
         min-height: rem(200);
+        max-height: 60vh;
+        overflow: auto;
+        padding: rem($pad / 2);
     }
 }
