@@ -22,6 +22,7 @@ export default class AddArgumentForm extends React.Component {
         this.handleTypeToggle = this.handleTypeToggle.bind(this);
         this.handlePremisSearch = this.handlePremisSearch.bind(this);
         this.handlePremisResultClick = this.handlePremisResultClick.bind(this);
+        this.handleArgumentPremisClick = this.handleArgumentPremisClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -53,10 +54,18 @@ export default class AddArgumentForm extends React.Component {
 
     handlePremisResultClick(premis){
         //a premis in the premis search - add it to the new argument when it's clicked
-        console.log("premis serach result clicked!");
         var newArgument = this.state.argument;
         newArgument.premises.push(premis);
         this.setState({ argument: newArgument });
+    }
+
+    handleArgumentPremisClick(premis){
+        //when a premis that has been added to the argument is clicked, remove it from the argument
+        var newArgument = this.state.argument;
+        newArgument.premises = newArgument.premises.filter(function(statePremis){
+            return (statePremis.id != premis.id);
+        });
+        this.setState({argument: newArgument});
     }
 
     handleSubmit(event){
@@ -113,7 +122,7 @@ export default class AddArgumentForm extends React.Component {
                 </div>
 
                 <div className="add-argument-form__argument-simulator">
-                    <Argument argumentObject={this.state.argument}/>
+                    <Argument argumentObject={this.state.argument} premisClickHandler={this.handleArgumentPremisClick}/>
                 </div>
 
                 <div className="add-argument-form__submit">
