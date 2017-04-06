@@ -3,6 +3,7 @@ import Argument from '../Argument/Argument.jsx';
 import API from '../../API/api.js';
 import SearchInput from '../SearchInput/SearchInput.jsx';
 import Claim from '../Claim/Claim.jsx';
+import Business from '../../business/_index.js';
 
 /* Search & select claims to add as premises to an argument
  */
@@ -55,8 +56,11 @@ export default class AddArgumentForm extends React.Component {
     handlePremisResultClick(premis){
         //a premis in the premis search - add it to the new argument when it's clicked
         var newArgument = this.state.argument;
-        newArgument.premises.push(premis);
-        this.setState({ argument: newArgument });
+        
+        if (Business.validateNewPremis(premis, newArgument)){
+            newArgument.premises.push(premis);
+            this.setState({ argument: newArgument });
+        }
     }
 
     handleArgumentPremisClick(premis){
