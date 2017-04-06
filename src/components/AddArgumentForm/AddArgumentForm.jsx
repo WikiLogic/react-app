@@ -56,8 +56,8 @@ export default class AddArgumentForm extends React.Component {
     handlePremisResultClick(premis){
         //a premis in the premis search - add it to the new argument when it's clicked
         var newArgument = this.state.argument;
-        
-        if (Business.validateNewPremis(premis, newArgument)){
+
+        if (Business.validateNewPremis(premis, newArgument, this.props.parentClaim)){
             newArgument.premises.push(premis);
             this.setState({ argument: newArgument });
         }
