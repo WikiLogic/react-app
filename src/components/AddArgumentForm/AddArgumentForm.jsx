@@ -51,8 +51,12 @@ export default class AddArgumentForm extends React.Component {
 		}
     }
 
-    handlePremisResultClick(){
+    handlePremisResultClick(premis){
+        //a premis in the premis search - add it to the new argument when it's clicked
         console.log("premis serach result clicked!");
+        var newArgument = this.state.argument;
+        newArgument.premises.push(premis);
+        this.setState({ argument: newArgument });
     }
 
     handleSubmit(event){
