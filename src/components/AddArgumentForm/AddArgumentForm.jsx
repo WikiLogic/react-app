@@ -3,6 +3,7 @@ import Argument from '../Argument/Argument.jsx';
 import API from '../../API/api.js';
 import SearchInput from '../SearchInput/SearchInput.jsx';
 import Claim from '../Claim/Claim.jsx';
+import Business from '../../business/_index.js';
 
 /* Search & select claims to add as premises to an argument
  */
@@ -22,6 +23,7 @@ export default class AddArgumentForm extends React.Component {
         this.handleTypeToggle = this.handleTypeToggle.bind(this);
         this.handlePremisSearch = this.handlePremisSearch.bind(this);
         this.handlePremisResultClick = this.handlePremisResultClick.bind(this);
+        this.handleArgumentPremisClick = this.handleArgumentPremisClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -51,8 +53,23 @@ export default class AddArgumentForm extends React.Component {
 		}
     }
 
-    handlePremisResultClick(){
-        console.log("premis serach result clicked!");
+    handlePremisResultClick(premis){
+        //a premis in the premis search - add it to the new argument when it's clicked
+        var newArgument = this.state.argument;
+
+        if (Business.validateNewPremis(premis, newArgument, this.props.parentClaim)){
+            newArgument.premises.push(premis);
+            this.setState({ argument: newArgument });
+        }
+    }
+
+    handleArgumentPremisClick(premis){
+        //when a premis that has been added to the argument is clicked, remove it from the argument
+        var newArgument = this.state.argument;
+        newArgument.premises = newArgument.premises.filter(function(statePremis){
+            return (statePremis.id != premis.id);
+        });
+        this.setState({argument: newArgument});
     }
 
     handleSubmit(event){
@@ -109,7 +126,7 @@ export default class AddArgumentForm extends React.Component {
                 </div>
 
                 <div className="add-argument-form__argument-simulator">
-                    <Argument argumentObject={this.state.argument}/>
+                    <Argument argumentObject={this.state.argument} premisClickHandler={this.handleArgumentPremisClick}/>
                 </div>
 
                 <div className="add-argument-form__submit">
