@@ -49,6 +49,7 @@ export default class ClaimDetail extends React.Component {
         });
     }
 
+
 	render() {
         if (typeof this.props.claim.text == 'undefined') { return null; }
         let argumentMarkup = null;
@@ -67,6 +68,7 @@ export default class ClaimDetail extends React.Component {
                     <div className="claim-detail__text">
                         {this.props.claim.text}
                     </div>
+
                     <div className="claim-detail__add-argument">
                         <div className="button" onClick={this.openNewArgumentModal}>
                             New Argument +

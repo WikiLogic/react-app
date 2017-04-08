@@ -10,7 +10,7 @@ export default class SearchInput extends React.Component {
 
 	constructor (props) {
 		super(props)
-		this.state = {value: ''}; //holding the search term
+		this.state = {value: 'zero'}; //holding the search term
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
