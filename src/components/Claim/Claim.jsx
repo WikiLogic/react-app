@@ -13,8 +13,8 @@ export default class Claim extends React.Component {
 	render() {
 		let cssClass = "claim";
 		if (this.props.isSelected) { cssClass += " claim--selected"; }
-		
-		if (this.props.claim.labels.includes('Axiom')) { 
+		//console.log("this.props.claim", this.props.claim);
+		if (typeof this.props.claim.labels !== "undefined" && this.props.claim.labels.includes('Axiom')) { 
 			cssClass += " claim--axiom"; 
 		}
 

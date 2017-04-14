@@ -4,13 +4,13 @@ import Argument from '../Argument/Argument.jsx';
 import StatusBar from '../StatusBar/StatusBar.jsx';
 import Modal from '../Modal/Modal.jsx';
 import AddArgumentForm from '../AddArgumentForm/AddArgumentForm.jsx';
-
+import Circle from '../Circle/Circle.jsx';
 /* A claim
  * and all it's arguments
  * Also the options to add arguments - eventually
  */
 
-export default class ClaimDetail extends React.Component {
+export default class ClaimDetail2 extends React.Component {
 
 	constructor (props) {
 		super(props);
@@ -55,7 +55,7 @@ export default class ClaimDetail extends React.Component {
         //the arguments
         if (this.props.claim.arguments.length > 0) {
             argumentMarkup = this.props.claim.arguments.map(function(argumentObject, index){
-                return <Argument argumentObject={argumentObject} key={index} highlightedPremisId={this.props.highlightedPremisId} premisClickHandler={this.premisClickHandler} />
+                return <Circle argumentObject={argumentObject} key={index} highlightedPremisId={this.props.highlightedPremisId} premisClickHandler={this.premisClickHandler} />
             }.bind(this));
         } else {
 			argumentMarkup = <div>No arguments - <a href="http://www.wikilogicfoundation.org/get-involved/" target="_blank">sign up</a> to add your own!</div>;

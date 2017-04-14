@@ -1,0 +1,60 @@
+
+.argumentCircle {
+    padding: rem($pad / 2);
+    border-radius: 5px;
+
+    &__header {
+        margin-bottom: rem($pad / 2);
+    }
+
+    &__body {
+
+    }
+
+    &__circle { //inside a row
+
+    $display: inline-block;
+     $size: 200px;
+    $color: #333;
+      display: $display;
+    line-height: $size;
+    width: $size;
+    height: $size;
+    background: $color;
+    -webkit-border-radius: $size/2;
+    -moz-border-radius: $size/2;
+    border-radius: $size/2;
+    }
+
+        &__premis {
+            cursor: pointer;
+            
+            + .argument__premis {
+                margin-top: rem($pad / 2);
+            }
+
+            &:hover {
+                //color: blue;
+            }
+        }
+
+    &--SUPPORTS {
+            $display: inline-block;
+     $size: 200px;
+    $color: rgba($WL_Green, 0.2);
+      display: $display;
+    line-height: $size;
+    width: $size;
+    height: $size;
+    background: $color;
+    -webkit-border-radius: $size/2;
+    -moz-border-radius: $size/2;
+    border-radius: $size/2;
+    }
+    
+    &--OPPOSES {
+        //border-color: red;
+        background-color: rgba($WL_Red, 0.2);
+        border: 1px solid $WL_Red;
+    }
+}

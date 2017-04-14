@@ -17,6 +17,7 @@ import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
 import ClaimDetail from './components/ClaimDetail/ClaimDetail.jsx';
 import AddClaimForm from './components/AddClaimForm/AddClaimForm.jsx';
 import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
+import Circle from './components/Circle/Circle.jsx';
 
 class Wikilogic extends React.Component {
 
