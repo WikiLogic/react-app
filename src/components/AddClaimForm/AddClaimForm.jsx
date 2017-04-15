@@ -28,7 +28,7 @@ export default class AddClaimForm extends React.Component {
         .then((data) => {  
             console.log("api returned new claim!", data);
         }).catch((err) => {
-            console.log('API returned a fail', err);
+            console.error('API returned a fail', err);
         });
     }
 

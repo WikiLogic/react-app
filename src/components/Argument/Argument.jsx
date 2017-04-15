@@ -15,7 +15,6 @@ export default class Argument extends React.Component {
 	}
 
 	handleClick(premis) {
-		console.log('Argument: premis click');
 		this.props.premisClickHandler(premis);
 	}
 
