@@ -44,7 +44,6 @@ class Wikilogic extends React.Component {
 		} else {
 			API.getClaimDetailById(search)
 			.then((data) => {
-				console.log("TODO: set claim found by ID as the claim detail", data);
 				this.setState({
 					focused_claim: data.claim
 				});

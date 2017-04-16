@@ -16,7 +16,6 @@ export default class Circle extends React.Component {
     }
 
     handleClick(premis) {
-        console.log('Argument: premis click');
         this.props.premisClickHandler(premis);
     }
 

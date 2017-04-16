@@ -16,6 +16,7 @@ export default class ClaimChain extends React.Component {
             chain: []
         }
         this.premisClickHandler = this.premisClickHandler.bind(this);
+        this.updatedClaimHandler = this.updatedClaimHandler.bind(this);
     }
 
     //When this claim chain recieves new props that means there's a new focus claim. So clear out the chain
@@ -33,12 +34,10 @@ export default class ClaimChain extends React.Component {
         //When a chain link premis is clicked, we need to:
         let newChain = this.state.chain;
 
-        console.log("index", index);
         //clear out any lower level rows. 
         newChain = newChain.slice(0, index + 1);
 
         //highlight the premis that was clicked
-        console.log("newChain", newChain);
         newChain[index].highlighted_premis_id = premis.id;
 
         //load in the arguments of that premis into the next level
@@ -50,13 +49,19 @@ export default class ClaimChain extends React.Component {
                     highlighted_premis_id: ""
                 });
 
-                this.setState({
-                    chain: newChain
-                });
+                this.setState({ chain: newChain });
 
             }).catch((err) => {
                 console.error("Error in claim detail api from a premis click", err);
             });
+    }
+
+    updatedClaimHandler(claim, index){
+        //when a claim in the chain is updated (eg by adding a new argument) - this will replace that link in the chain
+        let newChain = this.state.chain;
+        newChain[index].claim = claim;
+
+        this.setState({ chain: newChain });
     }
 
     render() {
@@ -68,6 +73,8 @@ export default class ClaimChain extends React.Component {
                 if (chainLink.hasOwnProperty('claim')) {
                     return <ClaimDetail claim={chainLink.claim} key={index} highlightedPremisId={chainLink.highlighted_premis_id} premisClickHandler={(premis) => {
                         this.premisClickHandler(premis, index);
+                    }} updatedClaimHandler={(claim) => {
+                        this.updatedClaimHandler(claim, index);
                     }} />
                 }
             });
@@ -88,9 +95,11 @@ export default class ClaimChain extends React.Component {
                 <div>
                     {theChain}
                 </div>
+                {
                 <div>
                     {dougChain}
                 </div>
+                }
             </div >
         );
     }

@@ -79,11 +79,11 @@ function postNewArgument(argument){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
-                parent_claim: argument.parent_claim,
+            body: JSON.stringify({
+                parent_claim_id: argument.parent_claim_id,
                 type: argument.type,
-                premises: argument.premises
-            }
+                premise_ids: argument.premise_ids
+            })
         })
         .then(checkStatus)
         .then(parseJSON)

@@ -34,7 +34,6 @@ export default class AddArgumentForm extends React.Component {
     }
 
     handlePremisSearch(term){
-        console.log('premis search term');
         if (isNaN(term)) {
 			API.searchClaimsByTerm(term)
 			.then((data) => {
@@ -45,7 +44,6 @@ export default class AddArgumentForm extends React.Component {
 		} else {
 			API.getClaimDetailById(term)
 			.then((data) => {
-				console.log("got claim by ID", data);
                 this.setState({ premis_search_results: [data.claim] });
 			}).catch((err) => {
 				console.error('search claim api call error', err);
@@ -73,16 +71,21 @@ export default class AddArgumentForm extends React.Component {
     }
 
     handleSubmit(event){
+        //when the publish button is clicked, set up the new argument JSON to be passed to the API
         event.preventDefault();
+
+        var premisIdArray = this.state.argument.premises.map(function(premis){
+            return premis.id;
+        });
         
         API.postNewArgument({
-            parent_claim: this.props.parentClaim.id,
-            type: 'OPPOSES',
-            premises: ['1','2','3']
-        }).then((data) => {  
-            console.log("api returned new claim!", data);
+            parent_claim_id: this.props.parentClaim.id,
+            type: this.state.argument.type,
+            premise_ids: premisIdArray
+        }).then((res) => {  
+            this.props.updatedClaimHandler(res.data.claim);
         }).catch((err) => {
-            console.log('API returned a fail', err);
+            console.error('API returned a fail', err);
         });
     }
 

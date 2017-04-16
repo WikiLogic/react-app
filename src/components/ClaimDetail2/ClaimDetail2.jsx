@@ -20,6 +20,7 @@ export default class ClaimDetail2 extends React.Component {
         };
         this.premisClickHandler = this.premisClickHandler.bind(this);
         this.openNewArgumentModal = this.openNewArgumentModal.bind(this);
+        this.updatedClaimHandler = this.updatedClaimHandler.bind(this);
         this.closeNewArgumentModal = this.closeNewArgumentModal.bind(this);
 	}
 
@@ -40,6 +41,14 @@ export default class ClaimDetail2 extends React.Component {
     openNewArgumentModal(claim){
         this.setState({
             new_argument_modal_open: true
+        });
+    }
+
+    updatedClaimHandler(claim){
+        //when a new argument is added the API returns the updated parent claim, so we should replace!
+        this.props.updatedClaimHandler(claim);
+        this.setState({
+            new_argument_modal_open: false
         });
     }
 
@@ -77,7 +86,7 @@ export default class ClaimDetail2 extends React.Component {
                 
                 {/* The new argument modal */}
                 <Modal show={this.state.new_argument_modal_open} title="New Argument" onClose={this.closeNewArgumentModal}>
-                    <AddArgumentForm parentClaim={this.props.claim}/>
+                    <AddArgumentForm parentClaim={this.props.claim} updatedClaimHandler={this.updatedClaimHandler}/>
                 </Modal>
 
                 <div className="claim-detail__status">   
