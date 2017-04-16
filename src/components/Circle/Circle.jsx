@@ -34,8 +34,10 @@ export default class Circle extends React.Component {
             );
         }.bind(this));
 
+        let colour = this.props.argumentObject.probability < 50 ? "false" :"true" ;
+        console.log("colour", colour);
         return (
-            <div className={`argument argumentCircle--${this.props.argumentObject.type}`}>
+            <div className={`argument argumentCircle--${colour}`}>
                 <div className="argumentCircle__header">
                     {this.props.argumentObject.type}
                 </div>

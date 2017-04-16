@@ -38,7 +38,7 @@
             }
         }
 
-    &--SUPPORTS {
+    &--true {
             $display: inline-block;
      $size: 200px;
     $color: rgba($WL_Green, 0.2);
@@ -52,7 +52,7 @@
     border-radius: $size/2;
     }
     
-    &--OPPOSES {
+    &--false {
         //border-color: red;
         background-color: rgba($WL_Red, 0.2);
         border: 1px solid $WL_Red;
