@@ -11,24 +11,10 @@
 
     }
 
-    &__circle { //inside a row
-
-    $display: inline-block;
-     $size: 200px;
-    $color: #333;
-      display: $display;
-    line-height: $size;
-    width: $size;
-    height: $size;
-    background: $color;
-    -webkit-border-radius: $size/2;
-    -moz-border-radius: $size/2;
-    border-radius: $size/2;
-    }
-
         &__premis {
             cursor: pointer;
-            
+             $size: 50px;
+             line-height: $size;
             + .argument__premis {
                 margin-top: rem($pad / 2);
             }
@@ -40,7 +26,7 @@
 
     &--true {
             $display: inline-block;
-     $size: 200px;
+     $size: 600px;
     $color: rgba($WL_Green, 0.2);
       display: $display;
     line-height: $size;
