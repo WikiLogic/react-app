@@ -37,9 +37,9 @@ export default class Circle extends React.Component {
         console.log("colour", colour);
         return (
             <div className={`argument argumentCircle--${colour}`}>
-                <div className="argumentCircle__header">
+                {/*<div className="argumentCircle__header">
                     {this.props.argumentObject.type}
-                </div>
+                </div>*/}
                 <div className="argumentCircle__body">
                     {premises}
                 </div>
