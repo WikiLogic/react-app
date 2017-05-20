@@ -7,6 +7,10 @@
 
 ---
 
+Virtual production server: `docker-compose up`
+Stop it: `Ctrl + c`
+`npm run watch` will build files as you save, the dist folder is mapped to the docker container, so you can refresh there & see the update!
+
 Docker set up (by a Docker newbie, we could use some suggestions for refinement if you're a docker pro).
 
 1. Build the container: `docker build -t react-app .` 

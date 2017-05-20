@@ -1,10 +1,10 @@
 web:
-  build: .
-  volumes:
-   - ./dist:/etc/nginx/conf.d/mysite.template
+  image: nginx:latest #use the latest official nginx docker image
+  volumes: #mapping from the repo files into the nginx container
+   - ./dist:/var/www
+   - ./nginx.conf:/etc/nginx/nginx.conf
   ports:
-   - "8080:80"
-  environment:
+   - "80:80"
+  environment: #environment variables
    - NGINX_HOST=foobar.com
    - NGINX_PORT=80
-  command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
