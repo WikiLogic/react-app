@@ -1,0 +1,4 @@
+web: #TODO get the dev env set up here & overrride the default one where it counts
+  volumes: #mapping from the repo files into the nginx container
+   - ./dist:/var/www
+   - ./nginx.conf:/etc/nginx/nginx.conf

@@ -1,10 +1,10 @@
 web:
   image: nginx:latest #use the latest official nginx docker image
-  volumes: #mapping from the repo files into the nginx container
-   - ./dist:/var/www
-   - ./nginx.conf:/etc/nginx/nginx.conf
   ports:
    - "80:80"
+  volumes: #mapping from the repo files into the nginx container
+   - ./dist:/var/www
+   - ./nginx/nginx.conf:/etc/nginx/nginx.conf
   environment: #environment variables
    - NGINX_HOST=foobar.com
    - NGINX_PORT=80
