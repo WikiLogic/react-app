@@ -3,8 +3,8 @@ web:
   ports:
    - "80:80"
   volumes: #mapping from the repo files into the nginx container
-   - ./dist:/var/www
-   - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+   - /dist:/var/www
+   - /nginx/nginx.conf:/etc/nginx/nginx.conf
   environment: #environment variables
    - NGINX_HOST=foobar.com
    - NGINX_PORT=80
