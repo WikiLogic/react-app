@@ -71,11 +71,13 @@ export default class ClaimChain extends React.Component {
         if (this.state.chain.length > 0) {
             theChain = this.state.chain.map((chainLink, index) => {
                 if (chainLink.hasOwnProperty('claim')) {
-                    return <ClaimDetail claim={chainLink.claim} key={index} highlightedPremisId={chainLink.highlighted_premis_id} premisClickHandler={(premis) => {
-                        this.premisClickHandler(premis, index);
-                    }} updatedClaimHandler={(claim) => {
-                        this.updatedClaimHandler(claim, index);
-                    }} />
+                    return <ClaimDetail 
+                    claim={chainLink.claim} 
+                    key={index} 
+                    highlightedPremisId={chainLink.highlighted_premis_id} 
+                    premisClickHandler={(premis) => { this.premisClickHandler(premis, index);}} 
+                    updatedClaimHandler={(claim) => {this.updatedClaimHandler(claim, index);}} 
+                        />
                 }
             });
         }
