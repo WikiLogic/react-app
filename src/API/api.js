@@ -100,6 +100,34 @@ function postNewArgument(argument){
     return newArgumentPromise;
 }
 
+function postNewExplanation(argument) {
+    let newExplanationPromise = new Promise((resolve, reject) => {
+        fetch("http://localhost:3030/create/explanation", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                parent_claim_id: argument.parent_claim_id,
+                type: argument.type,
+                premise_ids: argument.premise_ids
+            })
+        })
+            .then(checkStatus)
+            .then(parseJSON)
+            .then(function (res) {
+                resolve(res);
+            })
+            .catch(function (err) {
+                reject(err);
+                //eventManager.fire(actions.API_ERRORED, err);
+                console.error('API error', err);
+            });
+    });
+
+    return newExplanationPromise;
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -116,5 +144,6 @@ export default {
     searchClaimsByTerm,
     getClaimDetailById,
     postNewClaim,
-    postNewArgument
+    postNewArgument,
+    postNewExplanation
 }

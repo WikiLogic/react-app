@@ -78,7 +78,7 @@ export default class AddExplanationForm extends React.Component {
             return premis.id;
         });
         
-        API.postNewArgument({
+        API.postNewExplanation({
             parent_claim_id: this.props.parentClaim.id,
             type: this.state.argument.type,
             premise_ids: premisIdArray
