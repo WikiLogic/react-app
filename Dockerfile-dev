@@ -1,0 +1,24 @@
+#Development for the front end. We're using webpack's dev server so no need for nginx here
+
+# Pull base image with nod ealready on it
+FROM node
+
+WORKDIR /dev
+
+# ADD the config files
+COPY ./package.json /dev/
+COPY ./webpack.config.js /dev/
+COPY ./.babelrc /dev/
+
+# Install!
+RUN npm install
+
+# ADD the working files
+COPY ./dist /dev/dist
+COPY ./src /dev/src
+
+# Expose ports.
+EXPOSE 80
+
+# Define default command.
+CMD ["npm", "run", "start"]

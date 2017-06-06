@@ -1,9 +1,0 @@
-web:
-  image: nginx:latest #use the latest official nginx docker image
-  ports:
-   - "80:80"
-  volumes: #mapping from the repo files into the nginx container
-   - /dist:/var/www
-   - /nginx/nginx.conf:/etc/nginx/nginx.conf
-  environment: #environment variables
-   - API_URL=foobar.com
