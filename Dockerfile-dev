@@ -3,22 +3,29 @@
 # Pull base image with nod ealready on it
 FROM node
 
-WORKDIR /dev
+RUN mkdir wldev
+WORKDIR /wldev
 
 # ADD the config files
-COPY ./package.json /dev/
-COPY ./webpack.config.js /dev/
-COPY ./.babelrc /dev/
+COPY ./package.json /wldev/
+COPY ./webpack.config.js /wldev/
+COPY ./.babelrc /wldev/
 
 # Install!
 RUN npm install
 
 # ADD the working files
-COPY ./dist /dev/dist
-COPY ./src /dev/src
+RUN mkdir dist
+RUN mkdir src
+COPY ./dist /wldev/dist
+COPY ./src /wldev/src
 
 # Expose ports.
-EXPOSE 80
+EXPOSE 8080
 
 # Define default command.
+RUN echo "hello"
+RUN ls
+RUN dir
+RUN pwd
 CMD ["npm", "run", "start"]
