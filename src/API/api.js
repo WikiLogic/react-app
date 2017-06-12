@@ -3,13 +3,15 @@ import eventManager from '../eventManager/eventManager.js';
 import actions from '../eventManager/actions.js';
 import 'whatwg-fetch';
 
+var apiRouteRoot = "http://localhost:3030/api";
+
 /* The functions that call the API
  * Each returns a promise
  */
 function searchClaimsByTerm(searchTerm){
 
     let searchResultsPromies = new Promise((resolve, reject) => {
-        fetch( "http://localhost:3030/claims?search=" + searchTerm)
+        fetch(apiRouteRoot + "/claims?search=" + searchTerm)
         .then(checkStatus)
         .then(parseJSON)
         .then(function(res) {
@@ -27,7 +29,7 @@ function searchClaimsByTerm(searchTerm){
 function getClaimDetailById(claimId){
 
     let claimDetailPromise = new Promise((resolve, reject) => {
-        fetch("http://localhost:3030/claims/" + claimId)
+        fetch(apiRouteRoot + "/claims/" + claimId)
         .then(checkStatus)
         .then(parseJSON)
         .then(function (res) {
@@ -50,7 +52,7 @@ function getClaimDetailById(claimId){
 
 function postNewClaim(claim){
     let newClaimPromise = new Promise((resolve, reject) => {
-        fetch("http://localhost:3030/create/claim", {
+        fetch(apiRouteRoot + "/create/claim", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,7 +76,7 @@ function postNewClaim(claim){
 
 function postNewArgument(argument){
     let newArgumentPromise = new Promise((resolve, reject) => {
-        fetch("http://localhost:3030/create/argument", {
+        fetch(apiRouteRoot + "/create/argument", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +104,7 @@ function postNewArgument(argument){
 
 function postNewExplanation(argument) {
     let newExplanationPromise = new Promise((resolve, reject) => {
-        fetch("http://localhost:3030/create/explanation", {
+        fetch(apiRouteRoot + "/create/explanation", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

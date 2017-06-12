@@ -2,8 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Link, Route } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
-const history = createBrowserHistory();
+import createHashHistory from 'history/createHashHistory';
+const history = createHashHistory();
 
 //JS
 import eventManager from './eventManager/eventManager.js';
@@ -66,70 +66,87 @@ class Wikilogic extends React.Component {
 		return (
 			<Router history={history}>
 				<div className="main-layout">
-					<header className="main-layout__header header">
-						<div className="header__col">
-							<a href="/" className="site-flag">
-								<div href="/" className="site-flag__title">Wikilogic</div>
-								{/* <div className="site-flag__tagline">tagline</div> */}
-							</a>
-						</div>
-						<div className="header__col">
-							<Link to="/new-claim">New claim</Link>
-							{/*
-							<a href="/alchemy">Alchemy</a>
-							<a href="/d3">D3</a>
-							<a href="/d3v4">D3v4</a>
-							*/}
-						</div>
-						<div className="header__col header__col--search">
-							<div className="search">
-								<SearchInput submissionHandler={this.searchClaims} placeholder="Search Claims"/>
-							</div>
-						</div>
-						<div className="header__col">
-							{/*
-							<div className="language-selector">
-								<a href="/lang" className="language-selector__current">En</a>
+					<div className="main-layout__header">
 
-								<div className="language-selector__dropdown">
-									<div className="language-selector__dropdown-option">Spanish</div>
-									<div className="language-selector__dropdown-option">French</div>
-									<div className="language-selector__dropdown-option">German</div>
-								</div>
-								
+						<header className="header">
+
+							<Link to="/" className="header__title">Wikilogic</Link>
+
+							<div className="header__links">
+								<Link to="/">Search</Link>
+								<Link to="/new-claim">New claim</Link>
 							</div>
-							*/}
-						</div>
-					</header>
+
+						</header>
+
+					</div>
 					
 					<main className="main main-layout__body">
-						{/* the home page: search results */}
+
+						{/* the home page: search & results */}
 						<Route path="/" exact render={() => (
-							<div className="sidebar-layout">
-								<div className="sidebar-layout__main">
-									
-									<ClaimChain top_claim={this.state.focused_claim}/>
+							<div className="search-layout">
+								<div className="search-layout__header">
+									<div className="max-width-wrap">
 
+										<SearchInput submissionHandler={this.searchClaims} placeholder="Search Claims"/>
+
+									</div>
 								</div>
-								<div className="sidebar-layout__side">
+								<div className="search-layout__results">
+									<div className="max-width-wrap">
 
-									<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
+										<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
 
-								</div>	
+									</div>
+								</div>
+							</div>
+							
+						)}/>
+
+						<Route path="/claim/:claimId" exact render={(routeData) => (
+							<div className="claim-detail-layout">
+								<div className="claim-detail-layout__header">
+									<div className="max-width-wrap">
+
+										<ClaimChain topClaimId={routeData.match.params.claimId}/>
+
+									</div>
+								</div>
+								<div className="claim-detail-layout__body">
+									<div className="max-width-wrap">
+
+									</div>
+								</div>
 							</div>
 						)}/>
 
+									{/*<div className="sidebar-layout">
+										<div className="sidebar-layout__main">
+											
+											<ClaimChain top_claim={this.state.focused_claim}/>
+
+										</div>
+										<div className="sidebar-layout__side">
+
+											<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
+
+										</div>	
+									</div> */}
+
 						<Route path="/new-claim" exact render={() => (
-							<div className="sidebar-layout">
-								<div className="sidebar-layout__main">
+							<div className="new-claim-layout">
+								<div className="new-claim-layout__header">
+									<div className="max-width-wrap">
 
 									<AddClaimForm /> 
 
+									</div>
 								</div>
-								<div className="sidebar-layout__side">
+								<div className="new-claim-layout__results">
+									<div className="max-width-wrap">
 
-									<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
-
+									</div>
 								</div>	
 							</div>
 						)}/>
@@ -148,19 +165,24 @@ class Wikilogic extends React.Component {
 								</div>	
 							</div>
 						)}/>
+
 					</main>
 
-					<footer className="footer main-layout__footer">
-						<div className="footer__col">
-							Wikilogic is maintainted by the <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>, a non-profit organisation...
-						</div>
-						<div className="footer__col">
-							Privacy policy
-						</div>
-						<div className="footer__col">
-							Terms of use
-						</div>
-					</footer>	
+					<div className="main-layout__footer">
+						<footer className="footer max-width-wrap">
+
+							<div className="footer__col">
+								Wikilogic is maintainted by the <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>, a non-profit organisation...
+							</div>
+							<div className="footer__col">
+								Privacy policy
+							</div>
+							<div className="footer__col">
+								Terms of use
+							</div>
+
+						</footer>	
+					</div>
 				</div>
 			</Router>
 		);

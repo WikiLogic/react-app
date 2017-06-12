@@ -3,12 +3,12 @@ $WL_Red:		#F25454;
 $WL_Green:		#31D332; 
 $WL_Blue: 		#5f9aec;
 
-$dark-blue:     #002b4c;
+$dark-blue:     #002b4c; $header-background: $dark-blue;
 $light-blue:    #0a4471;
 $link-blue:     #0a88c5;
 
 /* shades of grey */
-$grey-e:		#eeeeee;
+$grey-e:		#eeeeee; $sub-header-background: $grey-e;
 $grey-d:		#dddddd;
 $grey-c:		#cccccc;
 $grey-b:		#bbbbbb;
@@ -28,3 +28,4 @@ $g4: #CCBDC1;
 $g3: #ADA0A2;
 $g2: #5D495F;
 $g1: #4C2455;
+

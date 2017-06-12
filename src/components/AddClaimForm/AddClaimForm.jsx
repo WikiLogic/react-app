@@ -36,17 +36,14 @@ export default class AddClaimForm extends React.Component {
 
 		return (
 			<form className="form" onSubmit={this.submitHandler}>
-                <h4 className="form__title">
-                    Create a new claim
-                </h4>
 
                 <label className="form__label">
-                    <div className="form__label-text">Claim text</div>
-                    <textarea className="form__input"  onChange={this.handleChange} />
+                    <label className="form__label-text" htmlFor="new-claim-text">Write up your new claim</label>
+                    <textarea className="form__input" id="new-claim-text" onChange={this.handleChange} />
                 </label>
                 
                 <div className="form__submit">
-                    <input className="form__submit-button" type="submit" value="publish"/>
+                    <input className="form__submit-button" type="submit" value="Publish"/>
                 </div>
 			</form>
 		);

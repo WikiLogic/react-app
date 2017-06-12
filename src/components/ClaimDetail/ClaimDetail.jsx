@@ -92,19 +92,20 @@ export default class ClaimDetail extends React.Component {
                     <div className="claim-detail__text">
                         {this.props.claim.text}
                     </div>
+                </div>
 
-                    <div className="claim-detail__add-argument">
-                        <div className="button" onClick={this.openNewExplanationModal}>
-                            This claim can be explained by...
-                        </div>
+
+                <div className="claim-detail__status">   
+                    <StatusBar state={this.props.claim.state}/>
+                </div>
+                
+                <div className="claim-detail__options">
+                    <div className="button" onClick={this.openNewExplanationModal}>
+                        This claim can be explained by...
                     </div>
-
-                    <div className="claim-detail__add-explanation">
-                        <div className="button" onClick={this.openNewArgumentModal}>
-                            New Argument +
-                        </div>
+                    <div className="button" onClick={this.openNewArgumentModal}>
+                        New Argument +
                     </div>
-
                 </div>
 
                 {/* The new explanation modal */}
@@ -117,9 +118,6 @@ export default class ClaimDetail extends React.Component {
                     <AddArgumentForm parentClaim={this.props.claim} updatedClaimHandler={this.updatedClaimHandler}/>
                 </Modal>
 
-                <div className="claim-detail__status">   
-                    <StatusBar state={this.props.claim.state}/>
-                </div>
 
                 <div className="claim-detail__arguments">
                     {argumentMarkup}

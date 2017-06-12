@@ -2,26 +2,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ccc;
-    background-color: $dark-blue;
+    max-width: $site-width;
+    margin: 0 auto;
     color: white;
 
-    a {
-        @include occluded-underline($dark-blue, $link-blue, $link-blue);
+    a { 
+        color: white;
+        @include occluded-underline($dark-blue, white, white); 
+    }
+    
+    &__title { //a
+        margin: rem(9) rem($pad-small);
+        text-align: center;
+        display: block;
+        font-family: $serif;
+        font-size: rem(24);
     }
 
-    //padding between matches side padding
-    padding: 0 rem($pad-small / 2);
-    &__col {
-        padding: 0 rem($pad-small / 2);
-        text-align: center;
-
-        +.header__col {
-            text-align: right;
-        }
-
-        &--search {
-            margin-left: auto; //pushes the search over to the right
-        }
+    &__links {
+        padding: 0 rem($pad-small);
+        a + a { margin-left: rem($pad-small); }
     }
 }

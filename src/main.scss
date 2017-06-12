@@ -29,24 +29,6 @@ styles are set in sass alongside the components. (in the components folder).
 */
 @import "components/**/*.scss";
 
-//a linking to root
-.site-flag {
-    color: white;
-    margin: rem(9) 0;
-    text-align: center;
-    display: block;
-    &:hover {
-        //border-bottom: 0;
-    }
-
-    &__title {
-        font-family: $serif;
-        font-size: rem(24);
-    }
-    &__tagline {
-        font-size: rem(15);
-    }
-}
 
 
 .language-selector {

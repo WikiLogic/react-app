@@ -1,11 +1,9 @@
 import React from 'react';
 import api from '../../API/api.js';
 import ClaimDetail from '../ClaimDetail/ClaimDetail.jsx';
-import ClaimDetail2 from '../ClaimDetail2/ClaimDetail2.jsx';
 
-/* A chain of claims so the user can explore a line of argument
- * Click a premis to show it as a ClaimDetail in the following link
- * Links below the claim whos premis was just clicked are cleared out 
+/* Start with a claim ID. Ask the API for that claim.
+ * Lets the user go deeper into the premises bloew that claim.
  */
 
 export default class ClaimChain extends React.Component {
@@ -13,20 +11,27 @@ export default class ClaimChain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: true,
             chain: []
         }
         this.premisClickHandler = this.premisClickHandler.bind(this);
         this.updatedClaimHandler = this.updatedClaimHandler.bind(this);
     }
 
-    //When this claim chain recieves new props that means there's a new focus claim. So clear out the chain
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            chain: [{
-                claim: nextProps.top_claim,
-                highlighted_premis_id: ""
-            }]
-        });
+    componentDidMount(){
+        //when this view opens, the ID of the claim is passed in by the props - ask the API for it!
+        api.getClaimDetailById(this.props.topClaimId)
+            .then((data) => {
+                this.setState({
+                    isLoading: false,
+                    chain: [{
+                        claim: data.claim,
+                        highlighted_premis_id: ""
+                    }]
+                });
+            }).catch((err) => {
+                console.error("claim chain err", err);
+            });
     }
 
 
@@ -68,41 +73,35 @@ export default class ClaimChain extends React.Component {
         let theChain = null;
         let dougChain = null;
 
-        if (this.state.chain.length > 0) {
-            theChain = this.state.chain.map((chainLink, index) => {
-                if (chainLink.hasOwnProperty('claim')) {
-                    return <ClaimDetail 
-                    claim={chainLink.claim} 
-                    key={index} 
-                    highlightedPremisId={chainLink.highlighted_premis_id} 
-                    premisClickHandler={(premis) => { this.premisClickHandler(premis, index);}} 
-                    updatedClaimHandler={(claim) => {this.updatedClaimHandler(claim, index);}} 
+        if (this.state.isLoading) {
+
+            return (
+                <div>
+                    Loading...
+                </div>
+            );
+
+        } else {
+
+            if (this.state.chain.length > 0) {
+                theChain = this.state.chain.map((chainLink, index) => {
+                    if (chainLink.hasOwnProperty('claim')) {
+                        return <ClaimDetail 
+                            claim={chainLink.claim} 
+                            key={index} 
+                            highlightedPremisId={chainLink.highlighted_premis_id} 
+                            premisClickHandler={(premis) => { this.premisClickHandler(premis, index);}} 
+                            updatedClaimHandler={(claim) => {this.updatedClaimHandler(claim, index);}} 
                         />
-                }
-            });
-        }
+                    }
+                });
+            }
 
-        if (this.state.chain.length > 0) {
-            dougChain = this.state.chain.map((chainLink, index) => {
-                if (chainLink.hasOwnProperty('claim')) {
-                    return <ClaimDetail2 claim={chainLink.claim} key={index} highlightedPremisId={chainLink.highlighted_premis_id} premisClickHandler={(premis) => {
-                        this.premisClickHandler(premis, index);
-                    }} />
-                }
-            });
-        }
-
-        return (
-            <div >
+            return (
                 <div>
                     {theChain}
                 </div>
-                {
-                <div>
-                    {dougChain}
-                </div>
-                }
-            </div >
-        );
+            );
+        }
     }
 }

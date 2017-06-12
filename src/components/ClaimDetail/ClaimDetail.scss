@@ -14,22 +14,24 @@
     &__header { //inside a row
         text-align: center;
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        margin-bottom: rem($pad / 2);
     }
 
-    &__text {
-        font-size: rem(28);
-    }
-
-    &__add-argument {
-        font-size: rem(15);
-    }
+        &__text {
+            font-size: rem(28);
+        }
 
     &__status {
-        margin-top: rem($pad / 2);
+        margin-bottom: rem($pad / 2);
     }
+
+    &__options {
+        display: flex;
+        justify-content: flex-end;
+        font-size: rem(15);
+        .button + .button { margin-left: rem($pad / 2); }
+    }   
+
 
     //css only dos scroll properly vertically. so we're going to do a bit of rotation :P
     &__arguments {
@@ -41,7 +43,7 @@
 
         .argument { 
             width: 21%;
-            min-width: 300px; 
+            min-width: 290px; 
             margin: rem($pad / 2);
         }
     }

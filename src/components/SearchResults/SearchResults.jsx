@@ -1,5 +1,6 @@
 import React from 'react';
 import Claim from '../Claim/Claim.jsx';
+import { Router, Link, Route } from 'react-router-dom';
 
 /* The Search Results
  * This is the parent component for the search results list
@@ -25,7 +26,11 @@ export default class SearchResults extends React.Component {
 		}
 		
         let searchResults = this.props.search_results.map(function(search_result, index){
-            return <Claim claim={search_result} key={index} handleClick={this.handleClick} isSelected={false}/>;
+            return (
+				<Link to={`/claim/${search_result.id}`} key={index}>
+					<Claim claim={search_result} handleClick={this.handleClick} isSelected={false}/>
+				</Link>
+			);
         }.bind(this));
 
 		return (

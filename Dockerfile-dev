@@ -17,8 +17,8 @@ RUN npm install
 # ADD the working files
 RUN mkdir dist
 RUN mkdir src
-COPY ./dist /wldev/dist
-COPY ./src /wldev/src
+# COPY ./dist/ /wldev/dist
+# COPY ./src/ /wldev/src
 
 # Expose ports.
 EXPOSE 8080
