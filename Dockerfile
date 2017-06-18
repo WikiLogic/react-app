@@ -15,7 +15,7 @@ COPY ./dist /var/www/app
 COPY ./.htpasswd /etc/nginx/.htpasswd
 
 # Define mountable directories.
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/app"]
+#VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/app"]
 
 # Define default command.
 CMD ["nginx"]

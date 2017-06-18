@@ -3,7 +3,7 @@ import eventManager from '../eventManager/eventManager.js';
 import actions from '../eventManager/actions.js';
 import 'whatwg-fetch';
 
-var apiRouteRoot = "http://localhost:3030/api";
+var apiRouteRoot = "/api";
 
 /* The functions that call the API
  * Each returns a promise
