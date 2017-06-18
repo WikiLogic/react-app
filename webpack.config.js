@@ -48,19 +48,19 @@ module.exports = {
     ],
     devServer: {
         quiet: false,
-        stats: { colors: true },
+        stats: { colors: true }
         //proxy: { "/api/**":"http://localhost:3030/" }
-        proxy: {
-            "/api/**": {
-                "target": {
-                    "host": "localhost",
-                    "protocol": 'http:',
-                    "port": 3030
-                },
-                ignorePath: false,
-                changeOrigin: true,
-                secure: false
-            }
-        }
+        // proxy: {
+        //     "/api/**": {
+        //         "target": {
+        //             "host": "localhost",
+        //             "protocol": 'http:',
+        //             "port": 3030
+        //         },
+        //         ignorePath: false,
+        //         changeOrigin: true,
+        //         secure: false
+        //     }
+        // }
     }
 }

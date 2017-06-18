@@ -21,11 +21,7 @@ RUN mkdir src
 # COPY ./src/ /wldev/src
 
 # Expose ports.
-EXPOSE 8080
+EXPOSE 8082
 
 # Define default command.
-RUN echo "hello"
-RUN ls
-RUN dir
-RUN pwd
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"] #in the docker-compose.dev.yml file this is overridden
