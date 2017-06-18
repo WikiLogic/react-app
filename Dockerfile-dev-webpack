@@ -1,6 +1,6 @@
-#Development for the front end. We're using webpack's dev server so no need for nginx here
+#Development for the front end. This builds the static code
 
-# Pull base image with nod ealready on it
+# Pull base image - we're running it on Ubuntu!
 FROM node
 
 RUN mkdir wldev
@@ -17,11 +17,9 @@ RUN npm install
 # ADD the working files
 RUN mkdir dist
 RUN mkdir src
-# COPY ./dist/ /wldev/dist
-# COPY ./src/ /wldev/src
 
 # Expose ports.
-EXPOSE 8082
+EXPOSE 8080
 
 # Define default command.
-CMD ["npm", "start"] #in the docker-compose.dev.yml file this is overridden
+CMD ["npm", "run", "watch"] #in the docker-compose.dev.yml file this is overridden

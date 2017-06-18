@@ -407,13 +407,6 @@ body {
   border: 0;
   padding: 0; }
 
-.main-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; }
-  .main-layout__footer {
-    margin-top: auto; }
-
 br {
   display: block;
   padding: 0;
@@ -852,41 +845,36 @@ These create the layout structurs within which components will live.
 .form__submit {
   margin-top: 1rem; }
 
-.header-layout {
-  display: flex;
-  flex-direction: column; }
-  .header-layout__head {
-    flex: none; }
-  .header-layout__body {
-    flex-grow: 1; }
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ccc;
-  background-color: #002b4c;
-  color: white;
-  padding: 0 0.625rem; }
+  max-width: 1024px;
+  margin: 0 auto;
+  color: white; }
   .header a {
+    color: white;
     text-decoration: none;
-    background-image: linear-gradient(transparent 50%, rgba(10, 136, 197, 0.1) 50%);
+    background-image: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.1) 50%);
     background-repeat: repeat-x;
     background-size: 2px 2px;
     background-position: 0 95%;
     text-shadow: 0.03em 0 0 #002b4c, 0.06em 0 0 #002b4c, 0.09em 0 0 #002b4c, 0.12em 0 0 #002b4c, 0.15em 0 0 #002b4c, -0.03em 0 0 #002b4c, -0.06em 0 0 #002b4c, -0.09em 0 0 #002b4c, -0.12em 0 0 #002b4c, -0.15em 0 0 #002b4c; }
     .header a:hover {
-      background-image: linear-gradient(transparent 50%, #0a88c5 50%); }
+      background-image: linear-gradient(transparent 50%, white 50%); }
     .header a::selection {
-      background: #0a88c5;
+      background: white;
       text-shadow: none; }
-  .header__col {
-    padding: 0 0.625rem;
-    text-align: center; }
-    .header__col + .header__col {
-      text-align: right; }
-    .header__col--search {
-      margin-left: auto; }
+  .header__title {
+    margin: 0.5625rem 1.25rem;
+    text-align: center;
+    display: block;
+    font-family: "Rufina", serif;
+    font-size: 1.5rem; }
+  .header__links {
+    padding: 0 1.25rem; }
+    .header__links a + a {
+      margin-left: 1.25rem; }
 
 .main-logo__icon {
   width: 1.875rem;
@@ -917,6 +905,21 @@ These create the layout structurs within which components will live.
     .main-sidebar-nav__utility-link:hover {
       color: #8db7f1; }
 
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; }
+  .main-layout__header {
+    background-color: #002b4c;
+    border-bottom: 1px solid #eeeeee; }
+  .main-layout__footer {
+    margin-top: auto; }
+
+.max-width-wrap {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1.25rem; }
+
 #svg {
   width: 100%;
   height: 100%; }
@@ -942,6 +945,14 @@ These create the layout structurs within which components will live.
   @media (min-width: 768px) {
     .root-sidebar__side {
       position: static; } }
+
+.search-layout__header {
+  margin-bottom: 1.25rem;
+  background-color: #eeeeee; }
+  .search-layout__header-content {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 1.25rem; }
 
 .sidebar-layout {
   display: flex;
@@ -1315,6 +1326,36 @@ styles are set in sass alongside the components. (in the components folder).
     padding: 0.5rem;
     width: 48%; }
 
+.add-argument-form__parent-claim {
+  margin-bottom: 1rem; }
+
+.add-argument-form__type-toggle {
+  margin-bottom: 1rem; }
+
+.add-argument-form__premis-finder {
+  margin-bottom: 1rem; }
+
+.add-argument-form__argument-simulator {
+  margin-bottom: 0.5rem; }
+
+.premis-finder__results {
+  min-height: 12.5rem;
+  max-height: 60vh;
+  overflow: auto;
+  padding: 0.5rem; }
+
+.type-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .type-toggle__label {
+    cursor: pointer;
+    background-color: #eeeeee;
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 0.5rem;
+    width: 48%; }
+
 .argument {
   padding: 0.5rem;
   border-radius: 5px; }
@@ -1401,15 +1442,17 @@ styles are set in sass alongside the components. (in the components folder).
   .claim-detail__header {
     text-align: center;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
+    margin-bottom: 0.5rem; }
   .claim-detail__text {
     font-size: 1.75rem; }
-  .claim-detail__add-argument {
-    font-size: 0.9375rem; }
   .claim-detail__status {
-    margin-top: 0.5rem; }
+    margin-bottom: 0.5rem; }
+  .claim-detail__options {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.9375rem; }
+    .claim-detail__options .button + .button {
+      margin-left: 0.5rem; }
   .claim-detail__arguments {
     padding: 1rem;
     overflow-x: auto;
@@ -1418,37 +1461,7 @@ styles are set in sass alongside the components. (in the components folder).
     flex-wrap: wrap; }
     .claim-detail__arguments .argument {
       width: 21%;
-      min-width: 300px;
-      margin: 0.5rem; }
-
-.claim-detail {
-  width: 100%;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  padding: 0.5rem; }
-  .claim-detail + .claim-detail {
-    margin-top: 1rem; }
-  .claim-detail__header {
-    text-align: center;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
-  .claim-detail__text {
-    font-size: 1.75rem; }
-  .claim-detail__add-argument {
-    font-size: 0.9375rem; }
-  .claim-detail__status {
-    margin-top: 0.5rem; }
-  .claim-detail__arguments {
-    padding: 1rem;
-    overflow-x: auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; }
-    .claim-detail__arguments .argument {
-      width: 21%;
-      min-width: 300px;
+      min-width: 290px;
       margin: 0.5rem; }
 
 .modal {
@@ -1497,10 +1510,6 @@ styles are set in sass alongside the components. (in the components folder).
     border-color: transparent; }
     .search-form__submit svg {
       fill: #002b4c; }
-
-.search-results {
-  padding: 0.5rem;
-  background-color: #eeeeee; }
 
 /* The status bar indicator
  * a bar between 1 and 100
@@ -1724,17 +1733,6 @@ styles are set in sass alongside the components. (in the components folder).
       width: 99%; }
     .status-bar__bar--100 {
       width: 100%; }
-
-.site-flag {
-  color: white;
-  margin: 0.5625rem 0;
-  text-align: center;
-  display: block; }
-  .site-flag__title {
-    font-family: "Rufina", serif;
-    font-size: 1.5rem; }
-  .site-flag__tagline {
-    font-size: 0.9375rem; }
 
 .language-selector__current {
   font-family: "Rufina", serif;
