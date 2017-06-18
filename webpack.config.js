@@ -49,6 +49,7 @@ module.exports = {
     devServer: {
         quiet: false,
         stats: { colors: true },
+        //proxy: { "/api/**":"http://localhost:3030/" }
         proxy: {
             "/api/**": {
                 "target": {

@@ -3,7 +3,11 @@ import eventManager from '../eventManager/eventManager.js';
 import actions from '../eventManager/actions.js';
 import 'whatwg-fetch';
 
+//in production it's "/api"
+//in a local docker set up it's also "/api"
+//running it manually it's "http://localhost:3030/api"
 var apiRouteRoot = "/api";
+
 
 /* The functions that call the API
  * Each returns a promise
