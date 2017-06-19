@@ -18,6 +18,8 @@ RUN npm install
 RUN mkdir dist
 RUN mkdir src
 
+VOLUME ["/wldev/src", "/wldev/dist"]
+
 # Expose ports.
 EXPOSE 8080
 

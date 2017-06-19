@@ -70,7 +70,7 @@ class Wikilogic extends React.Component {
 
 						<header className="header">
 
-							<Link to="/" className="header__title">Wikilogic hi</Link>
+							<Link to="/" className="header__title">Wikilogic hiya</Link>
 
 							<div className="header__links">
 								<Link to="/">Search</Link>
