@@ -12553,7 +12553,7 @@ var Wikilogic = function (_React$Component) {
 							_react2.default.createElement(
 								_reactRouterDom.Link,
 								{ to: '/', className: 'header__title' },
-								'Wikilogic hiya'
+								'Wikilogic'
 							),
 							_react2.default.createElement(
 								'div',

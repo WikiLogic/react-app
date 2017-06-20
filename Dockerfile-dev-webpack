@@ -6,13 +6,12 @@ FROM node
 RUN mkdir wldev
 WORKDIR /wldev
 
-# ADD the config files
+# NPMINEM
 COPY ./package.json /wldev/
+RUN npm install
+
 COPY ./webpack.config.js /wldev/
 COPY ./.babelrc /wldev/
-
-# Install!
-RUN npm install
 
 # ADD the working files
 RUN mkdir dist
