@@ -1,10 +1,7 @@
 .search-results {
 
-    &__title {
-
-    }
-    
-    &__list {
-
+    &__result {
+        display: block;
+        margin-bottom: 10px;
     }
 }

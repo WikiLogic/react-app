@@ -1511,6 +1511,10 @@ styles are set in sass alongside the components. (in the components folder).
     .search-form__submit svg {
       fill: #002b4c; }
 
+.search-results__result {
+  display: block;
+  margin-bottom: 10px; }
+
 /* The status bar indicator
  * a bar between 1 and 100
  */

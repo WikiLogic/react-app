@@ -35,6 +35,7 @@ class Wikilogic extends React.Component {
 
 	searchClaims(search){
 		if (isNaN(search)) {
+			console.log("searching by term", search);
 			API.searchClaimsByTerm(search)
 			.then((data) => {
 				this.setState({ search_results: data.claims });
@@ -42,11 +43,10 @@ class Wikilogic extends React.Component {
 				console.error('search term api call error', err);
 			});
 		} else {
+			console.log("searching by id", search);
 			API.getClaimDetailById(search)
 			.then((data) => {
-				this.setState({
-					focused_claim: data.claim
-				});
+				this.setState({ focused_claim: data.claim });
 			}).catch((err) => {
 				console.error('search claim api call error', err);
 			});

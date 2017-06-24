@@ -2719,6 +2719,7 @@ function postNewClaim(claim) {
 }
 
 function postNewArgument(argument) {
+    console.log('API posting new argument: ', argument);
     var newArgumentPromise = new Promise(function (resolve, reject) {
         fetch(apiRouteRoot + "/create/argument", {
             method: 'POST',
@@ -12507,16 +12508,16 @@ var Wikilogic = function (_React$Component) {
 			var _this2 = this;
 
 			if (isNaN(search)) {
+				console.log("searching by term", search);
 				_api2.default.searchClaimsByTerm(search).then(function (data) {
 					_this2.setState({ search_results: data.claims });
 				}).catch(function (err) {
 					console.error('search term api call error', err);
 				});
 			} else {
+				console.log("searching by id", search);
 				_api2.default.getClaimDetailById(search).then(function (data) {
-					_this2.setState({
-						focused_claim: data.claim
-					});
+					_this2.setState({ focused_claim: data.claim });
 				}).catch(function (err) {
 					console.error('search claim api call error', err);
 				});
@@ -13741,7 +13742,7 @@ var SearchResults = function (_React$Component) {
 			var searchResults = this.props.search_results.map(function (search_result, index) {
 				return _react2.default.createElement(
 					_reactRouterDom.Link,
-					{ to: '/claim/' + search_result.id, key: index },
+					{ to: '/claim/' + search_result.id, key: index, className: 'search-results__result' },
 					_react2.default.createElement(_Claim2.default, { claim: search_result, handleClick: this.handleClick, isSelected: false })
 				);
 			}.bind(this));

@@ -27,7 +27,7 @@ export default class SearchResults extends React.Component {
 		
         let searchResults = this.props.search_results.map(function(search_result, index){
             return (
-				<Link to={`/claim/${search_result.id}`} key={index}>
+				<Link to={`/claim/${search_result.id}`} key={index} className="search-results__result">
 					<Claim claim={search_result} handleClick={this.handleClick} isSelected={false}/>
 				</Link>
 			);

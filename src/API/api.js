@@ -79,6 +79,7 @@ function postNewClaim(claim){
 }
 
 function postNewArgument(argument){
+    console.log('API posting new argument: ', argument);
     let newArgumentPromise = new Promise((resolve, reject) => {
         fetch(apiRouteRoot + "/create/argument", {
             method: 'POST',
