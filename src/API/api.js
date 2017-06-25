@@ -15,7 +15,11 @@ var apiRouteRoot = "/api";
 function searchClaimsByTerm(searchTerm){
 
     let searchResultsPromies = new Promise((resolve, reject) => {
-        fetch(apiRouteRoot + "/claims?search=" + searchTerm)
+        fetch(apiRouteRoot + "/claims?search=" + searchTerm, {
+            headers: {
+                'Authorization': 'Basic '+btoa('wiki:logic')
+            }
+        })
         .then(checkStatus)
         .then(parseJSON)
         .then(function(res) {
@@ -33,7 +37,11 @@ function searchClaimsByTerm(searchTerm){
 function getClaimDetailById(claimId){
 
     let claimDetailPromise = new Promise((resolve, reject) => {
-        fetch(apiRouteRoot + "/claims/" + claimId)
+        fetch(apiRouteRoot + "/claims/" + claimId, {
+            headers: {
+                'Authorization': 'Basic '+btoa('wiki:logic')
+            }
+        })
         .then(checkStatus)
         .then(parseJSON)
         .then(function (res) {
@@ -59,7 +67,8 @@ function postNewClaim(claim){
         fetch(apiRouteRoot + "/create/claim", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic '+btoa('wiki:logic')
             },
             body: JSON.stringify(claim)
         })
@@ -84,7 +93,8 @@ function postNewArgument(argument){
         fetch(apiRouteRoot + "/create/argument", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic '+btoa('wiki:logic')
             },
             body: JSON.stringify({
                 parent_claim_id: argument.parent_claim_id,
@@ -112,7 +122,8 @@ function postNewExplanation(argument) {
         fetch(apiRouteRoot + "/create/explanation", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic '+btoa('wiki:logic')
             },
             body: JSON.stringify({
                 parent_claim_id: argument.parent_claim_id,
