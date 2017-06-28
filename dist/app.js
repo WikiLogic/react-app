@@ -2166,7 +2166,7 @@ var Claim = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'claim__status-circle' },
-						_react2.default.createElement(_StatusIndicator2.default, { state: this.props.claim.state, type: 'circle' })
+						_react2.default.createElement(_StatusIndicator2.default, { state: this.props.claim.probability, type: 'circle' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -12743,13 +12743,13 @@ var Wikilogic = function (_React$Component) {
 								_react2.default.createElement(_Claim2.default, {
 									claim: {
 										text: "claim text",
-										state: 0.75
+										probability: 0.75
 									}
 								}),
 								_react2.default.createElement(_Claim2.default, {
 									claim: {
 										text: "claim text",
-										state: 0.5
+										probability: 0.5
 									}
 								})
 							);

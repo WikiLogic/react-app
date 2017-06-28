@@ -22,7 +22,7 @@ export default class Claim extends React.Component {
 			<div className={cssClass} onClick={() => this.props.handleClick(this.props.claim)}>
 				<div className="claim__body">
                 	<div className="claim__status-circle">
-						<StatusIndicator state={this.props.claim.state} type="circle"/>
+						<StatusIndicator state={this.props.claim.probability} type="circle"/>
 					</div>
 					<div className="claim__text">
                     	{this.props.claim.text}
