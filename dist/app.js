@@ -2163,9 +2163,17 @@ var Claim = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'claim__body' },
-					this.props.claim.text
-				),
-				_react2.default.createElement(_StatusIndicator2.default, { state: this.props.claim.state })
+					_react2.default.createElement(
+						'div',
+						{ className: 'claim__status-circle' },
+						_react2.default.createElement(_StatusIndicator2.default, { state: this.props.claim.state, type: 'circle' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'claim__text' },
+						this.props.claim.text
+					)
+				)
 			);
 		}
 	}]);
@@ -4003,8 +4011,18 @@ var StatusIndicator = function (_React$Component) {
 			if (this.props.type == "circle") {
 				return _react2.default.createElement(
 					"div",
-					{ className: "status-bar" },
-					_react2.default.createElement("div", { className: "status-bar__bar status-bar__bar--" + this.props.state })
+					{ className: "status-circle status-circle--" + this.props.state * 100 },
+					_react2.default.createElement(
+						"svg",
+						{ className: "status-circle__svg", viewBox: "-5 -5 200 200" },
+						_react2.default.createElement("circle", { className: "status-circle__svg-icon status-circle__svg-bg outer", cx: "95", cy: "95", r: "85", transform: "rotate(-90, 95, 95)" }),
+						_react2.default.createElement("circle", { className: "status-circle__svg-icon status-circle__svg-state outer", cx: "95", cy: "95", r: "85", transform: "rotate(-90, 95, 95)" })
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "status-circle__text" },
+						this.props.state * 100 + "%"
+					)
 				);
 			}
 			return null;
@@ -12725,16 +12743,14 @@ var Wikilogic = function (_React$Component) {
 								_react2.default.createElement(_Claim2.default, {
 									claim: {
 										text: "claim text",
-										state: 0.5
-									},
-									type: 'bar'
+										state: 0.75
+									}
 								}),
 								_react2.default.createElement(_Claim2.default, {
 									claim: {
 										text: "claim text",
 										state: 0.5
-									},
-									type: 'circle'
+									}
 								})
 							);
 						} })

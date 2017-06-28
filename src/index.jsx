@@ -170,16 +170,14 @@ class Wikilogic extends React.Component {
 							<Claim
 								claim={{
 									text: "claim text",
-									state: 0.5
+									state: 0.75
 								}} 
-								type="bar"
 							/>
 							<Claim
 								claim={{
 									text: "claim text",
 									state: 0.5
 								}} 
-								type="circle"
 							/>
 						</div>
 					)}/>

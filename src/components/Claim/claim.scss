@@ -6,14 +6,25 @@
     cursor: pointer;
     display: block;
 
+    &__body {
+        display: table;
+        width: 100%;
+    }
+        &__status-circle {
+            display: table-cell;
+            vertical-align: top;
+            width: 70px;
+        }
+        &__text {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
 
     + .claim{
         margin-top: rem($pad / 2);
     }
 
-    &__body {
-        margin-bottom: rem($pad / 2);
-    }
 
 
     &:hover {
