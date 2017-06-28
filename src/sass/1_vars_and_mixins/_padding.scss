@@ -1,7 +1,0 @@
-@mixin padding() {
-	padding: rem($pad-small);
-
-	@include breakpoint(medium){
-		padding: rem($pad-medium);
-	}
-}
