@@ -1,5 +1,5 @@
 import React from 'react';
-import StatusBar from '../StatusBar/StatusBar.jsx';
+import StatusIndicator from '../StatusIndicator/StatusIndicator.jsx';
 
 /* Each Claim in the list of search results
  */
@@ -23,7 +23,7 @@ export default class Claim extends React.Component {
 				<div className="claim__body">
                     {this.props.claim.text}
                 </div>
-                <StatusBar state={this.props.claim.state}/>
+                <StatusIndicator state={this.props.claim.state}/>
 			</div>
 		);
 	}

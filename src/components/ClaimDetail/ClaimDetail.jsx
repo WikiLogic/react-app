@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../API/api.js';
 import Argument from '../Argument/Argument.jsx';
-import StatusBar from '../StatusBar/StatusBar.jsx';
+import StatusIndicator from '../StatusIndicator/StatusIndicator.jsx';
 import Modal from '../Modal/Modal.jsx';
 import AddArgumentForm from '../AddArgumentForm/AddArgumentForm.jsx';
 import AddExplanationForm from '../AddExplanationForm/AddExplanationForm.jsx';
@@ -96,7 +96,7 @@ export default class ClaimDetail extends React.Component {
 
 
                 <div className="claim-detail__status">   
-                    <StatusBar state={this.props.claim.state}/>
+                    <StatusIndicator state={this.props.claim.state}/>
                 </div>
                 
                 <div className="claim-detail__options">

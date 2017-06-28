@@ -429,8 +429,8 @@ input[type='button'],
   cursor: pointer;
   max-width: 100%;
   display: block;
-  background-color: #002b4c;
-  border: 4px solid #002b4c;
+  background-color: #111F2E;
+  border: 4px solid #111F2E;
   color: white;
   fill: white; }
   button:hover, button:focus,
@@ -504,102 +504,79 @@ body {
   font-family: Sans-Serif;
   /* 100 / 300 / 700 */
   font-weight: normal;
-  font-size: 0.875rem;
-  line-height: 1.3; }
-  @media (min-width: 540px) {
-    body {
-      font-size: 0.9375rem; } }
+  font-size: 1rem;
+  line-height: 1.5; }
   @media (min-width: 768px) {
     body {
-      font-size: 1rem; } }
+      font-size: 1.125rem; } }
 
 h1 {
-  margin: 0 0 0.25em;
+  margin: 0;
   font-family: "Rufina", serif;
-  font-size: 2rem;
-  line-height: 1;
-  font-weight: 400; }
+  font-size: 3rem;
+  font-weight: 700; }
 
 /* Page title */
 h2 {
-  margin: 0 0 0.25em;
+  margin: 0;
   font-family: "Rufina", serif;
-  font-size: 1.75rem;
-  line-height: 1;
-  font-weight: 400; }
+  font-size: 2.25rem;
+  font-weight: 700; }
 
 /* Page sub-titles */
 h3 {
-  margin: 0 0 0.5em;
-  font-family: Sans-Serif;
-  font-size: 1.25rem;
-  line-height: 1;
+  margin: 0;
+  font-family: "Rufina", serif;
+  font-size: 1.625rem;
   font-weight: 700; }
 
 /* Sidebar title / lead-in / form area title */
 h4 {
-  margin: 0 0 0.5em;
+  margin: 0;
   font-family: Sans-Serif;
-  font-size: 1.125rem;
-  line-height: 1;
-  font-weight: 700; }
+  font-size: 1.75rem;
+  font-weight: 300;
+  text-transform: uppercase; }
 
 h5 {
-  margin: 0 0 0.75em;
+  margin: 0;
   font-family: Sans-Serif;
-  font-size: 0.8125rem;
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 300;
   text-transform: uppercase; }
 
 h6 {
-  margin: 0 0 0.75em;
+  margin: 0;
   font-family: Sans-Serif;
-  font-size: 0.625rem;
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: 0.8125rem;
+  font-weight: 300;
   text-transform: uppercase; }
 
-@media (min-width: 768px) {
-  h1 {
-    font-size: 2.8125rem; }
-  h2 {
-    font-size: 1.875rem; }
-  h3 {
-    font-size: 1.4375rem; }
-  h4 {
-    font-size: 1.25rem; } }
-
-@media (min-width: 980px) {
-  h1 {
-    font-size: 3.375rem; }
-  h2 {
-    font-size: 2.375rem; }
-  h3 {
-    font-size: 1.5625rem; } }
-
 p {
-  font-size: 0.875rem;
-  line-height: 1.2;
   font-weight: 400;
-  margin: 0 0 1em; }
+  margin: 0 0 1em;
+  max-width: 35.9375rem; }
 
 p small,
 p.small {
-  font-size: 0.6875rem;
-  line-height: 1;
+  font-size: 0.8125rem;
   font-weight: 400; }
 
-@media (min-width: 540px) {
-  p {
-    font-size: 0.9375rem; }
-  p small,
-  p.small {
-    font-size: 0.75rem; } }
-
 @media (min-width: 768px) {
+  h1 {
+    font-size: 3.375rem; }
+  h2 {
+    font-size: 2.53125rem; }
+  h3 {
+    font-size: 1.82812rem; }
+  h4 {
+    font-size: 1.96875rem; }
+  h5 {
+    font-size: 1.26562rem; }
+  h6 {
+    font-size: 0.91406rem; }
   p {
-    font-size: 1rem; }
+    max-width: 38.4375rem; }
   p small,
   p.small {
     font-size: 0.8125rem; } }
@@ -661,168 +638,6 @@ LAYOUTS
 These create the layout structurs within which components will live.
 
 */
-.alerts {
-  position: absolute;
-  right: 16px;
-  bottom: 0; }
-  .alerts__bad {
-    background-color: #F25454;
-    color: white; }
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.row--pad {
-  /* Opt-in outside padding */ }
-  .row--pad .row-pad {
-    padding: 1rem 0 1rem 1rem; }
-    .row--pad .row-pad [class*='col-']:last-of-type {
-      padding-right: 1rem; }
-
-.row .row__col--no-padding {
-  padding-right: 0;
-  padding-left: 0; }
-
-.row.row .row__col--right-padding {
-  padding-right: 1rem; }
-
-.row.row .row__col--left-padding {
-  padding-left: 1rem; }
-
-.row__col--1-quarter {
-  width: 25%;
-  float: left;
-  padding-right: 1rem; }
-  .row__col--1-quarter:last-of-type {
-    padding-right: 0; }
-  .row__col--1-quarter\@small {
-    width: 100%;
-    padding-right: 0;
-    padding-bottom: 1rem; }
-    .row__col--1-quarter\@small:last-of-type {
-      padding-bottom: 0; }
-    @media (min-width: 540px) {
-      .row__col--1-quarter\@small {
-        width: 25%;
-        float: left;
-        padding-right: 1rem;
-        padding-bottom: 0; }
-        .row__col--1-quarter\@small:last-of-type {
-          padding-right: 0; } }
-
-.row__col--1-third {
-  width: 33.33%;
-  float: left;
-  padding-right: 1rem; }
-  .row__col--1-third:last-of-type {
-    padding-right: 0; }
-  .row__col--1-third\@small {
-    width: 100%;
-    padding-right: 0;
-    padding-bottom: 1rem; }
-    .row__col--1-third\@small:last-of-type {
-      padding-bottom: 0; }
-    @media (min-width: 540px) {
-      .row__col--1-third\@small {
-        width: 33.33%;
-        float: left;
-        padding-right: 1rem;
-        padding-bottom: 0; }
-        .row__col--1-third\@small:last-of-type {
-          padding-right: 0; } }
-
-.row__col--1-half {
-  width: 50%;
-  float: left;
-  padding-right: 1rem; }
-  .row__col--1-half:last-of-type {
-    padding-right: 0; }
-  .row__col--1-half\@small {
-    width: 100%;
-    padding-right: 0;
-    padding-bottom: 1rem; }
-    .row__col--1-half\@small:last-of-type {
-      padding-bottom: 0; }
-    @media (min-width: 540px) {
-      .row__col--1-half\@small {
-        width: 50%;
-        float: left;
-        padding-right: 1rem;
-        padding-bottom: 0; }
-        .row__col--1-half\@small:last-of-type {
-          padding-right: 0; } }
-
-.row__col--2-third {
-  width: 66.66%;
-  float: left;
-  padding-right: 1rem; }
-  .row__col--2-third:last-of-type {
-    padding-right: 0; }
-  .row__col--2-third\@small {
-    width: 100%;
-    padding-right: 0;
-    padding-bottom: 1rem; }
-    .row__col--2-third\@small:last-of-type {
-      padding-bottom: 0; }
-    @media (min-width: 540px) {
-      .row__col--2-third\@small {
-        width: 66.66%;
-        float: left;
-        padding-right: 1rem;
-        padding-bottom: 0; }
-        .row__col--2-third\@small:last-of-type {
-          padding-right: 0; } }
-
-.row__col--3-quarter {
-  width: 75%;
-  float: left;
-  padding-right: 1rem; }
-  .row__col--3-quarter:last-of-type {
-    padding-right: 0; }
-  .row__col--3-quarter\@small {
-    width: 100%;
-    padding-right: 0;
-    padding-bottom: 1rem; }
-    .row__col--3-quarter\@small:last-of-type {
-      padding-bottom: 0; }
-    @media (min-width: 540px) {
-      .row__col--3-quarter\@small {
-        width: 75%;
-        float: left;
-        padding-right: 1rem;
-        padding-bottom: 0; }
-        .row__col--3-quarter\@small:last-of-type {
-          padding-right: 0; } }
-
-.editor-sidebar {
-  display: flex;
-  flex-direction: row;
-  align-items: streatch;
-  position: relative;
-  overflow: hidden; }
-  .editor-sidebar__side {
-    position: absolute;
-    width: 12.5rem;
-    top: 0;
-    bottom: 0;
-    right: 100%;
-    z-index: 2;
-    transition: right 0.2s ease;
-    flex: none; }
-  .editor-sidebar__main {
-    flex-grow: 1; }
-  .editor-sidebar--show-menu .editor-sidebar__side {
-    right: calc(100% - 12.5rem); }
-  @media (min-width: 768px) {
-    .editor-sidebar__side {
-      position: static; } }
-
-@media (min-width: 768px) {
-  .js-editor-menu {
-    display: none !important; } }
-
 .form__title {
   padding-bottom: 1rem;
   font-weight: normal; }
@@ -859,7 +674,7 @@ These create the layout structurs within which components will live.
     background-repeat: repeat-x;
     background-size: 2px 2px;
     background-position: 0 95%;
-    text-shadow: 0.03em 0 0 #002b4c, 0.06em 0 0 #002b4c, 0.09em 0 0 #002b4c, 0.12em 0 0 #002b4c, 0.15em 0 0 #002b4c, -0.03em 0 0 #002b4c, -0.06em 0 0 #002b4c, -0.09em 0 0 #002b4c, -0.12em 0 0 #002b4c, -0.15em 0 0 #002b4c; }
+    text-shadow: 0.03em 0 0 #111F2E, 0.06em 0 0 #111F2E, 0.09em 0 0 #111F2E, 0.12em 0 0 #111F2E, 0.15em 0 0 #111F2E, -0.03em 0 0 #111F2E, -0.06em 0 0 #111F2E, -0.09em 0 0 #111F2E, -0.12em 0 0 #111F2E, -0.15em 0 0 #111F2E; }
     .header a:hover {
       background-image: linear-gradient(transparent 50%, white 50%); }
     .header a::selection {
@@ -876,75 +691,56 @@ These create the layout structurs within which components will live.
     .header__links a + a {
       margin-left: 1.25rem; }
 
+.layout-cols-2__left {
+  margin-bottom: 1.25rem; }
+
+.layout-cols-2__right {
+  margin-bottom: 1.25rem; }
+
+@media (min-width: 320px) {
+  .layout-cols-2 {
+    display: table; }
+    .layout-cols-2__left, .layout-cols-2__gap, .layout-cols-2__right {
+      display: table-cell;
+      vertical-align: top;
+      margin-bottom: 0; }
+      .layout-cols-2__left .card, .layout-cols-2__gap .card, .layout-cols-2__right .card {
+        margin-top: 0; }
+    .layout-cols-2__gap {
+      width: 5px; }
+      .layout-cols-2__gap--10 {
+        width: 10px; }
+      .layout-cols-2__gap--30 {
+        width: 30px; }
+    .layout-cols-2--5050 .layout-cols-2__left {
+      width: 50%; }
+    .layout-cols-2--vertical-center .layout-cols-2__left,
+    .layout-cols-2--vertical-center .layout-cols-2__right {
+      vertical-align: middle; }
+    .layout-cols-2--vertical-top .layout-cols-2__left,
+    .layout-cols-2--vertical-top .layout-cols-2__right {
+      vertical-align: top; } }
+
 .main-logo__icon {
   width: 1.875rem;
   height: 1.875rem;
   fill: white; }
-
-.main-sidebar-nav {
-  padding: 0.625rem 0;
-  color: white; }
-  .main-sidebar-nav__link {
-    display: block;
-    width: 100%;
-    padding: 0.625rem 0.875rem;
-    text-decoration: none;
-    color: #5f9aec; }
-    .main-sidebar-nav__link:hover {
-      color: #8db7f1; }
-  .main-sidebar-nav__link-icon {
-    width: 0.75rem;
-    height: 0.75rem;
-    fill: white; }
-  .main-sidebar-nav__link-text {
-    margin-left: 5px; }
-  .main-sidebar-nav__utility-links {
-    padding: 0.625rem 0.625rem 0 0.625rem; }
-  .main-sidebar-nav__utility-link {
-    color: #5f9aec; }
-    .main-sidebar-nav__utility-link:hover {
-      color: #8db7f1; }
 
 .main-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column; }
   .main-layout__header {
-    background-color: #002b4c;
+    background-color: #111F2E;
     border-bottom: 1px solid #eeeeee; }
   .main-layout__footer {
-    margin-top: auto; }
+    margin-top: auto;
+    background-color: #eeeeee; }
 
 .max-width-wrap {
   max-width: 1024px;
   margin: 0 auto;
   padding: 1.25rem; }
-
-#svg {
-  width: 100%;
-  height: 100%; }
-
-.root-sidebar {
-  display: flex;
-  flex-direction: row;
-  align-items: streatch;
-  position: relative; }
-  .root-sidebar__side {
-    position: absolute;
-    width: 12.5rem;
-    top: 0;
-    bottom: 0;
-    right: 100%;
-    z-index: 3;
-    transition: right 0.2s ease;
-    flex: none; }
-  .root-sidebar__main {
-    flex-grow: 1; }
-  .root-sidebar--show-menu .root-sidebar__side {
-    right: calc(100% - 12.5rem); }
-  @media (min-width: 768px) {
-    .root-sidebar__side {
-      position: static; } }
 
 .search-layout__header {
   margin-bottom: 1.25rem;
@@ -978,7 +774,7 @@ NUKES / utiility classes / atomic classes
 Single responsability classes. for those times when it makes life easier to just put a class in the html to tweak something.
  */
 .bg-color--red {
-  background-color: #F25454; }
+  background-color: #f05d65; }
 
 .bg-color--blue {
   background-color: #5f9aec; }
@@ -1028,7 +824,7 @@ Single responsability classes. for those times when it makes life easier to just
 .bg-pattern {
   background-image: repeating-linear-gradient(30deg, rgba(59, 131, 232, 0.5), rgba(59, 131, 232, 0.5) 8px, rgba(36, 117, 229, 0.5) 9px, rgba(59, 131, 232, 0.5) 10px), radial-gradient(circle farthest-corner at 50% 20%, rgba(72, 140, 233, 0.5), black); }
   .bg-pattern--red {
-    background-image: repeating-linear-gradient(30deg, rgba(239, 46, 46, 0.5), rgba(239, 46, 46, 0.5) 8px, rgba(237, 22, 22, 0.5) 9px, rgba(239, 46, 46, 0.5) 10px), radial-gradient(circle farthest-corner at 50% 20%, rgba(240, 60, 60, 0.5), rgba(113, 9, 9, 0.5)); }
+    background-image: repeating-linear-gradient(30deg, rgba(237, 56, 66, 0.5), rgba(237, 56, 66, 0.5) 8px, rgba(234, 32, 43, 0.5) 9px, rgba(237, 56, 66, 0.5) 10px), radial-gradient(circle farthest-corner at 50% 20%, rgba(238, 70, 79, 0.5), rgba(118, 11, 17, 0.5)); }
   .bg-pattern--green {
     background-image: repeating-linear-gradient(30deg, rgba(39, 181, 39, 0.5), rgba(39, 181, 39, 0.5) 8px, rgba(34, 160, 35, 0.5) 9px, rgba(39, 181, 39, 0.5) 10px), radial-gradient(circle farthest-corner at 50% 20%, rgba(41, 193, 42, 0.5), rgba(1, 4, 1, 0.4)); }
 
@@ -1039,7 +835,7 @@ Single responsability classes. for those times when it makes life easier to just
   .border--white {
     border-color: rgba(255, 255, 255, 0.5); }
   .border--red {
-    border-color: rgba(242, 84, 84, 0.5); }
+    border-color: rgba(240, 93, 101, 0.5); }
   .border--green {
     border-color: rgba(49, 211, 50, 0.5); }
   .border--solid {
@@ -1099,7 +895,7 @@ Single responsability classes. for those times when it makes life easier to just
   fill: white !important; }
 
 .color--red {
-  color: #F25454 !important; }
+  color: #f05d65 !important; }
 
 .color--blue {
   color: #5f9aec !important; }
@@ -1114,7 +910,7 @@ Single responsability classes. for those times when it makes life easier to just
   fill: white !important; }
 
 .fill--red {
-  fill: #F25454 !important; }
+  fill: #f05d65 !important; }
 
 .fill--blue {
   fill: #5f9aec !important; }
@@ -1126,7 +922,7 @@ Single responsability classes. for those times when it makes life easier to just
   color: #223856 !important; }
 
 .hover-color--red:hover {
-  color: #F25454 !important; }
+  color: #f05d65 !important; }
 
 .hover-color--blue:hover {
   color: #5f9aec !important; }
@@ -1138,7 +934,7 @@ Single responsability classes. for those times when it makes life easier to just
   fill: #223856 !important; }
 
 .hover-fill--red:hover {
-  fill: #F25454 !important; }
+  fill: #f05d65 !important; }
 
 .hover-fill--blue:hover {
   fill: #5f9aec !important; }
@@ -1369,8 +1165,8 @@ styles are set in sass alongside the components. (in the components folder).
     background-color: rgba(49, 211, 50, 0.2);
     border: 1px solid #31D332; }
   .argument--OPPOSES {
-    background-color: rgba(242, 84, 84, 0.2);
-    border: 1px solid #F25454; }
+    background-color: rgba(240, 93, 101, 0.2);
+    border: 1px solid #f05d65; }
 
 .argumentCircle {
   padding: 0.5rem;
@@ -1392,8 +1188,8 @@ styles are set in sass alongside the components. (in the components folder).
     -moz-border-radius: 300px;
     border-radius: 300px; }
   .argumentCircle--false {
-    background-color: rgba(242, 84, 84, 0.2);
-    border: 1px solid #F25454; }
+    background-color: rgba(240, 93, 101, 0.2);
+    border: 1px solid #f05d65; }
 
 .claim {
   border: 1px solid #cccccc;
@@ -1509,7 +1305,7 @@ styles are set in sass alongside the components. (in the components folder).
     background-color: transparent;
     border-color: transparent; }
     .search-form__submit svg {
-      fill: #002b4c; }
+      fill: #111F2E; }
 
 .search-results__result {
   display: block;
@@ -1521,22 +1317,15 @@ styles are set in sass alongside the components. (in the components folder).
 .status-bar {
   width: 100%;
   height: 6px;
-  border-radius: 5px;
   position: relative;
-  background-color: #eee;
-  -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.15); }
+  background-color: #f05d65; }
   .status-bar__bar {
     position: absolute;
-    top: 1px;
-    bottom: 1px;
-    left: 1px;
+    top: 0;
+    bottom: 0;
+    left: 0;
     border-radius: 3px;
-    background-color: #039c15;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(34, 255, 0, 0.3);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(34, 255, 0, 0.3);
-    box-shadow: 0px 0px 5px 0px rgba(34, 255, 0, 0.3); }
+    background-color: #31D332; }
     .status-bar__bar--1 {
       width: 1%; }
     .status-bar__bar--2 {

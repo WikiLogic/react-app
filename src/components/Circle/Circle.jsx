@@ -1,5 +1,5 @@
 import React from 'react';
-import StatusBar from '../StatusBar/StatusBar.jsx';
+import StatusIndicator from '../StatusIndicator/StatusIndicator.jsx';
 import Claim from '../Claim/Claim.jsx';
 
 /* A claim
