@@ -14,9 +14,7 @@ export default class SearchResults extends React.Component {
 	}
 
 	handleClick(resultObject){
-		//TODO: highlight the clicked result, clear out any other highlights
-
-		this.props.resultClickHandler(resultObject);
+		//currently - do nothing!
 	}
 
 	render() {

@@ -6,19 +6,18 @@ import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory();
 
 //JS
-import eventManager from './eventManager/eventManager.js';
-import actions from './eventManager/actions.js';
 import API from './API/api.js';
 
 //React components
-import SearchInput from './components/SearchInput/SearchInput.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
-import ClaimChain from './components/ClaimChain/ClaimChain.jsx';
-import ClaimDetail from './components/ClaimDetail/ClaimDetail.jsx';
-import Claim from './components/Claim/Claim.jsx';
-import AddClaimForm from './components/AddClaimForm/AddClaimForm.jsx';
 import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import Circle from './components/Circle/Circle.jsx';
+
+//Scenes
+import SearchScene from './scenes/search/SearchScene.jsx';
+import ClaimDetailScene from './scenes/claimDetail/ClaimDetailScene.jsx';
+import ClaimCreateScene from './scenes/claimCreate/ClaimCreateScene.jsx';
+import StyleguideScene from './scenes/styleguide/StyleguideScene.jsx'
 
 class Wikilogic extends React.Component {
 
@@ -30,28 +29,7 @@ class Wikilogic extends React.Component {
 			focused_claim: {}
 		};
 
-		this.searchClaims = this.searchClaims.bind(this);
 		this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
-	}
-
-	searchClaims(search){
-		if (isNaN(search)) {
-			console.log("searching by term", search);
-			API.searchClaimsByTerm(search)
-			.then((data) => {
-				this.setState({ search_results: data.claims });
-			}).catch((err) => {
-				console.error('search term api call error', err);
-			});
-		} else {
-			console.log("searching by id", search);
-			API.getClaimDetailById(search)
-			.then((data) => {
-				this.setState({ focused_claim: data.claim });
-			}).catch((err) => {
-				console.error('search claim api call error', err);
-			});
-		}
 	}
 
 	setNewClaimFocus(claim){
@@ -84,62 +62,14 @@ class Wikilogic extends React.Component {
 				
 				<main className="main main-layout__body">
 
-					{/* the home page: search & results */}
-					<Route path="/" exact render={() => (
-						<div className="search-layout">
-							<div className="search-layout__header">
-								<div className="max-width-wrap">
+					<Route path="/" exact component={SearchScene}> 
+					</Route>
 
-									<SearchInput submissionHandler={this.searchClaims} placeholder="Search Claims"/>
+					<Route path="/claim/:claimId" exact component={ClaimDetailScene}>
+					</Route>
 
-								</div>
-							</div>
-							<div className="search-layout__results">
-								<div className="max-width-wrap">
-
-									<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
-
-								</div>
-							</div>
-						</div>
-						
-					)}/>
-
-					{/* Calim detail page */}
-					<Route path="/claim/:claimId" exact render={(routeData) => (
-						<div className="claim-detail-layout">
-							<div className="claim-detail-layout__header">
-								<div className="max-width-wrap">
-
-									<ClaimChain topClaimId={routeData.match.params.claimId}/>
-
-								</div>
-							</div>
-							<div className="claim-detail-layout__body">
-								<div className="max-width-wrap">
-
-								</div>
-							</div>
-						</div>
-					)}/>
-
-					{/* New claim page */}
-					<Route path="/new-claim" exact render={() => (
-						<div className="new-claim-layout">
-							<div className="new-claim-layout__header">
-								<div className="max-width-wrap">
-
-								<AddClaimForm /> 
-
-								</div>
-							</div>
-							<div className="new-claim-layout__results">
-								<div className="max-width-wrap">
-
-								</div>
-							</div>	
-						</div>
-					)}/>
+					<Route path="/new-claim" exact component={ClaimCreateScene}>
+					</Route>
 
 					{/* Edit claim page ... not sure if this should really be a thing */}
 					<Route path="/edit-claim" exact render={() => (
@@ -157,30 +87,8 @@ class Wikilogic extends React.Component {
 						</div>
 					)}/>
 
-					<Route path="/styleguide" exact render={() => (
-						<div>
-							<h1>Heading 1</h1>
-							<h2>Heading 2</h2>
-							<h3>Heading 3</h3>
-							<h4>Heading 4</h4>
-							<h5>Heading 5</h5>
-							<h6>Heading 6</h6>
-							<p>123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.</p>
-
-							<Claim
-								claim={{
-									text: "claim text",
-									probability: 0.75
-								}} 
-							/>
-							<Claim
-								claim={{
-									text: "claim text",
-									probability: 0.5
-								}} 
-							/>
-						</div>
-					)}/>
+					<Route path="/styleguide" exact component={StyleguideScene}>
+					</Route>
 
 				</main>
 
