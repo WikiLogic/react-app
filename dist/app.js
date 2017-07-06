@@ -14578,7 +14578,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * The Search Results page
+ * The Home page
  * @prop {*} name 
  */
 var SearchScene = function (_React$Component) {
@@ -14672,7 +14672,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /**
  * The Search Results page
- * @prop {*} name 
  */
 var SearchScene = function (_React$Component) {
 	_inherits(SearchScene, _React$Component);
@@ -14694,13 +14693,17 @@ var SearchScene = function (_React$Component) {
 	_createClass(SearchScene, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
+			//get the search param to see if there is anything there
 			var URLsearchTerm = _urlParameter2.default.get('s', this.props.location.search);
-			console.log("_1", URLsearchTerm);
-			this.setState({
-				search_term: URLsearchTerm
-			});
-			console.log("_2", URLsearchTerm);
+
+			//if there is
 			if (URLsearchTerm != '') {
+				//set the state so it renders
+				this.setState({
+					search_term: URLsearchTerm
+				});
+
+				//and run the search
 				this.searchClaims(URLsearchTerm);
 			}
 		}
@@ -14709,6 +14712,7 @@ var SearchScene = function (_React$Component) {
 		value: function searchClaims(search) {
 			var _this2 = this;
 
+			//run the search
 			if (isNaN(search)) {
 				console.log("searching by term", search);
 				_api2.default.searchClaimsByTerm(search).then(function (data) {
@@ -14724,7 +14728,11 @@ var SearchScene = function (_React$Component) {
 					console.error('search claim api call error', err);
 				});
 			}
+
+			//add it to the url
 			this.props.history.push('/search?s=' + search);
+
+			//set the state
 			this.setState({
 				search_term: search
 			});
@@ -14732,8 +14740,6 @@ var SearchScene = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			console.log("_3", this.state.search_term);
-
 			return _react2.default.createElement(
 				'div',
 				{ className: 'search-layout' },

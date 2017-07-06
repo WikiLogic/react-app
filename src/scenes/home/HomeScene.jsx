@@ -2,7 +2,7 @@ import React from 'react';
 import SearchInput from '../../components/SearchInput/SearchInput.jsx';
 
 /**
- * The Search Results page
+ * The Home page
  * @prop {*} name 
  */
 export default class SearchScene extends React.Component {
