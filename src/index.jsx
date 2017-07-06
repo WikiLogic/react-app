@@ -14,10 +14,11 @@ import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import Circle from './components/Circle/Circle.jsx';
 
 //Scenes
+import HomeScene from './scenes/home/HomeScene.jsx';
 import SearchScene from './scenes/search/SearchScene.jsx';
 import ClaimDetailScene from './scenes/claimDetail/ClaimDetailScene.jsx';
 import ClaimCreateScene from './scenes/claimCreate/ClaimCreateScene.jsx';
-import StyleguideScene from './scenes/styleguide/StyleguideScene.jsx'
+import StyleguideScene from './scenes/styleguide/StyleguideScene.jsx';
 
 class Wikilogic extends React.Component {
 
@@ -62,7 +63,10 @@ class Wikilogic extends React.Component {
 				
 				<main className="main main-layout__body">
 
-					<Route path="/" exact component={SearchScene}> 
+					<Route path="/" exact component={HomeScene}> 
+					</Route>
+
+					<Route path="/search" exact component={SearchScene}> 
 					</Route>
 
 					<Route path="/claim/:claimId" exact component={ClaimDetailScene}>

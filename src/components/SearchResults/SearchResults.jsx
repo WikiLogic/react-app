@@ -19,7 +19,7 @@ export default class SearchResults extends React.Component {
 
 	render() {
 		if (typeof this.props.search_results == 'undefined') { 
-			console.warn('Search result props undefined :(');
+			console.warn('Search result props undefined :('); 
 			return null; 
 		}
 		

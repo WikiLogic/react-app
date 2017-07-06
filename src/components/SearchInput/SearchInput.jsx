@@ -9,22 +9,26 @@ import SearchIcon from  '../_Icons/SearchIcon.jsx';
 export default class SearchInput extends React.Component {
 
 	constructor (props) {
-		super(props)
-		this.state = {value: 'zero'}; //holding the search term
+		super(props);
+		this.state = {value: ''};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	componentWillReceiveProps(nextProps){
+		if (nextProps.inputValue != '') {
+			this.setState({
+				value: nextProps.inputValue
+			});
+		}
+	}
+
 	handleChange(event) {
-		/* Change handler is required otherwise the state wouldn't update and nothing will show up in the input when typing
-		 * https://facebook.github.io/react/docs/forms.html
-		 */
 		this.setState({value: event.target.value});
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
-
 		this.props.submissionHandler(this.state.value);
 	}
 
@@ -38,5 +42,4 @@ export default class SearchInput extends React.Component {
 			</form>
 		);
 	}
-
 }
