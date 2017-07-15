@@ -10,11 +10,12 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN chown -R www-data:www-data /var/lib/nginx
 
 #copy the server configuration into the docker container
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.https.conf /etc/nginx/nginx.conf
 COPY ./.htpasswd /etc/nginx/.htpasswd
+COPY /etc/letsencrypt/ /root/ssl/
 
-# sharing the static files!
-VOLUME ["/var/www/app", "/root/ssl"]
+# sharing the static files! "/root/ssl"
+VOLUME ["/var/www/app"] 
 
 # Define default command.
 CMD ["nginx"]
