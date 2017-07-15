@@ -1,7 +1,7 @@
 #The dockerfile for Wikilogic's nginx static file server
 
 # Pull base image - we're running it on Ubuntu!
-FROM ubuntu
+FROM ubuntu:16.04
 
 # Install Nginx
 RUN apt-get update
@@ -11,11 +11,10 @@ RUN chown -R www-data:www-data /var/lib/nginx
 
 #copy the server configuration into the docker container
 COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./dist /var/www/app
 COPY ./.htpasswd /etc/nginx/.htpasswd
 
-# Define mountable directories.
-#VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/app"]
+# sharing the static files!
+VOLUME ["/var/www/app"]
 
 # Define default command.
 CMD ["nginx"]
