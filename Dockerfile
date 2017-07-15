@@ -14,7 +14,7 @@ COPY ./nginx.https.conf /etc/nginx/nginx.conf
 COPY ./.htpasswd /etc/nginx/.htpasswd
 
 # sharing the static files!
-VOLUME ["/var/www/app", "/etc/letsencrypt/live/demo.wikilogicfoundation.org"]
+VOLUME ["/var/www/app", "/root/ssl"]
 
 # Define default command.
 CMD ["nginx"]
