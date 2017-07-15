@@ -10,7 +10,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN chown -R www-data:www-data /var/lib/nginx
 
 #copy the server configuration into the docker container
-COPY ./nginx.https.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./.htpasswd /etc/nginx/.htpasswd
 
 # sharing the static files!
@@ -21,3 +21,4 @@ CMD ["nginx"]
 
 # Expose ports.
 EXPOSE 80
+EXPOSE 443

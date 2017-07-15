@@ -1,7 +1,7 @@
 #The dockerfile for Wikilogic's nginx static file server
 
 # Pull base image - we're running it on Ubuntu!
-FROM ubuntu
+FROM ubuntu:16.04
 
 # Install Nginx
 RUN apt-get update
@@ -13,11 +13,11 @@ RUN chown -R www-data:www-data /var/lib/nginx
 COPY ./nginx.dev.conf /etc/nginx/nginx.conf
 
 # Define mountable directories.
-#VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/app"]
-VOLUME ["/var/www/app"]
+VOLUME ["/var/www/app", "/root/ssl"]
 
 # Define default command.
 CMD ["nginx"]
 
 # Expose ports.
 EXPOSE 80
+EXPOSE 443
