@@ -1,5 +1,3 @@
-'use strict';
-
 function addToQueryString(queryString, paramName, value){
 	if (queryString.length > 0) {
 		//there's something in the querystring, I'm going to assume it's a properly formed parameter

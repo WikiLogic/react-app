@@ -3867,7 +3867,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SearchIcon = __webpack_require__(110);
+var _SearchIcon = __webpack_require__(111);
 
 var _SearchIcon2 = _interopRequireDefault(_SearchIcon);
 
@@ -7807,6 +7807,34 @@ module.exports = getIteratorFn;
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.newPremis = newPremis;
+function newPremis(newPremis, argument, parentClaim) {
+    //check 1 - is it the parent?
+    if (newPremis.id == parentClaim.id) {
+        return false;
+    }
+
+    //check 2 - is it a duplicate
+    var isDuplicate = argument.premises.some(function (argPremis) {
+        return argPremis.id == newPremis.id;
+    });
+    if (isDuplicate) {
+        return false;
+    }
+
+    return true;
+}
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
@@ -7879,34 +7907,6 @@ var SearchResults = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = SearchResults;
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.newPremis = newPremis;
-function newPremis(newPremis, argument, parentClaim) {
-    //check 1 - is it the parent?
-    if (newPremis.id == parentClaim.id) {
-        return false;
-    }
-
-    //check 2 - is it a duplicate
-    var isDuplicate = argument.premises.some(function (argPremis) {
-        return argPremis.id == newPremis.id;
-    });
-    if (isDuplicate) {
-        return false;
-    }
-
-    return true;
-}
 
 /***/ }),
 /* 68 */
@@ -11341,35 +11341,35 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _SearchResults = __webpack_require__(66);
+var _SearchResults = __webpack_require__(67);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
-var _EditClaimForm = __webpack_require__(108);
+var _EditClaimForm = __webpack_require__(109);
 
 var _EditClaimForm2 = _interopRequireDefault(_EditClaimForm);
 
-var _Circle = __webpack_require__(105);
+var _Circle = __webpack_require__(106);
 
 var _Circle2 = _interopRequireDefault(_Circle);
 
-var _HomeScene = __webpack_require__(113);
+var _HomeScene = __webpack_require__(114);
 
 var _HomeScene2 = _interopRequireDefault(_HomeScene);
 
-var _SearchScene = __webpack_require__(114);
+var _SearchScene = __webpack_require__(115);
 
 var _SearchScene2 = _interopRequireDefault(_SearchScene);
 
-var _ClaimDetailScene = __webpack_require__(112);
+var _ClaimDetailScene = __webpack_require__(113);
 
 var _ClaimDetailScene2 = _interopRequireDefault(_ClaimDetailScene);
 
-var _ClaimCreateScene = __webpack_require__(111);
+var _ClaimCreateScene = __webpack_require__(112);
 
 var _ClaimCreateScene2 = _interopRequireDefault(_ClaimCreateScene);
 
-var _StyleguideScene = __webpack_require__(115);
+var _StyleguideScene = __webpack_require__(116);
 
 var _StyleguideScene2 = _interopRequireDefault(_StyleguideScene);
 
@@ -11541,6 +11541,112 @@ _reactDom2.default.render(_react2.default.createElement(
 
 
 Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+function addToQueryString(queryString, paramName, value) {
+	if (queryString.length > 0) {
+		//there's something in the querystring, I'm going to assume it's a properly formed parameter
+		return queryString + '&' + paramName + '=' + value;
+	} else {
+		//guess there's nothing there, no need to '&'
+		return '?' + paramName + '=' + value;
+	}
+}
+
+function removeQueryFromString(queryString, paramName) {
+
+	//find the index of paramName (note that the param name could be a substring of another param name)
+	var startSlice = queryString.indexOf('?' + paramName + '='); //include the "?" and "=" to help negate the substring problem
+	if (startSlice == -1) {
+		//it's not the first param, but it could be further along
+		var startSlice = queryString.indexOf('&' + paramName + '=');
+		if (startSlice == -1) {
+			//it's not there either, just return the string
+			return queryString;
+		}
+	}
+
+	//shift the index of the start slice along past the '?' or '&'
+	startSlice++;
+
+	//find index of the next &
+	var endSlice = queryString.indexOf('&', startSlice);
+	if (endSlice == -1) {
+		//it's the last / only one!
+		return queryString.substr(0, startSlice - 1); //-1 to lop of the preceeding "?" if it's the only one or "&" if it's the last one
+	}
+
+	if (endSlice < queryString.length) {
+		//we're in the middle, add to end slice so it'll lop off one of the "&"'s
+		endSlice++;
+	}
+
+	//if we're here - the param is one of many - return the slice before & after the param
+	return queryString.substr(0, startSlice) + queryString.substr(endSlice, queryString.length);
+}
+
+function formatStringForUrl(unsafeString) {
+	//note: I've tried a bunch of alternate methods to replace characters, none have managed to beat the regex.
+	unsafeString = unsafeString.replace(/ /g, '%20');
+	unsafeString = unsafeString.replace(/&/g, '%26');
+	unsafeString = unsafeString.replace(/\//g, '%2F');
+
+	return unsafeString;
+}
+
+exports.default = {
+	get: function get(paramName, queryString, isEncoded) {
+		if (typeof paramName != 'string' || typeof queryString != 'string') {
+			return false;
+		}
+
+		//find the index of paramName
+		var startSlice = queryString.indexOf(paramName);
+		if (startSlice == -1) {
+			//it's not in there, return false
+			return false;
+		}
+		startSlice = startSlice + paramName.length + 1; //start slice for the actual value. Param name + "="
+
+		//find index of the next &
+		var endSlice = queryString.indexOf('&', startSlice);
+		if (endSlice == -1) {
+			//it's the last / only one!
+			return queryString.substr(startSlice, queryString.length);
+		}
+
+		return queryString.substr(startSlice, endSlice - startSlice); //end slice is index. substr needs length
+	},
+	set: function set(paramName, value, queryString, isEncoded) {
+		if (typeof paramName != 'string') {
+			return false;
+		}
+
+		var queryString = removeQueryFromString(queryString, paramName);
+		if (value == "") {
+			return queryString;
+		}
+		if (!isEncoded) {
+			//param name and value have passed, so format them 
+			var paramName = formatStringForUrl(paramName);
+			var value = formatStringForUrl(value);
+		}
+
+		//and return the new string!
+		var newQuery = addToQueryString(queryString, paramName, value);
+
+		return newQuery;
+	}
+};
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
@@ -11566,7 +11672,7 @@ var _Claim = __webpack_require__(17);
 
 var _Claim2 = _interopRequireDefault(_Claim);
 
-var _validate = __webpack_require__(67);
+var _validate = __webpack_require__(66);
 
 var _validate2 = _interopRequireDefault(_validate);
 
@@ -11764,7 +11870,7 @@ var AddArgumentForm = function (_React$Component) {
 exports.default = AddArgumentForm;
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11861,7 +11967,7 @@ var AddClaimForm = function (_React$Component) {
 exports.default = AddClaimForm;
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11893,7 +11999,7 @@ var _Claim = __webpack_require__(17);
 
 var _Claim2 = _interopRequireDefault(_Claim);
 
-var _validate = __webpack_require__(67);
+var _validate = __webpack_require__(66);
 
 var _validate2 = _interopRequireDefault(_validate);
 
@@ -12060,7 +12166,7 @@ var AddExplanationForm = function (_React$Component) {
 exports.default = AddExplanationForm;
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12154,7 +12260,7 @@ var Circle = function (_React$Component) {
 exports.default = Circle;
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12174,7 +12280,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _ClaimDetail = __webpack_require__(107);
+var _ClaimDetail = __webpack_require__(108);
 
 var _ClaimDetail2 = _interopRequireDefault(_ClaimDetail);
 
@@ -12311,7 +12417,7 @@ var ClaimChain = function (_React$Component) {
 exports.default = ClaimChain;
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12339,15 +12445,15 @@ var _StatusIndicator = __webpack_require__(32);
 
 var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
-var _Modal = __webpack_require__(109);
+var _Modal = __webpack_require__(110);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
-var _AddArgumentForm = __webpack_require__(102);
+var _AddArgumentForm = __webpack_require__(103);
 
 var _AddArgumentForm2 = _interopRequireDefault(_AddArgumentForm);
 
-var _AddExplanationForm = __webpack_require__(104);
+var _AddExplanationForm = __webpack_require__(105);
 
 var _AddExplanationForm2 = _interopRequireDefault(_AddExplanationForm);
 
@@ -12525,7 +12631,7 @@ var ClaimDetail = function (_React$Component) {
 exports.default = ClaimDetail;
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12615,7 +12721,7 @@ var EditClaimForm = function (_React$Component) {
 exports.default = EditClaimForm;
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12696,7 +12802,7 @@ var Modal = function (_React$Component) {
 exports.default = Modal;
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12726,7 +12832,7 @@ function SearchIcon(props) {
 }
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12746,7 +12852,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _AddClaimForm = __webpack_require__(103);
+var _AddClaimForm = __webpack_require__(104);
 
 var _AddClaimForm2 = _interopRequireDefault(_AddClaimForm);
 
@@ -12806,7 +12912,7 @@ var ClaimCreateScene = function (_React$Component) {
 exports.default = ClaimCreateScene;
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12826,7 +12932,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _ClaimChain = __webpack_require__(106);
+var _ClaimChain = __webpack_require__(107);
 
 var _ClaimChain2 = _interopRequireDefault(_ClaimChain);
 
@@ -12886,7 +12992,7 @@ var ClaimDetailScene = function (_React$Component) {
 exports.default = ClaimDetailScene;
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12967,7 +13073,7 @@ var SearchScene = function (_React$Component) {
 exports.default = SearchScene;
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12987,7 +13093,7 @@ var _SearchInput = __webpack_require__(31);
 
 var _SearchInput2 = _interopRequireDefault(_SearchInput);
 
-var _SearchResults = __webpack_require__(66);
+var _SearchResults = __webpack_require__(67);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
@@ -12995,7 +13101,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _urlParameter = __webpack_require__(116);
+var _urlParameter = __webpack_require__(102);
 
 var _urlParameter2 = _interopRequireDefault(_urlParameter);
 
@@ -13108,7 +13214,7 @@ var SearchScene = function (_React$Component) {
 exports.default = SearchScene;
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13219,112 +13325,6 @@ var StyleguideScene = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = StyleguideScene;
-
-/***/ }),
-/* 116 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-function addToQueryString(queryString, paramName, value) {
-	if (queryString.length > 0) {
-		//there's something in the querystring, I'm going to assume it's a properly formed parameter
-		return queryString + '&' + paramName + '=' + value;
-	} else {
-		//guess there's nothing there, no need to '&'
-		return '?' + paramName + '=' + value;
-	}
-}
-
-function removeQueryFromString(queryString, paramName) {
-
-	//find the index of paramName (note that the param name could be a substring of another param name)
-	var startSlice = queryString.indexOf('?' + paramName + '='); //include the "?" and "=" to help negate the substring problem
-	if (startSlice == -1) {
-		//it's not the first param, but it could be further along
-		var startSlice = queryString.indexOf('&' + paramName + '=');
-		if (startSlice == -1) {
-			//it's not there either, just return the string
-			return queryString;
-		}
-	}
-
-	//shift the index of the start slice along past the '?' or '&'
-	startSlice++;
-
-	//find index of the next &
-	var endSlice = queryString.indexOf('&', startSlice);
-	if (endSlice == -1) {
-		//it's the last / only one!
-		return queryString.substr(0, startSlice - 1); //-1 to lop of the preceeding "?" if it's the only one or "&" if it's the last one
-	}
-
-	if (endSlice < queryString.length) {
-		//we're in the middle, add to end slice so it'll lop off one of the "&"'s
-		endSlice++;
-	}
-
-	//if we're here - the param is one of many - return the slice before & after the param
-	return queryString.substr(0, startSlice) + queryString.substr(endSlice, queryString.length);
-}
-
-function formatStringForUrl(unsafeString) {
-	//note: I've tried a bunch of alternate methods to replace characters, none have managed to beat the regex.
-	unsafeString = unsafeString.replace(/ /g, '%20');
-	unsafeString = unsafeString.replace(/&/g, '%26');
-	unsafeString = unsafeString.replace(/\//g, '%2F');
-
-	return unsafeString;
-}
-
-exports.default = {
-	get: function get(paramName, queryString, isEncoded) {
-		if (typeof paramName != 'string' || typeof queryString != 'string') {
-			return false;
-		}
-
-		//find the index of paramName
-		var startSlice = queryString.indexOf(paramName);
-		if (startSlice == -1) {
-			//it's not in there, return false
-			return false;
-		}
-		startSlice = startSlice + paramName.length + 1; //start slice for the actual value. Param name + "="
-
-		//find index of the next &
-		var endSlice = queryString.indexOf('&', startSlice);
-		if (endSlice == -1) {
-			//it's the last / only one!
-			return queryString.substr(startSlice, queryString.length);
-		}
-
-		return queryString.substr(startSlice, endSlice - startSlice); //end slice is index. substr needs length
-	},
-	set: function set(paramName, value, queryString, isEncoded) {
-		if (typeof paramName != 'string') {
-			return false;
-		}
-
-		var queryString = removeQueryFromString(queryString, paramName);
-		if (value == "") {
-			return queryString;
-		}
-		if (!isEncoded) {
-			//param name and value have passed, so format them 
-			var paramName = formatStringForUrl(paramName);
-			var value = formatStringForUrl(value);
-		}
-
-		//and return the new string!
-		var newQuery = addToQueryString(queryString, paramName, value);
-
-		return newQuery;
-	}
-};
 
 /***/ }),
 /* 117 */
