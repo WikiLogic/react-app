@@ -3,5 +3,8 @@
   "extends": "airbnb",
   "rules": {
     "linebreak-style": ["error", "windows"]
+  },
+  "globals": {
+    "window": true
   }
 }

@@ -20,15 +20,15 @@ function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
       headers: {
-        Authorization: `Basic ${btoa('wiki:logic')}`,
+        Authorization: `Basic ${window.btoa('wiki:logic')}`,
       },
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(function (res) {
+      .then((res) => {
         resolve(res.data);
       })
-      .catch(function (err) {
+      .catch((err) => {
         reject(err);
       });
   });
@@ -40,19 +40,19 @@ function getClaimDetailById(claimId) {
   const claimDetailPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims/${claimId}`, {
       headers: {
-        Authorization: `Basic ${btoa('wiki:logic')}`,
+        Authorization: `Basic ${window.btoa('wiki:logic')}`,
       },
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(function (res) {
+      .then((res) => {
         if (!Object.prototype.hasOwnProperty.call(res, 'claim')) {
           reject('404');
           return;
         }
         resolve(res.data);
       })
-      .catch(function (err) {
+      .catch((err) => {
         reject(err);
       });
   });
@@ -66,16 +66,16 @@ function postNewClaim(claim) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${btoa('wiki:logic')}`,
+        Authorization: `Basic ${window.btoa('wiki:logic')}`,
       },
       body: JSON.stringify(claim),
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(function (res) {
+      .then((res) => {
         resolve(res);
       })
-      .catch(function (err) {
+      .catch((err) => {
         reject(err);
       });
   });
@@ -84,13 +84,12 @@ function postNewClaim(claim) {
 }
 
 function postNewArgument(argument) {
-  console.log('API posting new argument: ', argument);
   const newArgumentPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/create/argument`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${btoa('wiki:logic')}`,
+        Authorization: `Basic ${window.btoa('wiki:logic')}`,
       },
       body: JSON.stringify({
         parent_claim_id: argument.parent_claim_id,
@@ -100,10 +99,10 @@ function postNewArgument(argument) {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(function (res) {
+      .then((res) => {
         resolve(res);
       })
-      .catch(function (err) {
+      .catch((err) => {
         reject(err);
       });
   });
@@ -117,7 +116,7 @@ function postNewExplanation(argument) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${btoa('wiki:logic')}`,
+        Authorization: `Basic ${window.btoa('wiki:logic')}`,
       },
       body: JSON.stringify({
         parent_claim_id: argument.parent_claim_id,
@@ -127,10 +126,10 @@ function postNewExplanation(argument) {
     })
       .then(checkStatus)
       .then(parseJSON)
-      .then(function (res) {
+      .then((res) => {
         resolve(res);
       })
-      .catch(function (err) {
+      .catch((err) => {
         reject(err);
       });
   });
