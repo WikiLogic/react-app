@@ -7804,23 +7804,29 @@ module.exports = getIteratorFn;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.newPremis = newPremis;
-function newPremis(newPremis, argument, parentClaim) {
-  //check 1 - is it the parent?
-  if (newPremis.id == parentClaim.id) {
+function newPremis(newPremisObj, argument, parentClaim) {
+  // check 1 - is it the parent?
+  if (newPremisObj.id === parentClaim.id) {
     return false;
   }
 
-  //check 2 - is it a duplicate
+  // check 2 - is it a duplicate
   var isDuplicate = argument.premises.some(function (argPremis) {
-    return argPremis.id == newPremis.id;
+    if (argPremis.id === newPremisObj.id) {
+      return true;
+    }
+    return false;
   });
+
   if (isDuplicate) {
     return false;
   }
-
   return true;
 }
+
+exports.default = {
+  newPremis: newPremis
+};
 
 /***/ }),
 /* 67 */
