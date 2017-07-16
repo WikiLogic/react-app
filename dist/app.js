@@ -11536,102 +11536,113 @@ _reactDom2.default.render(_react2.default.createElement(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 function addToQueryString(queryString, paramName, value) {
-	if (queryString.length > 0) {
-		//there's something in the querystring, I'm going to assume it's a properly formed parameter
-		return queryString + '&' + paramName + '=' + value;
-	} else {
-		//guess there's nothing there, no need to '&'
-		return '?' + paramName + '=' + value;
-	}
+  if (queryString.length > 0) {
+    // there's something in the querystring, I'm going to assume it's a properly formed parameter
+    return queryString + '&' + paramName + '=' + value;
+  }
+  // guess there's nothing there, no need to '&'
+  return '?' + paramName + '=' + value;
 }
 
 function removeQueryFromString(queryString, paramName) {
+  // find the index of paramName 
+  // (note that the param name could be a substring of another param name)
+  // include the "?" and "=" to help negate the substring problem
+  var startSlice = queryString.indexOf('?' + paramName + '=');
+  if (startSlice === -1) {
+    // it's not the first param, but it could be further along
+    startSlice = queryString.indexOf('&' + paramName + '=');
+    if (startSlice === -1) {
+      // it's not there either, just return the string
+      return queryString;
+    }
+  }
 
-	//find the index of paramName (note that the param name could be a substring of another param name)
-	var startSlice = queryString.indexOf('?' + paramName + '='); //include the "?" and "=" to help negate the substring problem
-	if (startSlice == -1) {
-		//it's not the first param, but it could be further along
-		var startSlice = queryString.indexOf('&' + paramName + '=');
-		if (startSlice == -1) {
-			//it's not there either, just return the string
-			return queryString;
-		}
-	}
+  // shift the index of the start slice along past the '?' or '&'
+  startSlice += 1;
 
-	//shift the index of the start slice along past the '?' or '&'
-	startSlice++;
+  // find index of the next &
+  var endSlice = queryString.indexOf('&' + startSlice);
+  if (endSlice === -1) {
+    // it's the last / only one!
+    // -1 to lop of the preceeding "?" if it's the only one or "&" if it's the last one
+    return queryString.substr(0, startSlice - 1);
+  }
 
-	//find index of the next &
-	var endSlice = queryString.indexOf('&', startSlice);
-	if (endSlice == -1) {
-		//it's the last / only one!
-		return queryString.substr(0, startSlice - 1); //-1 to lop of the preceeding "?" if it's the only one or "&" if it's the last one
-	}
+  if (endSlice < queryString.length) {
+    // we're in the middle, add to end slice so it'll lop off one of the "&"'s
+    endSlice += 1;
+  }
 
-	if (endSlice < queryString.length) {
-		//we're in the middle, add to end slice so it'll lop off one of the "&"'s
-		endSlice++;
-	}
-
-	//if we're here - the param is one of many - return the slice before & after the param
-	return queryString.substr(0, startSlice) + queryString.substr(endSlice, queryString.length);
+  // if we're here - the param is one of many - return the slice before & after the param
+  return queryString.substr(0, startSlice) + queryString.substr(endSlice, queryString.length);
 }
 
 function formatStringForUrl(unsafeString) {
-	//note: I've tried a bunch of alternate methods to replace characters, none have managed to beat the regex.
-	unsafeString = unsafeString.replace(/ /g, '%20');
-	unsafeString = unsafeString.replace(/&/g, '%26');
-	unsafeString = unsafeString.replace(/\//g, '%2F');
+  // note: I've tried a bunch of alternate methods to replace characters, 
+  // none have managed to beat the regex.
+  var saferString = unsafeString.replace(/ /g, '%20');
+  saferString = saferString.replace(/&/g, '%26');
+  saferString = saferString.replace(/\//g, '%2F');
 
-	return unsafeString;
+  return saferString;
 }
 
 exports.default = {
-	get: function get(paramName, queryString, isEncoded) {
-		if (typeof paramName != 'string' || typeof queryString != 'string') {
-			return false;
-		}
+  get: function get(paramName, queryString) {
+    if (typeof paramName !== 'string' || typeof queryString !== 'string') {
+      return false;
+    }
 
-		//find the index of paramName
-		var startSlice = queryString.indexOf(paramName);
-		if (startSlice == -1) {
-			//it's not in there, return false
-			return false;
-		}
-		startSlice = startSlice + paramName.length + 1; //start slice for the actual value. Param name + "="
+    // find the index of paramName
+    var startSlice = queryString.indexOf(paramName);
+    if (startSlice === -1) {
+      // it's not in there, return false
+      return false;
+    }
+    // start slice for the actual value. Param name + "="
+    startSlice = startSlice + paramName.length + 1;
 
-		//find index of the next &
-		var endSlice = queryString.indexOf('&', startSlice);
-		if (endSlice == -1) {
-			//it's the last / only one!
-			return queryString.substr(startSlice, queryString.length);
-		}
+    // find index of the next &
+    var endSlice = queryString.indexOf('&', startSlice);
+    if (endSlice === -1) {
+      // it's the last / only one!
+      return queryString.substr(startSlice, queryString.length);
+    }
 
-		return queryString.substr(startSlice, endSlice - startSlice); //end slice is index. substr needs length
-	},
-	set: function set(paramName, value, queryString, isEncoded) {
-		if (typeof paramName != 'string') {
-			return false;
-		}
+    // end slice is index. substr needs length
+    return queryString.substr(startSlice, endSlice - startSlice);
+  },
+  set: function set(paramName, value, queryString, isEncoded) {
+    var formattedParamName = void 0;
+    var formattedValue = void 0;
 
-		var queryString = removeQueryFromString(queryString, paramName);
-		if (value == "") {
-			return queryString;
-		}
-		if (!isEncoded) {
-			//param name and value have passed, so format them 
-			var paramName = formatStringForUrl(paramName);
-			var value = formatStringForUrl(value);
-		}
+    if (typeof paramName !== 'string') {
+      return false;
+    }
 
-		//and return the new string!
-		var newQuery = addToQueryString(queryString, paramName, value);
+    var cleanQueryString = removeQueryFromString(queryString, paramName);
+    if (value === '') {
+      return cleanQueryString;
+    }
 
-		return newQuery;
-	}
+    if (!isEncoded) {
+      // param name and value have passed, so format them 
+      formattedParamName = formatStringForUrl(paramName);
+      formattedValue = formatStringForUrl(value);
+    } else {
+      formattedParamName = paramName;
+      formattedValue = value;
+    }
+
+    // and return the new string!
+    var newQuery = addToQueryString(cleanQueryString, formattedParamName, formattedValue);
+
+    return newQuery;
+  }
 };
 
 /***/ }),
