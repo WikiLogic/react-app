@@ -1244,143 +1244,144 @@ module.exports = emptyFunction;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-__webpack_require__(239);
+var _whatwgFetch = __webpack_require__(239);
 
-var apiRouteRoot = "/api";
+var _whatwgFetch2 = _interopRequireDefault(_whatwgFetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var apiRouteRoot = '/api';
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+  return null;
+}
+
+function parseJSON(response) {
+  return response.json();
+}
 
 /* The functions that call the API
  * Each returns a promise
  */
 function searchClaimsByTerm(searchTerm) {
-
-    var searchResultsPromies = new Promise(function (resolve, reject) {
-        fetch(apiRouteRoot + "/claims?search=" + searchTerm, {
-            headers: {
-                'Authorization': 'Basic ' + btoa('wiki:logic')
-            }
-        }).then(checkStatus).then(parseJSON).then(function (res) {
-            resolve(res.data);
-        }).catch(function (err) {
-            reject(err);
-            console.error('API error', err);
-        });
+  var searchResultsPromies = new Promise(function (resolve, reject) {
+    (0, _whatwgFetch2.default)(apiRouteRoot + '/claims?search=' + searchTerm, {
+      headers: {
+        Authorization: 'Basic ' + btoa('wiki:logic')
+      }
+    }).then(checkStatus).then(parseJSON).then(function (res) {
+      resolve(res.data);
+    }).catch(function (err) {
+      reject(err);
+      console.error('API error', err);
     });
+  });
 
-    return searchResultsPromies;
+  return searchResultsPromies;
 }
 
 function getClaimDetailById(claimId) {
-
-    var claimDetailPromise = new Promise(function (resolve, reject) {
-        fetch(apiRouteRoot + "/claims/" + claimId, {
-            headers: {
-                'Authorization': 'Basic ' + btoa('wiki:logic')
-            }
-        }).then(checkStatus).then(parseJSON).then(function (res) {
-            if (!res.data.hasOwnProperty('claim')) {
-                reject('404');
-                return;
-            }
-            resolve(res.data);
-        }).catch(function (err) {
-            reject(err);
-            console.error('API error', err);
-        });
+  var claimDetailPromise = new Promise(function (resolve, reject) {
+    (0, _whatwgFetch2.default)(apiRouteRoot + '/claims/' + claimId, {
+      headers: {
+        Authorization: 'Basic ' + btoa('wiki:logic')
+      }
+    }).then(checkStatus).then(parseJSON).then(function (res) {
+      if (!Object.prototype.hasOwnProperty.call(res, 'claim')) {
+        reject('404');
+        return;
+      }
+      resolve(res.data);
+    }).catch(function (err) {
+      reject(err);
+      console.error('API error', err);
     });
+  });
 
-    return claimDetailPromise;
+  return claimDetailPromise;
 }
 
 function postNewClaim(claim) {
-    var newClaimPromise = new Promise(function (resolve, reject) {
-        fetch(apiRouteRoot + "/create/claim", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + btoa('wiki:logic')
-            },
-            body: JSON.stringify(claim)
-        }).then(checkStatus).then(parseJSON).then(function (res) {
-            resolve(res);
-        }).catch(function (err) {
-            reject(err);
-            console.error('API error', err);
-        });
+  var newClaimPromise = new Promise(function (resolve, reject) {
+    (0, _whatwgFetch2.default)(apiRouteRoot + '/create/claim', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + btoa('wiki:logic')
+      },
+      body: JSON.stringify(claim)
+    }).then(checkStatus).then(parseJSON).then(function (res) {
+      resolve(res);
+    }).catch(function (err) {
+      reject(err);
+      console.error('API error', err);
     });
+  });
 
-    return newClaimPromise;
+  return newClaimPromise;
 }
 
 function postNewArgument(argument) {
-    console.log('API posting new argument: ', argument);
-    var newArgumentPromise = new Promise(function (resolve, reject) {
-        fetch(apiRouteRoot + "/create/argument", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + btoa('wiki:logic')
-            },
-            body: JSON.stringify({
-                parent_claim_id: argument.parent_claim_id,
-                type: argument.type,
-                premise_ids: argument.premise_ids
-            })
-        }).then(checkStatus).then(parseJSON).then(function (res) {
-            resolve(res);
-        }).catch(function (err) {
-            reject(err);
-            console.error('API error', err);
-        });
+  console.log('API posting new argument: ', argument);
+  var newArgumentPromise = new Promise(function (resolve, reject) {
+    (0, _whatwgFetch2.default)(apiRouteRoot + '/create/argument', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + btoa('wiki:logic')
+      },
+      body: JSON.stringify({
+        parent_claim_id: argument.parent_claim_id,
+        type: argument.type,
+        premise_ids: argument.premise_ids
+      })
+    }).then(checkStatus).then(parseJSON).then(function (res) {
+      resolve(res);
+    }).catch(function (err) {
+      reject(err);
+      console.error('API error', err);
     });
+  });
 
-    return newArgumentPromise;
+  return newArgumentPromise;
 }
 
 function postNewExplanation(argument) {
-    var newExplanationPromise = new Promise(function (resolve, reject) {
-        fetch(apiRouteRoot + "/create/explanation", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + btoa('wiki:logic')
-            },
-            body: JSON.stringify({
-                parent_claim_id: argument.parent_claim_id,
-                type: argument.type,
-                premise_ids: argument.premise_ids
-            })
-        }).then(checkStatus).then(parseJSON).then(function (res) {
-            resolve(res);
-        }).catch(function (err) {
-            reject(err);
-            console.error('API error', err);
-        });
+  var newExplanationPromise = new Promise(function (resolve, reject) {
+    (0, _whatwgFetch2.default)(apiRouteRoot + '/create/explanation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Basic ' + btoa('wiki:logic')
+      },
+      body: JSON.stringify({
+        parent_claim_id: argument.parent_claim_id,
+        type: argument.type,
+        premise_ids: argument.premise_ids
+      })
+    }).then(checkStatus).then(parseJSON).then(function (res) {
+      resolve(res);
+    }).catch(function (err) {
+      reject(err);
+      console.error('API error', err);
     });
+  });
 
-    return newExplanationPromise;
-}
-
-function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    } else {
-        return null;
-    }
-}
-
-function parseJSON(response) {
-    return response.json();
+  return newExplanationPromise;
 }
 
 exports.default = {
-    searchClaimsByTerm: searchClaimsByTerm,
-    getClaimDetailById: getClaimDetailById,
-    postNewClaim: postNewClaim,
-    postNewArgument: postNewArgument,
-    postNewExplanation: postNewExplanation
+  searchClaimsByTerm: searchClaimsByTerm,
+  getClaimDetailById: getClaimDetailById,
+  postNewClaim: postNewClaim,
+  postNewArgument: postNewArgument,
+  postNewExplanation: postNewExplanation
 };
 
 /***/ }),
@@ -7807,24 +7808,24 @@ module.exports = getIteratorFn;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.newPremis = newPremis;
 function newPremis(newPremis, argument, parentClaim) {
-    //check 1 - is it the parent?
-    if (newPremis.id == parentClaim.id) {
-        return false;
-    }
+  //check 1 - is it the parent?
+  if (newPremis.id == parentClaim.id) {
+    return false;
+  }
 
-    //check 2 - is it a duplicate
-    var isDuplicate = argument.premises.some(function (argPremis) {
-        return argPremis.id == newPremis.id;
-    });
-    if (isDuplicate) {
-        return false;
-    }
+  //check 2 - is it a duplicate
+  var isDuplicate = argument.premises.some(function (argPremis) {
+    return argPremis.id == newPremis.id;
+  });
+  if (isDuplicate) {
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
 /***/ }),

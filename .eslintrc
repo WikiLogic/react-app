@@ -1,3 +1,7 @@
+// https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb#eslint-config-airbnb-1
 {
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": ["error", "windows"]
+  }
 }
