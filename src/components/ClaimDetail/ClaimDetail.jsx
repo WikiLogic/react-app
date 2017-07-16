@@ -1,10 +1,10 @@
 import React from 'react';
-import api from '../../API/api.js';
-import Argument from '../Argument/Argument.jsx';
-import StatusIndicator from '../StatusIndicator/StatusIndicator.jsx';
-import Modal from '../Modal/Modal.jsx';
-import AddArgumentForm from '../AddArgumentForm/AddArgumentForm.jsx';
-import AddExplanationForm from '../AddExplanationForm/AddExplanationForm.jsx';
+import API from 'API/api';
+import Argument from 'Components/Argument/Argument.jsx';
+import StatusIndicator from 'Components/StatusIndicator/StatusIndicator.jsx';
+import Modal from 'Components/Modal/Modal.jsx';
+import AddArgumentForm from 'Components/AddArgumentForm/AddArgumentForm.jsx';
+import AddExplanationForm from 'Components/AddExplanationForm/AddExplanationForm.jsx';
 
 /* A claim
  * and all it's arguments

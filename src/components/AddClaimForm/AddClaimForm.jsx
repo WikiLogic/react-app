@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../../API/api.js';
+import API from 'API/api';
 
 /* Each Claim in the list of search results
  */

@@ -1,6 +1,6 @@
 import React from 'react';
-import API from '../../services/api.js';
-import ClaimChain from '../../components/ClaimChain/ClaimChain.jsx';
+import API from 'API/api';
+import ClaimChain from 'Components/ClaimChain/ClaimChain.jsx';
 
 /**
  * The Search Results page

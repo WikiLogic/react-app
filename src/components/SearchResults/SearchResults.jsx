@@ -1,5 +1,5 @@
 import React from 'react';
-import Claim from '../Claim/Claim.jsx';
+import Claim from 'Components/Claim/Claim.jsx';
 import { Router, Link, Route } from 'react-router-dom';
 
 /* The Search Results

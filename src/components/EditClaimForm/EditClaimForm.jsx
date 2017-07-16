@@ -1,5 +1,5 @@
 import React from 'react';
-import Claim from '../Claim/Claim.jsx';
+import Claim from 'Components/Claim/Claim.jsx';
 
 /* Each Claim in the list of search results
  */

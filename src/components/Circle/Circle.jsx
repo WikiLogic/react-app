@@ -1,6 +1,6 @@
 import React from 'react';
-import StatusIndicator from '../StatusIndicator/StatusIndicator.jsx';
-import Claim from '../Claim/Claim.jsx';
+import StatusIndicator from 'Components/StatusIndicator/StatusIndicator.jsx';
+import Claim from 'Components/Claim/Claim.jsx';
 
 /* A claim
  * and all it's arguments

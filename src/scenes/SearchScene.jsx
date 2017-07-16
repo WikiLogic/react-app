@@ -1,8 +1,8 @@
 import React from 'react';
-import SearchInput from '../../components/SearchInput/SearchInput.jsx';
-import SearchResults from '../../components/SearchResults/SearchResults.jsx';
-import API from '../../services/api.js';
-import urlParameter from '../../services/urlParameter.js';
+import SearchInput from 'Components/SearchInput/SearchInput.jsx';
+import SearchResults from 'Components/SearchResults/SearchResults.jsx';
+import API from 'API/api';
+import urlParameter from 'Services/urlParameter.js';
 
 /**
  * The Search Results page

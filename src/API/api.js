@@ -1,13 +1,6 @@
-"use strict";
-import eventManager from '../eventManager/eventManager.js';
-import actions from '../eventManager/actions.js';
 import 'whatwg-fetch';
 
-//in production it's "/api"
-//in a local docker set up it's also "/api"
-//running it manually it's "http://localhost:3030/api"
 var apiRouteRoot = "/api";
-
 
 /* The functions that call the API
  * Each returns a promise
@@ -47,14 +40,12 @@ function getClaimDetailById(claimId){
         .then(function (res) {
             if (!res.data.hasOwnProperty('claim')) {
                 reject('404');
-                //eventManager.fire(actions.API_REQUEST_BY_ID_ERRORED, '404');
                 return;
             }
             resolve(res.data);
         })
         .catch(function (err) {
             reject(err);
-            //eventManager.fire(actions.API_ERRORED, err);
             console.error('API error', err);
         });
     });
@@ -79,7 +70,6 @@ function postNewClaim(claim){
         })
         .catch(function (err) {
             reject(err);
-            //eventManager.fire(actions.API_ERRORED, err);
             console.error('API error', err);
         });
     });
@@ -109,7 +99,6 @@ function postNewArgument(argument){
         })
         .catch(function (err) {
             reject(err);
-            //eventManager.fire(actions.API_ERRORED, err);
             console.error('API error', err);
         });
     });
@@ -138,7 +127,6 @@ function postNewExplanation(argument) {
             })
             .catch(function (err) {
                 reject(err);
-                //eventManager.fire(actions.API_ERRORED, err);
                 console.error('API error', err);
             });
     });
@@ -150,7 +138,7 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
-    eventManager.fire(actions.API_RETURNED_ERROR, response);
+    return null;
   }
 }
 

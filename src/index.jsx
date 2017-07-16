@@ -6,7 +6,7 @@ import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory();
 
 //JS
-import API from './API/api.js';
+import API from 'API/api';
 
 //React components
 import SearchResults from './components/SearchResults/SearchResults.jsx';
@@ -14,11 +14,11 @@ import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import Circle from './components/Circle/Circle.jsx';
 
 //Scenes
-import HomeScene from './scenes/home/HomeScene.jsx';
-import SearchScene from './scenes/search/SearchScene.jsx';
-import ClaimDetailScene from './scenes/claimDetail/ClaimDetailScene.jsx';
-import ClaimCreateScene from './scenes/claimCreate/ClaimCreateScene.jsx';
-import StyleguideScene from './scenes/styleguide/StyleguideScene.jsx';
+import HomeScene from 'Scenes/HomeScene';
+import SearchScene from 'Scenes/SearchScene';
+import ClaimDetailScene from 'Scenes/ClaimDetailScene';
+import ClaimCreateScene from 'Scenes/ClaimCreateScene';
+import StyleguideScene from 'Scenes/StyleguideScene';
 
 class Wikilogic extends React.Component {
 

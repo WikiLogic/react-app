@@ -1,9 +1,6 @@
-/* Checks to see if a premis can be added to an argument
- *
- */
 
-export default function(newPremis, argument, parentClaim){
 
+export function newPremis(newPremis, argument, parentClaim){
     //check 1 - is it the parent?
     if (newPremis.id == parentClaim.id) { return false; }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import API from '../../services/api.js';
-import Claim from '../../components/Claim/Claim.jsx';
+import API from 'API/api';
+import Claim from 'Components/Claim/Claim.jsx';
 
 /**
  * The Search Results page

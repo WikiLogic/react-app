@@ -4,10 +4,19 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
+    resolve: {
+        extensions: [".js", ".jsx"],
+        alias: {
+            API: path.resolve(__dirname, 'src/API'),
+            Scenes: path.resolve(__dirname, 'src/scenes'),
+            Components: path.resolve(__dirname, 'src/components'),
+            Services: path.resolve(__dirname, 'src/services')
+        }
+    },
     entry: {
         app: [
-        './src/index.jsx',
-        './src/main.scss'
+            './src/index.jsx',
+            './src/main.scss'
         ]
     },
     output: {

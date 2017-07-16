@@ -1,6 +1,6 @@
 import React from 'react';
-import api from '../../API/api.js';
-import ClaimDetail from '../ClaimDetail/ClaimDetail.jsx';
+import API from 'API/api';
+import ClaimDetail from 'Components/ClaimDetail/ClaimDetail.jsx';
 
 /* Start with a claim ID. Ask the API for that claim.
  * Lets the user go deeper into the premises bloew that claim.
