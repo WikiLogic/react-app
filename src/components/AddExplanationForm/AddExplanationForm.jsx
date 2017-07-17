@@ -15,9 +15,9 @@ export default class AddExplanationForm extends React.Component {
     this.state = {
       argument: {
         type: 'SUPPORTS',
-        premises: []
+        premises: [],
       },
-      premis_search_results: []
+      premis_search_results: [],
     }
     // this.handleTypeToggle = this.handleTypeToggle.bind(this);
     this.handlePremisSearch = this.handlePremisSearch.bind(this);
