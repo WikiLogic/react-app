@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchIcon from  'Components/_Icons/SearchIcon.jsx';
+import SearchIcon from 'Components/_Icons/SearchIcon';
 
 /* Listens to the search form for input and submission
  * Publishes search submissions (for text or number searches)
@@ -8,14 +8,14 @@ import SearchIcon from  'Components/_Icons/SearchIcon.jsx';
 
 export default class SearchInput extends React.Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
-		this.state = {value: ''};
+		this.state = { value: '' };
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		if (nextProps.inputValue != '') {
 			this.setState({
 				value: nextProps.inputValue
@@ -24,7 +24,7 @@ export default class SearchInput extends React.Component {
 	}
 
 	handleChange(event) {
-		this.setState({value: event.target.value});
+		this.setState({ value: event.target.value });
 	}
 
 	handleSubmit(event) {
@@ -35,9 +35,9 @@ export default class SearchInput extends React.Component {
 	render() {
 		return (
 			<form className="search-form" onSubmit={this.handleSubmit}>
-				<input className="search-form__input" type="text" placeholder={this.props.placeholder} value={this.state.value} onChange={this.handleChange}/>
+				<input className="search-form__input" type="text" placeholder={this.props.placeholder} value={this.state.value} onChange={this.handleChange} />
 				<button className="search-form__submit" onClick={this.handleSubmit}>
-					<SearchIcon/>
+					<SearchIcon />
 				</button>
 			</form>
 		);

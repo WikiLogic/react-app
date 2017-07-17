@@ -5,7 +5,7 @@ import React from 'react';
 
 export default class StatusIndicator extends React.Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props)
 	}
 
@@ -22,8 +22,8 @@ export default class StatusIndicator extends React.Component {
 			return (
 				<div className={`status-circle status-circle--${(this.props.state * 100)}`}>
 					<svg className="status-circle__svg" viewBox="-5 -5 200 200">
-						<circle className="status-circle__svg-icon status-circle__svg-bg outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)"/>
-						<circle className="status-circle__svg-icon status-circle__svg-state outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)"/>
+						<circle className="status-circle__svg-icon status-circle__svg-bg outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)" />
+						<circle className="status-circle__svg-icon status-circle__svg-state outer" cx="95" cy="95" r="85" transform="rotate(-90, 95, 95)" />
 					</svg>
 					<div className="status-circle__text">
 						{(this.props.state * 100) + "%"}

@@ -1,16 +1,14 @@
 import React from 'react';
-import StatusIndicator from 'Components/StatusIndicator/StatusIndicator.jsx';
-import Claim from 'Components/Claim/Claim.jsx';
+import Claim from 'Components/Claim/Claim';
 
 /* An argument group
  */
 
 export default class Argument extends React.Component {
 
-	constructor (props) {
-		super(props)
-		this.state = {
-        };
+	constructor(props) {
+		super(props);
+		
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -19,18 +17,18 @@ export default class Argument extends React.Component {
 	}
 
 	render() {
-		
+
 		//loop through the premises in this argument
-        let premises = this.props.argumentObject.premises.map(function(premis, index){
-			
+		let premises = this.props.argumentObject.premises.map(function (premis, index) {
+
 			let isSelected = (premis.id == this.props.highlightedPremisId);
-            
+
 			return (
 				<div className="argument__premis" key={index}>
-					<Claim claim={premis} isSelected={isSelected} handleClick={() => { this.handleClick(premis); }}/>
+					<Claim claim={premis} isSelected={isSelected} handleClick={() => { this.handleClick(premis); }} />
 				</div>
 			);
-        }.bind(this));
+		}.bind(this));
 
 		return (
 			<div className={`argument argument--${this.props.argumentObject.type}`}>
@@ -38,7 +36,7 @@ export default class Argument extends React.Component {
 					{this.props.argumentObject.type}
 				</div>
 				<div className="argument__body">
-                	{premises}
+					{premises}
 				</div>
 			</div>
 		);

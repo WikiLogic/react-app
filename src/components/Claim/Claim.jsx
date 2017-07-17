@@ -1,33 +1,33 @@
 import React from 'react';
-import StatusIndicator from 'Components/StatusIndicator/StatusIndicator.jsx';
+import StatusIndicator from 'Components/StatusIndicator/StatusIndicator';
 
 /* Each Claim in the list of search results
  */
 
 export default class Claim extends React.Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props)
 	}
 
 	render() {
 		let cssClass = "claim";
 		if (this.props.isSelected) { cssClass += " claim--selected"; }
-		
-		if (typeof this.props.claim.labels !== "undefined" && this.props.claim.labels.includes('Axiom')) { 
-			cssClass += " claim--axiom"; 
+
+		if (typeof this.props.claim.labels !== "undefined" && this.props.claim.labels.includes('Axiom')) {
+			cssClass += " claim--axiom";
 		}
 
 		return (
 			<div className={cssClass} onClick={() => this.props.handleClick(this.props.claim)}>
 				<div className="claim__body">
-                	<div className="claim__status-circle">
-						<StatusIndicator state={this.props.claim.probability} type="circle"/>
+					<div className="claim__status-circle">
+						<StatusIndicator state={this.props.claim.probability} type="circle" />
 					</div>
 					<div className="claim__text">
-                    	{this.props.claim.text}
+						{this.props.claim.text}
 					</div>
-                </div>
+				</div>
 			</div>
 		);
 	}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Claim from 'Components/Claim/Claim.jsx';
+import Claim from 'Components/Claim/Claim';
 import { Router, Link, Route } from 'react-router-dom';
 
 /* The Search Results
@@ -8,33 +8,33 @@ import { Router, Link, Route } from 'react-router-dom';
 
 export default class SearchResults extends React.Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	handleClick(resultObject){
+	handleClick(resultObject) {
 		//currently - do nothing!
 	}
 
 	render() {
-		if (typeof this.props.search_results == 'undefined') { 
-			console.warn('Search result props undefined :('); 
-			return null; 
+		if (typeof this.props.search_results == 'undefined') {
+			console.warn('Search result props undefined :(');
+			return null;
 		}
-		
-        let searchResults = this.props.search_results.map(function(search_result, index){
-            return (
+
+		let searchResults = this.props.search_results.map(function (search_result, index) {
+			return (
 				<Link to={`/claim/${search_result.id}`} key={index} className="search-results__result">
-					<Claim claim={search_result} handleClick={this.handleClick} isSelected={false}/>
+					<Claim claim={search_result} handleClick={this.handleClick} isSelected={false} />
 				</Link>
 			);
-        }.bind(this));
+		}.bind(this));
 
 		return (
 			<div className="search-results">
-                {searchResults}
-            </div>
+				{searchResults}
+			</div>
 		);
 	}
 }

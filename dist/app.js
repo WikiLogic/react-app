@@ -1402,7 +1402,7 @@ var CallbackQueue = __webpack_require__(74);
 var PooledClass = __webpack_require__(18);
 var ReactFeatureFlags = __webpack_require__(79);
 var ReactReconciler = __webpack_require__(23);
-var Transaction = __webpack_require__(37);
+var Transaction = __webpack_require__(36);
 
 var invariant = __webpack_require__(1);
 
@@ -2178,7 +2178,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _StatusIndicator = __webpack_require__(32);
+var _StatusIndicator = __webpack_require__(40);
 
 var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
@@ -2839,7 +2839,7 @@ module.exports = warning;
 
 
 var DOMNamespaces = __webpack_require__(45);
-var setInnerHTML = __webpack_require__(39);
+var setInnerHTML = __webpack_require__(38);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(52);
 var setTextContent = __webpack_require__(92);
@@ -3323,7 +3323,7 @@ var createPath = exports.createPath = function createPath(location) {
 
 var _prodInvariant = __webpack_require__(4);
 
-var EventPluginRegistry = __webpack_require__(34);
+var EventPluginRegistry = __webpack_require__(33);
 var EventPluginUtils = __webpack_require__(46);
 var ReactErrorUtils = __webpack_require__(50);
 
@@ -3862,7 +3862,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SearchIcon = __webpack_require__(111);
+var _SearchIcon = __webpack_require__(110);
 
 var _SearchIcon2 = _interopRequireDefault(_SearchIcon);
 
@@ -3939,80 +3939,6 @@ exports.default = SearchInput;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(3);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/* A status between 1 and 100
- */
-
-var StatusIndicator = function (_React$Component) {
-	_inherits(StatusIndicator, _React$Component);
-
-	function StatusIndicator(props) {
-		_classCallCheck(this, StatusIndicator);
-
-		return _possibleConstructorReturn(this, (StatusIndicator.__proto__ || Object.getPrototypeOf(StatusIndicator)).call(this, props));
-	}
-
-	_createClass(StatusIndicator, [{
-		key: "render",
-		value: function render() {
-
-			if (this.props.type == "bar") {
-				return _react2.default.createElement(
-					"div",
-					{ className: "status-bar" },
-					_react2.default.createElement("div", { className: "status-bar__bar status-bar__bar--" + this.props.state })
-				);
-			}
-			if (this.props.type == "circle") {
-				return _react2.default.createElement(
-					"div",
-					{ className: "status-circle status-circle--" + this.props.state * 100 },
-					_react2.default.createElement(
-						"svg",
-						{ className: "status-circle__svg", viewBox: "-5 -5 200 200" },
-						_react2.default.createElement("circle", { className: "status-circle__svg-icon status-circle__svg-bg outer", cx: "95", cy: "95", r: "85", transform: "rotate(-90, 95, 95)" }),
-						_react2.default.createElement("circle", { className: "status-circle__svg-icon status-circle__svg-state outer", cx: "95", cy: "95", r: "85", transform: "rotate(-90, 95, 95)" })
-					),
-					_react2.default.createElement(
-						"div",
-						{ className: "status-circle__text" },
-						this.props.state * 100 + "%"
-					)
-				);
-			}
-			return null;
-		}
-	}]);
-
-	return StatusIndicator;
-}(_react2.default.Component);
-
-exports.default = StatusIndicator;
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -4068,7 +3994,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4329,7 +4255,7 @@ module.exports = EventPluginRegistry;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4347,7 +4273,7 @@ module.exports = EventPluginRegistry;
 
 var _assign = __webpack_require__(5);
 
-var EventPluginRegistry = __webpack_require__(34);
+var EventPluginRegistry = __webpack_require__(33);
 var ReactEventEmitterMixin = __webpack_require__(166);
 var ViewportMetrics = __webpack_require__(85);
 
@@ -4662,7 +4588,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
 module.exports = ReactBrowserEventEmitter;
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4739,7 +4665,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 module.exports = SyntheticMouseEvent;
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4970,7 +4896,7 @@ module.exports = TransactionImpl;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5098,7 +5024,7 @@ function escapeTextContentForBrowser(text) {
 module.exports = escapeTextContentForBrowser;
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5201,7 +5127,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setInnerHTML;
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5216,10 +5142,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _StatusIndicator = __webpack_require__(32);
-
-var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
 var _Claim = __webpack_require__(17);
 
@@ -5244,7 +5166,6 @@ var Argument = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (Argument.__proto__ || Object.getPrototypeOf(Argument)).call(this, props));
 
-		_this.state = {};
 		_this.handleClick = _this.handleClick.bind(_this);
 		return _this;
 	}
@@ -5294,6 +5215,80 @@ var Argument = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Argument;
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* A status between 1 and 100
+ */
+
+var StatusIndicator = function (_React$Component) {
+	_inherits(StatusIndicator, _React$Component);
+
+	function StatusIndicator(props) {
+		_classCallCheck(this, StatusIndicator);
+
+		return _possibleConstructorReturn(this, (StatusIndicator.__proto__ || Object.getPrototypeOf(StatusIndicator)).call(this, props));
+	}
+
+	_createClass(StatusIndicator, [{
+		key: "render",
+		value: function render() {
+
+			if (this.props.type == "bar") {
+				return _react2.default.createElement(
+					"div",
+					{ className: "status-bar" },
+					_react2.default.createElement("div", { className: "status-bar__bar status-bar__bar--" + this.props.state })
+				);
+			}
+			if (this.props.type == "circle") {
+				return _react2.default.createElement(
+					"div",
+					{ className: "status-circle status-circle--" + this.props.state * 100 },
+					_react2.default.createElement(
+						"svg",
+						{ className: "status-circle__svg", viewBox: "-5 -5 200 200" },
+						_react2.default.createElement("circle", { className: "status-circle__svg-icon status-circle__svg-bg outer", cx: "95", cy: "95", r: "85", transform: "rotate(-90, 95, 95)" }),
+						_react2.default.createElement("circle", { className: "status-circle__svg-icon status-circle__svg-state outer", cx: "95", cy: "95", r: "85", transform: "rotate(-90, 95, 95)" })
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "status-circle__text" },
+						this.props.state * 100 + "%"
+					)
+				);
+			}
+			return null;
+		}
+	}]);
+
+	return StatusIndicator;
+}(_react2.default.Component);
+
+exports.default = StatusIndicator;
 
 /***/ }),
 /* 41 */
@@ -5551,7 +5546,7 @@ var ReactDOMComponentTree = __webpack_require__(6);
 var ReactInstrumentation = __webpack_require__(9);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(52);
-var setInnerHTML = __webpack_require__(39);
+var setInnerHTML = __webpack_require__(38);
 var setTextContent = __webpack_require__(92);
 
 function getNodeAfter(parentNode, node) {
@@ -7275,7 +7270,7 @@ module.exports = validateDOMNesting;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -7802,40 +7797,6 @@ module.exports = getIteratorFn;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-function newPremis(newPremisObj, argument, parentClaim) {
-  // check 1 - is it the parent?
-  if (newPremisObj.id === parentClaim.id) {
-    return false;
-  }
-
-  // check 2 - is it a duplicate
-  var isDuplicate = argument.premises.some(function (argPremis) {
-    if (argPremis.id === newPremisObj.id) {
-      return true;
-    }
-    return false;
-  });
-
-  if (isDuplicate) {
-    return false;
-  }
-  return true;
-}
-
-exports.default = {
-  newPremis: newPremis
-};
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
@@ -7908,6 +7869,40 @@ var SearchResults = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = SearchResults;
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function newPremis(newPremisObj, argument, parentClaim) {
+  // check 1 - is it the parent?
+  if (newPremisObj.id === parentClaim.id) {
+    return false;
+  }
+
+  // check 2 - is it a duplicate
+  var isDuplicate = argument.premises.some(function (argPremis) {
+    if (argPremis.id === newPremisObj.id) {
+      return true;
+    }
+    return false;
+  });
+
+  if (isDuplicate) {
+    return false;
+  }
+  return true;
+}
+
+exports.default = {
+  newPremis: newPremis
+};
 
 /***/ }),
 /* 68 */
@@ -8152,7 +8147,7 @@ var _warning = __webpack_require__(21);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(33);
+var _invariant = __webpack_require__(32);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -9502,7 +9497,7 @@ var _prodInvariant = __webpack_require__(4);
 var DOMLazyTree = __webpack_require__(22);
 var DOMProperty = __webpack_require__(16);
 var React = __webpack_require__(24);
-var ReactBrowserEventEmitter = __webpack_require__(35);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactCurrentOwner = __webpack_require__(14);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMContainerInfo = __webpack_require__(149);
@@ -9518,7 +9513,7 @@ var ReactUpdates = __webpack_require__(13);
 var emptyObject = __webpack_require__(25);
 var instantiateReactComponent = __webpack_require__(90);
 var invariant = __webpack_require__(1);
-var setInnerHTML = __webpack_require__(39);
+var setInnerHTML = __webpack_require__(38);
 var shouldUpdateReactComponent = __webpack_require__(57);
 var warning = __webpack_require__(2);
 
@@ -10505,8 +10500,8 @@ module.exports = isTextInputElement;
 
 
 var ExecutionEnvironment = __webpack_require__(7);
-var escapeTextContentForBrowser = __webpack_require__(38);
-var setInnerHTML = __webpack_require__(39);
+var escapeTextContentForBrowser = __webpack_require__(37);
+var setInnerHTML = __webpack_require__(38);
 
 /**
  * Set the textContent property of a node, ensuring that whitespace is preserved
@@ -11342,35 +11337,35 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _SearchResults = __webpack_require__(67);
+var _SearchResults = __webpack_require__(66);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
-var _EditClaimForm = __webpack_require__(109);
+var _EditClaimForm = __webpack_require__(108);
 
 var _EditClaimForm2 = _interopRequireDefault(_EditClaimForm);
 
-var _Circle = __webpack_require__(106);
+var _Circle = __webpack_require__(105);
 
 var _Circle2 = _interopRequireDefault(_Circle);
 
-var _HomeScene = __webpack_require__(114);
+var _HomeScene = __webpack_require__(113);
 
 var _HomeScene2 = _interopRequireDefault(_HomeScene);
 
-var _SearchScene = __webpack_require__(115);
+var _SearchScene = __webpack_require__(114);
 
 var _SearchScene2 = _interopRequireDefault(_SearchScene);
 
-var _ClaimDetailScene = __webpack_require__(113);
+var _ClaimDetailScene = __webpack_require__(112);
 
 var _ClaimDetailScene2 = _interopRequireDefault(_ClaimDetailScene);
 
-var _ClaimCreateScene = __webpack_require__(112);
+var _ClaimCreateScene = __webpack_require__(111);
 
 var _ClaimCreateScene2 = _interopRequireDefault(_ClaimCreateScene);
 
-var _StyleguideScene = __webpack_require__(116);
+var _StyleguideScene = __webpack_require__(115);
 
 var _StyleguideScene2 = _interopRequireDefault(_StyleguideScene);
 
@@ -11544,123 +11539,6 @@ _reactDom2.default.render(_react2.default.createElement(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-function addToQueryString(queryString, paramName, value) {
-  if (queryString.length > 0) {
-    // there's something in the querystring, I'm going to assume it's a properly formed parameter
-    return queryString + '&' + paramName + '=' + value;
-  }
-  // guess there's nothing there, no need to '&'
-  return '?' + paramName + '=' + value;
-}
-
-function removeQueryFromString(queryString, paramName) {
-  // find the index of paramName 
-  // (note that the param name could be a substring of another param name)
-  // include the "?" and "=" to help negate the substring problem
-  var startSlice = queryString.indexOf('?' + paramName + '=');
-  if (startSlice === -1) {
-    // it's not the first param, but it could be further along
-    startSlice = queryString.indexOf('&' + paramName + '=');
-    if (startSlice === -1) {
-      // it's not there either, just return the string
-      return queryString;
-    }
-  }
-
-  // shift the index of the start slice along past the '?' or '&'
-  startSlice += 1;
-
-  // find index of the next &
-  var endSlice = queryString.indexOf('&' + startSlice);
-  if (endSlice === -1) {
-    // it's the last / only one!
-    // -1 to lop of the preceeding "?" if it's the only one or "&" if it's the last one
-    return queryString.substr(0, startSlice - 1);
-  }
-
-  if (endSlice < queryString.length) {
-    // we're in the middle, add to end slice so it'll lop off one of the "&"'s
-    endSlice += 1;
-  }
-
-  // if we're here - the param is one of many - return the slice before & after the param
-  return queryString.substr(0, startSlice) + queryString.substr(endSlice, queryString.length);
-}
-
-function formatStringForUrl(unsafeString) {
-  // note: I've tried a bunch of alternate methods to replace characters, 
-  // none have managed to beat the regex.
-  var saferString = unsafeString.replace(/ /g, '%20');
-  saferString = saferString.replace(/&/g, '%26');
-  saferString = saferString.replace(/\//g, '%2F');
-
-  return saferString;
-}
-
-exports.default = {
-  get: function get(paramName, queryString) {
-    if (typeof paramName !== 'string' || typeof queryString !== 'string') {
-      return false;
-    }
-
-    // find the index of paramName
-    var startSlice = queryString.indexOf(paramName);
-    if (startSlice === -1) {
-      // it's not in there, return false
-      return false;
-    }
-    // start slice for the actual value. Param name + "="
-    startSlice = startSlice + paramName.length + 1;
-
-    // find index of the next &
-    var endSlice = queryString.indexOf('&', startSlice);
-    if (endSlice === -1) {
-      // it's the last / only one!
-      return queryString.substr(startSlice, queryString.length);
-    }
-
-    // end slice is index. substr needs length
-    return queryString.substr(startSlice, endSlice - startSlice);
-  },
-  set: function set(paramName, value, queryString, isEncoded) {
-    var formattedParamName = void 0;
-    var formattedValue = void 0;
-
-    if (typeof paramName !== 'string') {
-      return false;
-    }
-
-    var cleanQueryString = removeQueryFromString(queryString, paramName);
-    if (value === '') {
-      return cleanQueryString;
-    }
-
-    if (!isEncoded) {
-      // param name and value have passed, so format them 
-      formattedParamName = formatStringForUrl(paramName);
-      formattedValue = formatStringForUrl(value);
-    } else {
-      formattedParamName = paramName;
-      formattedValue = value;
-    }
-
-    // and return the new string!
-    var newQuery = addToQueryString(cleanQueryString, formattedParamName, formattedValue);
-
-    return newQuery;
-  }
-};
-
-/***/ }),
-/* 103 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11668,7 +11546,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Argument = __webpack_require__(40);
+var _Argument = __webpack_require__(39);
 
 var _Argument2 = _interopRequireDefault(_Argument);
 
@@ -11684,7 +11562,7 @@ var _Claim = __webpack_require__(17);
 
 var _Claim2 = _interopRequireDefault(_Claim);
 
-var _validate = __webpack_require__(66);
+var _validate = __webpack_require__(67);
 
 var _validate2 = _interopRequireDefault(_validate);
 
@@ -11700,196 +11578,196 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var AddArgumentForm = function (_React$Component) {
-    _inherits(AddArgumentForm, _React$Component);
+  _inherits(AddArgumentForm, _React$Component);
 
-    function AddArgumentForm(props) {
-        _classCallCheck(this, AddArgumentForm);
+  function AddArgumentForm(props) {
+    _classCallCheck(this, AddArgumentForm);
 
-        //state is bundled inside an argument for ease in passing to the argument element
-        var _this = _possibleConstructorReturn(this, (AddArgumentForm.__proto__ || Object.getPrototypeOf(AddArgumentForm)).call(this, props));
+    //state is bundled inside an argument for ease in passing to the argument element
+    var _this = _possibleConstructorReturn(this, (AddArgumentForm.__proto__ || Object.getPrototypeOf(AddArgumentForm)).call(this, props));
 
-        _this.state = {
-            argument: {
-                type: 'SUPPORTS',
-                premises: []
-            },
-            premis_search_results: []
-        };
-        _this.handleTypeToggle = _this.handleTypeToggle.bind(_this);
-        _this.handlePremisSearch = _this.handlePremisSearch.bind(_this);
-        _this.handlePremisResultClick = _this.handlePremisResultClick.bind(_this);
-        _this.handleArgumentPremisClick = _this.handleArgumentPremisClick.bind(_this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
-        return _this;
+    _this.state = {
+      argument: {
+        type: 'SUPPORTS',
+        premises: []
+      },
+      premis_search_results: []
+    };
+    _this.handleTypeToggle = _this.handleTypeToggle.bind(_this);
+    _this.handlePremisSearch = _this.handlePremisSearch.bind(_this);
+    _this.handlePremisResultClick = _this.handlePremisResultClick.bind(_this);
+    _this.handleArgumentPremisClick = _this.handleArgumentPremisClick.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(AddArgumentForm, [{
+    key: 'handleTypeToggle',
+    value: function handleTypeToggle(type) {
+      var newArgument = this.state.argument;
+      newArgument.type = type;
+      this.setState({ argument: newArgument });
     }
+  }, {
+    key: 'handlePremisSearch',
+    value: function handlePremisSearch(term) {
+      var _this2 = this;
 
-    _createClass(AddArgumentForm, [{
-        key: 'handleTypeToggle',
-        value: function handleTypeToggle(type) {
-            var newArgument = this.state.argument;
-            newArgument.type = type;
-            this.setState({ argument: newArgument });
-        }
-    }, {
-        key: 'handlePremisSearch',
-        value: function handlePremisSearch(term) {
-            var _this2 = this;
+      if (isNaN(term)) {
+        _api2.default.searchClaimsByTerm(term).then(function (data) {
+          _this2.setState({ premis_search_results: data.claims });
+        }).catch(function (err) {
+          console.error('search term api call error', err);
+        });
+      } else {
+        _api2.default.getClaimDetailById(term).then(function (data) {
+          _this2.setState({ premis_search_results: [data.claim] });
+        }).catch(function (err) {
+          console.error('search claim api call error', err);
+        });
+      }
+    }
+  }, {
+    key: 'handlePremisResultClick',
+    value: function handlePremisResultClick(premis) {
+      //a premis in the premis search - add it to the new argument when it's clicked
+      var newArgument = this.state.argument;
 
-            if (isNaN(term)) {
-                _api2.default.searchClaimsByTerm(term).then(function (data) {
-                    _this2.setState({ premis_search_results: data.claims });
-                }).catch(function (err) {
-                    console.error('search term api call error', err);
-                });
-            } else {
-                _api2.default.getClaimDetailById(term).then(function (data) {
-                    _this2.setState({ premis_search_results: [data.claim] });
-                }).catch(function (err) {
-                    console.error('search claim api call error', err);
-                });
-            }
-        }
-    }, {
-        key: 'handlePremisResultClick',
-        value: function handlePremisResultClick(premis) {
-            //a premis in the premis search - add it to the new argument when it's clicked
-            var newArgument = this.state.argument;
+      if (_validate2.default.newPremis(premis, newArgument, this.props.parentClaim)) {
+        newArgument.premises.push(premis);
+        this.setState({ argument: newArgument });
+      }
+    }
+  }, {
+    key: 'handleArgumentPremisClick',
+    value: function handleArgumentPremisClick(premis) {
+      //when a premis that has been added to the argument is clicked, remove it from the argument
+      var newArgument = this.state.argument;
+      newArgument.premises = newArgument.premises.filter(function (statePremis) {
+        return statePremis.id != premis.id;
+      });
+      this.setState({ argument: newArgument });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      var _this3 = this;
 
-            if (_validate2.default.newPremis(premis, newArgument, this.props.parentClaim)) {
-                newArgument.premises.push(premis);
-                this.setState({ argument: newArgument });
-            }
-        }
-    }, {
-        key: 'handleArgumentPremisClick',
-        value: function handleArgumentPremisClick(premis) {
-            //when a premis that has been added to the argument is clicked, remove it from the argument
-            var newArgument = this.state.argument;
-            newArgument.premises = newArgument.premises.filter(function (statePremis) {
-                return statePremis.id != premis.id;
-            });
-            this.setState({ argument: newArgument });
-        }
-    }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            var _this3 = this;
+      //when the publish button is clicked, set up the new argument JSON to be passed to the API
+      event.preventDefault();
 
-            //when the publish button is clicked, set up the new argument JSON to be passed to the API
-            event.preventDefault();
+      var premisIdArray = this.state.argument.premises.map(function (premis) {
+        return premis.id;
+      });
 
-            var premisIdArray = this.state.argument.premises.map(function (premis) {
-                return premis.id;
-            });
+      _api2.default.postNewArgument({
+        parent_claim_id: this.props.parentClaim.id,
+        type: this.state.argument.type,
+        premise_ids: premisIdArray
+      }).then(function (res) {
+        _this3.props.updatedClaimHandler(res.data.claim);
+      }).catch(function (err) {
+        console.error('API returned a fail', err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
 
-            _api2.default.postNewArgument({
-                parent_claim_id: this.props.parentClaim.id,
-                type: this.state.argument.type,
-                premise_ids: premisIdArray
-            }).then(function (res) {
-                _this3.props.updatedClaimHandler(res.data.claim);
-            }).catch(function (err) {
-                console.error('API returned a fail', err);
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this4 = this;
+      var premisSearchResults = null;
+      if (this.state.premis_search_results.length > 0) {
+        premisSearchResults = this.state.premis_search_results.map(function (premis, index) {
+          return _react2.default.createElement(_Claim2.default, { claim: premis, key: index, handleClick: this.handlePremisResultClick, isSelected: false });
+        }.bind(this));
+      }
 
-            var premisSearchResults = null;
-            if (this.state.premis_search_results.length > 0) {
-                premisSearchResults = this.state.premis_search_results.map(function (premis, index) {
-                    return _react2.default.createElement(_Claim2.default, { claim: premis, key: index, handleClick: this.handlePremisResultClick, isSelected: false });
-                }.bind(this));
-            }
-
-            return _react2.default.createElement(
+      return _react2.default.createElement(
+        'div',
+        { className: 'add-argument-form' },
+        _react2.default.createElement(
+          'h4',
+          { className: 'add-argument-form__parent-claim' },
+          this.props.parentClaim.text
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__type-toggle' },
+          _react2.default.createElement(
+            'div',
+            { className: 'type-toggle' },
+            _react2.default.createElement(
+              'label',
+              { className: 'type-toggle__label' },
+              _react2.default.createElement('input', { className: 'type-toggle__input', type: 'radio', value: 'SUPPORTS', checked: this.state.argument.type == 'SUPPORTS', onChange: function onChange() {
+                  return _this4.handleTypeToggle('SUPPORTS');
+                } }),
+              _react2.default.createElement(
                 'div',
-                { className: 'add-argument-form' },
-                _react2.default.createElement(
-                    'h4',
-                    { className: 'add-argument-form__parent-claim' },
-                    this.props.parentClaim.text
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__type-toggle' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'type-toggle' },
-                        _react2.default.createElement(
-                            'label',
-                            { className: 'type-toggle__label' },
-                            _react2.default.createElement('input', { className: 'type-toggle__input', type: 'radio', value: 'SUPPORTS', checked: this.state.argument.type == 'SUPPORTS', onChange: function onChange() {
-                                    return _this4.handleTypeToggle('SUPPORTS');
-                                } }),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'type-toggle__text' },
-                                'SUPPORTS'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            { className: 'type-toggle__label' },
-                            _react2.default.createElement('input', { className: 'type-toggle__input', type: 'radio', value: 'OPPOSES', checked: this.state.argument.type == 'OPPOSES', onChange: function onChange() {
-                                    return _this4.handleTypeToggle('OPPOSES');
-                                } }),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'type-toggle__text' },
-                                'OPPOSES'
-                            )
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__premis-finder' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'premis-finder' },
-                        _react2.default.createElement(_SearchInput2.default, { submissionHandler: this.handlePremisSearch, placeholder: 'Search Premises' }),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'premis-finder__results' },
-                            premisSearchResults
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__argument-simulator' },
-                    _react2.default.createElement(_Argument2.default, { argumentObject: this.state.argument, premisClickHandler: this.handleArgumentPremisClick })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__submit' },
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.handleSubmit },
-                        'Publish'
-                    )
-                )
-            );
-        }
-    }]);
+                { className: 'type-toggle__text' },
+                'SUPPORTS'
+              )
+            ),
+            _react2.default.createElement(
+              'label',
+              { className: 'type-toggle__label' },
+              _react2.default.createElement('input', { className: 'type-toggle__input', type: 'radio', value: 'OPPOSES', checked: this.state.argument.type == 'OPPOSES', onChange: function onChange() {
+                  return _this4.handleTypeToggle('OPPOSES');
+                } }),
+              _react2.default.createElement(
+                'div',
+                { className: 'type-toggle__text' },
+                'OPPOSES'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__premis-finder' },
+          _react2.default.createElement(
+            'div',
+            { className: 'premis-finder' },
+            _react2.default.createElement(_SearchInput2.default, { submissionHandler: this.handlePremisSearch, placeholder: 'Search Premises' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'premis-finder__results' },
+              premisSearchResults
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__argument-simulator' },
+          _react2.default.createElement(_Argument2.default, { argumentObject: this.state.argument, premisClickHandler: this.handleArgumentPremisClick })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__submit' },
+          _react2.default.createElement(
+            'button',
+            { onClick: this.handleSubmit },
+            'Publish'
+          )
+        )
+      );
+    }
+  }]);
 
-    return AddArgumentForm;
+  return AddArgumentForm;
 }(_react2.default.Component);
 
 exports.default = AddArgumentForm;
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -11914,79 +11792,79 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var AddClaimForm = function (_React$Component) {
-    _inherits(AddClaimForm, _React$Component);
+  _inherits(AddClaimForm, _React$Component);
 
-    function AddClaimForm(props) {
-        _classCallCheck(this, AddClaimForm);
+  function AddClaimForm(props) {
+    _classCallCheck(this, AddClaimForm);
 
-        var _this = _possibleConstructorReturn(this, (AddClaimForm.__proto__ || Object.getPrototypeOf(AddClaimForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AddClaimForm.__proto__ || Object.getPrototypeOf(AddClaimForm)).call(this, props));
 
-        _this.state = {
-            text: ''
-        };
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.submitHandler = _this.submitHandler.bind(_this);
-        return _this;
+    _this.state = {
+      text: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.submitHandler = _this.submitHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(AddClaimForm, [{
+    key: 'handleChange',
+    value: function handleChange(event) {
+      this.setState({
+        text: event.target.value
+      });
     }
+  }, {
+    key: 'submitHandler',
+    value: function submitHandler(event) {
+      event.preventDefault();
 
-    _createClass(AddClaimForm, [{
-        key: 'handleChange',
-        value: function handleChange(event) {
-            this.setState({
-                text: event.target.value
-            });
-        }
-    }, {
-        key: 'submitHandler',
-        value: function submitHandler(event) {
-            event.preventDefault();
+      _api2.default.postNewClaim({ text: this.state.text }).then(function (data) {
+        console.log("api returned new claim!", data);
+      }).catch(function (err) {
+        console.error('API returned a fail', err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
 
-            _api2.default.postNewClaim({ text: this.state.text }).then(function (data) {
-                console.log("api returned new claim!", data);
-            }).catch(function (err) {
-                console.error('API returned a fail', err);
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
+      return _react2.default.createElement(
+        'form',
+        { className: 'form', onSubmit: this.submitHandler },
+        _react2.default.createElement(
+          'label',
+          { className: 'form__label' },
+          _react2.default.createElement(
+            'label',
+            { className: 'form__label-text', htmlFor: 'new-claim-text' },
+            'Write up your new claim'
+          ),
+          _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleChange })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form__submit' },
+          _react2.default.createElement('input', { className: 'form__submit-button', type: 'submit', value: 'Publish' })
+        )
+      );
+    }
+  }]);
 
-            return _react2.default.createElement(
-                'form',
-                { className: 'form', onSubmit: this.submitHandler },
-                _react2.default.createElement(
-                    'label',
-                    { className: 'form__label' },
-                    _react2.default.createElement(
-                        'label',
-                        { className: 'form__label-text', htmlFor: 'new-claim-text' },
-                        'Write up your new claim'
-                    ),
-                    _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleChange })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'form__submit' },
-                    _react2.default.createElement('input', { className: 'form__submit-button', type: 'submit', value: 'Publish' })
-                )
-            );
-        }
-    }]);
-
-    return AddClaimForm;
+  return AddClaimForm;
 }(_react2.default.Component);
 
 exports.default = AddClaimForm;
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -11995,7 +11873,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Argument = __webpack_require__(40);
+var _Argument = __webpack_require__(39);
 
 var _Argument2 = _interopRequireDefault(_Argument);
 
@@ -12011,7 +11889,7 @@ var _Claim = __webpack_require__(17);
 
 var _Claim2 = _interopRequireDefault(_Claim);
 
-var _validate = __webpack_require__(66);
+var _validate = __webpack_require__(67);
 
 var _validate2 = _interopRequireDefault(_validate);
 
@@ -12027,165 +11905,165 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var AddExplanationForm = function (_React$Component) {
-    _inherits(AddExplanationForm, _React$Component);
+  _inherits(AddExplanationForm, _React$Component);
 
-    function AddExplanationForm(props) {
-        _classCallCheck(this, AddExplanationForm);
+  function AddExplanationForm(props) {
+    _classCallCheck(this, AddExplanationForm);
 
-        //state is bundled inside an argument for ease in passing to the argument element
-        var _this = _possibleConstructorReturn(this, (AddExplanationForm.__proto__ || Object.getPrototypeOf(AddExplanationForm)).call(this, props));
+    //state is bundled inside an argument for ease in passing to the argument element
+    var _this = _possibleConstructorReturn(this, (AddExplanationForm.__proto__ || Object.getPrototypeOf(AddExplanationForm)).call(this, props));
 
-        _this.state = {
-            argument: {
-                type: 'SUPPORTS',
-                premises: []
-            },
-            premis_search_results: []
-        };
-        //this.handleTypeToggle = this.handleTypeToggle.bind(this);
-        _this.handlePremisSearch = _this.handlePremisSearch.bind(_this);
-        _this.handlePremisResultClick = _this.handlePremisResultClick.bind(_this);
-        _this.handleArgumentPremisClick = _this.handleArgumentPremisClick.bind(_this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
-        return _this;
+    _this.state = {
+      argument: {
+        type: 'SUPPORTS',
+        premises: []
+      },
+      premis_search_results: []
+    };
+    //this.handleTypeToggle = this.handleTypeToggle.bind(this);
+    _this.handlePremisSearch = _this.handlePremisSearch.bind(_this);
+    _this.handlePremisResultClick = _this.handlePremisResultClick.bind(_this);
+    _this.handleArgumentPremisClick = _this.handleArgumentPremisClick.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(AddExplanationForm, [{
+    key: 'handleTypeToggle',
+    value: function handleTypeToggle(type) {
+      var newArgument = this.state.argument;
+      newArgument.type = type;
+      this.setState({ argument: newArgument });
     }
+  }, {
+    key: 'handlePremisSearch',
+    value: function handlePremisSearch(term) {
+      var _this2 = this;
 
-    _createClass(AddExplanationForm, [{
-        key: 'handleTypeToggle',
-        value: function handleTypeToggle(type) {
-            var newArgument = this.state.argument;
-            newArgument.type = type;
-            this.setState({ argument: newArgument });
-        }
-    }, {
-        key: 'handlePremisSearch',
-        value: function handlePremisSearch(term) {
-            var _this2 = this;
+      if (isNaN(term)) {
+        _api2.default.searchClaimsByTerm(term).then(function (data) {
+          _this2.setState({ premis_search_results: data.claims });
+        }).catch(function (err) {
+          console.error('search term api call error', err);
+        });
+      } else {
+        _api2.default.getClaimDetailById(term).then(function (data) {
+          _this2.setState({ premis_search_results: [data.claim] });
+        }).catch(function (err) {
+          console.error('search claim api call error', err);
+        });
+      }
+    }
+  }, {
+    key: 'handlePremisResultClick',
+    value: function handlePremisResultClick(premis) {
+      //a premis in the premis search - add it to the new argument when it's clicked
+      var newArgument = this.state.argument;
 
-            if (isNaN(term)) {
-                _api2.default.searchClaimsByTerm(term).then(function (data) {
-                    _this2.setState({ premis_search_results: data.claims });
-                }).catch(function (err) {
-                    console.error('search term api call error', err);
-                });
-            } else {
-                _api2.default.getClaimDetailById(term).then(function (data) {
-                    _this2.setState({ premis_search_results: [data.claim] });
-                }).catch(function (err) {
-                    console.error('search claim api call error', err);
-                });
-            }
-        }
-    }, {
-        key: 'handlePremisResultClick',
-        value: function handlePremisResultClick(premis) {
-            //a premis in the premis search - add it to the new argument when it's clicked
-            var newArgument = this.state.argument;
+      if (_validate2.default.newPremis(premis, newArgument, this.props.parentClaim)) {
+        newArgument.premises.push(premis);
+        this.setState({ argument: newArgument });
+      }
+    }
+  }, {
+    key: 'handleArgumentPremisClick',
+    value: function handleArgumentPremisClick(premis) {
+      //when a premis that has been added to the argument is clicked, remove it from the argument
+      var newArgument = this.state.argument;
+      newArgument.premises = newArgument.premises.filter(function (statePremis) {
+        return statePremis.id != premis.id;
+      });
+      this.setState({ argument: newArgument });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      var _this3 = this;
 
-            if (_validate2.default.newPremis(premis, newArgument, this.props.parentClaim)) {
-                newArgument.premises.push(premis);
-                this.setState({ argument: newArgument });
-            }
-        }
-    }, {
-        key: 'handleArgumentPremisClick',
-        value: function handleArgumentPremisClick(premis) {
-            //when a premis that has been added to the argument is clicked, remove it from the argument
-            var newArgument = this.state.argument;
-            newArgument.premises = newArgument.premises.filter(function (statePremis) {
-                return statePremis.id != premis.id;
-            });
-            this.setState({ argument: newArgument });
-        }
-    }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            var _this3 = this;
+      //when the publish button is clicked, set up the new argument JSON to be passed to the API
+      event.preventDefault();
 
-            //when the publish button is clicked, set up the new argument JSON to be passed to the API
-            event.preventDefault();
+      var premisIdArray = this.state.argument.premises.map(function (premis) {
+        return premis.id;
+      });
 
-            var premisIdArray = this.state.argument.premises.map(function (premis) {
-                return premis.id;
-            });
+      _api2.default.postNewExplanation({
+        parent_claim_id: this.props.parentClaim.id,
+        type: this.state.argument.type,
+        premise_ids: premisIdArray
+      }).then(function (res) {
+        _this3.props.updatedClaimHandler(res.data.claim);
+      }).catch(function (err) {
+        console.error('API returned a fail', err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
 
-            _api2.default.postNewExplanation({
-                parent_claim_id: this.props.parentClaim.id,
-                type: this.state.argument.type,
-                premise_ids: premisIdArray
-            }).then(function (res) {
-                _this3.props.updatedClaimHandler(res.data.claim);
-            }).catch(function (err) {
-                console.error('API returned a fail', err);
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
+      var premisSearchResults = null;
+      if (this.state.premis_search_results.length > 0) {
+        premisSearchResults = this.state.premis_search_results.map(function (premis, index) {
+          return _react2.default.createElement(_Claim2.default, { claim: premis, key: index, handleClick: this.handlePremisResultClick, isSelected: false });
+        }.bind(this));
+      }
 
-            var premisSearchResults = null;
-            if (this.state.premis_search_results.length > 0) {
-                premisSearchResults = this.state.premis_search_results.map(function (premis, index) {
-                    return _react2.default.createElement(_Claim2.default, { claim: premis, key: index, handleClick: this.handlePremisResultClick, isSelected: false });
-                }.bind(this));
-            }
+      return _react2.default.createElement(
+        'div',
+        { className: 'add-argument-form' },
+        _react2.default.createElement(
+          'h4',
+          { className: 'add-argument-form__parent-claim' },
+          'The claim ',
+          this.props.parentClaim.text,
+          ' requires one of the following explanations to be true:'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__premis-finder' },
+          _react2.default.createElement(
+            'div',
+            { className: 'premis-finder' },
+            _react2.default.createElement(_SearchInput2.default, { submissionHandler: this.handlePremisSearch, placeholder: 'Search Premises' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'premis-finder__results' },
+              premisSearchResults
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__argument-simulator' },
+          _react2.default.createElement(_Argument2.default, { argumentObject: this.state.argument, premisClickHandler: this.handleArgumentPremisClick })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'add-argument-form__submit' },
+          _react2.default.createElement(
+            'button',
+            { onClick: this.handleSubmit },
+            'Publish'
+          )
+        )
+      );
+    }
+  }]);
 
-            return _react2.default.createElement(
-                'div',
-                { className: 'add-argument-form' },
-                _react2.default.createElement(
-                    'h4',
-                    { className: 'add-argument-form__parent-claim' },
-                    'The claim ',
-                    this.props.parentClaim.text,
-                    ' requires one of the following explanations to be true:'
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__premis-finder' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'premis-finder' },
-                        _react2.default.createElement(_SearchInput2.default, { submissionHandler: this.handlePremisSearch, placeholder: 'Search Premises' }),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'premis-finder__results' },
-                            premisSearchResults
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__argument-simulator' },
-                    _react2.default.createElement(_Argument2.default, { argumentObject: this.state.argument, premisClickHandler: this.handleArgumentPremisClick })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'add-argument-form__submit' },
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.handleSubmit },
-                        'Publish'
-                    )
-                )
-            );
-        }
-    }]);
-
-    return AddExplanationForm;
+  return AddExplanationForm;
 }(_react2.default.Component);
 
 exports.default = AddExplanationForm;
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12194,7 +12072,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _StatusIndicator = __webpack_require__(32);
+var _StatusIndicator = __webpack_require__(40);
 
 var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
@@ -12216,70 +12094,69 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var Circle = function (_React$Component) {
-    _inherits(Circle, _React$Component);
+  _inherits(Circle, _React$Component);
 
-    function Circle(props) {
-        _classCallCheck(this, Circle);
+  function Circle(props) {
+    _classCallCheck(this, Circle);
 
-        var _this = _possibleConstructorReturn(this, (Circle.__proto__ || Object.getPrototypeOf(Circle)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Circle.__proto__ || Object.getPrototypeOf(Circle)).call(this, props));
 
-        _this.state = {};
-        _this.handleClick = _this.handleClick.bind(_this);
-        return _this;
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(Circle, [{
+    key: 'handleClick',
+    value: function handleClick(premis) {
+      this.props.premisClickHandler(premis);
     }
+  }, {
+    key: 'render',
+    value: function render() {
 
-    _createClass(Circle, [{
-        key: 'handleClick',
-        value: function handleClick(premis) {
-            this.props.premisClickHandler(premis);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
+      //loop through the premises in this argument
+      var premises = this.props.argumentObject.premises.map(function (premis, index) {
+        var _this2 = this;
 
-            //loop through the premises in this argument
-            var premises = this.props.argumentObject.premises.map(function (premis, index) {
-                var _this2 = this;
+        var isSelected = premis.id == this.props.highlightedPremisId;
 
-                var isSelected = premis.id == this.props.highlightedPremisId;
+        return _react2.default.createElement(
+          'div',
+          { className: 'argumentCircle__premis', key: index },
+          _react2.default.createElement(_Claim2.default, { claim: premis, isSelected: isSelected, handleClick: function handleClick() {
+              _this2.handleClick(premis);
+            } })
+        );
+      }.bind(this));
 
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'argumentCircle__premis', key: index },
-                    _react2.default.createElement(_Claim2.default, { claim: premis, isSelected: isSelected, handleClick: function handleClick() {
-                            _this2.handleClick(premis);
-                        } })
-                );
-            }.bind(this));
+      var colour = this.props.argumentObject.probability < 50 ? "false" : "true";
+      console.log("colour", colour);
+      return _react2.default.createElement(
+        'div',
+        { className: 'argument argumentCircle--' + colour },
+        _react2.default.createElement(
+          'div',
+          { className: 'argumentCircle__body' },
+          premises
+        )
+      );
+    }
+  }]);
 
-            var colour = this.props.argumentObject.probability < 50 ? "false" : "true";
-            console.log("colour", colour);
-            return _react2.default.createElement(
-                'div',
-                { className: 'argument argumentCircle--' + colour },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'argumentCircle__body' },
-                    premises
-                )
-            );
-        }
-    }]);
-
-    return Circle;
+  return Circle;
 }(_react2.default.Component);
 
 exports.default = Circle;
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12292,7 +12169,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _ClaimDetail = __webpack_require__(108);
+var _ClaimDetail = __webpack_require__(107);
 
 var _ClaimDetail2 = _interopRequireDefault(_ClaimDetail);
 
@@ -12309,134 +12186,134 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var ClaimChain = function (_React$Component) {
-    _inherits(ClaimChain, _React$Component);
+  _inherits(ClaimChain, _React$Component);
 
-    function ClaimChain(props) {
-        _classCallCheck(this, ClaimChain);
+  function ClaimChain(props) {
+    _classCallCheck(this, ClaimChain);
 
-        var _this = _possibleConstructorReturn(this, (ClaimChain.__proto__ || Object.getPrototypeOf(ClaimChain)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ClaimChain.__proto__ || Object.getPrototypeOf(ClaimChain)).call(this, props));
 
-        _this.state = {
-            isLoading: true,
-            chain: []
-        };
-        _this.premisClickHandler = _this.premisClickHandler.bind(_this);
-        _this.updatedClaimHandler = _this.updatedClaimHandler.bind(_this);
-        return _this;
+    _this.state = {
+      isLoading: true,
+      chain: []
+    };
+    _this.premisClickHandler = _this.premisClickHandler.bind(_this);
+    _this.updatedClaimHandler = _this.updatedClaimHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(ClaimChain, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      //when this view opens, the ID of the claim is passed in by the props - ask the API for it!
+      api.getClaimDetailById(this.props.topClaimId).then(function (data) {
+        _this2.setState({
+          isLoading: false,
+          chain: [{
+            claim: data.claim,
+            highlighted_premis_id: ""
+          }]
+        });
+      }).catch(function (err) {
+        console.error("claim chain err", err);
+      });
     }
+  }, {
+    key: 'premisClickHandler',
+    value: function premisClickHandler(premis, index) {
+      var _this3 = this;
 
-    _createClass(ClaimChain, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
+      //When a chain link premis is clicked, we need to:
+      var newChain = this.state.chain;
 
-            //when this view opens, the ID of the claim is passed in by the props - ask the API for it!
-            api.getClaimDetailById(this.props.topClaimId).then(function (data) {
-                _this2.setState({
-                    isLoading: false,
-                    chain: [{
-                        claim: data.claim,
-                        highlighted_premis_id: ""
-                    }]
-                });
-            }).catch(function (err) {
-                console.error("claim chain err", err);
-            });
-        }
-    }, {
-        key: 'premisClickHandler',
-        value: function premisClickHandler(premis, index) {
-            var _this3 = this;
+      //clear out any lower level rows. 
+      newChain = newChain.slice(0, index + 1);
 
-            //When a chain link premis is clicked, we need to:
-            var newChain = this.state.chain;
+      //highlight the premis that was clicked
+      newChain[index].highlighted_premis_id = premis.id;
 
-            //clear out any lower level rows. 
-            newChain = newChain.slice(0, index + 1);
+      //load in the arguments of that premis into the next level
+      api.getClaimDetailById(premis.id).then(function (data) {
 
-            //highlight the premis that was clicked
-            newChain[index].highlighted_premis_id = premis.id;
+        newChain.push({
+          claim: data.claim,
+          highlighted_premis_id: ""
+        });
 
-            //load in the arguments of that premis into the next level
-            api.getClaimDetailById(premis.id).then(function (data) {
+        _this3.setState({ chain: newChain });
+      }).catch(function (err) {
+        console.error("Error in claim detail api from a premis click", err);
+      });
+    }
+  }, {
+    key: 'updatedClaimHandler',
+    value: function updatedClaimHandler(claim, index) {
+      //when a claim in the chain is updated (eg by adding a new argument) - this will replace that link in the chain
+      var newChain = this.state.chain;
+      newChain[index].claim = claim;
 
-                newChain.push({
-                    claim: data.claim,
-                    highlighted_premis_id: ""
-                });
+      this.setState({ chain: newChain });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
 
-                _this3.setState({ chain: newChain });
-            }).catch(function (err) {
-                console.error("Error in claim detail api from a premis click", err);
-            });
-        }
-    }, {
-        key: 'updatedClaimHandler',
-        value: function updatedClaimHandler(claim, index) {
-            //when a claim in the chain is updated (eg by adding a new argument) - this will replace that link in the chain
-            var newChain = this.state.chain;
-            newChain[index].claim = claim;
+      var theChain = null;
+      var dougChain = null;
 
-            this.setState({ chain: newChain });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this4 = this;
+      if (this.state.isLoading) {
 
-            var theChain = null;
-            var dougChain = null;
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading...'
+        );
+      } else {
 
-            if (this.state.isLoading) {
-
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    'Loading...'
-                );
-            } else {
-
-                if (this.state.chain.length > 0) {
-                    theChain = this.state.chain.map(function (chainLink, index) {
-                        if (chainLink.hasOwnProperty('claim')) {
-                            return _react2.default.createElement(_ClaimDetail2.default, {
-                                claim: chainLink.claim,
-                                key: index,
-                                highlightedPremisId: chainLink.highlighted_premis_id,
-                                premisClickHandler: function premisClickHandler(premis) {
-                                    _this4.premisClickHandler(premis, index);
-                                },
-                                updatedClaimHandler: function updatedClaimHandler(claim) {
-                                    _this4.updatedClaimHandler(claim, index);
-                                }
-                            });
-                        }
-                    });
+        if (this.state.chain.length > 0) {
+          theChain = this.state.chain.map(function (chainLink, index) {
+            if (chainLink.hasOwnProperty('claim')) {
+              return _react2.default.createElement(_ClaimDetail2.default, {
+                claim: chainLink.claim,
+                key: index,
+                highlightedPremisId: chainLink.highlighted_premis_id,
+                premisClickHandler: function premisClickHandler(premis) {
+                  _this4.premisClickHandler(premis, index);
+                },
+                updatedClaimHandler: function updatedClaimHandler(claim) {
+                  _this4.updatedClaimHandler(claim, index);
                 }
-
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    theChain
-                );
+              });
             }
+          });
         }
-    }]);
 
-    return ClaimChain;
+        return _react2.default.createElement(
+          'div',
+          null,
+          theChain
+        );
+      }
+    }
+  }]);
+
+  return ClaimChain;
 }(_react2.default.Component);
 
 exports.default = ClaimChain;
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12449,23 +12326,23 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _Argument = __webpack_require__(40);
+var _Argument = __webpack_require__(39);
 
 var _Argument2 = _interopRequireDefault(_Argument);
 
-var _StatusIndicator = __webpack_require__(32);
+var _StatusIndicator = __webpack_require__(40);
 
 var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
-var _Modal = __webpack_require__(110);
+var _Modal = __webpack_require__(109);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
-var _AddArgumentForm = __webpack_require__(103);
+var _AddArgumentForm = __webpack_require__(102);
 
 var _AddArgumentForm2 = _interopRequireDefault(_AddArgumentForm);
 
-var _AddExplanationForm = __webpack_require__(105);
+var _AddExplanationForm = __webpack_require__(104);
 
 var _AddExplanationForm2 = _interopRequireDefault(_AddExplanationForm);
 
@@ -12483,167 +12360,167 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var ClaimDetail = function (_React$Component) {
-    _inherits(ClaimDetail, _React$Component);
+  _inherits(ClaimDetail, _React$Component);
 
-    function ClaimDetail(props) {
-        _classCallCheck(this, ClaimDetail);
+  function ClaimDetail(props) {
+    _classCallCheck(this, ClaimDetail);
 
-        var _this = _possibleConstructorReturn(this, (ClaimDetail.__proto__ || Object.getPrototypeOf(ClaimDetail)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ClaimDetail.__proto__ || Object.getPrototypeOf(ClaimDetail)).call(this, props));
 
-        _this.state = {
-            highlight_premis_id: "",
-            new_argument_modal_open: false,
-            new_explanation_modal_open: false
-        };
-        _this.premisClickHandler = _this.premisClickHandler.bind(_this);
-        _this.openNewArgumentModal = _this.openNewArgumentModal.bind(_this);
-        _this.openNewExplanationModal = _this.openNewExplanationModal.bind(_this);
-        _this.updatedClaimHandler = _this.updatedClaimHandler.bind(_this);
-        _this.closeNewArgumentModal = _this.closeNewArgumentModal.bind(_this);
-        _this.closeNewExplanationModal = _this.closeNewExplanationModal.bind(_this);
-        return _this;
+    _this.state = {
+      highlight_premis_id: "",
+      new_argument_modal_open: false,
+      new_explanation_modal_open: false
+    };
+    _this.premisClickHandler = _this.premisClickHandler.bind(_this);
+    _this.openNewArgumentModal = _this.openNewArgumentModal.bind(_this);
+    _this.openNewExplanationModal = _this.openNewExplanationModal.bind(_this);
+    _this.updatedClaimHandler = _this.updatedClaimHandler.bind(_this);
+    _this.closeNewArgumentModal = _this.closeNewArgumentModal.bind(_this);
+    _this.closeNewExplanationModal = _this.closeNewExplanationModal.bind(_this);
+    return _this;
+  }
+
+  //When this claim chain recieves new props that means there's a new focus argument. So this clears out the state
+
+
+  _createClass(ClaimDetail, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      this.setState({
+        highlight_premis_id: "",
+        new_argument_modal_open: false,
+        new_explanation_modal_open: false
+      });
     }
 
-    //When this claim chain recieves new props that means there's a new focus argument. So this clears out the state
+    //the focus premises get their own click handler as the logic is a bit different
 
+  }, {
+    key: 'premisClickHandler',
+    value: function premisClickHandler(premis) {
+      this.props.premisClickHandler(premis);
+    }
+  }, {
+    key: 'openNewArgumentModal',
+    value: function openNewArgumentModal(claim) {
+      this.setState({
+        new_argument_modal_open: true
+      });
+    }
+  }, {
+    key: 'openNewExplanationModal',
+    value: function openNewExplanationModal(claim) {
+      this.setState({
+        new_explanation_modal_open: true
+      });
+    }
+  }, {
+    key: 'updatedClaimHandler',
+    value: function updatedClaimHandler(claim) {
+      //when a new argument is added the API returns the updated parent claim, so we should replace!
+      this.props.updatedClaimHandler(claim);
+      this.setState({
+        new_argument_modal_open: false
+      });
+    }
+  }, {
+    key: 'closeNewArgumentModal',
+    value: function closeNewArgumentModal() {
+      this.setState({
+        new_argument_modal_open: false
+      });
+    }
+  }, {
+    key: 'closeNewExplanationModal',
+    value: function closeNewExplanationModal() {
+      this.setState({
+        new_explanation_modal_open: false
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (typeof this.props.claim.text == 'undefined') {
+        return null;
+      }
+      var argumentMarkup = null;
+      //the arguments
+      if (this.props.claim.arguments.length > 0) {
+        argumentMarkup = this.props.claim.arguments.map(function (argumentObject, index) {
+          return _react2.default.createElement(_Argument2.default, { argumentObject: argumentObject, key: index, highlightedPremisId: this.props.highlightedPremisId, premisClickHandler: this.premisClickHandler });
+        }.bind(this));
+      } else {
+        argumentMarkup = _react2.default.createElement(
+          'div',
+          null,
+          'No arguments - ',
+          _react2.default.createElement(
+            'a',
+            { href: 'http://www.wikilogicfoundation.org/get-involved/', target: '_blank' },
+            'sign up'
+          ),
+          ' to add your own!'
+        );
+      }
 
-    _createClass(ClaimDetail, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps() {
-            this.setState({
-                highlight_premis_id: "",
-                new_argument_modal_open: false,
-                new_explanation_modal_open: false
-            });
-        }
+      return _react2.default.createElement(
+        'div',
+        { className: 'claim-detail' },
+        _react2.default.createElement(
+          'div',
+          { className: 'claim-detail__header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'claim-detail__text' },
+            this.props.claim.text
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'claim-detail__status' },
+          _react2.default.createElement(_StatusIndicator2.default, { state: this.props.claim.state })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'claim-detail__options' },
+          _react2.default.createElement(
+            'div',
+            { className: 'button', onClick: this.openNewExplanationModal },
+            'This claim can be explained by...'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'button', onClick: this.openNewArgumentModal },
+            'New Argument +'
+          )
+        ),
+        _react2.default.createElement(
+          _Modal2.default,
+          { show: this.state.new_explanation_modal_open, title: 'New Explanation', onClose: this.closeNewExplanationModal },
+          _react2.default.createElement(_AddExplanationForm2.default, { parentClaim: this.props.claim, updatedClaimHandler: this.updatedClaimHandler })
+        ),
+        _react2.default.createElement(
+          _Modal2.default,
+          { show: this.state.new_argument_modal_open, title: 'New Argument', onClose: this.closeNewArgumentModal },
+          _react2.default.createElement(_AddArgumentForm2.default, { parentClaim: this.props.claim, updatedClaimHandler: this.updatedClaimHandler })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'claim-detail__arguments' },
+          argumentMarkup
+        )
+      );
+    }
+  }]);
 
-        //the focus premises get their own click handler as the logic is a bit different
-
-    }, {
-        key: 'premisClickHandler',
-        value: function premisClickHandler(premis) {
-            this.props.premisClickHandler(premis);
-        }
-    }, {
-        key: 'openNewArgumentModal',
-        value: function openNewArgumentModal(claim) {
-            this.setState({
-                new_argument_modal_open: true
-            });
-        }
-    }, {
-        key: 'openNewExplanationModal',
-        value: function openNewExplanationModal(claim) {
-            this.setState({
-                new_explanation_modal_open: true
-            });
-        }
-    }, {
-        key: 'updatedClaimHandler',
-        value: function updatedClaimHandler(claim) {
-            //when a new argument is added the API returns the updated parent claim, so we should replace!
-            this.props.updatedClaimHandler(claim);
-            this.setState({
-                new_argument_modal_open: false
-            });
-        }
-    }, {
-        key: 'closeNewArgumentModal',
-        value: function closeNewArgumentModal() {
-            this.setState({
-                new_argument_modal_open: false
-            });
-        }
-    }, {
-        key: 'closeNewExplanationModal',
-        value: function closeNewExplanationModal() {
-            this.setState({
-                new_explanation_modal_open: false
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (typeof this.props.claim.text == 'undefined') {
-                return null;
-            }
-            var argumentMarkup = null;
-            //the arguments
-            if (this.props.claim.arguments.length > 0) {
-                argumentMarkup = this.props.claim.arguments.map(function (argumentObject, index) {
-                    return _react2.default.createElement(_Argument2.default, { argumentObject: argumentObject, key: index, highlightedPremisId: this.props.highlightedPremisId, premisClickHandler: this.premisClickHandler });
-                }.bind(this));
-            } else {
-                argumentMarkup = _react2.default.createElement(
-                    'div',
-                    null,
-                    'No arguments - ',
-                    _react2.default.createElement(
-                        'a',
-                        { href: 'http://www.wikilogicfoundation.org/get-involved/', target: '_blank' },
-                        'sign up'
-                    ),
-                    ' to add your own!'
-                );
-            }
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'claim-detail' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'claim-detail__header' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'claim-detail__text' },
-                        this.props.claim.text
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'claim-detail__status' },
-                    _react2.default.createElement(_StatusIndicator2.default, { state: this.props.claim.state })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'claim-detail__options' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'button', onClick: this.openNewExplanationModal },
-                        'This claim can be explained by...'
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'button', onClick: this.openNewArgumentModal },
-                        'New Argument +'
-                    )
-                ),
-                _react2.default.createElement(
-                    _Modal2.default,
-                    { show: this.state.new_explanation_modal_open, title: 'New Explanation', onClose: this.closeNewExplanationModal },
-                    _react2.default.createElement(_AddExplanationForm2.default, { parentClaim: this.props.claim, updatedClaimHandler: this.updatedClaimHandler })
-                ),
-                _react2.default.createElement(
-                    _Modal2.default,
-                    { show: this.state.new_argument_modal_open, title: 'New Argument', onClose: this.closeNewArgumentModal },
-                    _react2.default.createElement(_AddArgumentForm2.default, { parentClaim: this.props.claim, updatedClaimHandler: this.updatedClaimHandler })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'claim-detail__arguments' },
-                    argumentMarkup
-                )
-            );
-        }
-    }]);
-
-    return ClaimDetail;
+  return ClaimDetail;
 }(_react2.default.Component);
 
 exports.default = ClaimDetail;
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12733,14 +12610,14 @@ var EditClaimForm = function (_React$Component) {
 exports.default = EditClaimForm;
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -12762,59 +12639,59 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  */
 
 var Modal = function (_React$Component) {
-    _inherits(Modal, _React$Component);
+  _inherits(Modal, _React$Component);
 
-    function Modal(props) {
-        _classCallCheck(this, Modal);
+  function Modal(props) {
+    _classCallCheck(this, Modal);
 
-        return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+    return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+  }
+
+  _createClass(Modal, [{
+    key: "render",
+    value: function render() {
+      // Render nothing if the "show" prop is false
+      if (!this.props.show) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        "div",
+        { className: "modal" },
+        _react2.default.createElement(
+          "div",
+          { className: "modal__body" },
+          _react2.default.createElement(
+            "div",
+            { className: "modal__header" },
+            _react2.default.createElement(
+              "h3",
+              { className: "modal__title" },
+              this.props.title
+            ),
+            _react2.default.createElement(
+              "button",
+              { onClick: this.props.onClose },
+              "Close"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "modal__content" },
+            this.props.children
+          )
+        )
+      );
     }
+  }]);
 
-    _createClass(Modal, [{
-        key: "render",
-        value: function render() {
-            // Render nothing if the "show" prop is false
-            if (!this.props.show) {
-                return null;
-            }
-
-            return _react2.default.createElement(
-                "div",
-                { className: "modal" },
-                _react2.default.createElement(
-                    "div",
-                    { className: "modal__body" },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "modal__header" },
-                        _react2.default.createElement(
-                            "h3",
-                            { className: "modal__title" },
-                            this.props.title
-                        ),
-                        _react2.default.createElement(
-                            "button",
-                            { onClick: this.props.onClose },
-                            "Close"
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "modal__content" },
-                        this.props.children
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Modal;
+  return Modal;
 }(_react2.default.Component);
 
 exports.default = Modal;
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12844,7 +12721,7 @@ function SearchIcon(props) {
 }
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12864,7 +12741,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _AddClaimForm = __webpack_require__(104);
+var _AddClaimForm = __webpack_require__(103);
 
 var _AddClaimForm2 = _interopRequireDefault(_AddClaimForm);
 
@@ -12924,7 +12801,7 @@ var ClaimCreateScene = function (_React$Component) {
 exports.default = ClaimCreateScene;
 
 /***/ }),
-/* 113 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12944,7 +12821,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _ClaimChain = __webpack_require__(107);
+var _ClaimChain = __webpack_require__(106);
 
 var _ClaimChain2 = _interopRequireDefault(_ClaimChain);
 
@@ -13004,7 +12881,7 @@ var ClaimDetailScene = function (_React$Component) {
 exports.default = ClaimDetailScene;
 
 /***/ }),
-/* 114 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13085,7 +12962,7 @@ var SearchScene = function (_React$Component) {
 exports.default = SearchScene;
 
 /***/ }),
-/* 115 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13105,7 +12982,7 @@ var _SearchInput = __webpack_require__(31);
 
 var _SearchInput2 = _interopRequireDefault(_SearchInput);
 
-var _SearchResults = __webpack_require__(67);
+var _SearchResults = __webpack_require__(66);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
@@ -13113,7 +12990,7 @@ var _api = __webpack_require__(12);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _urlParameter = __webpack_require__(102);
+var _urlParameter = __webpack_require__(116);
 
 var _urlParameter2 = _interopRequireDefault(_urlParameter);
 
@@ -13226,7 +13103,7 @@ var SearchScene = function (_React$Component) {
 exports.default = SearchScene;
 
 /***/ }),
-/* 116 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13337,6 +13214,123 @@ var StyleguideScene = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = StyleguideScene;
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function addToQueryString(queryString, paramName, value) {
+  if (queryString.length > 0) {
+    // there's something in the querystring, I'm going to assume it's a properly formed parameter
+    return queryString + '&' + paramName + '=' + value;
+  }
+  // guess there's nothing there, no need to '&'
+  return '?' + paramName + '=' + value;
+}
+
+function removeQueryFromString(queryString, paramName) {
+  // find the index of paramName 
+  // (note that the param name could be a substring of another param name)
+  // include the "?" and "=" to help negate the substring problem
+  var startSlice = queryString.indexOf('?' + paramName + '=');
+  if (startSlice === -1) {
+    // it's not the first param, but it could be further along
+    startSlice = queryString.indexOf('&' + paramName + '=');
+    if (startSlice === -1) {
+      // it's not there either, just return the string
+      return queryString;
+    }
+  }
+
+  // shift the index of the start slice along past the '?' or '&'
+  startSlice += 1;
+
+  // find index of the next &
+  var endSlice = queryString.indexOf('&' + startSlice);
+  if (endSlice === -1) {
+    // it's the last / only one!
+    // -1 to lop of the preceeding "?" if it's the only one or "&" if it's the last one
+    return queryString.substr(0, startSlice - 1);
+  }
+
+  if (endSlice < queryString.length) {
+    // we're in the middle, add to end slice so it'll lop off one of the "&"'s
+    endSlice += 1;
+  }
+
+  // if we're here - the param is one of many - return the slice before & after the param
+  return queryString.substr(0, startSlice) + queryString.substr(endSlice, queryString.length);
+}
+
+function formatStringForUrl(unsafeString) {
+  // note: I've tried a bunch of alternate methods to replace characters, 
+  // none have managed to beat the regex.
+  var saferString = unsafeString.replace(/ /g, '%20');
+  saferString = saferString.replace(/&/g, '%26');
+  saferString = saferString.replace(/\//g, '%2F');
+
+  return saferString;
+}
+
+exports.default = {
+  get: function get(paramName, queryString) {
+    if (typeof paramName !== 'string' || typeof queryString !== 'string') {
+      return false;
+    }
+
+    // find the index of paramName
+    var startSlice = queryString.indexOf(paramName);
+    if (startSlice === -1) {
+      // it's not in there, return false
+      return false;
+    }
+    // start slice for the actual value. Param name + "="
+    startSlice = startSlice + paramName.length + 1;
+
+    // find index of the next &
+    var endSlice = queryString.indexOf('&', startSlice);
+    if (endSlice === -1) {
+      // it's the last / only one!
+      return queryString.substr(startSlice, queryString.length);
+    }
+
+    // end slice is index. substr needs length
+    return queryString.substr(startSlice, endSlice - startSlice);
+  },
+  set: function set(paramName, value, queryString, isEncoded) {
+    var formattedParamName = void 0;
+    var formattedValue = void 0;
+
+    if (typeof paramName !== 'string') {
+      return false;
+    }
+
+    var cleanQueryString = removeQueryFromString(queryString, paramName);
+    if (value === '') {
+      return cleanQueryString;
+    }
+
+    if (!isEncoded) {
+      // param name and value have passed, so format them 
+      formattedParamName = formatStringForUrl(paramName);
+      formattedValue = formatStringForUrl(value);
+    } else {
+      formattedParamName = paramName;
+      formattedValue = value;
+    }
+
+    // and return the new string!
+    var newQuery = addToQueryString(cleanQueryString, formattedParamName, formattedValue);
+
+    return newQuery;
+  }
+};
 
 /***/ }),
 /* 117 */
@@ -14094,7 +14088,7 @@ var _warning = __webpack_require__(21);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(33);
+var _invariant = __webpack_require__(32);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -15720,7 +15714,7 @@ module.exports = DefaultEventPluginOrder;
 
 var EventPropagators = __webpack_require__(28);
 var ReactDOMComponentTree = __webpack_require__(6);
-var SyntheticMouseEvent = __webpack_require__(36);
+var SyntheticMouseEvent = __webpack_require__(35);
 
 var eventTypes = {
   mouseEnter: {
@@ -17372,8 +17366,8 @@ var DOMNamespaces = __webpack_require__(45);
 var DOMProperty = __webpack_require__(16);
 var DOMPropertyOperations = __webpack_require__(75);
 var EventPluginHub = __webpack_require__(27);
-var EventPluginRegistry = __webpack_require__(34);
-var ReactBrowserEventEmitter = __webpack_require__(35);
+var EventPluginRegistry = __webpack_require__(33);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactDOMComponentFlags = __webpack_require__(76);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMInput = __webpack_require__(153);
@@ -17385,7 +17379,7 @@ var ReactMultiChild = __webpack_require__(172);
 var ReactServerRenderingTransaction = __webpack_require__(177);
 
 var emptyFunction = __webpack_require__(11);
-var escapeTextContentForBrowser = __webpack_require__(38);
+var escapeTextContentForBrowser = __webpack_require__(37);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(56);
 var shallowEqual = __webpack_require__(41);
@@ -19319,7 +19313,7 @@ var DOMChildrenOperations = __webpack_require__(44);
 var DOMLazyTree = __webpack_require__(22);
 var ReactDOMComponentTree = __webpack_require__(6);
 
-var escapeTextContentForBrowser = __webpack_require__(38);
+var escapeTextContentForBrowser = __webpack_require__(37);
 var invariant = __webpack_require__(1);
 var validateDOMNesting = __webpack_require__(58);
 
@@ -19791,7 +19785,7 @@ module.exports = {
 
 
 var DOMProperty = __webpack_require__(16);
-var EventPluginRegistry = __webpack_require__(34);
+var EventPluginRegistry = __webpack_require__(33);
 var ReactComponentTreeHook = __webpack_require__(8);
 
 var warning = __webpack_require__(2);
@@ -20278,7 +20272,7 @@ module.exports = ReactDebugTool;
 var _assign = __webpack_require__(5);
 
 var ReactUpdates = __webpack_require__(13);
-var Transaction = __webpack_require__(37);
+var Transaction = __webpack_require__(36);
 
 var emptyFunction = __webpack_require__(11);
 
@@ -20706,7 +20700,7 @@ var EventPluginHub = __webpack_require__(27);
 var EventPluginUtils = __webpack_require__(46);
 var ReactComponentEnvironment = __webpack_require__(49);
 var ReactEmptyComponent = __webpack_require__(78);
-var ReactBrowserEventEmitter = __webpack_require__(35);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactHostComponent = __webpack_require__(80);
 var ReactUpdates = __webpack_require__(13);
 
@@ -21429,10 +21423,10 @@ var _assign = __webpack_require__(5);
 
 var CallbackQueue = __webpack_require__(74);
 var PooledClass = __webpack_require__(18);
-var ReactBrowserEventEmitter = __webpack_require__(35);
+var ReactBrowserEventEmitter = __webpack_require__(34);
 var ReactInputSelection = __webpack_require__(81);
 var ReactInstrumentation = __webpack_require__(9);
-var Transaction = __webpack_require__(37);
+var Transaction = __webpack_require__(36);
 var ReactUpdateQueue = __webpack_require__(51);
 
 /**
@@ -21706,7 +21700,7 @@ module.exports = ReactRef;
 var _assign = __webpack_require__(5);
 
 var PooledClass = __webpack_require__(18);
-var Transaction = __webpack_require__(37);
+var Transaction = __webpack_require__(36);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactServerUpdateQueue = __webpack_require__(178);
 
@@ -22477,7 +22471,7 @@ var SyntheticClipboardEvent = __webpack_require__(184);
 var SyntheticEvent = __webpack_require__(15);
 var SyntheticFocusEvent = __webpack_require__(187);
 var SyntheticKeyboardEvent = __webpack_require__(189);
-var SyntheticMouseEvent = __webpack_require__(36);
+var SyntheticMouseEvent = __webpack_require__(35);
 var SyntheticDragEvent = __webpack_require__(186);
 var SyntheticTouchEvent = __webpack_require__(190);
 var SyntheticTransitionEvent = __webpack_require__(191);
@@ -22828,7 +22822,7 @@ module.exports = SyntheticCompositionEvent;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(36);
+var SyntheticMouseEvent = __webpack_require__(35);
 
 /**
  * @interface DragEvent
@@ -23135,7 +23129,7 @@ module.exports = SyntheticTransitionEvent;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(36);
+var SyntheticMouseEvent = __webpack_require__(35);
 
 /**
  * @interface WheelEvent
@@ -23933,7 +23927,7 @@ module.exports = getVendorPrefixedEventName;
 
 
 
-var escapeTextContentForBrowser = __webpack_require__(38);
+var escapeTextContentForBrowser = __webpack_require__(37);
 
 /**
  * Escapes attribute value to prevent scripting attacks.
@@ -24459,7 +24453,7 @@ Redirect.contextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_invariant__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_invariant__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
