@@ -3,6 +3,7 @@ import SearchInput from 'Components/SearchInput/SearchInput.jsx';
 import SearchResults from 'Components/SearchResults/SearchResults.jsx';
 import API from 'API/api';
 import urlParameter from 'Services/urlParameter.js';
+import Notify from 'Services/notify';
 
 /**
  * The Search Results page
@@ -44,7 +45,7 @@ export default class SearchScene extends React.Component {
 			.then((data) => {
 				this.setState({ search_results: data.claims });
 			}).catch((err) => {
-				console.error('search term api call error', err);
+				Notify.post(err);
 			});
 		} else {
 			console.log("searching by id", search);
@@ -52,7 +53,7 @@ export default class SearchScene extends React.Component {
 			.then((data) => {
 				this.setState({ focused_claim: data.claim });
 			}).catch((err) => {
-				console.error('search claim api call error', err);
+				Notify.post(err);
 			});
 		}
 

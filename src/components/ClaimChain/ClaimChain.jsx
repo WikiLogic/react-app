@@ -1,6 +1,7 @@
 import React from 'react';
 import API from 'API/api';
 import ClaimDetail from 'Components/ClaimDetail/ClaimDetail';
+import Notify from 'Services/notify';
 
 /* Start with a claim ID. Ask the API for that claim.
  * Lets the user go deeper into the premises bloew that claim.
@@ -30,7 +31,7 @@ export default class ClaimChain extends React.Component {
           }]
         });
       }).catch((err) => {
-        console.error("claim chain err", err);
+        Notify.post(err);
       });
   }
 
@@ -57,7 +58,7 @@ export default class ClaimChain extends React.Component {
         this.setState({ chain: newChain });
 
       }).catch((err) => {
-        console.error("Error in claim detail api from a premis click", err);
+        Notify.post(err);
       });
   }
 

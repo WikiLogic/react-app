@@ -1,5 +1,6 @@
 import React from 'react';
 import API from 'API/api';
+import Notify from 'Services/notify';
 
 /* Each Claim in the list of search results
  */
@@ -28,7 +29,7 @@ export default class AddClaimForm extends React.Component {
       .then((data) => {
         console.log("api returned new claim!", data);
       }).catch((err) => {
-        console.error('API returned a fail', err);
+        Notify.post(err);
       });
   }
 

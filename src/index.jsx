@@ -13,6 +13,9 @@ import SearchResults from './components/SearchResults/SearchResults.jsx';
 import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import Circle from './components/Circle/Circle.jsx';
 
+import Notifyer from 'Notifyer/Notifyer';
+import Notify from 'Services/notify';
+
 //Scenes
 import HomeScene from 'Scenes/HomeScene';
 import SearchScene from 'Scenes/SearchScene';
@@ -38,7 +41,7 @@ class Wikilogic extends React.Component {
 		.then((data) => {
 			this.setState({ focused_claim: data.claim });
 		}).catch((err) => {
-			console.error('claim focus api call error', err);
+			Notify.post(err);
 		});
 	}
 

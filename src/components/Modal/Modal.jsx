@@ -5,7 +5,6 @@ import React from 'react';
  */
 
 export default class Modal extends React.Component {
-
   render() {
     // Render nothing if the "show" prop is false
     if (!this.props.show) {
@@ -34,5 +33,5 @@ Modal.propTypes = {
   show: React.PropTypes.bool.isRequired,
   title: React.PropTypes.string.isRequired,
   onClose: React.PropTypes.func.isRequired,
-  children: React.PropTypes.element.isRequired
+  children: React.PropTypes.element.isRequired,
 };
