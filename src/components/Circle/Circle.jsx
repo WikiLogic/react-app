@@ -18,24 +18,26 @@ export default class Circle extends React.Component {
   }
 
   render() {
-
-    //loop through the premises in this argument
-    let premises = this.props.argumentObject.premises.map(function (premis, index) {
-
-      let isSelected = (premis.id == this.props.highlightedPremisId);
+    // loop through the premises in this argument
+    const premises = this.props.argumentObject.premises.map((premis) => {
+      const isSelected = (premis.id === this.props.highlightedPremisId);
 
       return (
-        <div className="argumentCircle__premis" key={index}>
-          <Claim claim={premis} isSelected={isSelected} handleClick={() => { this.handleClick(premis); }} />
+        <div className="argumentCircle__premis" key={premis.id}>
+          <Claim
+            claim={premis}
+            isSelected={isSelected}
+            handleClick={() => { this.handleClick(premis); }}
+          />
         </div>
       );
-    }.bind(this));
+    });
 
-    let colour = this.props.argumentObject.probability < 50 ? "false" : "true";
-    console.log("colour", colour);
+    const colour = this.props.argumentObject.probability < 50 ? 'false' : 'true';
+
     return (
       <div className={`argument argumentCircle--${colour}`}>
-        {/*<div className="argumentCircle__header">
+        {/* <div className="argumentCircle__header">
           {this.props.argumentObject.type}
         </div>*/}
         <div className="argumentCircle__body">
@@ -45,3 +47,12 @@ export default class Circle extends React.Component {
     );
   }
 }
+
+Circle.propTypes = {
+  highlightedPremisId: React.PropTypes.string.isRequired,
+  argumentObject: React.PropTypes.shape({
+    probability: React.PropTypes.number.isRequired,
+    premises: React.PropTypes.array.isRequired,
+  }).isRequired,
+  premisClickHandler: React.PropTypes.func.isRequired,
+};
