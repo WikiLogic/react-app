@@ -7,34 +7,30 @@ import { Router, Link, Route } from 'react-router-dom';
  */
 
 export default class SearchResults extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-	constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this);
-	}
+  render() {
+    if (typeof this.props.searchResults === 'undefined') {
+      return null;
+    }
 
-	handleClick(resultObject) {
-		//currently - do nothing!
-	}
+    const searchResults = this.props.searchResults.map(searchResult => (
+      <Link to={`/claim/${searchResult.id}`} key={searchResult.id} className="search-results__result">
+        <Claim claim={searchResult} isSelected={false} />
+      </Link>
+    ));
 
-	render() {
-		if (typeof this.props.search_results == 'undefined') {
-			console.warn('Search result props undefined :(');
-			return null;
-		}
-
-		let searchResults = this.props.search_results.map(function (search_result, index) {
-			return (
-				<Link to={`/claim/${search_result.id}`} key={index} className="search-results__result">
-					<Claim claim={search_result} handleClick={this.handleClick} isSelected={false} />
-				</Link>
-			);
-		}.bind(this));
-
-		return (
-			<div className="search-results">
-				{searchResults}
-			</div>
-		);
-	}
+    return (
+      <div className="search-results">
+        {searchResults}
+      </div>
+    );
+  }
 }
+
+SearchResults.propTypes = {
+  searchResults: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+};
