@@ -103,6 +103,6 @@ export default class ClaimChain extends React.Component {
   }
 }
 
-ClaimDetail.propTypes = {
+ClaimChain.propTypes = {
   topClaimId: React.PropTypes.string.isRequired,
 };
