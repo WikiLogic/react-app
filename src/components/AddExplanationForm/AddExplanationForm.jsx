@@ -64,9 +64,7 @@ export default class AddExplanationForm extends React.Component {
   handleArgumentPremisClick(premis) {
     // when a premis that has been added to the argument is clicked, remove it from the argument
     const newArgument = this.state.argument;
-    newArgument.premises = newArgument.premises.filter((statePremis) => {
-      return (statePremis.id !== premis.id);
-    });
+    newArgument.premises = newArgument.premises.filter(statePremis => statePremis.id !== premis.id);
     this.setState({ argument: newArgument });
   }
 
@@ -74,9 +72,7 @@ export default class AddExplanationForm extends React.Component {
     // when the publish button is clicked, set up the new argument JSON to be passed to the API
     event.preventDefault();
 
-    const premisIdArray = this.state.argument.premises.map((premis) => {
-      return premis.id;
-    });
+    const premisIdArray = this.state.argument.premises.map(premis => premis.id);
 
     API.postNewExplanation({
       parent_claim_id: this.props.parentClaim.id,
@@ -92,22 +88,24 @@ export default class AddExplanationForm extends React.Component {
   render() {
     let premisSearchResults = null;
     if (this.state.premis_search_results.length > 0) {
-      premisSearchResults = this.state.premis_search_results.map((premis, index) => {
-        return <Claim claim={premis} 
-          key={index} 
-          handleClick={this.handlePremisResultClick} 
-          isSelected={false} />;
-      });
+      premisSearchResults = this.state.premis_search_results.map(premis =>
+        (<Claim
+          claim={premis}
+          key={premis.id}
+          handleClick={this.handlePremisResultClick}
+          isSelected={false}
+        />),
+      );
     }
 
     return (
       <div className="add-argument-form">
         <h4 className="add-argument-form__parent-claim">
-          The claim {this.props.parentClaim.text} requires one of the following 
+          The claim {this.props.parentClaim.text} requires one of the following
           explanations to be true:
         </h4>
 
-        {/*<div className="add-argument-form__type-toggle">
+        {/* <div className="add-argument-form__type-toggle">
           <div className="type-toggle">
             <label className="type-toggle__label">
               <input className="type-toggle__input" 
@@ -131,8 +129,10 @@ export default class AddExplanationForm extends React.Component {
 
         <div className="add-argument-form__premis-finder">
           <div className="premis-finder">
-            <SearchInput submissionHandler={this.handlePremisSearch} 
-              placeholder="Search Premises" />
+            <SearchInput
+              submissionHandler={this.handlePremisSearch}
+              placeholder="Search Premises"
+            />
 
             <div className="premis-finder__results">
               {premisSearchResults}
@@ -141,8 +141,10 @@ export default class AddExplanationForm extends React.Component {
         </div>
 
         <div className="add-argument-form__argument-simulator">
-          <Argument argumentObject={this.state.argument} 
-            premisClickHandler={this.handleArgumentPremisClick} />
+          <Argument
+            argumentObject={this.state.argument}
+            premisClickHandler={this.handleArgumentPremisClick}
+          />
         </div>
 
         <div className="add-argument-form__submit">
@@ -153,8 +155,10 @@ export default class AddExplanationForm extends React.Component {
   }
 }
 
-Argument.propTypes = {
-  parentClaim: React.PropTypes.object.isRequired,
-  argumentObject: React.PropTypes.object.isRequired,
-  highlightedPremisId: React.PropTypes.string.isRequired,
+AddExplanationForm.propTypes = {
+  parentClaim: React.PropTypes.shape({
+    id: React.propTypes.string.isRequired,
+    text: React.propTypes.string.isRequired,
+  }).isRequired,
+  updatedClaimHandler: React.PropTypes.func.isRequired,
 };
