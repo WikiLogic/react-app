@@ -42,5 +42,7 @@ export default class EditClaimForm extends React.Component {
 EditClaimForm.propTypes = {
   claim: React.PropTypes.shape({
     id: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string.isRequired,
+    state: React.PropTypes.number.isRequired,
   }).isRequired,
 };

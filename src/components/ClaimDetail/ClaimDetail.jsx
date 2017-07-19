@@ -12,13 +12,12 @@ import AddExplanationForm from 'Components/AddExplanationForm/AddExplanationForm
  */
 
 export default class ClaimDetail extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      highlight_premis_id: "",
+      highlight_premis_id: '',
       new_argument_modal_open: false,
-      new_explanation_modal_open: false
+      new_explanation_modal_open: false,
     };
     this.premisClickHandler = this.premisClickHandler.bind(this);
     this.openNewArgumentModal = this.openNewArgumentModal.bind(this);
@@ -28,62 +27,75 @@ export default class ClaimDetail extends React.Component {
     this.closeNewExplanationModal = this.closeNewExplanationModal.bind(this);
   }
 
-  //When this claim chain recieves new props that means there's a new focus argument. So this clears out the state
+  // When this claim chain recieves new props that means there's a new focus argument. 
+  // So this clears out the state
   componentWillReceiveProps() {
     this.setState({
-      highlight_premis_id: "",
+      highlight_premis_id: '',
       new_argument_modal_open: false,
-      new_explanation_modal_open: false
+      new_explanation_modal_open: false,
     });
   }
 
-  //the focus premises get their own click handler as the logic is a bit different
+  // the focus premises get their own click handler as the logic is a bit different
   premisClickHandler(premis) {
     this.props.premisClickHandler(premis);
   }
 
-  openNewArgumentModal(claim) {
+  openNewArgumentModal() {
     this.setState({
-      new_argument_modal_open: true
+      new_argument_modal_open: true,
     });
   }
 
-  openNewExplanationModal(claim) {
+  openNewExplanationModal() {
     this.setState({
-      new_explanation_modal_open: true
+      new_explanation_modal_open: true,
     });
   }
 
   updatedClaimHandler(claim) {
-    //when a new argument is added the API returns the updated parent claim, so we should replace!
+    // when a new argument is added the API returns the updated parent claim, so we should replace!
     this.props.updatedClaimHandler(claim);
     this.setState({
-      new_argument_modal_open: false
+      new_argument_modal_open: false,
     });
   }
 
   closeNewArgumentModal() {
     this.setState({
-      new_argument_modal_open: false
+      new_argument_modal_open: false,
     });
   }
 
   closeNewExplanationModal() {
     this.setState({
-      new_explanation_modal_open: false
+      new_explanation_modal_open: false,
     });
   }
 
   render() {
-    if (typeof this.props.claim.text == 'undefined') { return null; }
+    if (typeof this.props.claim.text === 'undefined') { return null; }
     let argumentMarkup = null;
-    //the arguments
+    // the arguments
     if (this.props.claim.arguments.length > 0) {
-      argumentMarkup = this.props.claim.arguments.map(function (argumentObject, index) {
-        return <Argument argumentObject={argumentObject} key={index} highlightedPremisId={this.props.highlightedPremisId} premisClickHandler={this.premisClickHandler} />
-      }.bind(this));
+      argumentMarkup = this.props.claim.arguments.map(argumentObject => (
+        <Argument
+          argumentObject={argumentObject}
+          key={argumentObject.id}
+          highlightedPremisId={this.props.highlightedPremisId}
+          premisClickHandler={this.premisClickHandler}
+        />
+      ));
     } else {
-      argumentMarkup = <div>No arguments - <a href="http://www.wikilogicfoundation.org/get-involved/" target="_blank">sign up</a> to add your own!</div>;
+      argumentMarkup = (
+        <div>
+          No arguments -
+          <a href="http://www.wikilogicfoundation.org/get-involved/" target="_blank" rel="noopener noreferrer">
+            sign up
+          </a> to add your own!
+        </div>
+      );
     }
 
     return (
@@ -100,22 +112,36 @@ export default class ClaimDetail extends React.Component {
         </div>
 
         <div className="claim-detail__options">
-          <div className="button" onClick={this.openNewExplanationModal}>
+          <button className="button" onClick={this.openNewExplanationModal}>
             This claim can be explained by...
-                    </div>
-          <div className="button" onClick={this.openNewArgumentModal}>
+          </button>
+          <button className="button" onClick={this.openNewArgumentModal}>
             New Argument +
-                    </div>
+          </button>
         </div>
 
         {/* The new explanation modal */}
-        <Modal show={this.state.new_explanation_modal_open} title="New Explanation" onClose={this.closeNewExplanationModal}>
-          <AddExplanationForm parentClaim={this.props.claim} updatedClaimHandler={this.updatedClaimHandler} />
+        <Modal
+          show={this.state.new_explanation_modal_open}
+          title="New Explanation"
+          onClose={this.closeNewExplanationModal}
+        >
+          <AddExplanationForm
+            parentClaim={this.props.claim}
+            updatedClaimHandler={this.updatedClaimHandler}
+          />
         </Modal>
 
         {/* The new argument modal */}
-        <Modal show={this.state.new_argument_modal_open} title="New Argument" onClose={this.closeNewArgumentModal}>
-          <AddArgumentForm parentClaim={this.props.claim} updatedClaimHandler={this.updatedClaimHandler} />
+        <Modal
+          show={this.state.new_argument_modal_open}
+          title="New Argument"
+          onClose={this.closeNewArgumentModal}
+        >
+          <AddArgumentForm
+            parentClaim={this.props.claim}
+            updatedClaimHandler={this.updatedClaimHandler}
+          />
         </Modal>
 
 
@@ -127,3 +153,15 @@ export default class ClaimDetail extends React.Component {
     );
   }
 }
+
+ClaimDetail.propTypes = {
+  claim: React.PropTypes.shape({
+    id: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string.isRequired,
+    state: React.PropTypes.number.isRequired,
+    arguments: React.PropTypes.array.isRequired,
+  }).isRequired,
+  premisClickHandler: React.PropTypes.func.isRequired,
+  updatedClaimHandler: React.PropTypes.func.isRequired,
+  highlightedPremisId: React.PropTypes.string.isRequired,
+};
