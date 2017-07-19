@@ -4,15 +4,12 @@ import React from 'react';
  *
  */
 
-export default class Notifyer extends React.Component {
-  render() {
-
-    return (
-      <div className="notifyer">
-        {this.props.message}
-      </div>
-    );
-  }
+export default function Notifyer(props) {
+  return (
+    <div className="notifyer">
+      {props.message}
+    </div>
+  );
 }
 
 Notifyer.propTypes = {
