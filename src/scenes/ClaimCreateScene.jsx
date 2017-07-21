@@ -1,5 +1,5 @@
 import React from 'react';
-import AddClaimForm from 'Components/AddClaimForm/AddClaimForm.jsx';
+import AddClaimForm from 'WlComponents/AddClaimForm/AddClaimForm.jsx';
 
 /**
  * The Search Results page

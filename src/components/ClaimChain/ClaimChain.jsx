@@ -1,7 +1,7 @@
 import React from 'react';
-import API from 'API/api';
-import ClaimDetail from 'Components/ClaimDetail/ClaimDetail';
-import Notify from 'Services/notify';
+import API from 'WlAPI/api.js';
+import ClaimDetail from 'WlComponents/ClaimDetail/ClaimDetail.jsx';
+import Notify from 'WlServices/notify.js';
 
 /* Start with a claim ID. Ask the API for that claim.
  * Lets the user go deeper into the premises bloew that claim.

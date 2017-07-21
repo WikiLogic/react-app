@@ -1,10 +1,10 @@
 import React from 'react';
-import Argument from 'Components/Argument/Argument';
-import API from 'API/api';
-import SearchInput from 'Components/SearchInput/SearchInput';
-import Claim from 'Components/Claim/Claim';
-import Validate from 'Services/validate';
-import Notify from 'Services/notify';
+import Argument from 'WlComponents/Argument/Argument.jsx';
+import API from 'WlAPI/api.js';
+import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import Claim from 'WlComponents/Claim/Claim.jsx';
+import Validate from 'WlServices/validate.js';
+import Notify from 'WlServices/notify.js';
 
 /* Search & select claims to add as premises to an argument
  */

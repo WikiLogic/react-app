@@ -1,5 +1,5 @@
 import React from 'react';
-import StatusIndicator from 'Components/StatusIndicator/StatusIndicator';
+import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
 
 /* Each Claim in the list of search results
  */

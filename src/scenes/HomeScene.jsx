@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchInput from 'Components/SearchInput/SearchInput.jsx';
+import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 
 /**
  * The Home page

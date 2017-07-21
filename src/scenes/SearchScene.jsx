@@ -1,9 +1,9 @@
 import React from 'react';
-import SearchInput from 'Components/SearchInput/SearchInput.jsx';
-import SearchResults from 'Components/SearchResults/SearchResults.jsx';
-import API from 'API/api';
-import urlParameter from 'Services/urlParameter.js';
-import Notify from 'Services/notify';
+import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
+import API from 'WlAPI/api.js';
+import urlParameter from 'WlServices/urlParameter.js';
+import Notify from 'WlServices/notify.js';
 
 /**
  * The Search Results page

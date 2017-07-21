@@ -1,6 +1,6 @@
 import React from 'react';
-import API from 'API/api';
-import Notify from 'Services/notify';
+import API from 'WlAPI/api.js';
+import Notify from 'WlServices/notify.js';
 
 /* Each Claim in the list of search results
  */

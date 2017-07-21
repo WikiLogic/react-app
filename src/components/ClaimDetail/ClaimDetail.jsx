@@ -1,9 +1,9 @@
 import React from 'react';
-import Argument from 'Components/Argument/Argument';
-import StatusIndicator from 'Components/StatusIndicator/StatusIndicator';
-import Modal from 'Components/Modal/Modal';
-import AddArgumentForm from 'Components/AddArgumentForm/AddArgumentForm';
-import AddExplanationForm from 'Components/AddExplanationForm/AddExplanationForm';
+import Argument from 'WlComponents/Argument/Argument.jsx';
+import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
+import Modal from 'WlComponents/Modal/Modal.jsx';
+import AddArgumentForm from 'WlComponents/AddArgumentForm/AddArgumentForm.jsx';
+import AddExplanationForm from 'WlComponents/AddExplanationForm/AddExplanationForm.jsx';
 
 /* A claim
  * and all it's arguments

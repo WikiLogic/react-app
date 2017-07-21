@@ -1,5 +1,5 @@
 import React from 'react';
-import ClaimChain from 'Components/ClaimChain/ClaimChain.jsx';
+import ClaimChain from 'WlComponents/ClaimChain/ClaimChain.jsx';
 
 /**
  * The Search Results page

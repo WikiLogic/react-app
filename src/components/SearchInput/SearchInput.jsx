@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchIcon from 'Components/_Icons/SearchIcon.svg.jsx';
+import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
 
 /* Listens to the search form for input and submission
  * Publishes search submissions (for text or number searches)

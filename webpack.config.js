@@ -5,12 +5,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   resolve: {
-    extensions: ['js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
-      API: path.resolve(__dirname, 'src/API'),
-      Scenes: path.resolve(__dirname, 'src/scenes'),
-      Components: path.resolve(__dirname, 'src/components'),
-      Services: path.resolve(__dirname, 'src/services'),
+      WlAPI: path.resolve(__dirname, 'src/API'),
+      WlScenes: path.resolve(__dirname, 'src/scenes'),
+      WlComponents: path.resolve(__dirname, 'src/components'),
+      WlServices: path.resolve(__dirname, 'src/services'),
     },
   },
   entry: {

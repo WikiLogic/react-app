@@ -5,19 +5,19 @@ import { Router, Link, Route } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 
 // JS
-import API from 'API/api';
-import Notify from 'Services/notify';
+import API from 'WlAPI/api.js';
+import Notify from 'WlServices/notify.js';
 
 // Scenes
-import HomeScene from 'Scenes/HomeScene';
-import SearchScene from 'Scenes/SearchScene';
-import ClaimDetailScene from 'Scenes/ClaimDetailScene';
-import ClaimCreateScene from 'Scenes/ClaimCreateScene';
-import StyleguideScene from 'Scenes/StyleguideScene';
+import HomeScene from 'WlScenes/HomeScene.jsx';
+import SearchScene from 'WlScenes/SearchScene.jsx';
+import ClaimDetailScene from 'WlScenes/ClaimDetailScene.jsx';
+import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
+import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
 
 // React components
-import SearchResults from './components/SearchResults/SearchResults.jsx';
-import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
+import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
+import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
 
 
 const history = createHashHistory();
