@@ -161,7 +161,6 @@ export default class AddArgumentForm extends React.Component {
   }
 }
 
-
 AddArgumentForm.propTypes = {
   parentClaim: React.PropTypes.shape({
     id: React.PropTypes.string.isRequired,

@@ -1,5 +1,4 @@
 import React from 'react';
-import API from 'API/api';
 import ClaimChain from 'Components/ClaimChain/ClaimChain.jsx';
 
 /**
@@ -7,33 +6,37 @@ import ClaimChain from 'Components/ClaimChain/ClaimChain.jsx';
  * @prop {*} name 
  */
 export default class ClaimDetailScene extends React.Component {
-	
-	constructor (props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-		};
+    this.state = {
+    };
+  }
 
-	}
+  render() {
+    return (
+      <div className="claim-detail-layout">
+        <div className="claim-detail-layout__header">
+          <div className="max-width-wrap">
 
+            <ClaimChain topClaimId={this.props.match.params.claimId} />
 
-	render() {
-		
-		return (
-			<div className="claim-detail-layout">
-                <div className="claim-detail-layout__header">
-                    <div className="max-width-wrap">
-
-                        <ClaimChain topClaimId={this.props.match.params.claimId}/>
-
-                    </div>
-                </div>
-                <div className="claim-detail-layout__body">
-                    <div className="max-width-wrap">
-
-                    </div>
-                </div>
-            </div>
-		);
-	}
+          </div>
+        </div>
+        <div className="claim-detail-layout__body">
+          <div className="max-width-wrap">
+            layout
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
+
+ClaimDetailScene.propTypes = {
+  match: React.PropTypes.shape({
+    params: React.PropTypes.shape({
+      claimId: React.PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};

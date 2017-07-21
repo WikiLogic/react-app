@@ -1,5 +1,4 @@
 import React from 'react';
-import API from 'API/api';
 import AddClaimForm from 'Components/AddClaimForm/AddClaimForm.jsx';
 
 /**
@@ -7,33 +6,29 @@ import AddClaimForm from 'Components/AddClaimForm/AddClaimForm.jsx';
  * @prop {*} name 
  */
 export default class ClaimCreateScene extends React.Component {
-	
-	constructor (props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-		};
+    this.state = {
+    };
+  }
 
-	}
+  render() {
+    return (
+      <div className="new-claim-layout">
+        <div className="new-claim-layout__header">
+          <div className="max-width-wrap">
 
+            <AddClaimForm />
 
-	render() {
-		
-		return (
-			<div className="new-claim-layout">
-                <div className="new-claim-layout__header">
-                    <div className="max-width-wrap">
-
-                        <AddClaimForm /> 
-
-                    </div>
-                </div>
-                <div className="new-claim-layout__results">
-                    <div className="max-width-wrap">
-
-                    </div>
-                </div>	
-            </div>
-		);
-	}
+          </div>
+        </div>
+        <div className="new-claim-layout__results">
+          <div className="max-width-wrap">
+            results here
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
