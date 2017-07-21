@@ -1582,7 +1582,8 @@ var ClaimChain = function (_React$Component) {
   }, {
     key: 'updatedClaimHandler',
     value: function updatedClaimHandler(claim, index) {
-      // when a claim in the chain is updated (eg by adding a new argument) - this will replace that link in the chain
+      // when a claim in the chain is updated (eg by adding a new argument) - 
+      // this will replace that link in the chain
       var newChain = this.state.chain;
       newChain[index].claim = claim;
 
@@ -1656,10 +1657,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _api = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"API/api\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-var _api2 = _interopRequireDefault(_api);
 
 var _Argument = __webpack_require__(3);
 
@@ -1929,6 +1926,7 @@ var EditClaimForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (EditClaimForm.__proto__ || Object.getPrototypeOf(EditClaimForm)).call(this, props));
 
+    _this.makeEsLintHappy = 0;
     _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
@@ -1936,7 +1934,7 @@ var EditClaimForm = function (_React$Component) {
   _createClass(EditClaimForm, [{
     key: 'handleClick',
     value: function handleClick(premis) {
-      console.log("claim that's being edited was clicked... hmm");
+      this.makeEsLintHappy = premis;
     }
   }, {
     key: 'render',
@@ -2099,10 +2097,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _api = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"API/api\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-var _api2 = _interopRequireDefault(_api);
-
 var _AddClaimForm = __webpack_require__(10);
 
 var _AddClaimForm2 = _interopRequireDefault(_AddClaimForm);
@@ -2128,14 +2122,12 @@ var ClaimCreateScene = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ClaimCreateScene.__proto__ || Object.getPrototypeOf(ClaimCreateScene)).call(this, props));
 
     _this.state = {};
-
     return _this;
   }
 
   _createClass(ClaimCreateScene, [{
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'div',
         { className: 'new-claim-layout' },
@@ -2151,7 +2143,11 @@ var ClaimCreateScene = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'new-claim-layout__results' },
-          _react2.default.createElement('div', { className: 'max-width-wrap' })
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            'results here'
+          )
         )
       );
     }
@@ -2179,10 +2175,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _api = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"API/api\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-var _api2 = _interopRequireDefault(_api);
-
 var _ClaimChain = __webpack_require__(13);
 
 var _ClaimChain2 = _interopRequireDefault(_ClaimChain);
@@ -2208,14 +2200,12 @@ var ClaimDetailScene = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ClaimDetailScene.__proto__ || Object.getPrototypeOf(ClaimDetailScene)).call(this, props));
 
     _this.state = {};
-
     return _this;
   }
 
   _createClass(ClaimDetailScene, [{
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'div',
         { className: 'claim-detail-layout' },
@@ -2231,7 +2221,11 @@ var ClaimDetailScene = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'claim-detail-layout__body' },
-          _react2.default.createElement('div', { className: 'max-width-wrap' })
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            'layout'
+          )
         )
       );
     }
@@ -2242,6 +2236,15 @@ var ClaimDetailScene = function (_React$Component) {
 
 exports.default = ClaimDetailScene;
 
+
+ClaimDetailScene.propTypes = {
+  match: _react2.default.PropTypes.shape({
+    params: _react2.default.PropTypes.shape({
+      claimId: _react2.default.PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
+};
+
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2250,7 +2253,7 @@ exports.default = ClaimDetailScene;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2276,52 +2279,58 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @prop {*} name 
  */
 var SearchScene = function (_React$Component) {
-	_inherits(SearchScene, _React$Component);
+  _inherits(SearchScene, _React$Component);
 
-	function SearchScene(props) {
-		_classCallCheck(this, SearchScene);
+  function SearchScene(props) {
+    _classCallCheck(this, SearchScene);
 
-		var _this = _possibleConstructorReturn(this, (SearchScene.__proto__ || Object.getPrototypeOf(SearchScene)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SearchScene.__proto__ || Object.getPrototypeOf(SearchScene)).call(this, props));
 
-		_this.state = {
-			search_results: []
-		};
+    _this.state = {
+      search_results: []
+    };
 
-		_this.searchClaims = _this.searchClaims.bind(_this);
-		return _this;
-	}
+    _this.searchClaims = _this.searchClaims.bind(_this);
+    return _this;
+  }
 
-	_createClass(SearchScene, [{
-		key: 'searchClaims',
-		value: function searchClaims(search) {
-			//go to /search?s=term
-			this.props.history.push('/search?s=' + search);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
+  _createClass(SearchScene, [{
+    key: 'searchClaims',
+    value: function searchClaims(search) {
+      // go to /search?s=term
+      this.props.history.push('/search?s=' + search);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'search-layout' },
+        _react2.default.createElement(
+          'div',
+          { className: 'search-layout__header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            'You\'ve come home',
+            _react2.default.createElement(_SearchInput2.default, { submissionHandler: this.searchClaims, placeholder: 'Search Claims' })
+          )
+        )
+      );
+    }
+  }]);
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'search-layout' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'search-layout__header' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'max-width-wrap' },
-						'You\'ve come home',
-						_react2.default.createElement(_SearchInput2.default, { submissionHandler: this.searchClaims, placeholder: 'Search Claims' })
-					)
-				)
-			);
-		}
-	}]);
-
-	return SearchScene;
+  return SearchScene;
 }(_react2.default.Component);
 
 exports.default = SearchScene;
+
+
+SearchScene.propTypes = {
+  history: _react2.default.PropTypes.shape({
+    push: _react2.default.PropTypes.func.isRequired
+  }).isRequired
+};
 
 /***/ }),
 /* 21 */
@@ -2331,7 +2340,7 @@ exports.default = SearchScene;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2372,101 +2381,108 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * The Search Results page
  */
 var SearchScene = function (_React$Component) {
-	_inherits(SearchScene, _React$Component);
+  _inherits(SearchScene, _React$Component);
 
-	function SearchScene(props) {
-		_classCallCheck(this, SearchScene);
+  function SearchScene(props) {
+    _classCallCheck(this, SearchScene);
 
-		var _this = _possibleConstructorReturn(this, (SearchScene.__proto__ || Object.getPrototypeOf(SearchScene)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SearchScene.__proto__ || Object.getPrototypeOf(SearchScene)).call(this, props));
 
-		_this.state = {
-			search_term: '',
-			search_results: []
-		};
+    _this.state = {
+      search_term: '',
+      search_results: []
+    };
 
-		_this.searchClaims = _this.searchClaims.bind(_this);
-		return _this;
-	}
+    _this.searchClaims = _this.searchClaims.bind(_this);
+    return _this;
+  }
 
-	_createClass(SearchScene, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			//get the search param to see if there is anything there
-			var URLsearchTerm = _urlParameter2.default.get('s', this.props.location.search);
+  _createClass(SearchScene, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // get the search param to see if there is anything there
+      var URLsearchTerm = _urlParameter2.default.get('s', this.props.location.search);
 
-			//if there is
-			if (URLsearchTerm != '') {
-				//set the state so it renders
-				this.setState({
-					search_term: URLsearchTerm
-				});
+      // if there is
+      if (URLsearchTerm !== '') {
+        // and run the search
+        this.searchClaims(URLsearchTerm);
+      }
+    }
+  }, {
+    key: 'searchClaims',
+    value: function searchClaims(search) {
+      var _this2 = this;
 
-				//and run the search
-				this.searchClaims(URLsearchTerm);
-			}
-		}
-	}, {
-		key: 'searchClaims',
-		value: function searchClaims(search) {
-			var _this2 = this;
+      // run the search
+      if (isNaN(search)) {
+        _api2.default.searchClaimsByTerm(search).then(function (data) {
+          _this2.setState({ search_results: data.claims });
+        }).catch(function (err) {
+          _notify2.default.post(err);
+        });
+      } else {
+        _api2.default.getClaimDetailById(search).then(function (data) {
+          _this2.setState({ focused_claim: data.claim });
+        }).catch(function (err) {
+          _notify2.default.post(err);
+        });
+      }
 
-			//run the search
-			if (isNaN(search)) {
-				console.log("searching by term", search);
-				_api2.default.searchClaimsByTerm(search).then(function (data) {
-					_this2.setState({ search_results: data.claims });
-				}).catch(function (err) {
-					_notify2.default.post(err);
-				});
-			} else {
-				console.log("searching by id", search);
-				_api2.default.getClaimDetailById(search).then(function (data) {
-					_this2.setState({ focused_claim: data.claim });
-				}).catch(function (err) {
-					_notify2.default.post(err);
-				});
-			}
+      // add it to the url
+      this.props.history.push('/search?s=' + search);
 
-			//add it to the url
-			this.props.history.push('/search?s=' + search);
+      // set the state
+      this.setState({
+        search_term: search
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'search-layout' },
+        _react2.default.createElement(
+          'div',
+          { className: 'search-layout__header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            _react2.default.createElement(_SearchInput2.default, {
+              submissionHandler: this.searchClaims,
+              placeholder: 'Search Claims',
+              inputValue: this.state.search_term
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'search-layout__results' },
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            _react2.default.createElement(_SearchResults2.default, { search_results: this.state.search_results })
+          )
+        )
+      );
+    }
+  }]);
 
-			//set the state
-			this.setState({
-				search_term: search
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'search-layout' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'search-layout__header' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'max-width-wrap' },
-						_react2.default.createElement(_SearchInput2.default, { submissionHandler: this.searchClaims, placeholder: 'Search Claims', inputValue: this.state.search_term })
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'search-layout__results' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'max-width-wrap' },
-						_react2.default.createElement(_SearchResults2.default, { search_results: this.state.search_results })
-					)
-				)
-			);
-		}
-	}]);
-
-	return SearchScene;
+  return SearchScene;
 }(_react2.default.Component);
 
 exports.default = SearchScene;
+
+
+SearchScene.propTypes = {
+  history: _react2.default.PropTypes.shape({
+    push: _react2.default.PropTypes.func.isRequired
+  }).isRequired,
+  location: _react2.default.PropTypes.shape({
+    search: _react2.default.PropTypes.string.isRequired
+  }).isRequired
+};
 
 /***/ }),
 /* 22 */
@@ -2484,10 +2500,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _api = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"API/api\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-var _api2 = _interopRequireDefault(_api);
 
 var _Claim = __webpack_require__(1);
 
@@ -2514,14 +2526,12 @@ var StyleguideScene = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (StyleguideScene.__proto__ || Object.getPrototypeOf(StyleguideScene)).call(this, props));
 
     _this.state = {};
-
     return _this;
   }
 
   _createClass(StyleguideScene, [{
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'div',
         null,
@@ -2562,13 +2572,13 @@ var StyleguideScene = function (_React$Component) {
         ),
         _react2.default.createElement(_Claim2.default, {
           claim: {
-            text: "claim text",
+            text: 'claim text',
             probability: 0.75
           }
         }),
         _react2.default.createElement(_Claim2.default, {
           claim: {
-            text: "claim text",
+            text: 'claim text',
             probability: 0.5
           }
         })

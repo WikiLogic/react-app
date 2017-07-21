@@ -1,5 +1,4 @@
 import React from 'react';
-import StatusIndicator from 'Components/StatusIndicator/StatusIndicator';
 import Claim from 'Components/Claim/Claim';
 
 /* A claim

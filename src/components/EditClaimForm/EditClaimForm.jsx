@@ -5,7 +5,6 @@ import Claim from 'Components/Claim/Claim';
  */
 
 export default class EditClaimForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.makeEsLintHappy = 0;

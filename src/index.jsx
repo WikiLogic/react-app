@@ -1,127 +1,129 @@
-//React
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Link, Route } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
-const history = createHashHistory();
 
-//JS
+// JS
 import API from 'API/api';
-
-//React components
-import SearchResults from './components/SearchResults/SearchResults.jsx';
-import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
-import Circle from './components/Circle/Circle.jsx';
-
-import Notifyer from 'Notifyer/Notifyer';
 import Notify from 'Services/notify';
 
-//Scenes
+// Scenes
 import HomeScene from 'Scenes/HomeScene';
 import SearchScene from 'Scenes/SearchScene';
 import ClaimDetailScene from 'Scenes/ClaimDetailScene';
 import ClaimCreateScene from 'Scenes/ClaimCreateScene';
 import StyleguideScene from 'Scenes/StyleguideScene';
 
+// React components
+import SearchResults from './components/SearchResults/SearchResults.jsx';
+import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
+
+
+const history = createHashHistory();
+
 class Wikilogic extends React.Component {
+  constructor(props) {
+    super(props);
 
-	constructor (props) {
-		super(props)
-		
-		this.state = {
-			search_results: [],
-			focused_claim: {}
-		};
+    this.state = {
+      search_results: [],
+      focused_claim: {},
+    };
 
-		this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
-	}
+    this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
+  }
 
-	setNewClaimFocus(claim){
-		API.getClaimDetailById(claim.id)
-		.then((data) => {
-			this.setState({ focused_claim: data.claim });
-		}).catch((err) => {
-			Notify.post(err);
-		});
-	}
+  setNewClaimFocus(claim) {
+    API.getClaimDetailById(claim.id)
+      .then((data) => {
+        this.setState({ focused_claim: data.claim });
+      }).catch((err) => {
+        Notify.post(err);
+      });
+  }
 
-	render() {
-		return (
-			<div className="main-layout">
-				<div className="main-layout__header">
+  render() {
+    return (
+      <div className="main-layout">
+        <div className="main-layout__header">
 
-					<header className="header">
+          <header className="header">
 
-						<Link to="/" className="header__title">Wikilogic</Link>
+            <Link to="/" className="header__title">Wikilogic</Link>
 
-						<div className="header__links">
-							<Link to="/">Search</Link>
-							<Link to="/new-claim">New claim</Link>
-							<Link to="/styleguide">Styleguide</Link>
-						</div>
+            <div className="header__links">
+              <Link to="/">Search</Link>
+              <Link to="/new-claim">New claim</Link>
+              <Link to="/styleguide">Styleguide</Link>
+            </div>
 
-					</header>
+          </header>
 
-				</div>
-				
-				<main className="main main-layout__body">
+        </div>
 
-					<Route path="/" exact component={HomeScene}> 
-					</Route>
+        <main className="main main-layout__body">
 
-					<Route path="/search" exact component={SearchScene}> 
-					</Route>
+          <Route path="/" exact component={HomeScene} />
 
-					<Route path="/claim/:claimId" exact component={ClaimDetailScene}>
-					</Route>
+          <Route path="/search" exact component={SearchScene} />
 
-					<Route path="/new-claim" exact component={ClaimCreateScene}>
-					</Route>
+          <Route path="/claim/:claimId" exact component={ClaimDetailScene} />
 
-					{/* Edit claim page ... not sure if this should really be a thing */}
-					<Route path="/edit-claim" exact render={() => (
-						<div className="sidebar-layout">
-							<div className="sidebar-layout__main">
+          <Route path="/new-claim" exact component={ClaimCreateScene} />
 
-								<EditClaimForm /> 
+          {/* Edit claim page ... not sure if this should really be a thing */}
+          <Route
+            path="/edit-claim"
+            exact
+            render={() => (
+              <div className="sidebar-layout">
+                <div className="sidebar-layout__main">
 
-							</div>
-							<div className="sidebar-layout__side">
+                  <EditClaimForm />
 
-								<SearchResults search_results={this.state.search_results} resultClickHandler={this.setNewClaimFocus}/>
+                </div>
+                <div className="sidebar-layout__side">
 
-							</div>	
-						</div>
-					)}/>
+                  <SearchResults
+                    search_results={this.state.search_results}
+                    resultClickHandler={this.setNewClaimFocus}
+                  />
 
-					<Route path="/styleguide" exact component={StyleguideScene}>
-					</Route>
+                </div>
+              </div>
+            )}
+          />
 
-				</main>
+          <Route path="/styleguide" exact component={StyleguideScene} />
 
-				<div className="main-layout__footer">
-					<footer className="footer max-width-wrap">
+        </main>
 
-						<div className="footer__col">
-							Wikilogic is maintainted by the <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>, a non-profit organisation...
-						</div>
-						<div className="footer__col">
-							Privacy policy
-						</div>
-						<div className="footer__col">
-							Terms of use
-						</div>
+        <div className="main-layout__footer">
+          <footer className="footer max-width-wrap">
 
-					</footer>	
-				</div>
-			</div>
-		);
-	}
+            <div className="footer__col">
+              Wikilogic is maintainted by the
+              <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>,
+              a non-profit organisation...
+            </div>
+            <div className="footer__col">
+              Privacy policy
+            </div>
+            <div className="footer__col">
+              Terms of use
+            </div>
+
+          </footer>
+        </div>
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(
-	<Router history={history}>
-		<Wikilogic />
-	</Router>, 
-	document.getElementById('root')
+  <Router history={history}>
+    <Wikilogic />
+  </Router>,
+  document.getElementById('root'),
 );

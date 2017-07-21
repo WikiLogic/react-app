@@ -22,7 +22,12 @@ export default class StyleguideScene extends React.Component {
         <h4>Heading 4</h4>
         <h5>Heading 5</h5>
         <h6>Heading 6</h6>
-        <p>123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.</p>
+        <p>
+          123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad.
+          Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam
+          inventore recusandae iure rerum odio veniam, consectetur non.
+        </p>
 
         <Claim
           claim={{
