@@ -60,7 +60,8 @@ export default class ClaimChain extends React.Component {
   }
 
   updatedClaimHandler(claim, index) {
-    // when a claim in the chain is updated (eg by adding a new argument) - this will replace that link in the chain
+    // when a claim in the chain is updated (eg by adding a new argument) - 
+    // this will replace that link in the chain
     const newChain = this.state.chain;
     newChain[index].claim = claim;
 

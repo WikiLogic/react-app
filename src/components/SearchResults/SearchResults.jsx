@@ -1,6 +1,6 @@
 import React from 'react';
 import Claim from 'Components/Claim/Claim';
-import { Router, Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /* The Search Results
  * This is the parent component for the search results list

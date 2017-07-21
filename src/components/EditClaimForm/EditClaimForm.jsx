@@ -8,11 +8,12 @@ export default class EditClaimForm extends React.Component {
 
   constructor(props) {
     super(props);
+    this.makeEsLintHappy = 0;
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(premis) {
-    console.log("claim that's being edited was clicked... hmm");
+    this.makeEsLintHappy = premis;
   }
 
   render() {
