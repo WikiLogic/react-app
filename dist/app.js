@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -92,7 +92,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _StatusIndicator = __webpack_require__(4);
+var _StatusIndicator = __webpack_require__(5);
 
 var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
@@ -156,7 +156,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SearchIconSvg = __webpack_require__(17);
+var _SearchIconSvg = __webpack_require__(16);
 
 var _SearchIconSvg2 = _interopRequireDefault(_SearchIconSvg);
 
@@ -354,74 +354,6 @@ Argument.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = StatusIndicator;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* A status between 1 and 100
- */
-
-function StatusIndicator(props) {
-  if (props.type === 'bar') {
-    return _react2.default.createElement(
-      'div',
-      { className: 'status-bar' },
-      _react2.default.createElement('div', { className: 'status-bar__bar status-bar__bar--' + props.state })
-    );
-  }
-
-  if (props.type === 'circle') {
-    return _react2.default.createElement(
-      'div',
-      { className: 'status-circle status-circle--' + props.state * 100 },
-      _react2.default.createElement(
-        'svg',
-        { className: 'status-circle__svg', viewBox: '-5 -5 200 200' },
-        _react2.default.createElement('circle', {
-          className: 'status-circle__svg-icon status-circle__svg-bg outer',
-          cx: '95',
-          cy: '95',
-          r: '85',
-          transform: 'rotate(-90, 95, 95)'
-        }),
-        _react2.default.createElement('circle', {
-          className: 'status-circle__svg-icon status-circle__svg-state outer',
-          cx: '95',
-          cy: '95',
-          r: '85',
-          transform: 'rotate(-90, 95, 95)'
-        })
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'status-circle__text' },
-        props.state * 100 + '%'
-      )
-    );
-  }
-
-  return null;
-}
-
-StatusIndicator.propTypes = {
-  state: _react2.default.PropTypes.number.isRequired,
-  type: _react2.default.PropTypes.string.isRequired
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -490,6 +422,74 @@ exports.default = SearchResults;
 
 SearchResults.propTypes = {
   searchResults: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = StatusIndicator;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* A status between 1 and 100
+ */
+
+function StatusIndicator(props) {
+  if (props.type === 'bar') {
+    return _react2.default.createElement(
+      'div',
+      { className: 'status-bar' },
+      _react2.default.createElement('div', { className: 'status-bar__bar status-bar__bar--' + props.state })
+    );
+  }
+
+  if (props.type === 'circle') {
+    return _react2.default.createElement(
+      'div',
+      { className: 'status-circle status-circle--' + props.state * 100 },
+      _react2.default.createElement(
+        'svg',
+        { className: 'status-circle__svg', viewBox: '-5 -5 200 200' },
+        _react2.default.createElement('circle', {
+          className: 'status-circle__svg-icon status-circle__svg-bg outer',
+          cx: '95',
+          cy: '95',
+          r: '85',
+          transform: 'rotate(-90, 95, 95)'
+        }),
+        _react2.default.createElement('circle', {
+          className: 'status-circle__svg-icon status-circle__svg-state outer',
+          cx: '95',
+          cy: '95',
+          r: '85',
+          transform: 'rotate(-90, 95, 95)'
+        })
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'status-circle__text' },
+        props.state * 100 + '%'
+      )
+    );
+  }
+
+  return null;
+}
+
+StatusIndicator.propTypes = {
+  state: _react2.default.PropTypes.number.isRequired,
+  type: _react2.default.PropTypes.string.isRequired
 };
 
 /***/ }),
@@ -564,7 +564,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(24);
+var _reactDom = __webpack_require__(23);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -578,45 +578,37 @@ var _api = __webpack_require__(!(function webpackMissingModule() { var e = new E
 
 var _api2 = _interopRequireDefault(_api);
 
-var _SearchResults = __webpack_require__(5);
-
-var _SearchResults2 = _interopRequireDefault(_SearchResults);
-
-var _EditClaimForm = __webpack_require__(15);
-
-var _EditClaimForm2 = _interopRequireDefault(_EditClaimForm);
-
-var _Circle = __webpack_require__(12);
-
-var _Circle2 = _interopRequireDefault(_Circle);
-
-var _Notifyer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"Notifyer/Notifyer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
-var _Notifyer2 = _interopRequireDefault(_Notifyer);
-
 var _notify = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"Services/notify\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 var _notify2 = _interopRequireDefault(_notify);
 
-var _HomeScene = __webpack_require__(20);
+var _HomeScene = __webpack_require__(19);
 
 var _HomeScene2 = _interopRequireDefault(_HomeScene);
 
-var _SearchScene = __webpack_require__(21);
+var _SearchScene = __webpack_require__(20);
 
 var _SearchScene2 = _interopRequireDefault(_SearchScene);
 
-var _ClaimDetailScene = __webpack_require__(19);
+var _ClaimDetailScene = __webpack_require__(18);
 
 var _ClaimDetailScene2 = _interopRequireDefault(_ClaimDetailScene);
 
-var _ClaimCreateScene = __webpack_require__(18);
+var _ClaimCreateScene = __webpack_require__(17);
 
 var _ClaimCreateScene2 = _interopRequireDefault(_ClaimCreateScene);
 
-var _StyleguideScene = __webpack_require__(22);
+var _StyleguideScene = __webpack_require__(21);
 
 var _StyleguideScene2 = _interopRequireDefault(_StyleguideScene);
+
+var _SearchResults = __webpack_require__(4);
+
+var _SearchResults2 = _interopRequireDefault(_SearchResults);
+
+var _EditClaimForm = __webpack_require__(14);
+
+var _EditClaimForm2 = _interopRequireDefault(_EditClaimForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -624,152 +616,160 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //React
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // React
+
+
+// JS
+
+
+// Scenes
+
+
+// React components
 
 
 var history = (0, _createHashHistory2.default)();
 
-//JS
-
-
-//React components
-
-
-//Scenes
-
 var Wikilogic = function (_React$Component) {
-	_inherits(Wikilogic, _React$Component);
+  _inherits(Wikilogic, _React$Component);
 
-	function Wikilogic(props) {
-		_classCallCheck(this, Wikilogic);
+  function Wikilogic(props) {
+    _classCallCheck(this, Wikilogic);
 
-		var _this = _possibleConstructorReturn(this, (Wikilogic.__proto__ || Object.getPrototypeOf(Wikilogic)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Wikilogic.__proto__ || Object.getPrototypeOf(Wikilogic)).call(this, props));
 
-		_this.state = {
-			search_results: [],
-			focused_claim: {}
-		};
+    _this.state = {
+      search_results: [],
+      focused_claim: {}
+    };
 
-		_this.setNewClaimFocus = _this.setNewClaimFocus.bind(_this);
-		return _this;
-	}
+    _this.setNewClaimFocus = _this.setNewClaimFocus.bind(_this);
+    return _this;
+  }
 
-	_createClass(Wikilogic, [{
-		key: 'setNewClaimFocus',
-		value: function setNewClaimFocus(claim) {
-			var _this2 = this;
+  _createClass(Wikilogic, [{
+    key: 'setNewClaimFocus',
+    value: function setNewClaimFocus(claim) {
+      var _this2 = this;
 
-			_api2.default.getClaimDetailById(claim.id).then(function (data) {
-				_this2.setState({ focused_claim: data.claim });
-			}).catch(function (err) {
-				_notify2.default.post(err);
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this3 = this;
+      _api2.default.getClaimDetailById(claim.id).then(function (data) {
+        _this2.setState({ focused_claim: data.claim });
+      }).catch(function (err) {
+        _notify2.default.post(err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'main-layout' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'main-layout__header' },
-					_react2.default.createElement(
-						'header',
-						{ className: 'header' },
-						_react2.default.createElement(
-							_reactRouterDom.Link,
-							{ to: '/', className: 'header__title' },
-							'Wikilogic'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'header__links' },
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/' },
-								'Search'
-							),
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/new-claim' },
-								'New claim'
-							),
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/styleguide' },
-								'Styleguide'
-							)
-						)
-					)
-				),
-				_react2.default.createElement(
-					'main',
-					{ className: 'main main-layout__body' },
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _HomeScene2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/search', exact: true, component: _SearchScene2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/claim/:claimId', exact: true, component: _ClaimDetailScene2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/new-claim', exact: true, component: _ClaimCreateScene2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/edit-claim', exact: true, render: function render() {
-							return _react2.default.createElement(
-								'div',
-								{ className: 'sidebar-layout' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'sidebar-layout__main' },
-									_react2.default.createElement(_EditClaimForm2.default, null)
-								),
-								_react2.default.createElement(
-									'div',
-									{ className: 'sidebar-layout__side' },
-									_react2.default.createElement(_SearchResults2.default, { search_results: _this3.state.search_results, resultClickHandler: _this3.setNewClaimFocus })
-								)
-							);
-						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/styleguide', exact: true, component: _StyleguideScene2.default })
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'main-layout__footer' },
-					_react2.default.createElement(
-						'footer',
-						{ className: 'footer max-width-wrap' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'footer__col' },
-							'Wikilogic is maintainted by the ',
-							_react2.default.createElement(
-								'a',
-								{ href: 'www.wikilogicfoundation.org', target: '_blank' },
-								'Wikilogic Foundation'
-							),
-							', a non-profit organisation...'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'footer__col' },
-							'Privacy policy'
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'footer__col' },
-							'Terms of use'
-						)
-					)
-				)
-			);
-		}
-	}]);
+      return _react2.default.createElement(
+        'div',
+        { className: 'main-layout' },
+        _react2.default.createElement(
+          'div',
+          { className: 'main-layout__header' },
+          _react2.default.createElement(
+            'header',
+            { className: 'header' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/', className: 'header__title' },
+              'Wikilogic'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'header__links' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/' },
+                'Search'
+              ),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/new-claim' },
+                'New claim'
+              ),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/styleguide' },
+                'Styleguide'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'main',
+          { className: 'main main-layout__body' },
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _HomeScene2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/search', exact: true, component: _SearchScene2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/claim/:claimId', exact: true, component: _ClaimDetailScene2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/new-claim', exact: true, component: _ClaimCreateScene2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, {
+            path: '/edit-claim',
+            exact: true,
+            render: function render() {
+              return _react2.default.createElement(
+                'div',
+                { className: 'sidebar-layout' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'sidebar-layout__main' },
+                  _react2.default.createElement(_EditClaimForm2.default, null)
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'sidebar-layout__side' },
+                  _react2.default.createElement(_SearchResults2.default, {
+                    search_results: _this3.state.search_results,
+                    resultClickHandler: _this3.setNewClaimFocus
+                  })
+                )
+              );
+            }
+          }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/styleguide', exact: true, component: _StyleguideScene2.default })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'main-layout__footer' },
+          _react2.default.createElement(
+            'footer',
+            { className: 'footer max-width-wrap' },
+            _react2.default.createElement(
+              'div',
+              { className: 'footer__col' },
+              'Wikilogic is maintainted by the',
+              _react2.default.createElement(
+                'a',
+                { href: 'www.wikilogicfoundation.org', target: '_blank' },
+                'Wikilogic Foundation'
+              ),
+              ', a non-profit organisation...'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'footer__col' },
+              'Privacy policy'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'footer__col' },
+              'Terms of use'
+            )
+          )
+        )
+      );
+    }
+  }]);
 
-	return Wikilogic;
+  return Wikilogic;
 }(_react2.default.Component);
 
 _reactDom2.default.render(_react2.default.createElement(
-	_reactRouterDom.Router,
-	{ history: history },
-	_react2.default.createElement(Wikilogic, null)
+  _reactRouterDom.Router,
+  { history: history },
+  _react2.default.createElement(Wikilogic, null)
 ), document.getElementById('root'));
 
 /***/ }),
@@ -1388,117 +1388,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _StatusIndicator = __webpack_require__(4);
-
-var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
-
-var _Claim = __webpack_require__(1);
-
-var _Claim2 = _interopRequireDefault(_Claim);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/* A claim
- * and all it's arguments
- * Also the options to add arguments - eventually
- */
-
-var Circle = function (_React$Component) {
-  _inherits(Circle, _React$Component);
-
-  function Circle(props) {
-    _classCallCheck(this, Circle);
-
-    var _this = _possibleConstructorReturn(this, (Circle.__proto__ || Object.getPrototypeOf(Circle)).call(this, props));
-
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
-  }
-
-  _createClass(Circle, [{
-    key: 'handleClick',
-    value: function handleClick(premis) {
-      this.props.premisClickHandler(premis);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      // loop through the premises in this argument
-      var premises = this.props.argumentObject.premises.map(function (premis) {
-        var isSelected = premis.id === _this2.props.highlightedPremisId;
-
-        return _react2.default.createElement(
-          'div',
-          { className: 'argumentCircle__premis', key: premis.id },
-          _react2.default.createElement(_Claim2.default, {
-            claim: premis,
-            isSelected: isSelected,
-            handleClick: function handleClick() {
-              _this2.handleClick(premis);
-            }
-          })
-        );
-      });
-
-      var colour = this.props.argumentObject.probability < 50 ? 'false' : 'true';
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'argument argumentCircle--' + colour },
-        _react2.default.createElement(
-          'div',
-          { className: 'argumentCircle__body' },
-          premises
-        )
-      );
-    }
-  }]);
-
-  return Circle;
-}(_react2.default.Component);
-
-exports.default = Circle;
-
-
-Circle.propTypes = {
-  highlightedPremisId: _react2.default.PropTypes.string.isRequired,
-  argumentObject: _react2.default.PropTypes.shape({
-    probability: _react2.default.PropTypes.number.isRequired,
-    premises: _react2.default.PropTypes.array.isRequired
-  }).isRequired,
-  premisClickHandler: _react2.default.PropTypes.func.isRequired
-};
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
 var _api = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"API/api\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 var _api2 = _interopRequireDefault(_api);
 
-var _ClaimDetail = __webpack_require__(14);
+var _ClaimDetail = __webpack_require__(13);
 
 var _ClaimDetail2 = _interopRequireDefault(_ClaimDetail);
 
@@ -1642,7 +1536,7 @@ ClaimChain.propTypes = {
 };
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1662,11 +1556,11 @@ var _Argument = __webpack_require__(3);
 
 var _Argument2 = _interopRequireDefault(_Argument);
 
-var _StatusIndicator = __webpack_require__(4);
+var _StatusIndicator = __webpack_require__(5);
 
 var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
-var _Modal = __webpack_require__(16);
+var _Modal = __webpack_require__(15);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -1887,7 +1781,7 @@ ClaimDetail.propTypes = {
 };
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1986,7 +1880,7 @@ EditClaimForm.propTypes = {
 };
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2050,7 +1944,7 @@ Modal.propTypes = {
 };
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2081,7 +1975,7 @@ function SearchIcon() {
 }
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2159,7 +2053,7 @@ var ClaimCreateScene = function (_React$Component) {
 exports.default = ClaimCreateScene;
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2175,7 +2069,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ClaimChain = __webpack_require__(13);
+var _ClaimChain = __webpack_require__(12);
 
 var _ClaimChain2 = _interopRequireDefault(_ClaimChain);
 
@@ -2246,7 +2140,7 @@ ClaimDetailScene.propTypes = {
 };
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2333,7 +2227,7 @@ SearchScene.propTypes = {
 };
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2353,7 +2247,7 @@ var _SearchInput = __webpack_require__(2);
 
 var _SearchInput2 = _interopRequireDefault(_SearchInput);
 
-var _SearchResults = __webpack_require__(5);
+var _SearchResults = __webpack_require__(4);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
@@ -2361,7 +2255,7 @@ var _api = __webpack_require__(!(function webpackMissingModule() { var e = new E
 
 var _api2 = _interopRequireDefault(_api);
 
-var _urlParameter = __webpack_require__(23);
+var _urlParameter = __webpack_require__(22);
 
 var _urlParameter2 = _interopRequireDefault(_urlParameter);
 
@@ -2485,7 +2379,7 @@ SearchScene.propTypes = {
 };
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2592,7 +2486,7 @@ var StyleguideScene = function (_React$Component) {
 exports.default = StyleguideScene;
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2709,7 +2603,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2719,7 +2613,7 @@ module.exports = __webpack_require__(!(function webpackMissingModule() { var e =
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(7);
