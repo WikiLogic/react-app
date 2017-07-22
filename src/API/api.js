@@ -13,9 +13,44 @@ function parseJSON(response) {
   return response.json();
 }
 
+function formDataify(jsObj) {
+  const formData = [];
+
+  Object.keys(jsObj).forEach((key) => {
+    formData.push(`${encodeURIComponent(key)}=${encodeURIComponent(jsObj[key])}`);
+  });
+
+  return formData.join('&');
+}
+
 /* The functions that call the API
  * Each returns a promise
  */
+function login(username, password) {
+  const loggedInPromise = new Promise((resolve, reject) => {
+    fetch(`${apiRouteRoot}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formDataify({
+        name: username,
+        password,
+      }),
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  return loggedInPromise;
+}
+
 function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
@@ -143,4 +178,5 @@ export default {
   postNewClaim,
   postNewArgument,
   postNewExplanation,
+  login,
 };
