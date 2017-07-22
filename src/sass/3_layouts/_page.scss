@@ -1,0 +1,12 @@
+.page {
+
+  &__header {
+    margin-bottom: rem($pad-small);
+    background-color: $sub-header-background;
+    padding: rem($pad-small) 0;
+  }
+
+  &__body {
+    padding: rem($pad-small) 0;
+  }
+}

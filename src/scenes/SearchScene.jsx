@@ -25,7 +25,7 @@ export default class SearchScene extends React.Component {
     const URLsearchTerm = urlParameter.get('s', this.props.location.search);
 
     // if there is
-    if (URLsearchTerm !== '') {
+    if (URLsearchTerm) {
       // and run the search
       this.searchClaims(URLsearchTerm);
     }
@@ -61,8 +61,8 @@ export default class SearchScene extends React.Component {
 
   render() {
     return (
-      <div className="search-layout">
-        <div className="search-layout__header">
+      <div className="page">
+        <div className="page__header">
           <div className="max-width-wrap">
 
             <SearchInput
@@ -71,9 +71,12 @@ export default class SearchScene extends React.Component {
               inputValue={this.state.search_term}
             />
 
+            Filtering options...
+
           </div>
         </div>
-        <div className="search-layout__results">
+
+        <div className="page__body">
           <div className="max-width-wrap">
 
             <SearchResults search_results={this.state.search_results} />

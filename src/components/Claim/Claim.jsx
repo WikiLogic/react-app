@@ -10,18 +10,18 @@ export default function Claim(props) {
     cssClass = `${cssClass} claim--selected`;
   }
 
-  if (typeof this.props.claim.labels !== 'undefined' && this.props.claim.labels.includes('Axiom')) {
+  if (typeof props.claim.labels !== 'undefined' && props.claim.labels.includes('Axiom')) {
     cssClass = `${cssClass} claim--axiom`;
   }
 
   return (
-    <button className={cssClass} onClick={() => this.props.handleClick(this.props.claim)}>
+    <button className={cssClass} onClick={() => props.handleClick(props.claim)}>
       <div className="claim__body">
         <div className="claim__status-circle">
-          <StatusIndicator state={this.props.claim.probability} type="circle" />
+          <StatusIndicator state={props.claim.probability} type="circle" />
         </div>
         <div className="claim__text">
-          {this.props.claim.text}
+          {props.claim.text}
         </div>
       </div>
     </button>
@@ -29,5 +29,15 @@ export default function Claim(props) {
 }
 
 Claim.propTypes = {
-  isSelected: React.PropTypes.bool.isRequired,
+  isSelected: React.PropTypes.bool,
+  claim: React.PropTypes.shape({
+    labels: React.PropTypes.arrayOf(React.PropTypes.string),
+    text: React.PropTypes.string.isRequired,
+    probability: React.PropTypes.number.isRequired,
+  }).isRequired,
+  handleClick: React.PropTypes.func.isRequired,
+};
+
+Claim.defaultProps = {
+  isSelected: false,
 };

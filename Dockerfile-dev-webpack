@@ -12,6 +12,8 @@ RUN npm install
 
 COPY ./webpack.config.js /wldev/
 COPY ./.babelrc /wldev/
+COPY ./.eslintrc /wldev/
+COPY ./.eslintignore /wldev/
 
 # ADD the working files
 RUN mkdir dist

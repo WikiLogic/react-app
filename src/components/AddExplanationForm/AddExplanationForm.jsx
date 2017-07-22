@@ -157,8 +157,8 @@ export default class AddExplanationForm extends React.Component {
 
 AddExplanationForm.propTypes = {
   parentClaim: React.PropTypes.shape({
-    id: React.propTypes.string.isRequired,
-    text: React.propTypes.string.isRequired,
+    id: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string.isRequired,
   }).isRequired,
   updatedClaimHandler: React.PropTypes.func.isRequired,
 };

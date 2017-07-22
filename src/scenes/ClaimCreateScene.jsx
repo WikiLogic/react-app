@@ -15,17 +15,15 @@ export default class ClaimCreateScene extends React.Component {
 
   render() {
     return (
-      <div className="new-claim-layout">
-        <div className="new-claim-layout__header">
+      <div className="page">
+        <div className="page__header">
           <div className="max-width-wrap">
-
-            <AddClaimForm />
-
+            Create a new Claim
           </div>
         </div>
-        <div className="new-claim-layout__results">
+        <div className="page__body">
           <div className="max-width-wrap">
-            results here
+            <AddClaimForm />
           </div>
         </div>
       </div>

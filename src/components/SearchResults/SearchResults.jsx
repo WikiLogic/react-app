@@ -6,31 +6,28 @@ import Claim from 'WlComponents/Claim/Claim.jsx';
  * This is the parent component for the search results list
  */
 
-export default class SearchResults extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+export default function SearchResults(props) {
+  if (typeof props.searchResults === 'undefined') {
+    return null;
   }
 
-  render() {
-    if (typeof this.props.searchResults === 'undefined') {
-      return null;
-    }
+  const searchResults = props.searchResults.map(searchResult => (
+    <Link to={`/claim/${searchResult.id}`} key={searchResult.id} className="search-results__result">
+      <Claim claim={searchResult} isSelected={false} />
+    </Link>
+  ));
 
-    const searchResults = this.props.searchResults.map(searchResult => (
-      <Link to={`/claim/${searchResult.id}`} key={searchResult.id} className="search-results__result">
-        <Claim claim={searchResult} isSelected={false} />
-      </Link>
-    ));
-
-    return (
-      <div className="search-results">
-        {searchResults}
-      </div>
-    );
-  }
+  return (
+    <div className="search-results">
+      {searchResults}
+    </div>
+  );
 }
 
 SearchResults.propTypes = {
-  searchResults: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  searchResults: React.PropTypes.arrayOf(React.PropTypes.object),
+};
+
+SearchResults.defaultProps = {
+  searchResults: [],
 };

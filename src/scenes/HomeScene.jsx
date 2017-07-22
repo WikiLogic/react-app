@@ -23,8 +23,8 @@ export default class SearchScene extends React.Component {
 
   render() {
     return (
-      <div className="search-layout">
-        <div className="search-layout__header">
+      <div className="page">
+        <div className="page__header">
           <div className="max-width-wrap">
             You&#39;ve come home
 

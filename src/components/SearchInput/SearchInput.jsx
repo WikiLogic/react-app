@@ -50,7 +50,11 @@ export default class SearchInput extends React.Component {
 }
 
 SearchInput.propTypes = {
-  inputValue: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  inputValue: React.PropTypes.string,
   submissionHandler: React.PropTypes.func.isRequired,
   placeholder: React.PropTypes.string.isRequired,
+};
+
+SearchInput.defaultProps = {
+  inputValue: '',
 };
