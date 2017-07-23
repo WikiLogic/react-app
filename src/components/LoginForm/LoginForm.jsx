@@ -36,8 +36,7 @@ export default class LoginForm extends React.Component {
   handleFormSubmit(event) {
     event.preventDefault();
     API.apilogin(this.state.username, this.state.password)
-      .then((data) => {
-        console.log('in!', data);
+      .then(() => {
         // it's looking for the user
         this.props.updateUser({
           profile: {

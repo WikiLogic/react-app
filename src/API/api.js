@@ -2,7 +2,6 @@ import 'whatwg-fetch';
 import AuthState from 'WlServices/authState.js';
 
 const apiRouteRoot = '/api';
-let token = '';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -58,7 +57,7 @@ function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
       headers: {
-        Authorization: token,
+        Authorization: AuthState.getToken(),
       },
     })
       .then(checkStatus)
