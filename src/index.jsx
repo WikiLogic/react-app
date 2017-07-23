@@ -14,6 +14,7 @@ import ClaimDetailScene from 'WlScenes/ClaimDetailScene.jsx';
 import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
 import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
 import AuthenticationScene from 'WlScenes/AuthenticationScene.jsx';
+import UserProfileScene from 'WlScenes/UserProfileScene.jsx';
 
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
@@ -31,10 +32,15 @@ class Wikilogic extends React.Component {
       search_results: [],
       focused_claim: {},
       notifications: [],
+      user: {
+        profile: {},
+        isLoggedIn: false,
+      },
     };
 
     this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
     this.notifyerHandler = this.notifyerHandler.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   setNewClaimFocus(claim) {
@@ -50,7 +56,21 @@ class Wikilogic extends React.Component {
     this.state.notifications.push(message);
   }
 
+  updateUser(newUser) {
+    console.log('new user!', newUser);
+    this.setState({
+      user: newUser,
+    });
+  }
+
   render() {
+    let authLink = null;
+    if (this.state.user.isLoggedIn) {
+      authLink = <Link to="/profile">Profile</Link>;
+    } else {
+      authLink = <Link to="/login">Login</Link>;
+    }
+
     return (
       <div className="main">
         <div className="main__header">
@@ -62,7 +82,7 @@ class Wikilogic extends React.Component {
             <div className="header__links">
               <Link to="/search">Search</Link>
               <Link to="/new-claim">New claim</Link>
-              <Link to="/login">Login</Link>
+              {authLink}
             </div>
 
           </header>
@@ -79,7 +99,21 @@ class Wikilogic extends React.Component {
 
           <Route path="/new-claim" exact component={ClaimCreateScene} />
 
-          <Route path="/login" exact component={AuthenticationScene} />
+          <Route
+            path="/login"
+            exact
+            render={() => (
+              <AuthenticationScene updateUser={this.updateUser} />
+            )}
+          />
+
+          <Route
+            path="/profile"
+            exact
+            render={() => (
+              <UserProfileScene user={this.state.user} />
+            )}
+          />
 
           {/* Edit claim page ... not sure if this should really be a thing */}
           <Route

@@ -33,10 +33,18 @@ export default class LoginForm extends React.Component {
     });
   }
 
-  handleFormSubmit() {
-    API.login(this.username, this.password)
+  handleFormSubmit(event) {
+    event.preventDefault();
+    API.apilogin(this.state.username, this.state.password)
       .then((data) => {
         console.log('in!', data);
+        // it's looking for the user
+        this.props.updateUser({
+          profile: {
+            username: 'demo',
+          },
+          isLoggedIn: true,
+        });
       }).catch((err) => {
         console.log('err', err);
       });
@@ -72,3 +80,7 @@ export default class LoginForm extends React.Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  updateUser: React.PropTypes.func.isRequired,
+};

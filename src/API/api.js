@@ -1,6 +1,8 @@
-import fetch from 'whatwg-fetch';
+import 'whatwg-fetch';
+import AuthState from 'WlServices/authState.js';
 
 const apiRouteRoot = '/api';
+let token = '';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -26,7 +28,7 @@ function formDataify(jsObj) {
 /* The functions that call the API
  * Each returns a promise
  */
-function login(username, password) {
+function apilogin(username, password) {
   const loggedInPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/login`, {
       method: 'POST',
@@ -41,7 +43,8 @@ function login(username, password) {
       .then(checkStatus)
       .then(parseJSON)
       .then((res) => {
-        resolve(res.data);
+        AuthState.setToken(`JWT ${res.token}`);
+        resolve(res);
       })
       .catch((err) => {
         reject(err);
@@ -55,7 +58,7 @@ function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
       headers: {
-        Authorization: `Basic ${window.btoa('wiki:logic')}`,
+        Authorization: token,
       },
     })
       .then(checkStatus)
@@ -75,7 +78,7 @@ function getClaimDetailById(claimId) {
   const claimDetailPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims/${claimId}`, {
       headers: {
-        Authorization: `Basic ${window.btoa('wiki:logic')}`,
+        Authorization: AuthState.getToken(),
       },
     })
       .then(checkStatus)
@@ -101,7 +104,7 @@ function postNewClaim(claim) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${window.btoa('wiki:logic')}`,
+        Authorization: AuthState.getToken(),
       },
       body: JSON.stringify(claim),
     })
@@ -124,7 +127,7 @@ function postNewArgument(argument) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${window.btoa('wiki:logic')}`,
+        Authorization: AuthState.getToken(),
       },
       body: JSON.stringify({
         parent_claim_id: argument.parent_claim_id,
@@ -151,7 +154,7 @@ function postNewExplanation(argument) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${window.btoa('wiki:logic')}`,
+        Authorization: AuthState.getToken(),
       },
       body: JSON.stringify({
         parent_claim_id: argument.parent_claim_id,
@@ -178,5 +181,5 @@ export default {
   postNewClaim,
   postNewArgument,
   postNewExplanation,
-  login,
+  apilogin,
 };

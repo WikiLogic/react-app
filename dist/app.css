@@ -1,12 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Rufina);/* 
 VARIABLES & MIXINS
-Sass things / settings for use throughout the styles.
+For Sass
 */
 /* colors */
 /* shades of grey */
 /*
 BASE
-The base styling that underlies everything. Generally speaking, these are the native html elements
+Base styling for the native html elements
 */
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
@@ -364,19 +364,9 @@ th {
 
 .a, a {
   text-decoration: none;
-  color: #0a88c5;
-  padding-bottom: 2px;
-  text-decoration: none;
-  background-image: linear-gradient(transparent 50%, rgba(10, 136, 197, 0.1) 50%);
-  background-repeat: repeat-x;
-  background-size: 2px 2px;
-  background-position: 0 95%;
-  text-shadow: 0.03em 0 0 white, 0.06em 0 0 white, 0.09em 0 0 white, 0.12em 0 0 white, 0.15em 0 0 white, -0.03em 0 0 white, -0.06em 0 0 white, -0.09em 0 0 white, -0.12em 0 0 white, -0.15em 0 0 white; }
+  color: #0a88c5; }
   .a:hover, a:hover {
-    background-image: linear-gradient(transparent 50%, #0a88c5 50%); }
-  .a::selection, a::selection {
-    background: #0a88c5;
-    text-shadow: none; }
+    text-decoration: underline; }
 
 html {
   -webkit-box-sizing: border-box;
@@ -442,14 +432,6 @@ input[type='button'],
     width: 1em;
     height: 1em; }
 
-hr {
-  border: 0;
-  border-top: 1px dashed rgba(95, 154, 236, 0.5);
-  margin: 0 0 -1px 0; }
-
-img {
-  display: block; }
-
 input[type='text'], input[type='password'], input[type='search'], textarea {
   background-color: white;
   padding: 0.4375rem 0.625rem;
@@ -469,6 +451,27 @@ select {
   select:focus {
     box-shadow: 0 0 5px #5f9aec;
     border: 1px solid #5f9aec; }
+
+label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  margin-bottom: 7px; }
+
+input {
+  display: block;
+  margin-bottom: 7px; }
+
+.form-group + .form-group {
+  margin-top: 1rem; }
+
+hr {
+  border: 0;
+  border-top: 1px dashed rgba(95, 154, 236, 0.5);
+  margin: 0 0 -1px 0; }
+
+img {
+  display: block; }
 
 svg {
   width: 0.0625rem;
@@ -624,62 +627,8 @@ ul {
 
 /*
 LAYOUTS
-These create the layout structurs within which components will live.
-
+columns, sidebars, grids, layout things!
 */
-.form__title {
-  padding-bottom: 1rem;
-  font-weight: normal; }
-
-.form__label {
-  width: 100%;
-  display: block; }
-  .form__label + .form__label {
-    margin-top: 1rem; }
-
-.form__label-text {
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  margin-bottom: 7px;
-  color: #5f9aec; }
-
-.form__input {
-  width: 100%; }
-
-.form__submit {
-  margin-top: 1rem; }
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1024px;
-  margin: 0 auto;
-  color: white; }
-  .header a {
-    color: white;
-    text-decoration: none;
-    background-image: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.1) 50%);
-    background-repeat: repeat-x;
-    background-size: 2px 2px;
-    background-position: 0 95%;
-    text-shadow: 0.03em 0 0 #111F2E, 0.06em 0 0 #111F2E, 0.09em 0 0 #111F2E, 0.12em 0 0 #111F2E, 0.15em 0 0 #111F2E, -0.03em 0 0 #111F2E, -0.06em 0 0 #111F2E, -0.09em 0 0 #111F2E, -0.12em 0 0 #111F2E, -0.15em 0 0 #111F2E; }
-    .header a:hover {
-      background-image: linear-gradient(transparent 50%, white 50%); }
-    .header a::selection {
-      background: white;
-      text-shadow: none; }
-  .header__title {
-    margin: 0.5625rem 1.25rem;
-    text-align: center;
-    display: block;
-    font-family: "Rufina", serif;
-    font-size: 1.5rem; }
-  .header__links {
-    padding: 0 1.25rem; }
-    .header__links a + a {
-      margin-left: 1.25rem; }
-
 .layout-cols-2__left {
   margin-bottom: 1.25rem; }
 
@@ -710,34 +659,18 @@ These create the layout structurs within which components will live.
     .layout-cols-2--vertical-top .layout-cols-2__right {
       vertical-align: top; } }
 
-.main-logo__icon {
-  width: 1.875rem;
-  height: 1.875rem;
-  fill: white; }
-
-.main-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; }
-  .main-layout__header {
-    background-color: #111F2E;
-    border-bottom: 1px solid #eeeeee; }
-  .main-layout__footer {
-    margin-top: auto;
-    background-color: #eeeeee; }
-
 .max-width-wrap {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 1.25rem; }
+  padding: 0 1.25rem; }
 
-.search-layout__header {
+.page__header {
   margin-bottom: 1.25rem;
-  background-color: #eeeeee; }
-  .search-layout__header-content {
-    max-width: 1024px;
-    margin: 0 auto;
-    padding: 1.25rem; }
+  background-color: #eeeeee;
+  padding: 1.25rem 0; }
+
+.page__body {
+  padding: 1.25rem 0; }
 
 .sidebar-layout {
   display: flex;
@@ -759,9 +692,84 @@ These create the layout structurs within which components will live.
     order: 1; }
 
 /*
-NUKES / utiility classes / atomic classes
-Single responsability classes. for those times when it makes life easier to just put a class in the html to tweak something.
- */
+UNIVERSALS
+site header, footer, the main layout, things that are on every page
+*/
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem; }
+  .footer__col {
+    flex-grow: 1;
+    text-align: left;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem; }
+    .footer__col + .footer__col {
+      padding-left: 1.25rem;
+      text-align: right; }
+  .footer a {
+    text-decoration: none;
+    background-image: linear-gradient(transparent 50%, rgba(10, 136, 197, 0.1) 50%);
+    background-repeat: repeat-x;
+    background-size: 2px 2px;
+    background-position: 0 95%;
+    text-shadow: 0.03em 0 0 #eeeeee, 0.06em 0 0 #eeeeee, 0.09em 0 0 #eeeeee, 0.12em 0 0 #eeeeee, 0.15em 0 0 #eeeeee, -0.03em 0 0 #eeeeee, -0.06em 0 0 #eeeeee, -0.09em 0 0 #eeeeee, -0.12em 0 0 #eeeeee, -0.15em 0 0 #eeeeee; }
+    .footer a:hover {
+      background-image: linear-gradient(transparent 50%, #0a88c5 50%); }
+    .footer a::selection {
+      background: #0a88c5;
+      text-shadow: none; }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1024px;
+  margin: 0 auto;
+  color: white; }
+  .header a {
+    color: white;
+    text-decoration: none;
+    background-image: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.1) 50%);
+    background-repeat: repeat-x;
+    background-size: 2px 2px;
+    background-position: 0 95%;
+    text-shadow: 0.03em 0 0 #111F2E, 0.06em 0 0 #111F2E, 0.09em 0 0 #111F2E, 0.12em 0 0 #111F2E, 0.15em 0 0 #111F2E, -0.03em 0 0 #111F2E, -0.06em 0 0 #111F2E, -0.09em 0 0 #111F2E, -0.12em 0 0 #111F2E, -0.15em 0 0 #111F2E; }
+    .header a:hover {
+      background-image: linear-gradient(transparent 50%, white 50%); }
+    .header a::selection {
+      background: white;
+      text-shadow: none; }
+  .header a.header__title {
+    margin: 0.5625rem 1.25rem;
+    text-align: center;
+    display: block;
+    font-family: "Rufina", serif;
+    font-size: 1.5rem;
+    background-position: 0 1.2em; }
+  .header__links {
+    padding: 0 1.25rem; }
+    .header__links a + a {
+      margin-left: 1.25rem; }
+
+/*
+Universal!
+The blue header, 
+the body, 
+the eeeeee footer
+*/
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; }
+  .main__header {
+    background-color: #111F2E;
+    border-bottom: 1px solid #eeeeee; }
+  .main__footer {
+    margin-top: auto;
+    background-color: #eeeeee; }
+
 /*
 COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
@@ -1434,21 +1442,4 @@ styles are set in sass alongside the components. (in the components folder).
     right: 0;
     text-align: center; }
 
-.language-selector__current {
-  font-family: "Rufina", serif;
-  color: white; }
-
-.language-selector__dropdown {
-  display: none; }
-
-.footer {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem; }
-  .footer__col {
-    padding: 1.25rem;
-    flex-grow: 1;
-    text-align: left; }
-    .footer__col + .footer__col {
-      text-align: right; }
+/* UTILITIES - single responsability classes */

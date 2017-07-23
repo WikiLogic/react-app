@@ -1,11 +1,11 @@
 import React from 'react';
-import LoginForm from 'WlComponents/LoginForm/LoginForm.jsx';
 
 /**
- * The Authentication page (logging in!)
+ * The User profile & settings page
+ * Here you will be able to change the theme / alert settings / your username / password / etc...
  * @prop {*} name 
  */
-export default class AuthenticationScene extends React.Component {
+export default class UserProfileScene extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,19 +18,15 @@ export default class AuthenticationScene extends React.Component {
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
-            Log in!
+            DEMO
           </div>
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            <LoginForm updateUser={this.props.updateUser} />
+            You are logged in as Demo - proper user profiles are coming soon!
           </div>
         </div>
       </div>
     );
   }
 }
-
-AuthenticationScene.propTypes = {
-  updateUser: React.PropTypes.func.isRequired,
-};
