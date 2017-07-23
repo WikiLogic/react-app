@@ -15,15 +15,15 @@ export default class ClaimDetailScene extends React.Component {
 
   render() {
     return (
-      <div className="claim-detail-layout">
-        <div className="claim-detail-layout__header">
+      <div className="page">
+        <div className="page__header">
           <div className="max-width-wrap">
 
             <ClaimChain topClaimId={this.props.match.params.claimId} />
 
           </div>
         </div>
-        <div className="claim-detail-layout__body">
+        <div className="page__body">
           <div className="max-width-wrap">
             layout
           </div>
