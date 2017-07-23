@@ -1,0 +1,21 @@
+form {
+
+}
+
+label {
+  display: block;
+  text-transform: uppercase;
+  font-size: rem(14);
+  margin-bottom: 7px;
+}
+
+input {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.form-group {
+  + .form-group {
+    margin-top: rem($pad);
+  }
+}

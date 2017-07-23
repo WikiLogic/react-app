@@ -1,0 +1,22 @@
+.footer {
+  margin-top: auto; //pushes it to the bottom of the screen
+  display: flex;
+  justify-content: space-between;
+  font-size: rem(14);
+
+  &__col {
+    flex-grow: 1;
+    text-align: left;
+    padding-top: rem($pad-small);
+    padding-bottom: rem($pad-small);
+
+    + .footer__col {
+        padding-left: rem($pad-small);
+        text-align: right;
+    }
+  }
+
+  a {
+    @include occluded-underline($link-blue, #eeeeee); 
+  }
+}

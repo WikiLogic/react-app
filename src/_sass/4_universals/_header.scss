@@ -8,15 +8,16 @@
 
     a { 
         color: white;
-        @include occluded-underline($dark-blue, white, white); 
+        @include occluded-underline(white, $dark-blue); 
     }
     
-    &__title { //a
+    a.header__title {
         margin: rem(9) rem($pad-small);
         text-align: center;
         display: block;
         font-family: $serif;
         font-size: rem(24);
+        background-position: 0 1.2em;
     }
 
     &__links {
