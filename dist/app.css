@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Rufina);/* 
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,700|Open+Sans|Rufina);/* 
 VARIABLES & MIXINS
 For Sass
 */
@@ -493,8 +493,7 @@ table {
     padding: 1.25rem; }
 
 body {
-  font-family: Sans-Serif;
-  /* 100 / 300 / 700 */
+  font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.5; }
@@ -504,74 +503,28 @@ body {
 
 h1 {
   margin: 0;
-  font-family: "Rufina", serif;
-  font-size: 3rem;
-  font-weight: 700; }
+  font-family: "Roboto", sans-serif;
+  font-size: 2.125rem;
+  font-weight: 100;
+  line-height: 1.2; }
 
-/* Page title */
-h2 {
-  margin: 0;
-  font-family: "Rufina", serif;
-  font-size: 2.25rem;
-  font-weight: 700; }
-
-/* Page sub-titles */
-h3 {
-  margin: 0;
-  font-family: "Rufina", serif;
-  font-size: 1.625rem;
-  font-weight: 700; }
-
-/* Sidebar title / lead-in / form area title */
-h4 {
-  margin: 0;
-  font-family: Sans-Serif;
-  font-size: 1.75rem;
-  font-weight: 300;
-  text-transform: uppercase; }
-
-h5 {
-  margin: 0;
-  font-family: Sans-Serif;
-  font-size: 1.125rem;
-  font-weight: 300;
-  text-transform: uppercase; }
-
-h6 {
-  margin: 0;
-  font-family: Sans-Serif;
-  font-size: 0.8125rem;
-  font-weight: 300;
-  text-transform: uppercase; }
+h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2; }
 
 p {
   font-weight: 400;
-  margin: 0 0 1em;
+  margin: 0;
   max-width: 35.9375rem; }
-
-p small,
-p.small {
-  font-size: 0.8125rem;
-  font-weight: 400; }
+  p + p {
+    margin-top: 1rem; }
 
 @media (min-width: 768px) {
-  h1 {
-    font-size: 3.375rem; }
-  h2 {
-    font-size: 2.53125rem; }
-  h3 {
-    font-size: 1.82812rem; }
-  h4 {
-    font-size: 1.96875rem; }
-  h5 {
-    font-size: 1.26562rem; }
-  h6 {
-    font-size: 0.91406rem; }
   p {
-    max-width: 38.4375rem; }
-  p small,
-  p.small {
-    font-size: 0.8125rem; } }
+    max-width: 38.4375rem; } }
 
 code, pre {
   background: #000;
@@ -629,35 +582,26 @@ ul {
 LAYOUTS
 columns, sidebars, grids, layout things!
 */
-.layout-cols-2__left {
-  margin-bottom: 1.25rem; }
-
-.layout-cols-2__right {
-  margin-bottom: 1.25rem; }
-
-@media (min-width: 320px) {
-  .layout-cols-2 {
-    display: table; }
-    .layout-cols-2__left, .layout-cols-2__gap, .layout-cols-2__right {
-      display: table-cell;
-      vertical-align: top;
-      margin-bottom: 0; }
-      .layout-cols-2__left .card, .layout-cols-2__gap .card, .layout-cols-2__right .card {
-        margin-top: 0; }
-    .layout-cols-2__gap {
-      width: 5px; }
-      .layout-cols-2__gap--10 {
+.layout-cols-2 {
+  width: 100%; }
+  .layout-cols-2__left {
+    margin-bottom: 1.25rem; }
+  .layout-cols-2__right {
+    margin-bottom: 1.25rem; }
+  @media (min-width: 320px) {
+    .layout-cols-2 {
+      display: table; }
+      .layout-cols-2__left, .layout-cols-2__gap, .layout-cols-2__right {
+        display: table-cell;
+        vertical-align: top;
+        margin-bottom: 0; }
+      .layout-cols-2__left {
+        width: 50%; }
+      .layout-cols-2__gap {
         width: 10px; }
-      .layout-cols-2__gap--30 {
-        width: 30px; }
-    .layout-cols-2--5050 .layout-cols-2__left {
-      width: 50%; }
-    .layout-cols-2--vertical-center .layout-cols-2__left,
-    .layout-cols-2--vertical-center .layout-cols-2__right {
-      vertical-align: middle; }
-    .layout-cols-2--vertical-top .layout-cols-2__left,
-    .layout-cols-2--vertical-top .layout-cols-2__right {
-      vertical-align: top; } }
+      .layout-cols-2--vertical-center .layout-cols-2__left,
+      .layout-cols-2--vertical-center .layout-cols-2__right {
+        vertical-align: middle; } }
 
 .max-width-wrap {
   max-width: 1024px;
@@ -665,7 +609,6 @@ columns, sidebars, grids, layout things!
   padding: 0 1.25rem; }
 
 .page__header {
-  margin-bottom: 1.25rem;
   background-color: #eeeeee;
   padding: 1.25rem 0; }
 
@@ -708,6 +651,8 @@ site header, footer, the main layout, things that are on every page
     .footer__col + .footer__col {
       padding-left: 1.25rem;
       text-align: right; }
+  .footer__util-link {
+    margin: 2px 5px; }
   .footer a {
     text-decoration: none;
     background-image: linear-gradient(transparent 50%, rgba(10, 136, 197, 0.1) 50%);
@@ -749,7 +694,9 @@ site header, footer, the main layout, things that are on every page
     font-size: 1.5rem;
     background-position: 0 1.2em; }
   .header__links {
-    padding: 0 1.25rem; }
+    padding: 0 1.25rem;
+    text-transform: uppercase;
+    font-size: 0.9375rem; }
     .header__links a + a {
       margin-left: 1.25rem; }
 
