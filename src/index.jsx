@@ -6,7 +6,6 @@ import createHashHistory from 'history/createHashHistory';
 
 // JS
 import API from 'WlAPI/api.js';
-import Notify from 'WlServices/notify.js';
 
 // Scenes
 import HomeScene from 'WlScenes/HomeScene.jsx';
@@ -14,10 +13,12 @@ import SearchScene from 'WlScenes/SearchScene.jsx';
 import ClaimDetailScene from 'WlScenes/ClaimDetailScene.jsx';
 import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
 import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
+import AuthenticationScene from 'WlScenes/AuthenticationScene.jsx';
 
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
+import Notifyer from 'WlComponents/Notifyer/Notifyer.jsx';
 
 
 const history = createHashHistory();
@@ -29,9 +30,11 @@ class Wikilogic extends React.Component {
     this.state = {
       search_results: [],
       focused_claim: {},
+      notifications: [],
     };
 
     this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
+    this.notifyerHandler = this.notifyerHandler.bind(this);
   }
 
   setNewClaimFocus(claim) {
@@ -39,14 +42,18 @@ class Wikilogic extends React.Component {
       .then((data) => {
         this.setState({ focused_claim: data.claim });
       }).catch((err) => {
-        Notify.post(err);
+        this.state.notifications.push(err);
       });
+  }
+
+  notifyerHandler(message) {
+    this.state.notifications.push(message);
   }
 
   render() {
     return (
-      <div className="main-layout">
-        <div className="main-layout__header">
+      <div className="main">
+        <div className="main__header">
 
           <header className="header">
 
@@ -55,14 +62,14 @@ class Wikilogic extends React.Component {
             <div className="header__links">
               <Link to="/search">Search</Link>
               <Link to="/new-claim">New claim</Link>
-              <Link to="/styleguide">Styleguide</Link>
+              <Link to="/login">Login</Link>
             </div>
 
           </header>
 
         </div>
 
-        <main className="main main-layout__body">
+        <main className="main__body">
 
           <Route path="/" exact component={HomeScene} />
 
@@ -71,6 +78,8 @@ class Wikilogic extends React.Component {
           <Route path="/claim/:claimId" exact component={ClaimDetailScene} />
 
           <Route path="/new-claim" exact component={ClaimCreateScene} />
+
+          <Route path="/login" exact component={AuthenticationScene} />
 
           {/* Edit claim page ... not sure if this should really be a thing */}
           <Route
@@ -99,22 +108,26 @@ class Wikilogic extends React.Component {
 
         </main>
 
-        <div className="main-layout__footer">
+        <div className="main__footer">
           <footer className="footer max-width-wrap">
 
             <div className="footer__col">
-              Wikilogic is maintainted by the
-              <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>,
-              a non-profit organisation...
+              Wikilogic is maintainted by
+              the <a href="www.wikilogicfoundation.org" target="_blank">Wikilogic Foundation</a>, a
+              non-profit organisation...
             </div>
             <div className="footer__col">
-              Privacy policy
+              Privacy policy <Link to="/styleguide">Styleguide</Link>
             </div>
             <div className="footer__col">
               Terms of use
             </div>
 
           </footer>
+        </div>
+
+        <div className="main__notifications">
+          <Notifyer notifications={this.state.notifications} />
         </div>
       </div>
     );
