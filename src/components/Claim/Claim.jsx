@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
 
 /* Each Claim in the list of search results
@@ -13,18 +14,18 @@ export default function Claim(props) {
   if (typeof props.claim.labels !== 'undefined' && props.claim.labels.includes('Axiom')) {
     cssClass = `${cssClass} claim--axiom`;
   }
-
+  // onClick={() => props.handleClick(props.claim)}
   return (
-    <button className={cssClass} onClick={() => props.handleClick(props.claim)}>
+    <div className={cssClass}>
       <div className="claim__body">
         <div className="claim__status-circle">
           <StatusIndicator state={props.claim.probability} type="circle" />
         </div>
-        <div className="claim__text">
+        <Link to={`/claim/${props.claim.id}`} className="claim__text">
           {props.claim.text}
-        </div>
+        </Link>
       </div>
-    </button>
+    </div>
   );
 }
 
@@ -33,11 +34,12 @@ Claim.propTypes = {
   claim: React.PropTypes.shape({
     labels: React.PropTypes.arrayOf(React.PropTypes.string),
     text: React.PropTypes.string.isRequired,
-    probability: React.PropTypes.number.isRequired,
+    probability: React.PropTypes.number,
+    id: React.PropTypes.number.isRequired,
   }).isRequired,
-  handleClick: React.PropTypes.func.isRequired,
 };
 
 Claim.defaultProps = {
   isSelected: false,
+  probability: 0.5,
 };

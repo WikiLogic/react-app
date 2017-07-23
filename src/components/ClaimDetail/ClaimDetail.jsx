@@ -77,6 +77,7 @@ export default class ClaimDetail extends React.Component {
     if (typeof this.props.claim.text === 'undefined') { return null; }
     let argumentMarkup = null;
     // the arguments
+    console.log('===== this claim: ', this.props.claim);
     if (this.props.claim.arguments.length > 0) {
       argumentMarkup = this.props.claim.arguments.map(argumentObject => (
         <Argument
@@ -155,12 +156,19 @@ export default class ClaimDetail extends React.Component {
 
 ClaimDetail.propTypes = {
   claim: React.PropTypes.shape({
-    id: React.PropTypes.string.isRequired,
+    id: React.PropTypes.number.isRequired,
     text: React.PropTypes.string.isRequired,
-    state: React.PropTypes.number.isRequired,
-    arguments: React.PropTypes.array.isRequired,
+    state: React.PropTypes.number,
+    arguments: React.PropTypes.array,
   }).isRequired,
   premisClickHandler: React.PropTypes.func.isRequired,
   updatedClaimHandler: React.PropTypes.func.isRequired,
   highlightedPremisId: React.PropTypes.string.isRequired,
+};
+
+ClaimDetail.defaultProps = {
+  claim: React.PropTypes.shape({
+    state: 0.5,
+    arguments: [],
+  }),
 };

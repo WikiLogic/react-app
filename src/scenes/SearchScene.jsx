@@ -14,7 +14,7 @@ export default class SearchScene extends React.Component {
 
     this.state = {
       search_term: '',
-      search_results: [],
+      searchResults: [],
     };
 
     this.searchClaims = this.searchClaims.bind(this);
@@ -36,7 +36,7 @@ export default class SearchScene extends React.Component {
     if (isNaN(search)) {
       API.searchClaimsByTerm(search)
         .then((data) => {
-          this.setState({ search_results: data.claims });
+          this.setState({ searchResults: data.claims });
         }).catch((err) => {
           Notify.post(err);
         });
@@ -79,7 +79,7 @@ export default class SearchScene extends React.Component {
         <div className="page__body">
           <div className="max-width-wrap">
 
-            <SearchResults search_results={this.state.search_results} />
+            <SearchResults searchResults={this.state.searchResults} />
 
           </div>
         </div>

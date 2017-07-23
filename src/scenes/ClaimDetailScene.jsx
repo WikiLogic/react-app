@@ -14,18 +14,19 @@ export default class ClaimDetailScene extends React.Component {
   }
 
   render() {
+    console.log('1, rendering claim detail scene', this.props.match.params.claimId);
     return (
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
 
-            <ClaimChain topClaimId={this.props.match.params.claimId} />
+            Claim Detail / inspector / explorer.
 
           </div>
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            layout
+            <ClaimChain topClaimId={this.props.match.params.claimId} />
           </div>
         </div>
       </div>

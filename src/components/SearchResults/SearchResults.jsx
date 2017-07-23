@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* The Search Results
@@ -12,9 +11,9 @@ export default function SearchResults(props) {
   }
 
   const searchResults = props.searchResults.map(searchResult => (
-    <Link to={`/claim/${searchResult.id}`} key={searchResult.id} className="search-results__result">
+    <div key={searchResult.id} className="search-results__result">
       <Claim claim={searchResult} isSelected={false} />
-    </Link>
+    </div>
   ));
 
   return (

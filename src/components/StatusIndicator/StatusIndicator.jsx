@@ -42,6 +42,11 @@ export default function StatusIndicator(props) {
 }
 
 StatusIndicator.propTypes = {
-  state: React.PropTypes.number.isRequired,
-  type: React.PropTypes.string.isRequired,
+  state: React.PropTypes.number,
+  type: React.PropTypes.string,
+};
+
+StatusIndicator.defaultProps = {
+  state: 0.5,
+  type: 'circle',
 };

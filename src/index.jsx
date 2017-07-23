@@ -29,7 +29,7 @@ class Wikilogic extends React.Component {
     super(props);
 
     this.state = {
-      search_results: [],
+      searchResults: [],
       focused_claim: {},
       notifications: [],
       user: {
@@ -57,7 +57,6 @@ class Wikilogic extends React.Component {
   }
 
   updateUser(newUser) {
-    console.log('new user!', newUser);
     this.setState({
       user: newUser,
     });
@@ -129,7 +128,7 @@ class Wikilogic extends React.Component {
                 <div className="sidebar-layout__side">
 
                   <SearchResults
-                    search_results={this.state.search_results}
+                    searchResults={this.state.searchResults}
                     resultClickHandler={this.setNewClaimFocus}
                   />
 

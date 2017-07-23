@@ -75,6 +75,7 @@ function searchClaimsByTerm(searchTerm) {
 
 function getClaimDetailById(claimId) {
   const claimDetailPromise = new Promise((resolve, reject) => {
+    console.log('api claimId', claimId);
     fetch(`${apiRouteRoot}/claims/${claimId}`, {
       headers: {
         Authorization: AuthState.getToken(),
@@ -83,13 +84,10 @@ function getClaimDetailById(claimId) {
       .then(checkStatus)
       .then(parseJSON)
       .then((res) => {
-        if (!Object.prototype.hasOwnProperty.call(res, 'claim')) {
-          reject('404');
-          return;
-        }
         resolve(res.data);
       })
       .catch((err) => {
+        console.log('api claim failed', err);
         reject(err);
       });
   });
