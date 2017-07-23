@@ -15,6 +15,7 @@ import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
 import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
 import AuthenticationScene from 'WlScenes/AuthenticationScene.jsx';
 import UserProfileScene from 'WlScenes/UserProfileScene.jsx';
+import LegalScene from 'WlScenes/LegalScene.jsx';
 
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
@@ -114,6 +115,22 @@ class Wikilogic extends React.Component {
             )}
           />
 
+          <Route
+            path="/privacy-policy"
+            exact
+            render={() => (
+              <LegalScene page="privacy-policy" />
+            )}
+          />
+
+          <Route
+            path="/terms-of-use"
+            exact
+            render={() => (
+              <LegalScene page="terms-of-use" />
+            )}
+          />
+
           {/* Edit claim page ... not sure if this should really be a thing */}
           <Route
             path="/edit-claim"
@@ -150,10 +167,9 @@ class Wikilogic extends React.Component {
               non-profit organisation...
             </div>
             <div className="footer__col">
-              Privacy policy <Link to="/styleguide">Styleguide</Link>
-            </div>
-            <div className="footer__col">
-              Terms of use
+              <Link to="/privacy-policy" className="footer__util-link">Privacy policy</Link>
+              <Link to="/terms-of-use" className="footer__util-link">Terms of use</Link>
+              <Link to="/styleguide" className="footer__util-link">Styleguide</Link>
             </div>
 
           </footer>

@@ -1,37 +1,46 @@
-@import url('https://fonts.googleapis.com/css?family=Rufina');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,700|Open+Sans|Rufina');
 
-$sans-serif: Sans-Serif; //don't download anything, keep it simple s... :x
-$serif: 'Rufina', serif; //Admittedly not actually neccesary... but my wife and I spent ages looking thruogh & comparing fonts. This one won.
+$fancy: 'Rufina', serif; //Admittedly not actually neccesary... will be replaced by the logo when we get one (400)
+$title: 'Roboto', sans-serif; //500
+$body: 'Open Sans', sans-serif; //400
 
 body {
-	font-family: $sans-serif; /* 100 / 300 / 700 */
+	font-family: $body;
 	font-weight: normal;
 	font-size: rem(16);
 	line-height: 1.5;
 	@include breakpoint(medium) { font-size: rem(18); }
 }
 
+h1 {
+	margin: 0; 
+	font-family: $title; 
+	font-size: rem(34); 
+	font-weight: 100; 
+	line-height: 1.2;
+} 
 
-h1 { margin: 0; font-family: $serif; font-size: rem(48); font-weight: 700; } /* Page title */
-h2 { margin: 0; font-family: $serif; font-size: rem(36); font-weight: 700; } /* Page sub-titles */
-h3 { margin: 0; font-family: $serif; font-size: rem(26); font-weight: 700; } /* Sidebar title / lead-in / form area title */
-h4 { margin: 0; font-family: $sans-serif; font-size: rem(28); font-weight: 300; text-transform: uppercase; }
-h5 { margin: 0; font-family: $sans-serif; font-size: rem(18); font-weight: 300; text-transform: uppercase; }
-h6 { margin: 0; font-family: $sans-serif; font-size: rem(13); font-weight: 300; text-transform: uppercase; }
-p         { font-weight: 400; margin: 0 0 1em; max-width: rem(575); } //max line length 45 to 75 characters https://css-tricks.com/equilateral-triangle-perfect-paragraph/
-p small,
-p.small   { font-size: rem(13); font-weight: 400; }
+h2, h3, h4, h5, h6 { 
+	margin: 0 0 rem(16); 
+	font-family: $title; 
+	font-size: rem(24); 
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+//max line length 45 to 75 characters https://css-tricks.com/equilateral-triangle-perfect-paragraph/
+p { 
+	font-weight: 400; 
+	margin: 0; 
+	max-width: rem(575); 
+
+	+ p {
+		margin-top: rem(16);
+	}
+}
 
 @include breakpoint(medium) {
-	h1 { font-size: rem(48 * 1.125); }
-	h2 { font-size: rem(36 * 1.125); }
-	h3 { font-size: rem(26 * 1.125); }
-	h4 { font-size: rem(28 * 1.125); }
-	h5 { font-size: rem(18 * 1.125); }
-	h6 { font-size: rem(13 * 1.125); }
-	p         { max-width: rem(615); }
-	p small,
-	p.small   { font-size: rem(13); }
+	p { max-width: rem(615); }
 }
 
 code, pre {

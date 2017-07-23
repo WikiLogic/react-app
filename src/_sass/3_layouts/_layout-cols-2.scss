@@ -1,4 +1,5 @@
 .layout-cols-2 {
+    width: 100%;
 
     &__left { margin-bottom: rem(20); }
     &__right { margin-bottom: rem(20); }
@@ -12,31 +13,18 @@
             display: table-cell;
             vertical-align: top;
             margin-bottom: 0;
-            
-            .card { margin-top: 0; }
         }
+
+        &__left { width: 50%; }
 
         &__gap { 
-            width: 5px; 
-            &--10 { width: 10px; }
-            &--30 { width: 30px; }
+            width: 10px;
         }
-
-        &--5050 {
-            .layout-cols-2__left { width: 50%; }
-        }
-
+        
         &--vertical-center {
             .layout-cols-2__left,
             .layout-cols-2__right {
                 vertical-align: middle;
-            }
-        }
-
-        &--vertical-top {
-            .layout-cols-2__left,
-            .layout-cols-2__right {
-                vertical-align: top;
             }
         }
     }

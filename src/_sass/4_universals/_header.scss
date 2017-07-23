@@ -15,13 +15,15 @@
         margin: rem(9) rem($pad-small);
         text-align: center;
         display: block;
-        font-family: $serif;
+        font-family: $fancy;
         font-size: rem(24);
         background-position: 0 1.2em;
     }
 
     &__links {
         padding: 0 rem($pad-small);
+        text-transform: uppercase;
+        font-size: rem(15);
         a + a { margin-left: rem($pad-small); }
     }
 }

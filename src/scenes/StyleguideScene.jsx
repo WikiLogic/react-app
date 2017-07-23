@@ -18,17 +18,20 @@ export default class StyleguideScene extends React.Component {
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
-            Style guide!
+            <h1>Style guide!</h1>
           </div>
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            <h1>Heading 1</h1>
             <h2>Heading 2</h2>
             <h3>Heading 3</h3>
             <h4>Heading 4</h4>
             <h5>Heading 5</h5>
             <h6>Heading 6</h6>
+            <p>Use h1&#39;s for page titles. All other heading tags are the same - for more variety,
+              scope the heading style to the component you&#39;re working on. Don&#39;t rely on tags
+              for typography
+            </p>
             <p>
               123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad.
