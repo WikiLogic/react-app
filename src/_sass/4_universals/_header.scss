@@ -4,11 +4,10 @@
     align-items: center;
     max-width: $site-width;
     margin: 0 auto;
-    color: white;
 
     a { 
-        color: white;
-        @include occluded-underline(white, $dark-blue); 
+        color: $header-color;
+        @include occluded-underline($header-color, $header-background); 
     }
     
     a.header__title {

@@ -3,7 +3,7 @@ input[type='text'], input[type='password'], input[type='search'], textarea {
 	padding: rem(7) rem(10);
 	outline: none;
 	color: black;
-	border: 3px solid $grey-d;
+	border: 3px solid $rule-color;
 	max-width: 100%;
 
 	&:active,

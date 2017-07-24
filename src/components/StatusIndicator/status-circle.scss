@@ -13,11 +13,11 @@
             stroke-dasharray: 534;
         }
             &-state {
-                stroke: $WL_Green;
+                stroke: $state-primary;
                 stroke-width: 30;
             }
             &-bg {
-                stroke: $WL_Red;
+                stroke: $state-bg;
                 stroke-dashoffset: 0;
                 stroke-width: 27;
             }

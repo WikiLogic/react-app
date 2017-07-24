@@ -20,6 +20,6 @@
     }
 
   a {
-    @include occluded-underline($link-blue, #eeeeee); 
+    @include occluded-underline($link-blue, $footer-background); 
   }
 }

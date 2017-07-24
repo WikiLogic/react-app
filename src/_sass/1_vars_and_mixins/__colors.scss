@@ -1,24 +1,39 @@
 /* colors */
+
+$dark-blue:     #111F2E; .dark-blue { background-color: $dark-blue; }
+$link-blue:     #0a88c5; .link-blue { background-color: $link-blue; }
+$rule-color:    #cccccc; .rule-color { background-color: $rule-color; }
+$grey:		      #eeeeee; .grey { background-color: $grey; }
+
+// Main block colors
+$header-background: $dark-blue;
+$page-title-background: $grey;
+$body-background: white;
+$footer-background: $grey;
+
+$header-color: white;
+$page-title-color: black;
+$body-color: black;
+$footer-color: black;
+
+
+//component colors
+$state-primary: $dark-blue;
+$state-bg: $grey;
+
+
+//$light-blue:    #0a4471;
 $WL_Red:		  #f05d65; 
 $WL_Red--light:   #fcf2f3;
 $WL_Green:		  #31D332; 
 $WL_Green--light: #31D332; 
 $WL_Blue: 		  #5f9aec;
 
-$dark-blue:     #111F2E; $header-background: $dark-blue;
-$light-blue:    #0a4471;
-$link-blue:     #0a88c5;
 
-/* shades of grey */
-$grey-e:		#eeeeee; $sub-header-background: $grey-e;
-$grey-d:		#dddddd;
-$grey-c:		#cccccc;
-$grey-b:		#bbbbbb;
-$grey-a:		#aaaaaa;
-$grey-6:		#6f8db9;
-$grey-5:		#5e7ca8;
-$grey-4:		#4e6a92;
-$grey-3:		#375073;
-$grey-2:		#223856;
-$grey-1:		#131E2D;  //default grey-dark
-$text-black: 	rgba(0,0,0,0.87);
+.color-box {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  vertical-align: middle;
+}

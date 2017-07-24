@@ -39,6 +39,16 @@ export default class StyleguideScene extends React.Component {
               inventore recusandae iure rerum odio veniam, consectetur non.
             </p>
 
+            <hr />
+
+            <h2>Colors</h2>
+            <p>
+              <span className="color-box dark-blue" />
+              <span className="color-box link-blue" />
+              <span className="color-box rule-color" />
+              <span className="color-box grey" />
+            </p>
+
             <Claim
               claim={{
                 text: 'claim text',

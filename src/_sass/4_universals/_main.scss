@@ -12,12 +12,13 @@ the eeeeee footer
 
   &__header { 
     background-color: $header-background;
-    border-bottom: 1px solid $sub-header-background; 
+    color: $header-color;
   }
   
   &__body {}
   &__footer {
     margin-top: auto;
-    background-color: #eeeeee;
+    background-color: $footer-background;
+    color: $footer-color;
   }
 }

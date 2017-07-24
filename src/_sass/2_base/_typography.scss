@@ -53,4 +53,8 @@ span {
 	vertical-align: middle;
 }
 
-
+hr {
+	border: 0;
+	border-top: 1px solid $rule-color;
+	margin: 0 0 -1px 0;
+}
