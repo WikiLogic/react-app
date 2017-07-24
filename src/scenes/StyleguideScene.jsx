@@ -50,7 +50,7 @@ export default class StyleguideScene extends React.Component {
                 <span className="color-box grey" />
               </p>
             </section>
-
+            <hr />
             <section>
               <h2>Claims</h2>
               <div className="layout-cols-2">

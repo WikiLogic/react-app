@@ -13771,6 +13771,7 @@ var StyleguideScene = function (_React$Component) {
                 _react2.default.createElement('span', { className: 'color-box grey' })
               )
             ),
+            _react2.default.createElement('hr', null),
             _react2.default.createElement(
               'section',
               null,
