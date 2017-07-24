@@ -3,7 +3,25 @@ VARIABLES & MIXINS
 For Sass
 */
 /* colors */
-/* shades of grey */
+.dark-blue {
+  background-color: #111F2E; }
+
+.link-blue {
+  background-color: #0a88c5; }
+
+.rule-color {
+  background-color: #cccccc; }
+
+.grey {
+  background-color: #eeeeee; }
+
+.color-box {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  vertical-align: middle; }
+
 /*
 BASE
 Base styling for the native html elements
@@ -384,7 +402,9 @@ html {
 body {
   margin: 0;
   border: 0;
-  padding: 0; }
+  padding: 0;
+  background-color: white;
+  color: black; }
 
 br {
   display: block;
@@ -437,7 +457,7 @@ input[type='text'], input[type='password'], input[type='search'], textarea {
   padding: 0.4375rem 0.625rem;
   outline: none;
   color: black;
-  border: 3px solid #dddddd;
+  border: 3px solid #cccccc;
   max-width: 100%; }
   input[type='text']:active, input[type='text']:focus, input[type='password']:active, input[type='password']:focus, input[type='search']:active, input[type='search']:focus, textarea:active, textarea:focus {
     border-color: #5f9aec; }
@@ -464,11 +484,6 @@ input {
 
 .form-group + .form-group {
   margin-top: 1rem; }
-
-hr {
-  border: 0;
-  border-top: 1px dashed rgba(95, 154, 236, 0.5);
-  margin: 0 0 -1px 0; }
 
 img {
   display: block; }
@@ -533,6 +548,11 @@ code, pre {
 
 span {
   vertical-align: middle; }
+
+hr {
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 0 0 -1px 0; }
 
 ul {
   font-size: 1rem;
@@ -671,8 +691,7 @@ site header, footer, the main layout, things that are on every page
   justify-content: space-between;
   align-items: center;
   max-width: 1024px;
-  margin: 0 auto;
-  color: white; }
+  margin: 0 auto; }
   .header a {
     color: white;
     text-decoration: none;
@@ -712,10 +731,11 @@ the eeeeee footer
   flex-direction: column; }
   .main__header {
     background-color: #111F2E;
-    border-bottom: 1px solid #eeeeee; }
+    color: white; }
   .main__footer {
     margin-top: auto;
-    background-color: #eeeeee; }
+    background-color: #eeeeee;
+    color: black; }
 
 /*
 COMPONENTS
@@ -746,7 +766,7 @@ styles are set in sass alongside the components. (in the components folder).
   .type-toggle__label {
     cursor: pointer;
     background-color: #eeeeee;
-    border: 1px solid #dddddd;
+    border: 1px solid #eeeeee;
     text-align: center;
     padding: 0.5rem;
     width: 48%; }
@@ -776,7 +796,7 @@ styles are set in sass alongside the components. (in the components folder).
   .type-toggle__label {
     cursor: pointer;
     background-color: #eeeeee;
-    border: 1px solid #dddddd;
+    border: 1px solid #cccccc;
     text-align: center;
     padding: 0.5rem;
     width: 48%; }
@@ -867,7 +887,7 @@ styles are set in sass alongside the components. (in the components folder).
 
 .claim-detail {
   width: 100%;
-  border: 1px solid #dddddd;
+  border: 1px solid #cccccc;
   border-radius: 5px;
   padding: 0.5rem; }
   .claim-detail + .claim-detail {
@@ -916,7 +936,7 @@ styles are set in sass alongside the components. (in the components folder).
     overflow: auto; }
   .modal__header {
     background-color: #eeeeee;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #cccccc;
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -1176,10 +1196,10 @@ styles are set in sass alongside the components. (in the components folder).
       fill: transparent;
       stroke-dasharray: 534; }
     .status-circle__svg-state {
-      stroke: #31D332;
+      stroke: #111F2E;
       stroke-width: 30; }
     .status-circle__svg-bg {
-      stroke: #f05d65;
+      stroke: #eeeeee;
       stroke-dashoffset: 0;
       stroke-width: 27; }
   .status-circle--1 .status-circle__svg-state {

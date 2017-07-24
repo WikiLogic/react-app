@@ -13749,6 +13749,20 @@ var StyleguideScene = function (_React$Component) {
               null,
               '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.'
             ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              'h2',
+              null,
+              'Colors'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement('span', { className: 'color-box dark-blue' }),
+              _react2.default.createElement('span', { className: 'color-box link-blue' }),
+              _react2.default.createElement('span', { className: 'color-box rule-color' }),
+              _react2.default.createElement('span', { className: 'color-box grey' })
+            ),
             _react2.default.createElement(_Claim2.default, {
               claim: {
                 text: 'claim text',
