@@ -20,3 +20,7 @@ body {
   background-color: $body-background;
   color: $body-color;
 }
+
+section {
+  margin: rem($pad) 0;
+}

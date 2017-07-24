@@ -13715,68 +13715,98 @@ var StyleguideScene = function (_React$Component) {
             'div',
             { className: 'max-width-wrap' },
             _react2.default.createElement(
-              'h2',
+              'section',
               null,
-              'Heading 2'
-            ),
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Heading 3'
-            ),
-            _react2.default.createElement(
-              'h4',
-              null,
-              'Heading 4'
-            ),
-            _react2.default.createElement(
-              'h5',
-              null,
-              'Heading 5'
-            ),
-            _react2.default.createElement(
-              'h6',
-              null,
-              'Heading 6'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'Use h1\'s for page titles. All other heading tags are the same - for more variety, scope the heading style to the component you\'re working on. Don\'t rely on tags for typography'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.'
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Heading 2'
+              ),
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Heading 3'
+              ),
+              _react2.default.createElement(
+                'h4',
+                null,
+                'Heading 4'
+              ),
+              _react2.default.createElement(
+                'h5',
+                null,
+                'Heading 5'
+              ),
+              _react2.default.createElement(
+                'h6',
+                null,
+                'Heading 6'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Use h1\'s for page titles. All other heading tags are the same - for more variety, scope the heading style to the component you\'re working on. Don\'t rely on tags for typography'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.'
+              )
             ),
             _react2.default.createElement('hr', null),
             _react2.default.createElement(
-              'h2',
+              'section',
               null,
-              'Colors'
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Colors'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement('span', { className: 'color-box dark-blue' }),
+                _react2.default.createElement('span', { className: 'color-box link-blue' }),
+                _react2.default.createElement('span', { className: 'color-box rule-color' }),
+                _react2.default.createElement('span', { className: 'color-box grey' })
+              )
             ),
             _react2.default.createElement(
-              'p',
+              'section',
               null,
-              _react2.default.createElement('span', { className: 'color-box dark-blue' }),
-              _react2.default.createElement('span', { className: 'color-box link-blue' }),
-              _react2.default.createElement('span', { className: 'color-box rule-color' }),
-              _react2.default.createElement('span', { className: 'color-box grey' })
-            ),
-            _react2.default.createElement(_Claim2.default, {
-              claim: {
-                text: 'claim text',
-                probability: 0.75
-              },
-              handleClick: function handleClick() {}
-            }),
-            _react2.default.createElement(_Claim2.default, {
-              claim: {
-                text: 'claim text',
-                probability: 0.5
-              },
-              handleClick: function handleClick() {}
-            })
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Claims'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'layout-cols-2__left' },
+                  _react2.default.createElement(_Claim2.default, {
+                    claim: {
+                      text: 'claim text',
+                      probability: 0.75
+                    },
+                    handleClick: function handleClick() {}
+                  })
+                ),
+                _react2.default.createElement('div', { className: 'layout-cols-2__gap' }),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'layout-cols-2__right' },
+                  _react2.default.createElement(_Claim2.default, {
+                    claim: {
+                      text: 'claim text',
+                      probability: 0.5
+                    },
+                    handleClick: function handleClick() {}
+                  })
+                )
+              )
+            )
           )
         )
       );

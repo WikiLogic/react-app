@@ -406,6 +406,9 @@ body {
   background-color: white;
   color: black; }
 
+section {
+  margin: 1rem 0; }
+
 br {
   display: block;
   padding: 0;
