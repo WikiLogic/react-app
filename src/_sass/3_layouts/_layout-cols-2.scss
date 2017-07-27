@@ -4,7 +4,7 @@
     &__left { margin-bottom: rem(20); }
     &__right { margin-bottom: rem(20); }
     
-    @include breakpoint('tiny') {
+    @include breakpoint('small') {
         display: table;
 
         &__left,
@@ -14,12 +14,10 @@
             vertical-align: top;
             margin-bottom: 0;
         }
-
+        
         &__left { width: 50%; }
-
-        &__gap { 
-            width: 10px;
-        }
+        &__gap { width: 10px; }
+        &__right { text-align: right; }
         
         &--vertical-center {
             .layout-cols-2__left,

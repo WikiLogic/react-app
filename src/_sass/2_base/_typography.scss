@@ -43,6 +43,12 @@ p {
 	p { max-width: rem(615); }
 }
 
+::selection { background-color: rgba($link-color, 0.5); }
+::-moz-selection { background-color: rgba($link-color, 0.5); }
+
+a::selection { color: white; }
+a::-moz-selection { color: white; }
+
 code, pre {
 	background: #000;
 	color: #ccc;

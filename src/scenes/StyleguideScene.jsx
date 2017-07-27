@@ -24,21 +24,27 @@ export default class StyleguideScene extends React.Component {
         <div className="page__body">
           <div className="max-width-wrap">
             <section>
-              <h2>Heading 2</h2>
-              <h3>Heading 3</h3>
-              <h4>Heading 4</h4>
-              <h5>Heading 5</h5>
-              <h6>Heading 6</h6>
-              <p>Use h1&#39;s for page titles. All other heading tags are the same -
-                for more variety, scope the heading style to the component you&#39;re working on.
-                Don&#39;t rely on tags for typography
-              </p>
-              <p>
-                123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad.
-                Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam
-                inventore recusandae iure rerum odio veniam, consectetur non.
-              </p>
+              <div className="layout-cols-2">
+                <div className="layout-cols-2__left">
+                  <h2>Heading 2</h2>
+                  <h3>Heading 3</h3>
+                  <h4>Heading 4</h4>
+                  <h5>Heading 5</h5>
+                  <h6>Heading 6</h6>
+                </div>
+                <div className="layout-cols-2__right text-align-left">
+                  <p>Use h1&#39;s for page titles. All other heading tags are the same -
+                    for more variety, scope the heading style to the component you&#39;re
+                    working on. Don&#39;t rely on tags for typography.
+                  </p>
+                  <p>
+                    123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad.
+                    Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam
+                    inventore recusandae iure rerum odio veniam, consectetur non.
+                  </p>
+                </div>
+              </div>
             </section>
             <hr />
             <section>
@@ -49,6 +55,20 @@ export default class StyleguideScene extends React.Component {
                 <span className="color-box rule-color" />
                 <span className="color-box grey" />
               </p>
+            </section>
+            <hr />
+            <section>
+              <h2>Buttons</h2>
+              <button>Button</button>
+              <input type="button" value="input type='button'" />
+              <input type="submit" value="input type='submit'" />
+            </section>
+            <hr />
+            <section>
+              <h2>Forms</h2>
+              <form action="#">
+                <input type="text" value="text input" />
+              </form>
             </section>
             <hr />
             <section>

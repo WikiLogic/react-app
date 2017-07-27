@@ -8,6 +8,9 @@
     a { 
         color: $header-color;
         @include occluded-underline($header-color, $header-background); 
+        &:focus {
+            outline-color: white;
+        }
     }
     
     a.header__title {

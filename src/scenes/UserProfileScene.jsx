@@ -18,7 +18,14 @@ export default class UserProfileScene extends React.Component {
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
-            DEMO
+            <div className="layout-cols-2">
+              <div className="layout-cols-2__left">
+                DEMO
+              </div>
+              <div className="layout-cols-2__right">
+                <button>LOGOUT</button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="page__body">

@@ -6,25 +6,33 @@ button,
 input[type='submit'],
 input[type='button'],
 .button { 
-	padding: rem(6) rem(15) rem(7); //trying to keep buttons and inputs the same height - not really enforced though
+	padding: rem(9) rem(18) rem(10); //trying to keep buttons and inputs the same height - not really enforced though
 	line-height: 1;
 	border: 0;
 	text-align: center;
 	text-transform: uppercase;
 	cursor: pointer;
 	max-width: 100%;
-	display: block;
+	display: inline-block;
+	margin-right: 2px;
 	background-color: $dark-blue;
-	border: 4px solid $dark-blue;
 	color: white;
 	fill: white;
+	border-radius: 2px;
+	position: relative;
 
-	&:hover,
-	&:focus {
-		border-color: $WL_Blue;
+	&:hover {
+		background-color: $link-blue;
 	}
 	&:active {
-		background-color: $WL_Blue;
+		background-color: $link-blue;
+		top: 1px;
+	}
+	&:focus {
+		outline-color: white;
+		outline-offset: -4px;
+		outline-style: solid;
+		outline-width: 2px;
 	}
 
 	svg {
