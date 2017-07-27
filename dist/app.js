@@ -13718,39 +13718,51 @@ var StyleguideScene = function (_React$Component) {
               'section',
               null,
               _react2.default.createElement(
-                'h2',
-                null,
-                'Heading 2'
-              ),
-              _react2.default.createElement(
-                'h3',
-                null,
-                'Heading 3'
-              ),
-              _react2.default.createElement(
-                'h4',
-                null,
-                'Heading 4'
-              ),
-              _react2.default.createElement(
-                'h5',
-                null,
-                'Heading 5'
-              ),
-              _react2.default.createElement(
-                'h6',
-                null,
-                'Heading 6'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Use h1\'s for page titles. All other heading tags are the same - for more variety, scope the heading style to the component you\'re working on. Don\'t rely on tags for typography'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.'
+                'div',
+                { className: 'layout-cols-2' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'layout-cols-2__left' },
+                  _react2.default.createElement(
+                    'h2',
+                    null,
+                    'Heading 2'
+                  ),
+                  _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Heading 3'
+                  ),
+                  _react2.default.createElement(
+                    'h4',
+                    null,
+                    'Heading 4'
+                  ),
+                  _react2.default.createElement(
+                    'h5',
+                    null,
+                    'Heading 5'
+                  ),
+                  _react2.default.createElement(
+                    'h6',
+                    null,
+                    'Heading 6'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'layout-cols-2__right text-align-left' },
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    'Use h1\'s for page titles. All other heading tags are the same - for more variety, scope the heading style to the component you\'re working on. Don\'t rely on tags for typography.'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, repellat, ad. Autem reiciendis nobis, aspernatur, quo delectus modi quae vel assumenda aliquam inventore recusandae iure rerum odio veniam, consectetur non.'
+                  )
+                )
               )
             ),
             _react2.default.createElement('hr', null),
@@ -13769,6 +13781,38 @@ var StyleguideScene = function (_React$Component) {
                 _react2.default.createElement('span', { className: 'color-box link-blue' }),
                 _react2.default.createElement('span', { className: 'color-box rule-color' }),
                 _react2.default.createElement('span', { className: 'color-box grey' })
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              'section',
+              null,
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Buttons'
+              ),
+              _react2.default.createElement(
+                'button',
+                null,
+                'Button'
+              ),
+              _react2.default.createElement('input', { type: 'button', value: 'input type=\'button\'' }),
+              _react2.default.createElement('input', { type: 'submit', value: 'input type=\'submit\'' })
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              'section',
+              null,
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Forms'
+              ),
+              _react2.default.createElement(
+                'form',
+                { action: '#' },
+                _react2.default.createElement('input', { type: 'text', value: 'text input' })
               )
             ),
             _react2.default.createElement('hr', null),
@@ -13873,7 +13917,24 @@ var UserProfileScene = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "max-width-wrap" },
-            "DEMO"
+            _react2.default.createElement(
+              "div",
+              { className: "layout-cols-2" },
+              _react2.default.createElement(
+                "div",
+                { className: "layout-cols-2__left" },
+                "DEMO"
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "layout-cols-2__right" },
+                _react2.default.createElement(
+                  "button",
+                  null,
+                  "LOGOUT"
+                )
+              )
+            )
           )
         ),
         _react2.default.createElement(
