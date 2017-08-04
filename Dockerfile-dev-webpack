@@ -8,7 +8,8 @@ WORKDIR /wldev
 
 # NPMINEM
 COPY ./package.json /wldev/
-RUN npm install
+COPY ./node_modules /wldev/node_modules
+# RUN npm install COPYing them in to cut down on docker build time
 
 COPY ./webpack.config.js /wldev/
 COPY ./.babelrc /wldev/
