@@ -30,3 +30,8 @@ styles are set in sass alongside the components. (in the components folder).
 
 /* UTILITIES - single responsability classes */
 .text-align-left { text-align: left !important; }
+
+.hi {
+  color: black;
+  background: green;
+}

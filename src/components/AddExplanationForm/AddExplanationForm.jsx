@@ -105,27 +105,29 @@ export default class AddExplanationForm extends React.Component {
           explanations to be true:
         </h4>
 
-        {/* <div className="add-argument-form__type-toggle">
-          <div className="type-toggle">
-            <label className="type-toggle__label">
-              <input className="type-toggle__input" 
-                type="radio" 
-                value="SUPPORTS" 
-                checked={this.state.argument.type == 'SUPPORTS'} 
-                onChange={() => this.handleTypeToggle('SUPPORTS')} />
-              <div className="type-toggle__text">SUPPORTS</div>
-            </label>
+        {/*
+          <div className="add-argument-form__type-toggle">
+            <div className="type-toggle">
+              <label className="type-toggle__label">
+                <input className="type-toggle__input" 
+                  type="radio" 
+                  value="SUPPORTS" 
+                  checked={this.state.argument.type == 'SUPPORTS'} 
+                  onChange={() => this.handleTypeToggle('SUPPORTS')} />
+                <div className="type-toggle__text">SUPPORTS</div>
+              </label>
 
-            <label className="type-toggle__label">
-              <input className="type-toggle__input" 
-                type="radio" 
-                value="OPPOSES" 
-                checked={this.state.argument.type == 'OPPOSES'} 
-                onChange={() => this.handleTypeToggle('OPPOSES')} />
-              <div className="type-toggle__text">OPPOSES</div>
-            </label>
+              <label className="type-toggle__label">
+                <input className="type-toggle__input" 
+                  type="radio" 
+                  value="OPPOSES" 
+                  checked={this.state.argument.type == 'OPPOSES'} 
+                  onChange={() => this.handleTypeToggle('OPPOSES')} />
+                <div className="type-toggle__text">OPPOSES</div>
+              </label>
+            </div>
           </div>
-        </div>*/}
+        */}
 
         <div className="add-argument-form__premis-finder">
           <div className="premis-finder">
