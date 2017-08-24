@@ -22,12 +22,12 @@ import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
 import Notifyer from 'WlComponents/Notifyer/Notifyer.jsx';
 
-
 const history = createHashHistory();
 
 class Wikilogic extends React.Component {
   constructor(props) {
     super(props);
+
 
     this.state = {
       searchResults: [],

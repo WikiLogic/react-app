@@ -53,6 +53,26 @@ function apilogin(username, password) {
   return loggedInPromise;
 }
 
+function areWeLoggedIn() {
+  const areWeLoggedInPromies = new Promise((resolve, reject) => {
+    fetch(`${apiRouteRoot}/claims/0`, {
+      headers: {
+        Authorization: AuthState.getToken(),
+      },
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  return areWeLoggedInPromies;
+}
+
 function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
@@ -179,4 +199,5 @@ export default {
   postNewArgument,
   postNewExplanation,
   apilogin,
+  areWeLoggedIn,
 };

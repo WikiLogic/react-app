@@ -5,14 +5,29 @@
  */
 
 let user = false;
-let token = false;
+
+function getCookie(name) {
+  const cookieArray = document.cookie.split(';');
+
+  for (let i = 0; i < cookieArray.length; i += 1) {
+    const thisCookie = cookieArray[i];
+    if (thisCookie.indexOf(name) !== -1) {
+      const startSlice = thisCookie.indexOf(name) + name.length + 1;
+      return thisCookie.substring(startSlice, thisCookie.length);
+    }
+  }
+
+  return false;
+}
 
 function getToken() {
-  return token;
+  const returnValue = getCookie('wlapi');
+  console.log('returnValue', returnValue);
+  return returnValue;
 }
 
 function setToken(newToken) {
-  token = newToken;
+  document.cookie = `wlapi=${newToken}; path=/`;
 }
 
 function getUser() {
