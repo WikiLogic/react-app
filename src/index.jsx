@@ -44,6 +44,22 @@ class Wikilogic extends React.Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
+  componentDidMount() {
+    // This is the place to trigger any network requests that need to go out on the first load
+    API.areWeLoggedIn()
+      .then((answere) => {
+        if (answere) {
+          this.setState({
+            user: {
+              isLoggedIn: true,
+            },
+          });
+        }
+      }).catch((err) => {
+        this.state.notifications.push(err);
+      });
+  }
+
   setNewClaimFocus(claim) {
     API.getClaimDetailById(claim.id)
       .then((data) => {

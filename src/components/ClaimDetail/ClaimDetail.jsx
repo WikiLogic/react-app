@@ -77,7 +77,6 @@ export default class ClaimDetail extends React.Component {
     if (typeof this.props.claim.text === 'undefined') { return null; }
     let argumentMarkup = null;
     // the arguments
-    console.log('===== this claim: ', this.props.claim);
     if (this.props.claim.arguments.length > 0) {
       argumentMarkup = this.props.claim.arguments.map(argumentObject => (
         <Argument

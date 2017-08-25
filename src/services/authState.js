@@ -22,7 +22,6 @@ function getCookie(name) {
 
 function getToken() {
   const returnValue = getCookie('wlapi');
-  console.log('returnValue', returnValue);
   return returnValue;
 }
 

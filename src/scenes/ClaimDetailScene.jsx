@@ -14,7 +14,6 @@ export default class ClaimDetailScene extends React.Component {
   }
 
   render() {
-    console.log('1, rendering claim detail scene', this.props.match.params.claimId);
     return (
       <div className="page">
         <div className="page__header">

@@ -2173,10 +2173,10 @@ function areWeLoggedIn() {
       headers: {
         Authorization: _authState2.default.getToken()
       }
-    }).then(checkStatus).then(parseJSON).then(function (res) {
-      resolve(res.data);
-    }).catch(function (err) {
-      reject(err);
+    }).then(function () {
+      resolve(true);
+    }).catch(function () {
+      reject(false);
     });
   });
 
@@ -2201,7 +2201,6 @@ function searchClaimsByTerm(searchTerm) {
 
 function getClaimDetailById(claimId) {
   var claimDetailPromise = new Promise(function (resolve, reject) {
-    console.log('api claimId', claimId);
     fetch(apiRouteRoot + '/claims/' + claimId, {
       headers: {
         Authorization: _authState2.default.getToken()
@@ -2209,7 +2208,7 @@ function getClaimDetailById(claimId) {
     }).then(checkStatus).then(parseJSON).then(function (res) {
       resolve(res.data);
     }).catch(function (err) {
-      console.log('api claim failed', err);
+      console.err('api claim failed', err);
       reject(err);
     });
   });
@@ -12384,14 +12383,32 @@ var Wikilogic = function (_React$Component) {
   }
 
   _createClass(Wikilogic, [{
-    key: 'setNewClaimFocus',
-    value: function setNewClaimFocus(claim) {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
       var _this2 = this;
 
-      _api2.default.getClaimDetailById(claim.id).then(function (data) {
-        _this2.setState({ focused_claim: data.claim });
+      // This is the place to trigger any network requests that need to go out on the first load
+      _api2.default.areWeLoggedIn().then(function (answere) {
+        if (answere) {
+          _this2.setState({
+            user: {
+              isLoggedIn: true
+            }
+          });
+        }
       }).catch(function (err) {
         _this2.state.notifications.push(err);
+      });
+    }
+  }, {
+    key: 'setNewClaimFocus',
+    value: function setNewClaimFocus(claim) {
+      var _this3 = this;
+
+      _api2.default.getClaimDetailById(claim.id).then(function (data) {
+        _this3.setState({ focused_claim: data.claim });
+      }).catch(function (err) {
+        _this3.state.notifications.push(err);
       });
     }
   }, {
@@ -12409,7 +12426,7 @@ var Wikilogic = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var authLink = null;
       if (this.state.user.isLoggedIn) {
@@ -12468,14 +12485,14 @@ var Wikilogic = function (_React$Component) {
             path: '/login',
             exact: true,
             render: function render() {
-              return _react2.default.createElement(_AuthenticationScene2.default, { updateUser: _this3.updateUser });
+              return _react2.default.createElement(_AuthenticationScene2.default, { updateUser: _this4.updateUser });
             }
           }),
           _react2.default.createElement(_reactRouterDom.Route, {
             path: '/profile',
             exact: true,
             render: function render() {
-              return _react2.default.createElement(_UserProfileScene2.default, { user: _this3.state.user });
+              return _react2.default.createElement(_UserProfileScene2.default, { user: _this4.state.user });
             }
           }),
           _react2.default.createElement(_reactRouterDom.Route, {
@@ -12508,8 +12525,8 @@ var Wikilogic = function (_React$Component) {
                   'div',
                   { className: 'sidebar-layout__side' },
                   _react2.default.createElement(_SearchResults2.default, {
-                    searchResults: _this3.state.searchResults,
-                    resultClickHandler: _this3.setNewClaimFocus
+                    searchResults: _this4.state.searchResults,
+                    resultClickHandler: _this4.setNewClaimFocus
                   })
                 )
               );
@@ -13237,7 +13254,6 @@ var ClaimChain = function (_React$Component) {
 
       // when this view opens, the ID of the claim is passed in by the props - ask the API for it!
       _api2.default.getClaimDetailById(this.props.topClaimId).then(function (data) {
-        console.log('get claim by id returned!', data);
         _this2.setState({
           isLoading: false,
           chain: [{
@@ -13265,7 +13281,6 @@ var ClaimChain = function (_React$Component) {
 
       // load in the arguments of that premis into the next level
       _api2.default.getClaimDetailById(premis.id).then(function (data) {
-        console.log('got claim dertai', data);
         newChain.push({
           claim: data.claim,
           highlighted_premis_id: ''
@@ -13478,7 +13493,6 @@ var ClaimDetail = function (_React$Component) {
       }
       var argumentMarkup = null;
       // the arguments
-      console.log('===== this claim: ', this.props.claim);
       if (this.props.claim.arguments.length > 0) {
         argumentMarkup = this.props.claim.arguments.map(function (argumentObject) {
           return _react2.default.createElement(_Argument2.default, {
@@ -14201,7 +14215,6 @@ var ClaimDetailScene = function (_React$Component) {
   _createClass(ClaimDetailScene, [{
     key: 'render',
     value: function render() {
-      console.log('1, rendering claim detail scene', this.props.match.params.claimId);
       return _react2.default.createElement(
         'div',
         { className: 'page' },
@@ -14903,7 +14916,6 @@ function getCookie(name) {
 
 function getToken() {
   var returnValue = getCookie('wlapi');
-  console.log('returnValue', returnValue);
   return returnValue;
 }
 

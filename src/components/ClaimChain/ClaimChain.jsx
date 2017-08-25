@@ -22,7 +22,6 @@ export default class ClaimChain extends React.Component {
     // when this view opens, the ID of the claim is passed in by the props - ask the API for it!
     API.getClaimDetailById(this.props.topClaimId)
       .then((data) => {
-        console.log('get claim by id returned!', data);
         this.setState({
           isLoading: false,
           chain: [{
@@ -49,7 +48,6 @@ export default class ClaimChain extends React.Component {
     // load in the arguments of that premis into the next level
     API.getClaimDetailById(premis.id)
       .then((data) => {
-        console.log('got claim dertai', data);
         newChain.push({
           claim: data.claim,
           highlighted_premis_id: '',

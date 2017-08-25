@@ -60,13 +60,11 @@ function areWeLoggedIn() {
         Authorization: AuthState.getToken(),
       },
     })
-      .then(checkStatus)
-      .then(parseJSON)
-      .then((res) => {
-        resolve(res.data);
+      .then(() => {
+        resolve(true);
       })
-      .catch((err) => {
-        reject(err);
+      .catch(() => {
+        reject(false);
       });
   });
 
@@ -95,7 +93,6 @@ function searchClaimsByTerm(searchTerm) {
 
 function getClaimDetailById(claimId) {
   const claimDetailPromise = new Promise((resolve, reject) => {
-    console.log('api claimId', claimId);
     fetch(`${apiRouteRoot}/claims/${claimId}`, {
       headers: {
         Authorization: AuthState.getToken(),
@@ -107,7 +104,7 @@ function getClaimDetailById(claimId) {
         resolve(res.data);
       })
       .catch((err) => {
-        console.log('api claim failed', err);
+        console.err('api claim failed', err);
         reject(err);
       });
   });
