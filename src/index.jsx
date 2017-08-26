@@ -6,6 +6,7 @@ import createHashHistory from 'history/createHashHistory';
 
 // JS
 import API from 'WlAPI/api.js';
+import User from 'WlServices/user.js';
 
 // Scenes
 import HomeScene from 'WlScenes/HomeScene.jsx';
@@ -41,17 +42,19 @@ class Wikilogic extends React.Component {
 
     this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
     this.notifyerHandler = this.notifyerHandler.bind(this);
-    this.updateUser = this.updateUser.bind(this);
+    this.loginSuccessHandler = this.loginSuccessHandler.bind(this);
+    this.logoutHandler = this.logoutHandler.bind(this);
   }
 
   componentDidMount() {
     // This is the place to trigger any network requests that need to go out on the first load
-    API.areWeLoggedIn()
-      .then((answere) => {
-        if (answere) {
+    User.get()
+      .then((profile) => {
+        if (profile) {
           this.setState({
             user: {
               isLoggedIn: true,
+              profile,
             },
           });
         }
@@ -73,9 +76,23 @@ class Wikilogic extends React.Component {
     this.state.notifications.push(message);
   }
 
-  updateUser(newUser) {
+  loginSuccessHandler(res) {
     this.setState({
-      user: newUser,
+      user: {
+        isLoggedIn: true,
+        profile: res.data.user,
+      },
+    });
+    history.push('/profile');
+  }
+
+  logoutHandler() {
+    User.logout(); // TODO call the server, see if you're logged in anywhere else
+    this.setState({
+      user: {
+        isLoggedIn: false,
+        profile: {},
+      },
     });
   }
 
@@ -118,17 +135,25 @@ class Wikilogic extends React.Component {
           <Route
             path="/login"
             exact
-            render={() => (
-              <AuthenticationScene updateUser={this.updateUser} />
-            )}
+            render={() => {
+              if (this.state.user.isLoggedIn) {
+                history.push('/profile');
+                return null;
+              }
+              return <AuthenticationScene loginSuccessHandler={this.loginSuccessHandler} />;
+            }}
           />
 
           <Route
             path="/profile"
             exact
-            render={() => (
-              <UserProfileScene user={this.state.user} />
-            )}
+            render={() => {
+              if (this.state.user.isLoggedIn) {
+                return <UserProfileScene user={this.state.user} logoutHandler={this.logoutHandler} />;
+              }
+              history.push('/login');
+              return null;
+            }}
           />
 
           <Route

@@ -1,5 +1,5 @@
 import React from 'react';
-import API from 'WlAPI/api.js';
+import User from 'WlServices/user.js';
 
 /**
  * Logging in!
@@ -35,15 +35,10 @@ export default class LoginForm extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    API.apilogin(this.state.username, this.state.password)
-      .then(() => {
+    User.login(this.state.username, this.state.password)
+      .then((res) => {
         // it's looking for the user
-        this.props.updateUser({
-          profile: {
-            username: 'demo',
-          },
-          isLoggedIn: true,
-        });
+        this.props.loginSuccessHandler(res);
       }).catch((err) => {
         console.log('err', err);
       });
@@ -81,5 +76,5 @@ export default class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  updateUser: React.PropTypes.func.isRequired,
+  loginSuccessHandler: React.PropTypes.func.isRequired,
 };

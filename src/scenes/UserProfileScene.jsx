@@ -11,6 +11,12 @@ export default class UserProfileScene extends React.Component {
 
     this.state = {
     };
+
+    this.logoutHandler = this.logoutHandler.bind(this);
+  }
+
+  logoutHandler() {
+    this.props.logoutHandler();
   }
 
   render() {
@@ -20,20 +26,33 @@ export default class UserProfileScene extends React.Component {
           <div className="max-width-wrap">
             <div className="layout-cols-2">
               <div className="layout-cols-2__left">
-                DEMO
+                {this.props.user.name}
               </div>
               <div className="layout-cols-2__right">
-                <button>LOGOUT</button>
+                <button onClick={this.logoutHandler}>LOGOUT</button>
               </div>
             </div>
           </div>
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            You are logged in as Demo - proper user profiles are coming soon!
+            Currently only the demo login is running, it has no profile data. Proper profiles will be coming!
           </div>
         </div>
       </div>
     );
   }
 }
+
+UserProfileScene.propTypes = {
+  logoutHandler: React.PropTypes.func.isRequired,
+  user: React.PropTypes.shape({
+    name: React.PropTypes.string,
+  }),
+};
+
+UserProfileScene.defaultProps = {
+  user: {
+    name: 'Not Logged In',
+  },
+};

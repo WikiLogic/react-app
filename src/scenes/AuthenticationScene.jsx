@@ -11,6 +11,12 @@ export default class AuthenticationScene extends React.Component {
 
     this.state = {
     };
+
+    this.loginSuccessHandler = this.loginSuccessHandler.bind(this);
+  }
+
+  loginSuccessHandler(res){
+    this.props.loginSuccessHandler(res);
   }
 
   render() {
@@ -23,7 +29,7 @@ export default class AuthenticationScene extends React.Component {
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            <LoginForm updateUser={this.props.updateUser} />
+            <LoginForm loginSuccessHandler={this.loginSuccessHandler} />
           </div>
         </div>
       </div>
@@ -32,5 +38,5 @@ export default class AuthenticationScene extends React.Component {
 }
 
 AuthenticationScene.propTypes = {
-  updateUser: React.PropTypes.func.isRequired,
+  loginSuccessHandler: React.PropTypes.func.isRequired,
 };

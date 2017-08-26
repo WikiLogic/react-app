@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
-import AuthState from 'WlServices/authState.js';
+import Cookies from 'WlServices/cookies.js';
+import Formatter from 'WlServices/formatter.js';
 
 const apiRouteRoot = '/api';
 
@@ -10,76 +11,15 @@ function checkStatus(response) {
   return null;
 }
 
-function parseJSON(response) {
-  return response.json();
-}
-
-function formDataify(jsObj) {
-  const formData = [];
-
-  Object.keys(jsObj).forEach((key) => {
-    formData.push(`${encodeURIComponent(key)}=${encodeURIComponent(jsObj[key])}`);
-  });
-
-  return formData.join('&');
-}
-
-/* The functions that call the API
- * Each returns a promise
- */
-function apilogin(username, password) {
-  const loggedInPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: formDataify({
-        name: username,
-        password,
-      }),
-    })
-      .then(checkStatus)
-      .then(parseJSON)
-      .then((res) => {
-        AuthState.setToken(`JWT ${res.token}`);
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-
-  return loggedInPromise;
-}
-
-function areWeLoggedIn() {
-  const areWeLoggedInPromies = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/claims/0`, {
-      headers: {
-        Authorization: AuthState.getToken(),
-      },
-    })
-      .then(() => {
-        resolve(true);
-      })
-      .catch(() => {
-        reject(false);
-      });
-  });
-
-  return areWeLoggedInPromies;
-}
-
 function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
       headers: {
-        Authorization: AuthState.getToken(),
+        Authorization: Cookies.get('JWT'),
       },
     })
       .then(checkStatus)
-      .then(parseJSON)
+      .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res.data);
       })
@@ -95,11 +35,11 @@ function getClaimDetailById(claimId) {
   const claimDetailPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/claims/${claimId}`, {
       headers: {
-        Authorization: AuthState.getToken(),
+        Authorization: Cookies.get('JWT'),
       },
     })
       .then(checkStatus)
-      .then(parseJSON)
+      .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res.data);
       })
@@ -118,12 +58,12 @@ function postNewClaim(claim) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AuthState.getToken(),
+        Authorization: Cookies.get('JWT'),
       },
       body: JSON.stringify(claim),
     })
       .then(checkStatus)
-      .then(parseJSON)
+      .then(parseFormatter.apiResponceToJSONJSON)
       .then((res) => {
         resolve(res);
       })
@@ -141,7 +81,7 @@ function postNewArgument(argument) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AuthState.getToken(),
+        Authorization: Cookies.get('JWT'),
       },
       body: JSON.stringify({
         parent_claim_id: argument.parent_claim_id,
@@ -150,7 +90,7 @@ function postNewArgument(argument) {
       }),
     })
       .then(checkStatus)
-      .then(parseJSON)
+      .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res);
       })
@@ -168,7 +108,7 @@ function postNewExplanation(argument) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AuthState.getToken(),
+        Authorization: Cookies.get('JWT'),
       },
       body: JSON.stringify({
         parent_claim_id: argument.parent_claim_id,
@@ -177,7 +117,7 @@ function postNewExplanation(argument) {
       }),
     })
       .then(checkStatus)
-      .then(parseJSON)
+      .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res);
       })
@@ -195,6 +135,4 @@ export default {
   postNewClaim,
   postNewArgument,
   postNewExplanation,
-  apilogin,
-  areWeLoggedIn,
 };
