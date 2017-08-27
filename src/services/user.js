@@ -36,6 +36,33 @@ function logout() {
   // tell the server?
 }
 
+function signup(email, username, password) {
+  const signupPromise = new Promise((resolve, reject) => {
+    fetch(`${apiRouteRoot}/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: Formatter.objectToFormData({
+        email,
+        name: username,
+        password,
+      }),
+    })
+      .then(Formatter.apiResponceToJSON)
+      .then((res) => {
+        JWT = res.data.token;
+        Cookies.set('JWT', `JWT ${res.data.token}`);
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  return signupPromise;
+}
+
 function get() {
   if (JWT === '') {
     JWT = Cookies.get('JWT');
@@ -67,4 +94,5 @@ export default {
   login,
   get,
   logout,
+  signup,
 };

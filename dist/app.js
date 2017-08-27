@@ -8117,6 +8117,30 @@ function logout() {
   // tell the server?
 }
 
+function signup(email, username, password) {
+  var signupPromise = new Promise(function (resolve, reject) {
+    fetch(apiRouteRoot + '/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: _formatter2.default.objectToFormData({
+        email: email,
+        name: username,
+        password: password
+      })
+    }).then(_formatter2.default.apiResponceToJSON).then(function (res) {
+      JWT = res.data.token;
+      _cookies2.default.set('JWT', 'JWT ' + res.data.token);
+      resolve(res);
+    }).catch(function (err) {
+      reject(err);
+    });
+  });
+
+  return signupPromise;
+}
+
 function get() {
   if (JWT === '') {
     JWT = _cookies2.default.get('JWT');
@@ -8144,7 +8168,8 @@ function get() {
 exports.default = {
   login: login,
   get: get,
-  logout: logout
+  logout: logout,
+  signup: signup
 };
 
 /***/ }),
@@ -12832,6 +12857,10 @@ var _LegalScene = __webpack_require__(131);
 
 var _LegalScene2 = _interopRequireDefault(_LegalScene);
 
+var _SignUpScene = __webpack_require__(274);
+
+var _SignUpScene2 = _interopRequireDefault(_SignUpScene);
+
 var _SearchResults = __webpack_require__(68);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
@@ -13013,6 +13042,17 @@ var Wikilogic = function (_React$Component) {
                 return null;
               }
               return _react2.default.createElement(_AuthenticationScene2.default, { loginSuccessHandler: _this4.loginSuccessHandler });
+            }
+          }),
+          _react2.default.createElement(_reactRouterDom.Route, {
+            path: '/signup',
+            exact: true,
+            render: function render() {
+              if (_this4.state.user.isLoggedIn) {
+                history.push('/profile');
+                return null;
+              }
+              return _react2.default.createElement(_SignUpScene2.default, { loginSuccessHandler: _this4.loginSuccessHandler });
             }
           }),
           _react2.default.createElement(_reactRouterDom.Route, {
@@ -14553,6 +14593,8 @@ var _LoginForm = __webpack_require__(123);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
+var _reactRouterDom = __webpack_require__(106);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14596,7 +14638,24 @@ var AuthenticationScene = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'max-width-wrap' },
-            'Log in!'
+            _react2.default.createElement(
+              'div',
+              { className: 'layout-cols-2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2__left' },
+                'Login!'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2__right' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: 'button', to: '/signup' },
+                  'SIGN UP'
+                )
+              )
+            )
           )
         ),
         _react2.default.createElement(
@@ -30900,6 +30959,287 @@ module.exports = traverseAllChildren;
 __webpack_require__(115);
 module.exports = __webpack_require__(116);
 
+
+/***/ }),
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _user = __webpack_require__(72);
+
+var _user2 = _interopRequireDefault(_user);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * Logging in!
+ * The API uses JSON Web Tokens which we'll have to pass with every request
+ */
+
+var LoginForm = function (_React$Component) {
+  _inherits(LoginForm, _React$Component);
+
+  function LoginForm(props) {
+    _classCallCheck(this, LoginForm);
+
+    var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+
+    _this.username = '';
+    _this.password = '';
+    _this.state = {
+      username: '',
+      password: '',
+      message: ''
+    };
+    _this.handleEmailChange = _this.handleEmailChange.bind(_this);
+    _this.handleUsernameChange = _this.handleUsernameChange.bind(_this);
+    _this.handlePasswordChange = _this.handlePasswordChange.bind(_this);
+    _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(LoginForm, [{
+    key: 'handleEmailChange',
+    value: function handleEmailChange(event) {
+      this.setState({
+        username: event.target.value
+      });
+    }
+  }, {
+    key: 'handleUsernameChange',
+    value: function handleUsernameChange(event) {
+      this.setState({
+        username: event.target.value
+      });
+    }
+  }, {
+    key: 'handlePasswordChange',
+    value: function handlePasswordChange(event) {
+      this.setState({
+        password: event.target.value
+      });
+    }
+  }, {
+    key: 'handleFormSubmit',
+    value: function handleFormSubmit(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      _user2.default.signup(this.state.email, this.state.username, this.state.password).then(function (res) {
+        // it's looking for the user
+        _this2.props.loginSuccessHandler(res);
+      }).catch(function (err) {
+        console.log('err', err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'email' },
+            'Email'
+          ),
+          _react2.default.createElement('input', {
+            type: 'text',
+            id: 'email',
+            name: 'email',
+            value: this.state.email,
+            onChange: this.handleEmailChange
+          })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'username' },
+            'Username'
+          ),
+          _react2.default.createElement('input', {
+            type: 'text',
+            id: 'username',
+            name: 'username',
+            value: this.state.username,
+            onChange: this.handleUsernameChange
+          })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'password' },
+            'Password'
+          ),
+          _react2.default.createElement('input', {
+            type: 'password',
+            id: 'password',
+            name: 'password',
+            value: this.state.password,
+            onChange: this.handlePasswordChange
+          })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { type: 'submit', value: 'login', onClick: this.handleFormSubmit })
+        )
+      );
+    }
+  }]);
+
+  return LoginForm;
+}(_react2.default.Component);
+
+exports.default = LoginForm;
+
+
+LoginForm.propTypes = {
+  loginSuccessHandler: _react2.default.PropTypes.func.isRequired
+};
+
+/***/ }),
+/* 274 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _SignUpForm = __webpack_require__(273);
+
+var _SignUpForm2 = _interopRequireDefault(_SignUpForm);
+
+var _reactRouterDom = __webpack_require__(106);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * The Authentication page (logging in!)
+ * @prop {*} name 
+ */
+var SignUpScene = function (_React$Component) {
+  _inherits(SignUpScene, _React$Component);
+
+  function SignUpScene(props) {
+    _classCallCheck(this, SignUpScene);
+
+    var _this = _possibleConstructorReturn(this, (SignUpScene.__proto__ || Object.getPrototypeOf(SignUpScene)).call(this, props));
+
+    _this.state = {};
+
+    _this.loginSuccessHandler = _this.loginSuccessHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(SignUpScene, [{
+    key: 'loginSuccessHandler',
+    value: function loginSuccessHandler(res) {
+      this.props.loginSuccessHandler(res);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'page' },
+        _react2.default.createElement(
+          'div',
+          { className: 'page__header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            _react2.default.createElement(
+              'div',
+              { className: 'layout-cols-2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2__left' },
+                'Create a new account!'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2__right' },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { className: 'button', to: '/login' },
+                  'LOGIN'
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'page__body' },
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width-wrap' },
+            _react2.default.createElement(_SignUpForm2.default, { loginSuccessHandler: this.loginSuccessHandler })
+          )
+        )
+      );
+    }
+  }]);
+
+  return SignUpScene;
+}(_react2.default.Component);
+
+exports.default = SignUpScene;
+
+
+SignUpScene.propTypes = {
+  loginSuccessHandler: _react2.default.PropTypes.func.isRequired
+};
 
 /***/ })
 /******/ ]);

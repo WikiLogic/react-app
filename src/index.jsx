@@ -17,6 +17,7 @@ import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
 import AuthenticationScene from 'WlScenes/AuthenticationScene.jsx';
 import UserProfileScene from 'WlScenes/UserProfileScene.jsx';
 import LegalScene from 'WlScenes/LegalScene.jsx';
+import SignUpScene from 'WlScenes/SignUpScene.jsx';
 
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
@@ -141,6 +142,18 @@ class Wikilogic extends React.Component {
                 return null;
               }
               return <AuthenticationScene loginSuccessHandler={this.loginSuccessHandler} />;
+            }}
+          />
+
+          <Route
+            path="/signup"
+            exact
+            render={() => {
+              if (this.state.user.isLoggedIn) {
+                history.push('/profile');
+                return null;
+              }
+              return <SignUpScene loginSuccessHandler={this.loginSuccessHandler} />;
             }}
           />
 

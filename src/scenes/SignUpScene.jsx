@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginForm from 'WlComponents/LoginForm/LoginForm.jsx';
+import SignUpForm from 'WlComponents/SignUpForm/SignUpForm.jsx';
 import { Link } from 'react-router-dom';
 
 /**
  * The Authentication page (logging in!)
  * @prop {*} name 
  */
-export default class AuthenticationScene extends React.Component {
+export default class SignUpScene extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,17 +27,17 @@ export default class AuthenticationScene extends React.Component {
           <div className="max-width-wrap">
             <div className="layout-cols-2">
               <div className="layout-cols-2__left">
-                Login!
+                Create a new account!
               </div>
               <div className="layout-cols-2__right">
-                <Link className="button" to="/signup">SIGN UP</Link>
+                <Link className="button" to="/login">LOGIN</Link>
               </div>
             </div>
           </div>
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            <LoginForm loginSuccessHandler={this.loginSuccessHandler} />
+            <SignUpForm loginSuccessHandler={this.loginSuccessHandler} />
           </div>
         </div>
       </div>
@@ -45,6 +45,6 @@ export default class AuthenticationScene extends React.Component {
   }
 }
 
-AuthenticationScene.propTypes = {
+SignUpScene.propTypes = {
   loginSuccessHandler: React.PropTypes.func.isRequired,
 };
