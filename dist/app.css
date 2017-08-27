@@ -199,22 +199,6 @@ hr {
   box-sizing: content-box;
   height: 0; }
 
-/**
- * Contain overflow in all browsers.
- */
-pre {
-  overflow: auto; }
-
-/**
- * Address odd `em`-unit font size rendering in all browsers.
- */
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em; }
-
 /* Forms
    ========================================================================== */
 /**
@@ -428,7 +412,7 @@ button,
 input[type='submit'],
 input[type='button'],
 .button {
-  padding: 0.5625rem 1.125rem 0.625rem;
+  padding: 0.75rem 1.125rem 0.875rem;
   line-height: 1;
   border: 0;
   text-align: center;
@@ -467,6 +451,14 @@ input[type='button'],
   .button svg {
     width: 1em;
     height: 1em; }
+
+pre {
+  font-family: monospace, monospace;
+  background: #000;
+  color: #fdfdfd;
+  font-size: 12px;
+  overflow: auto;
+  padding: 5px; }
 
 input[type='text'], input[type='password'], input[type='search'], textarea {
   background-color: white;
@@ -569,11 +561,6 @@ a::selection {
 a::-moz-selection {
   color: white; }
 
-code, pre {
-  background: #000;
-  color: #ccc;
-  font: 12px/1.2 Menlo, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif; }
-
 span {
   vertical-align: middle; }
 
@@ -630,6 +617,10 @@ ul {
 LAYOUTS
 columns, sidebars, grids, layout things!
 */
+.flex-row {
+  display: flex;
+  align-items: center; }
+
 .layout-cols-2 {
   width: 100%; }
   .layout-cols-2__left {
@@ -948,6 +939,20 @@ styles are set in sass alongside the components. (in the components folder).
       width: 21%;
       min-width: 290px;
       margin: 0.5rem; }
+
+.input-button {
+  display: flex;
+  width: 100%; }
+  .input-button input {
+    flex: 1;
+    vertical-align: middle;
+    margin-bottom: 0;
+    border-right-width: 0; }
+  .input-button button {
+    vertical-align: middle;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-right: 0; }
 
 .modal {
   position: fixed;
@@ -1442,8 +1447,17 @@ styles are set in sass alongside the components. (in the components folder).
     text-align: center; }
 
 /* UTILITIES - single responsability classes */
-.text-align-left {
+.text-align-left, .text-left {
   text-align: left !important; }
+
+.text-right {
+  text-align: right !important; }
+
+.width-100 {
+  width: 100% !important; }
+
+.no-margin {
+  margin: 0 !important; }
 
 .hi {
   color: black;

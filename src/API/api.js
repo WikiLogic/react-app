@@ -129,10 +129,56 @@ function postNewExplanation(argument) {
   return newExplanationPromise;
 }
 
+function get(url) {
+  const getPromise = new Promise((resolve, reject) => {
+    fetch(`${apiRouteRoot}/${url}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: Cookies.get('JWT'),
+      },
+    })
+      .then(checkStatus)
+      .then(Formatter.apiResponceToJSON)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  return getPromise;
+}
+
+function post(url, data) {
+  const postPromise = new Promise((resolve, reject) => {
+    fetch(`${apiRouteRoot}/${url}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: Cookies.get('JWT'),
+      },
+      body: JSON.stringify(data),
+    })
+      .then(checkStatus)
+      .then(Formatter.apiResponceToJSON)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  return postPromise;
+}
+
 export default {
   searchClaimsByTerm,
   getClaimDetailById,
   postNewClaim,
   postNewArgument,
   postNewExplanation,
+  get,
+  post,
 };

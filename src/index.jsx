@@ -18,6 +18,7 @@ import AuthenticationScene from 'WlScenes/AuthenticationScene.jsx';
 import UserProfileScene from 'WlScenes/UserProfileScene.jsx';
 import LegalScene from 'WlScenes/LegalScene.jsx';
 import SignUpScene from 'WlScenes/SignUpScene.jsx';
+import ApiDev from 'WlScenes/ApiDev.jsx';
 
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
@@ -185,6 +186,14 @@ class Wikilogic extends React.Component {
             )}
           />
 
+          <Route
+            path="/api-dev"
+            exact
+            render={() => (
+              <ApiDev />
+            )}
+          />
+
           {/* Edit claim page ... not sure if this should really be a thing */}
           <Route
             path="/edit-claim"
@@ -224,6 +233,7 @@ class Wikilogic extends React.Component {
               <Link to="/privacy-policy" className="footer__util-link">Privacy policy</Link>
               <Link to="/terms-of-use" className="footer__util-link">Terms of use</Link>
               <Link to="/styleguide" className="footer__util-link">Styleguide</Link>
+              <Link to="/api-dev" className="footer__util-link">API</Link>
             </div>
 
           </footer>

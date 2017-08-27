@@ -29,7 +29,11 @@ styles are set in sass alongside the components. (in the components folder).
 @import "components/**/*.scss";
 
 /* UTILITIES - single responsability classes */
-.text-align-left { text-align: left !important; }
+.text-align-left, .text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+.width-100 { width: 100% !important; }
+.no-margin { margin: 0 !important; }
 
 .hi {
   color: black;
