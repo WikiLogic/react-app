@@ -31116,7 +31116,7 @@ var LoginForm = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'form-group' },
-          _react2.default.createElement('input', { type: 'submit', value: 'login', onClick: this.handleFormSubmit })
+          _react2.default.createElement('input', { type: 'submit', value: 'Sign up!', onClick: this.handleFormSubmit })
         )
       );
     }

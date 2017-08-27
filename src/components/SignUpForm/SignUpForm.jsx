@@ -85,7 +85,7 @@ export default class LoginForm extends React.Component {
           />
         </div>
         <div className="form-group">
-          <input type="submit" value="login" onClick={this.handleFormSubmit} />
+          <input type="submit" value="Sign up!" onClick={this.handleFormSubmit} />
         </div>
       </form>
     );
