@@ -29,5 +29,8 @@ export default class Code extends React.Component {
 }
 
 Code.propTypes = {
-  code: React.PropTypes.string.isRequired,
+  code: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object,
+  ])
 };

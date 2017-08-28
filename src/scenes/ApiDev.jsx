@@ -1,6 +1,5 @@
 import React from 'react';
 import API from 'WlAPI/api.js';
-import urlParameter from 'WlServices/urlParameter.js';
 import Notify from 'WlServices/notify.js';
 import Code from 'WlComponents/Code/Code.jsx';
 import InputButton from 'WlComponents/InputButton/InputButton.jsx';
@@ -14,50 +13,14 @@ export default class ApiDev extends React.Component {
 
     this.state = {
       url: '',
-      body: {},
+      body: '',
+      result: '',
     };
 
-    this.searchClaims = this.searchClaims.bind(this);
     this.updateUrl = this.updateUrl.bind(this);
+    this.updateBody = this.updateBody.bind(this);
     this.get = this.get.bind(this);
-  }
-
-  componentDidMount() {
-    // get the search param to see if there is anything there
-    const URLsearchTerm = urlParameter.get('s', this.props.location.search);
-
-    // if there is
-    if (URLsearchTerm) {
-      // and run the search
-      this.searchClaims(URLsearchTerm);
-    }
-  }
-
-  searchClaims(search) {
-    // run the search
-    if (isNaN(search)) {
-      API.searchClaimsByTerm(search)
-        .then((data) => {
-          this.setState({ searchResults: data.claims });
-        }).catch((err) => {
-          Notify.post(err);
-        });
-    } else {
-      API.getClaimDetailById(search)
-        .then((data) => {
-          this.setState({ focused_claim: data.claim });
-        }).catch((err) => {
-          Notify.post(err);
-        });
-    }
-
-    // add it to the url
-    this.props.history.push(`/search?s=${search}`);
-
-    // set the state
-    this.setState({
-      search_term: search,
-    });
+    this.post = this.post.bind(this);
   }
 
   updateUrl(newUrl) {
@@ -66,8 +29,28 @@ export default class ApiDev extends React.Component {
     });
   }
 
-  get(){
+  updateBody(newBody) {
+    this.setState({
+      body: newBody,
+    });
+  }
 
+  get() {
+    API.get(this.state.url).then((res) => {
+      console.log("in get", res);
+      this.setState({
+        result: res,
+      });
+    });
+  }
+
+  post() {
+    API.post(this.state.url, this.state.body).then((res) => {
+
+      this.setState({
+        result: res,
+      });
+    });
   }
 
 
@@ -77,7 +60,16 @@ export default class ApiDev extends React.Component {
         <div className="page__header">
           <div className="max-width-wrap">
 
-            The API
+            <div className="layout-cols-2">
+              <div className="layout-cols-2__left">
+                Submit to the API
+              </div>
+              <div className="layout-cols-2__gap" />
+              <div className="layout-cols-2__right text-left">
+                See what comes back
+              </div>
+            </div>
+
 
           </div>
         </div>
@@ -92,7 +84,6 @@ export default class ApiDev extends React.Component {
                   <div style={{ padding: '5px' }}>/api/</div>
                   <InputButton
                     inputType="text"
-                    inputValue={this.state.url}
                     buttonText="GET"
                     submitHandler={this.get}
                     onChange={this.updateUrl}
@@ -102,26 +93,28 @@ export default class ApiDev extends React.Component {
                 <br />
 
                 <div>
-                  <textarea className="width-100" name="" id="" cols="30" rows="10" />
+                  <textarea
+                    className="width-100"
+                    value={this.state.body}
+                    onChange={this.updateBody}
+                  />
                 </div>
 
                 <div className="text-right">
-                  <button>POST</button>
+                  <button onClick={this.post}>POST</button>
                 </div>
 
               </div>
               <div className="layout-cols-2__gap" />
               <div className="layout-cols-2__right text-left">
-                Result:
 
-                <Code code={{
-                  data: 'data',
-                  errors: 'errors',
-                }}
-                />
+                <Code code={this.state.result} />
 
               </div>
             </div>
+
+            <p>Here are some examples:</p>
+            <p>/claims/5</p>
 
           </div>
         </div>
@@ -131,10 +124,5 @@ export default class ApiDev extends React.Component {
 }
 
 ApiDev.propTypes = {
-  history: React.PropTypes.shape({
-    push: React.PropTypes.func.isRequired,
-  }).isRequired,
-  location: React.PropTypes.shape({
-    search: React.PropTypes.string.isRequired,
-  }).isRequired,
+
 };

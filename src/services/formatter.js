@@ -8,9 +8,20 @@ function objectToFormData(jsObj) {
   return formData.join('&');
 }
 
+function IsJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 function apiResponceToJSON(response) {
-  console.log('response', response);
-  return response.json();
+  if (IsJsonString(response)) {
+    return response.json();
+  }
+  return response;
 }
 
 export default {

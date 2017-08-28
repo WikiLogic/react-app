@@ -63,7 +63,7 @@ function postNewClaim(claim) {
       body: JSON.stringify(claim),
     })
       .then(checkStatus)
-      .then(parseFormatter.apiResponceToJSONJSON)
+      .then(Formatter.apiResponceToJSONJSON)
       .then((res) => {
         resolve(res);
       })

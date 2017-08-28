@@ -11,7 +11,7 @@ export default class InputButton extends React.Component {
     super(props);
 
     let setInputValue = '';
-    if (this.props.hasOwnProperty('inputValue')) {
+    if (props.hasOwnProperty('inputValue')) {
       setInputValue = this.props.inputValue;
     } else {
       setInputValue = '';
@@ -21,21 +21,28 @@ export default class InputButton extends React.Component {
       value: setInputValue,
     };
     this.submitHandler = this.submitHandler.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.inputUpdateHandler = this.inputUpdateHandler.bind(this);
   }
 
   submitHandler() {
     this.props.submitHandler(this.state.value);
   }
 
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      this.submitHandler();
+    }
+  }
+
   inputUpdateHandler(event) {
     if (this.props.hasOwnProperty('onChange')) {
-
       this.props.onChange(event.target.value);
-    } else {
-      this.setState({
-        value: event.target.value,
-      });
     }
+
+    this.setState({
+      value: event.target.value,
+    });
   }
 
   render() {
@@ -45,8 +52,9 @@ export default class InputButton extends React.Component {
           type={this.props.inputType}
           value={this.state.value}
           onChange={this.inputUpdateHandler}
+          onKeyPress={this.handleKeyPress}
         />
-        <button>{this.props.buttonText}</button>
+        <button onClick={this.submitHandler}>{this.props.buttonText}</button>
       </div>
     );
   }

@@ -458,7 +458,8 @@ pre {
   color: #fdfdfd;
   font-size: 12px;
   overflow: auto;
-  padding: 5px; }
+  padding: 5px;
+  margin: 0; }
 
 input[type='text'], input[type='password'], input[type='search'], textarea {
   background-color: white;
