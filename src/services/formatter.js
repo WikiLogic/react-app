@@ -18,10 +18,23 @@ function IsJsonString(str) {
 }
 
 function apiResponceToJSON(response) {
-  if (IsJsonString(response)) {
-    return response.json();
+  if (response.status === 401) {
+    return 'request unauthorized - try logging in';
   }
-  return response;
+  if (response.status === 500) {
+    return 'server error, check the netowrk tab in the dev tools for more details';
+  }
+
+  let returnObject;
+  try {
+    returnObject = response.json();
+  } catch (e) {
+    returnObject = {
+      error: e,
+      response,
+    };
+  }
+  return returnObject;
 }
 
 export default {

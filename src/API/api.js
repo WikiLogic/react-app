@@ -137,7 +137,7 @@ function get(url) {
         Authorization: Cookies.get('JWT'),
       },
     })
-      .then(checkStatus)
+      // .then(checkStatus)
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res);
@@ -160,7 +160,7 @@ function post(url, data) {
       },
       body: JSON.stringify(data),
     })
-      .then(checkStatus)
+      // .then(checkStatus)
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res);

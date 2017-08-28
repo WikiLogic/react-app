@@ -2320,7 +2320,9 @@ function get(url) {
         'Content-Type': 'application/json',
         Authorization: _cookies2.default.get('JWT')
       }
-    }).then(checkStatus).then(_formatter2.default.apiResponceToJSON).then(function (res) {
+    })
+    // .then(checkStatus)
+    .then(_formatter2.default.apiResponceToJSON).then(function (res) {
       resolve(res);
     }).catch(function (err) {
       reject(err);
@@ -2339,7 +2341,9 @@ function post(url, data) {
         Authorization: _cookies2.default.get('JWT')
       },
       body: JSON.stringify(data)
-    }).then(checkStatus).then(_formatter2.default.apiResponceToJSON).then(function (res) {
+    })
+    // .then(checkStatus)
+    .then(_formatter2.default.apiResponceToJSON).then(function (res) {
       resolve(res);
     }).catch(function (err) {
       reject(err);
@@ -8269,10 +8273,23 @@ function IsJsonString(str) {
 }
 
 function apiResponceToJSON(response) {
-  if (IsJsonString(response)) {
-    return response.json();
+  if (response.status === 401) {
+    return 'request unauthorized - try logging in';
   }
-  return response;
+  if (response.status === 500) {
+    return 'server error, check the netowrk tab in the dev tools for more details';
+  }
+
+  var returnObject = void 0;
+  try {
+    returnObject = response.json();
+  } catch (e) {
+    returnObject = {
+      error: e,
+      response: response
+    };
+  }
+  return returnObject;
 }
 
 exports.default = {
@@ -15195,7 +15212,6 @@ var ApiDev = function (_React$Component) {
       var _this2 = this;
 
       _api2.default.get(this.state.url).then(function (res) {
-        console.log("in get", res);
         _this2.setState({
           result: res
         });
@@ -15287,6 +15303,30 @@ var ApiDev = function (_React$Component) {
                     { onClick: this.post },
                     'POST'
                   )
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Here are some examples:',
+                  _react2.default.createElement(
+                    'ul',
+                    null,
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'test'
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'claims/5'
+                    ),
+                    _react2.default.createElement(
+                      'li',
+                      null,
+                      'claims?search=test'
+                    )
+                  )
                 )
               ),
               _react2.default.createElement('div', { className: 'layout-cols-2__gap' }),
@@ -15295,16 +15335,6 @@ var ApiDev = function (_React$Component) {
                 { className: 'layout-cols-2__right text-left' },
                 _react2.default.createElement(_Code2.default, { code: this.state.result })
               )
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'Here are some examples:'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              '/claims/5'
             )
           )
         )

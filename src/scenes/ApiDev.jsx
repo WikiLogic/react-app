@@ -37,7 +37,6 @@ export default class ApiDev extends React.Component {
 
   get() {
     API.get(this.state.url).then((res) => {
-      console.log("in get", res);
       this.setState({
         result: res,
       });
@@ -104,6 +103,15 @@ export default class ApiDev extends React.Component {
                   <button onClick={this.post}>POST</button>
                 </div>
 
+                <p>
+                  Here are some examples:
+                  <ul>
+                    <li>test</li>
+                    <li>claims/5</li>
+                    <li>claims?search=test</li>
+                  </ul>
+                </p>
+
               </div>
               <div className="layout-cols-2__gap" />
               <div className="layout-cols-2__right text-left">
@@ -112,9 +120,6 @@ export default class ApiDev extends React.Component {
 
               </div>
             </div>
-
-            <p>Here are some examples:</p>
-            <p>/claims/5</p>
 
           </div>
         </div>
