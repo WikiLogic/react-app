@@ -12931,6 +12931,10 @@ var _ApiDev = __webpack_require__(130);
 
 var _ApiDev2 = _interopRequireDefault(_ApiDev);
 
+var _UberGraph = __webpack_require__(280);
+
+var _UberGraph2 = _interopRequireDefault(_UberGraph);
+
 var _SearchResults = __webpack_require__(70);
 
 var _SearchResults2 = _interopRequireDefault(_SearchResults);
@@ -13092,6 +13096,11 @@ var Wikilogic = function (_React$Component) {
                 { to: '/new-claim' },
                 'New claim'
               ),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/uber-graph' },
+                'Uber Graph'
+              ),
               authLink
             )
           )
@@ -13103,6 +13112,7 @@ var Wikilogic = function (_React$Component) {
           _react2.default.createElement(_reactRouterDom.Route, { path: '/search', exact: true, component: _SearchScene2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/claim/:claimId', exact: true, component: _ClaimDetailScene2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/new-claim', exact: true, component: _ClaimCreateScene2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/uber-graph', exact: true, component: _UberGraph2.default }),
           _react2.default.createElement(_reactRouterDom.Route, {
             path: '/login',
             exact: true,
@@ -31897,6 +31907,158 @@ Range.propTypes = {
   labelText: _react2.default.PropTypes.string.isRequired,
   handleValueUpdate: _react2.default.PropTypes.func.isRequired
 };
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDigraph = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-digraph\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _reactDigraph2 = _interopRequireDefault(_reactDigraph);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GraphConfig = {
+  NodeTypes: {
+    empty: {
+      typeText: 'None',
+      shapeId: '#empty',
+      shape: _react2.default.createElement(
+        'symbol',
+        { viewBox: '0 0 100 100', id: 'empty', key: '0' },
+        _react2.default.createElement('circle', { cx: '50', cy: '50', r: '45' })
+      )
+    }
+  },
+  NodeSubtypes: {},
+  EdgeTypes: {
+    emptyEdge: {
+      shapeId: '#emptyEdge',
+      shape: _react2.default.createElement(
+        'symbol',
+        { viewBox: '0 0 50 50', id: 'emptyEdge', key: '0' },
+        _react2.default.createElement('circle', { cx: '25', cy: '25', r: '8', fill: 'currentColor' })
+      )
+    }
+  }
+};
+
+var EMPTY_TYPE = 'empty'; // Text on empty nodes is positioned differently 
+var NODE_KEY = 'id'; // Allows D3 to correctly update DOM
+
+var Graph = function (_React$Component) {
+  _inherits(Graph, _React$Component);
+
+  function Graph(props) {
+    _classCallCheck(this, Graph);
+
+    var _this = _possibleConstructorReturn(this, (Graph.__proto__ || Object.getPrototypeOf(Graph)).call(this, props));
+
+    _this.state = {
+      graph: {
+        nodes: [{
+          id: 1,
+          title: 'Node ',
+          x: 258.3976135253906,
+          y: 331.9783248901367,
+          type: 'empty'
+        }, {
+          id: 2,
+          title: 'Node B',
+          x: 593.9393920898438,
+          y: 260.6060791015625,
+          type: 'empty'
+        }, {
+          id: 3,
+          title: 'Node C',
+          x: 237.5757598876953,
+          y: 61.81818389892578,
+          type: 'empty'
+        }, {
+          id: 4,
+          title: 'Node C',
+          x: 600.5757598876953,
+          y: 600.81818389892578,
+          type: 'empty'
+        }],
+        edges: [{
+          source: 1,
+          target: 2,
+          type: 'emptyEdge'
+        }, {
+          source: 2,
+          target: 4,
+          type: 'emptyEdge'
+        }]
+      },
+      selected: {}
+    };
+    return _this;
+  }
+
+  /* Define custom graph editing methods here */
+
+  _createClass(Graph, [{
+    key: 'render',
+    value: function render() {
+      var nodes = this.state.graph.nodes;
+      var edges = this.state.graph.edges;
+      var selected = this.state.selected;
+
+      var NodeTypes = GraphConfig.NodeTypes;
+      var NodeSubtypes = GraphConfig.NodeSubtypes;
+      var EdgeTypes = GraphConfig.EdgeTypes;
+
+      return _react2.default.createElement(
+        'div',
+        { id: 'graph' },
+        _react2.default.createElement(_reactDigraph2.default, {
+          ref: 'GraphView',
+          nodeKey: NODE_KEY,
+          emptyType: EMPTY_TYPE,
+          nodes: nodes,
+          edges: edges,
+          selected: selected,
+          nodeTypes: NodeTypes,
+          nodeSubtypes: NodeSubtypes,
+          edgeTypes: EdgeTypes,
+          getViewNode: this.getViewNode,
+          onSelectNode: this.onSelectNode,
+          onCreateNode: this.onCreateNode,
+          onUpdateNode: this.onUpdateNode,
+          onDeleteNode: this.onDeleteNode,
+          onSelectEdge: this.onSelectEdge,
+          onCreateEdge: this.onCreateEdge,
+          onSwapEdge: this.onSwapEdge,
+          onDeleteEdge: this.onDeleteEdge
+        })
+      );
+    }
+  }]);
+
+  return Graph;
+}(_react2.default.Component);
+
+exports.default = Graph;
 
 /***/ })
 /******/ ]);

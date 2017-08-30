@@ -19,6 +19,7 @@ import UserProfileScene from 'WlScenes/UserProfileScene.jsx';
 import LegalScene from 'WlScenes/LegalScene.jsx';
 import SignUpScene from 'WlScenes/SignUpScene.jsx';
 import ApiDev from 'WlScenes/ApiDev.jsx';
+import UberGraphScene from 'WlScenes/UberGraph.jsx';
 
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
@@ -117,6 +118,7 @@ class Wikilogic extends React.Component {
             <div className="header__links">
               <Link to="/search">Search</Link>
               <Link to="/new-claim">New claim</Link>
+              <Link to="/uber-graph">Uber Graph</Link>
               {authLink}
             </div>
 
@@ -127,12 +129,10 @@ class Wikilogic extends React.Component {
         <main className="main__body">
 
           <Route path="/" exact component={HomeScene} />
-
           <Route path="/search" exact component={SearchScene} />
-
           <Route path="/claim/:claimId" exact component={ClaimDetailScene} />
-
           <Route path="/new-claim" exact component={ClaimCreateScene} />
+          <Route path="/uber-graph" exact component={UberGraphScene} />
 
           <Route
             path="/login"
