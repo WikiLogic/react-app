@@ -11,8 +11,10 @@ export default class AddClaimForm extends React.Component {
     super(props);
     this.state = {
       text: '',
+      value: 0,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleValueUpdate = this.handleValueUpdate.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
 
@@ -22,15 +24,23 @@ export default class AddClaimForm extends React.Component {
     });
   }
 
+  handleValueUpdate(newValue) {
+    this.setState({
+      value: newValue,
+    });
+  }
+
   submitHandler(event) {
     event.preventDefault();
 
-    API.postNewClaim({ text: this.state.text })
-      .then((data) => {
-        Notify.post(data);
-      }).catch((err) => {
-        Notify.post(err);
-      });
+    API.postNewClaim({
+      text: this.state.text,
+      value: this.state.value,
+    }).then((data) => {
+      Notify.post(data);
+    }).catch((err) => {
+      Notify.post(err);
+    });
   }
 
   render() {
@@ -42,7 +52,15 @@ export default class AddClaimForm extends React.Component {
             Write up your new claim
           </label>
           <textarea className="form__input" id="new-claim-text" onChange={this.handleChange} />
-          <Range min={1} max={99} step={1} inputId="new-claim-value" labelText="Assign a value" />
+          <Range
+            min={1}
+            max={99}
+            step={1}
+            value={this.state.value}
+            inputId="new-claim-value"
+            labelText="Assign a value"
+            handleValueUpdate={this.handleValueUpdate}
+          />
         </div>
 
         <div className="form__submit">

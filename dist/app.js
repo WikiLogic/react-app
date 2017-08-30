@@ -13567,9 +13567,11 @@ var AddClaimForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AddClaimForm.__proto__ || Object.getPrototypeOf(AddClaimForm)).call(this, props));
 
     _this.state = {
-      text: ''
+      text: '',
+      value: 0
     };
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleValueUpdate = _this.handleValueUpdate.bind(_this);
     _this.submitHandler = _this.submitHandler.bind(_this);
     return _this;
   }
@@ -13582,11 +13584,21 @@ var AddClaimForm = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleValueUpdate',
+    value: function handleValueUpdate(newValue) {
+      this.setState({
+        value: newValue
+      });
+    }
+  }, {
     key: 'submitHandler',
     value: function submitHandler(event) {
       event.preventDefault();
 
-      _api2.default.postNewClaim({ text: this.state.text }).then(function (data) {
+      _api2.default.postNewClaim({
+        text: this.state.text,
+        value: this.state.value
+      }).then(function (data) {
         _notify2.default.post(data);
       }).catch(function (err) {
         _notify2.default.post(err);
@@ -13607,7 +13619,15 @@ var AddClaimForm = function (_React$Component) {
             'Write up your new claim'
           ),
           _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleChange }),
-          _react2.default.createElement(_Range2.default, { min: 1, max: 99, step: 1, inputId: 'new-claim-value', labelText: 'Assign a value' })
+          _react2.default.createElement(_Range2.default, {
+            min: 1,
+            max: 99,
+            step: 1,
+            value: this.state.value,
+            inputId: 'new-claim-value',
+            labelText: 'Assign a value',
+            handleValueUpdate: this.handleValueUpdate
+          })
         ),
         _react2.default.createElement(
           'div',
@@ -31783,11 +31803,6 @@ var Range = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Range.__proto__ || Object.getPrototypeOf(Range)).call(this, props));
 
-    _this.state = {
-      value: 0,
-      left: 0
-    };
-
     _this.updateValue = _this.updateValue.bind(_this);
     return _this;
   }
@@ -31795,12 +31810,12 @@ var Range = function (_React$Component) {
   _createClass(Range, [{
     key: 'updateValue',
     value: function updateValue(event) {
-      var newValue = this.state.value;
+      var newValue = this.props.value;
       if (typeof event === 'boolean') {
         if (event) {
-          newValue += 1;
+          newValue += this.props.step;
         } else {
-          newValue -= 1;
+          newValue -= this.props.step;
         }
       }
 
@@ -31816,15 +31831,14 @@ var Range = function (_React$Component) {
         newValue = this.props.min;
       }
 
-      this.setState({
-        value: newValue,
-        left: newValue / this.props.max * 100
-      });
+      this.props.handleValueUpdate(newValue);
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
+
+      var left = this.props.value / this.props.max * 100;
 
       return _react2.default.createElement(
         'div',
@@ -31847,7 +31861,7 @@ var Range = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'range__bar' },
-            _react2.default.createElement('div', { className: 'range__dragger', style: { left: this.state.left + '%' } })
+            _react2.default.createElement('div', { className: 'range__dragger', style: { left: left + '%' } })
           ),
           _react2.default.createElement(
             'button',
@@ -31861,7 +31875,7 @@ var Range = function (_React$Component) {
           className: 'range__input',
           type: 'number',
           id: this.props.inputId,
-          value: this.state.value,
+          value: this.props.value,
           onChange: this.updateValue
         })
       );
@@ -31878,8 +31892,10 @@ Range.propTypes = {
   max: _react2.default.PropTypes.number.isRequired,
   min: _react2.default.PropTypes.number.isRequired,
   step: _react2.default.PropTypes.number.isRequired,
+  value: _react2.default.PropTypes.number.isRequired,
   inputId: _react2.default.PropTypes.string.isRequired,
-  labelText: _react2.default.PropTypes.string.isRequired
+  labelText: _react2.default.PropTypes.string.isRequired,
+  handleValueUpdate: _react2.default.PropTypes.func.isRequired
 };
 
 /***/ })
