@@ -1,0 +1,32 @@
+.range {
+    width: 100%;
+
+    &__slider {
+        display: flex;
+        align-items: center;
+    }
+        &__button {
+            
+        }
+
+        &__bar {
+            position: relative;
+            width: 100%;
+            height: 5px;
+            background-color: $state-bg;
+            margin: 0 10px;
+        }
+            &__dragger {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                transform: translate(-10px, -10px);
+                background-color: $state-primary;
+                border-radius: 100%;
+            }
+    &__input {
+        margin-top: rem($pad);
+    }
+}

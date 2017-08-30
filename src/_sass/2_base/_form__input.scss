@@ -1,13 +1,18 @@
-input[type='text'], input[type='password'], input[type='search'], textarea {
+input[type='text'], input[type='password'], input[type='number'], input[type='search'], textarea {
 	background-color: white;
 	padding: rem(7) rem(10);
 	outline: none;
 	color: black;
 	border: 3px solid $rule-color;
+	width: 100%;
 	max-width: 100%;
 
 	&:active,
 	&:focus {
 		border-color: $WL_Blue;
 	}
+}
+
+textarea {
+	min-height: 200px;
 }

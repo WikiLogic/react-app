@@ -1,5 +1,6 @@
 import React from 'react';
 import API from 'WlAPI/api.js';
+import Range from 'WlComponents/Range/Range.jsx';
 import Notify from 'WlServices/notify.js';
 
 /* Each Claim in the list of search results
@@ -41,6 +42,7 @@ export default class AddClaimForm extends React.Component {
             Write up your new claim
           </label>
           <textarea className="form__input" id="new-claim-text" onChange={this.handleChange} />
+          <Range min={1} max={99} step={1} inputId="new-claim-value" labelText="Assign a value" />
         </div>
 
         <div className="form__submit">

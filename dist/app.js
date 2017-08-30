@@ -13539,6 +13539,10 @@ var _api = __webpack_require__(18);
 
 var _api2 = _interopRequireDefault(_api);
 
+var _Range = __webpack_require__(279);
+
+var _Range2 = _interopRequireDefault(_Range);
+
 var _notify = __webpack_require__(22);
 
 var _notify2 = _interopRequireDefault(_notify);
@@ -13602,7 +13606,8 @@ var AddClaimForm = function (_React$Component) {
             { className: 'form__label-text', htmlFor: 'new-claim-text' },
             'Write up your new claim'
           ),
-          _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleChange })
+          _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleChange }),
+          _react2.default.createElement(_Range2.default, { min: 1, max: 99, step: 1, inputId: 'new-claim-value', labelText: 'Assign a value' })
         ),
         _react2.default.createElement(
           'div',
@@ -31729,6 +31734,153 @@ module.exports = traverseAllChildren;
 __webpack_require__(115);
 module.exports = __webpack_require__(116);
 
+
+/***/ }),
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* Alerts / messages / updates / notes - fire them in here!
+ * This is the bar that sits at the bottom of the screen
+ */
+var Range = function (_React$Component) {
+  _inherits(Range, _React$Component);
+
+  function Range(props) {
+    _classCallCheck(this, Range);
+
+    var _this = _possibleConstructorReturn(this, (Range.__proto__ || Object.getPrototypeOf(Range)).call(this, props));
+
+    _this.state = {
+      value: 0,
+      left: 0
+    };
+
+    _this.updateValue = _this.updateValue.bind(_this);
+    return _this;
+  }
+
+  _createClass(Range, [{
+    key: 'updateValue',
+    value: function updateValue(event) {
+      var newValue = this.state.value;
+      if (typeof event === 'boolean') {
+        if (event) {
+          newValue += 1;
+        } else {
+          newValue -= 1;
+        }
+      }
+
+      if ((typeof event === 'undefined' ? 'undefined' : _typeof(event)) === 'object') {
+        newValue = event.target.value;
+      }
+
+      if (newValue > this.props.max) {
+        newValue = this.props.max;
+      }
+
+      if (newValue < this.props.min) {
+        newValue = this.props.min;
+      }
+
+      this.setState({
+        value: newValue,
+        left: newValue / this.props.max * 100
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'range' },
+        _react2.default.createElement(
+          'label',
+          { htmlFor: this.props.inputId },
+          this.props.labelText
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'range__slider' },
+          _react2.default.createElement(
+            'button',
+            { className: 'range__button', onClick: function onClick() {
+                _this2.updateValue(false);
+              } },
+            '-'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'range__bar' },
+            _react2.default.createElement('div', { className: 'range__dragger', style: { left: this.state.left + '%' } })
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'range__button', onClick: function onClick() {
+                _this2.updateValue(true);
+              } },
+            '+'
+          )
+        ),
+        _react2.default.createElement('input', {
+          className: 'range__input',
+          type: 'number',
+          id: this.props.inputId,
+          value: this.state.value,
+          onChange: this.updateValue
+        })
+      );
+    }
+  }]);
+
+  return Range;
+}(_react2.default.Component);
+
+exports.default = Range;
+
+
+Range.propTypes = {
+  max: _react2.default.PropTypes.number.isRequired,
+  min: _react2.default.PropTypes.number.isRequired,
+  step: _react2.default.PropTypes.number.isRequired,
+  inputId: _react2.default.PropTypes.string.isRequired,
+  labelText: _react2.default.PropTypes.string.isRequired
+};
 
 /***/ })
 /******/ ]);

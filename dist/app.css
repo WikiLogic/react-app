@@ -420,7 +420,6 @@ input[type='button'],
   cursor: pointer;
   max-width: 100%;
   display: inline-block;
-  margin-right: 2px;
   background-color: #111F2E;
   color: white;
   fill: white;
@@ -461,15 +460,19 @@ pre {
   padding: 5px;
   margin: 0; }
 
-input[type='text'], input[type='password'], input[type='search'], textarea {
+input[type='text'], input[type='password'], input[type='number'], input[type='search'], textarea {
   background-color: white;
   padding: 0.4375rem 0.625rem;
   outline: none;
   color: black;
   border: 3px solid #cccccc;
+  width: 100%;
   max-width: 100%; }
-  input[type='text']:active, input[type='text']:focus, input[type='password']:active, input[type='password']:focus, input[type='search']:active, input[type='search']:focus, textarea:active, textarea:focus {
+  input[type='text']:active, input[type='text']:focus, input[type='password']:active, input[type='password']:focus, input[type='number']:active, input[type='number']:focus, input[type='search']:active, input[type='search']:focus, textarea:active, textarea:focus {
     border-color: #5f9aec; }
+
+textarea {
+  min-height: 200px; }
 
 select {
   background-color: white;
@@ -983,6 +986,29 @@ styles are set in sass alongside the components. (in the components folder).
     margin: 0 1rem 0 0; }
   .modal__content {
     padding: 1rem; }
+
+.range {
+  width: 100%; }
+  .range__slider {
+    display: flex;
+    align-items: center; }
+  .range__bar {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    background-color: #eeeeee;
+    margin: 0 10px; }
+  .range__dragger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-10px, -10px);
+    background-color: #111F2E;
+    border-radius: 100%; }
+  .range__input {
+    margin-top: 1rem; }
 
 .search-form {
   display: block;
