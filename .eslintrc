@@ -5,7 +5,11 @@
     "linebreak-style": ["error", "windows"],
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "max-len": [1, 200],
+    "padded-blocks": [0],
+    "spaced-comment": [0],
+    "comma-dangle": [0]
   },
   "globals": {
     "window": true,

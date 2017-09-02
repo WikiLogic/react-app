@@ -1,0 +1,29 @@
+@keyframes loading {
+ from { left: -5%; }
+ to { left: 103%; }
+}
+
+.loader {
+  $b:&;
+  width: 100%;
+  height: 3px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -3px;
+  opacity: 0.5;
+
+  &__dot {
+    position:absolute;
+    left: -5%;
+    background:$link-blue;
+    width:20px;
+    height:3px;
+  }
+
+  &--is-loading {
+    #{$b}__dot--1 { animation: loading 3s infinite; }
+    #{$b}__dot--2 { animation: loading 3s 0.25s infinite; }
+    #{$b}__dot--3 { animation: loading 3s 0.5s infinite; }
+    #{$b}__dot--4 { animation: loading 3s 0.75s infinite; }
+  }
+}

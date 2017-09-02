@@ -3,6 +3,7 @@ import API from 'WlAPI/api.js';
 import Notify from 'WlServices/notify.js';
 import Code from 'WlComponents/Code/Code.jsx';
 import InputButton from 'WlComponents/InputButton/InputButton.jsx';
+import Loader from 'WlComponents/Loader/Loader.jsx';
 
 /**
  * The Search Results page
@@ -15,6 +16,7 @@ export default class ApiDev extends React.Component {
       url: '',
       body: '',
       result: '',
+      isLoading: false
     };
 
     this.updateUrl = this.updateUrl.bind(this);
@@ -25,31 +27,38 @@ export default class ApiDev extends React.Component {
 
   updateUrl(newUrl) {
     this.setState({
-      url: newUrl,
+      url: newUrl
     });
   }
 
   updateBody(newBody) {
     this.setState({
-      body: newBody,
+      body: newBody
     });
   }
 
   get() {
+
     API.get(this.state.url).then((res) => {
       this.setState({
         result: res,
+        isLoading: false
       });
     });
+
+    this.setState({ isLoading: true });
   }
 
   post() {
-    API.post(this.state.url, this.state.body).then((res) => {
 
+    API.post(this.state.url, this.state.body).then((res) => {
       this.setState({
         result: res,
+        isLoading: false
       });
     });
+
+    this.setState({ isLoading: true });
   }
 
 
@@ -72,6 +81,7 @@ export default class ApiDev extends React.Component {
 
           </div>
         </div>
+        <Loader isLoading={this.state.isLoading}/>
 
         <div className="page__body">
           <div className="max-width-wrap">

@@ -119,7 +119,6 @@ class Wikilogic extends React.Component {
               <Link to="/new-claim">New claim</Link>
               {authLink}
             </div>
-
           </header>
 
         </div>

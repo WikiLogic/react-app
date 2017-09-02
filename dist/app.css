@@ -958,6 +958,34 @@ styles are set in sass alongside the components. (in the components folder).
     border-bottom-left-radius: 0;
     margin-right: 0; }
 
+@keyframes loading {
+  from {
+    left: -5%; }
+  to {
+    left: 103%; } }
+
+.loader {
+  width: 100%;
+  height: 3px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -3px;
+  opacity: 0.5; }
+  .loader__dot {
+    position: absolute;
+    left: -5%;
+    background: #0a88c5;
+    width: 20px;
+    height: 3px; }
+  .loader--is-loading .loader__dot--1 {
+    animation: loading 3s infinite; }
+  .loader--is-loading .loader__dot--2 {
+    animation: loading 3s 0.25s infinite; }
+  .loader--is-loading .loader__dot--3 {
+    animation: loading 3s 0.5s infinite; }
+  .loader--is-loading .loader__dot--4 {
+    animation: loading 3s 0.75s infinite; }
+
 .modal {
   position: fixed;
   z-index: 5;
