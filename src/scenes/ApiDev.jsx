@@ -81,7 +81,7 @@ export default class ApiDev extends React.Component {
 
           </div>
         </div>
-        <Loader isLoading={this.state.isLoading}/>
+        <Loader isLoading={this.state.isLoading} />
 
         <div className="page__body">
           <div className="max-width-wrap">

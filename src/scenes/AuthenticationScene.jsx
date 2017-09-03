@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from 'WlComponents/LoginForm/LoginForm.jsx';
+import Loader from 'WlComponents/Loader/Loader.jsx';
 import { Link } from 'react-router-dom';
 
 /**
@@ -11,6 +12,7 @@ export default class AuthenticationScene extends React.Component {
     super(props);
 
     this.state = {
+      isLoading: false
     };
 
     this.loginSuccessHandler = this.loginSuccessHandler.bind(this);
@@ -35,6 +37,7 @@ export default class AuthenticationScene extends React.Component {
             </div>
           </div>
         </div>
+        <Loader isLoading={this.state.isLoading} />
         <div className="page__body">
           <div className="max-width-wrap">
             <LoginForm loginSuccessHandler={this.loginSuccessHandler} />

@@ -4,7 +4,7 @@ import Formatter from './formatter';
 let JWT = '';
 const apiRouteRoot = '/api';
 
-function login(user, password) {
+function login(username, password) {
   const loggedInPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/login`, {
       method: 'POST',
@@ -12,7 +12,7 @@ function login(user, password) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: Formatter.objectToFormData({
-        name: user,
+        username,
         password,
       }),
     })
@@ -46,7 +46,7 @@ function signup(email, username, password) {
       },
       body: Formatter.objectToFormData({
         email,
-        name: username,
+        username,
         password,
       }),
     })
