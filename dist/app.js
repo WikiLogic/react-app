@@ -5655,6 +5655,7 @@ function logout() {
 }
 
 function signup(email, username, password) {
+  console.log('----- email', email);
   var signupPromise = new Promise(function (resolve, reject) {
     fetch(apiRouteRoot + '/signup', {
       method: 'POST',
@@ -15089,13 +15090,13 @@ var LoginForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
 
-    _this.username = '';
-    _this.password = '';
     _this.state = {
+      email: '',
       username: '',
       password: '',
       message: ''
     };
+
     _this.handleEmailChange = _this.handleEmailChange.bind(_this);
     _this.handleUsernameChange = _this.handleUsernameChange.bind(_this);
     _this.handlePasswordChange = _this.handlePasswordChange.bind(_this);
@@ -15107,7 +15108,7 @@ var LoginForm = function (_React$Component) {
     key: 'handleEmailChange',
     value: function handleEmailChange(event) {
       this.setState({
-        username: event.target.value
+        email: event.target.value
       });
     }
   }, {

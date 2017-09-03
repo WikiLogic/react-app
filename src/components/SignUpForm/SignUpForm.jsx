@@ -9,13 +9,14 @@ import User from 'WlServices/user.js';
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.username = '';
-    this.password = '';
+
     this.state = {
+      email: '',
       username: '',
       password: '',
       message: '',
     };
+
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -24,7 +25,7 @@ export default class LoginForm extends React.Component {
 
   handleEmailChange(event) {
     this.setState({
-      username: event.target.value,
+      email: event.target.value,
     });
   }
 

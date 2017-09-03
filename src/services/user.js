@@ -37,6 +37,7 @@ function logout() {
 }
 
 function signup(email, username, password) {
+  console.log('----- email', email);
   const signupPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/signup`, {
       method: 'POST',
