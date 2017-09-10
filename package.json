@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --port 8084 --host=0.0.0.0",
+    "start": "webpack --watch",
+    "live": "webpack-dev-server --port 8084 --host=0.0.0.0",
     "build": "webpack",
-    "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

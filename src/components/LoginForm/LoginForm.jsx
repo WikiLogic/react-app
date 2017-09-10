@@ -40,7 +40,7 @@ export default class LoginForm extends React.Component {
         // it's looking for the user
         this.props.loginSuccessHandler(res);
       }).catch((err) => {
-        console.log('err', err);
+        window.err = err;
       });
   }
 

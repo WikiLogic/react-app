@@ -1,6 +1,5 @@
 import React from 'react';
 import API from 'WlAPI/api.js';
-import Notify from 'WlServices/notify.js';
 import Code from 'WlComponents/Code/Code.jsx';
 import InputButton from 'WlComponents/InputButton/InputButton.jsx';
 import Loader from 'WlComponents/Loader/Loader.jsx';

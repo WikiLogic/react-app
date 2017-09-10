@@ -2,7 +2,8 @@
 
 $highlight:      #ff0000;
 $dark-blue:      #111F2E; .dark-blue { background-color: $dark-blue; }
-$link-blue:      #0a88c5; .link-blue { background-color: $link-blue; } $link-color: $link-blue;
+$link-blue:      #0a88c5;
+.link-blue { background-color: $link-blue; } $link-color: $link-blue;
 $rule-color:     #cccccc; .rule-color { background-color: $rule-color; }
 $grey:		       #eeeeee; .grey { background-color: $grey; }
 

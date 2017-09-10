@@ -8,11 +8,13 @@ export default class Code extends React.Component {
   constructor(props) {
     super(props);
     this.convertCodeToMarkup = this.convertCodeToMarkup.bind(this);
+    this.markup = '';
   }
 
   // for now assuming it's JSON
   convertCodeToMarkup(code) {
-    return JSON.stringify(code, null, 2);
+    this.markup = JSON.stringify(code, null, 2);
+    return this.markup;
   }
 
   render() {
@@ -32,5 +34,5 @@ Code.propTypes = {
   code: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object,
-  ])
+  ]).isRequired
 };

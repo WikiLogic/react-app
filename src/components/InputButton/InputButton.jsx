@@ -11,7 +11,7 @@ export default class InputButton extends React.Component {
     super(props);
 
     let setInputValue = '';
-    if (props.hasOwnProperty('inputValue')) {
+    if (Object.prototype.hasOwnProperty.call(props, 'inputValue')) {
       setInputValue = this.props.inputValue;
     } else {
       setInputValue = '';
@@ -36,7 +36,7 @@ export default class InputButton extends React.Component {
   }
 
   inputUpdateHandler(event) {
-    if (this.props.hasOwnProperty('onChange')) {
+    if (Object.prototype.hasOwnProperty.call(this.props, 'onChange')) {
       this.props.onChange(event.target.value);
     }
 
@@ -66,4 +66,9 @@ InputButton.propTypes = {
   submitHandler: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func,
   inputValue: React.PropTypes.string,
+};
+
+InputButton.defaultProps = {
+  onChange: () => {},
+  inputValue: '',
 };

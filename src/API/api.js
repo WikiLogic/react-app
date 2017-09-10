@@ -44,7 +44,6 @@ function getClaimDetailById(claimId) {
         resolve(res.data);
       })
       .catch((err) => {
-        console.err('api claim failed', err);
         reject(err);
       });
   });
