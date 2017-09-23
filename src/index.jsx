@@ -7,6 +7,7 @@ import createHashHistory from 'history/createHashHistory';
 // JS
 import API from 'WlAPI/api.js';
 import User from 'WlServices/user.js';
+import Notify from 'WlServices/notify.js';
 
 // Scenes
 import HomeScene from 'WlScenes/HomeScene.jsx';
@@ -75,7 +76,8 @@ class Wikilogic extends React.Component {
   }
 
   notifyerHandler(message) {
-    this.state.notifications.push(message);
+    // this.state.notifications.push(message);
+    Notify.post(message);
   }
 
   loginSuccessHandler(res) {
@@ -99,6 +101,7 @@ class Wikilogic extends React.Component {
   }
 
   render() {
+    Notify.post('rendering');
     let authLink = null;
     if (this.state.user.isLoggedIn) {
       authLink = <Link to="/profile">Profile</Link>;
@@ -238,7 +241,7 @@ class Wikilogic extends React.Component {
           </footer>
         </div>
 
-        <div className="main__notifications">
+        <div className="main__status-bar">
           <Notifyer notifications={this.state.notifications} />
         </div>
       </div>

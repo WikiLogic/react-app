@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
+import Loader from 'WlComponents/Loader/Loader.jsx';
 import API from 'WlAPI/api.js';
 import urlParameter from 'WlServices/urlParameter.js';
 import Notify from 'WlServices/notify.js';
@@ -13,8 +14,9 @@ export default class SearchScene extends React.Component {
     super(props);
 
     this.state = {
-      search_term: '',
-      searchResults: [],
+      searchTerm: '',
+      searchResults: null,
+      isLoading: false
     };
 
     this.searchClaims = this.searchClaims.bind(this);
@@ -36,14 +38,20 @@ export default class SearchScene extends React.Component {
     if (isNaN(search)) {
       API.searchClaimsByTerm(search)
         .then((data) => {
-          this.setState({ searchResults: data.claims });
+          this.setState({
+            searchResults: data.claims,
+            isLoading: false
+          });
         }).catch((err) => {
           Notify.post(err);
         });
     } else {
       API.getClaimDetailById(search)
         .then((data) => {
-          this.setState({ focused_claim: data.claim });
+          this.setState({
+            focused_claim: data.claim,
+            isLoading: false
+          });
         }).catch((err) => {
           Notify.post(err);
         });
@@ -54,7 +62,8 @@ export default class SearchScene extends React.Component {
 
     // set the state
     this.setState({
-      search_term: search,
+      searchTerm: search,
+      isLoading: true
     });
   }
 
@@ -68,8 +77,9 @@ export default class SearchScene extends React.Component {
             <SearchInput
               submissionHandler={this.searchClaims}
               placeholder="Search Claims"
-              inputValue={this.state.search_term}
+              inputValue={this.state.searchTerm}
             />
+            <Loader isLoading={this.state.isLoading} />
 
             Filtering options...
 

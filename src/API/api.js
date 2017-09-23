@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import Cookies from 'WlServices/cookies.js';
 import Formatter from 'WlServices/formatter.js';
 
-const apiRouteRoot = '/api';
+const apiRouteRoot = '/api/v1';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -13,7 +13,7 @@ function checkStatus(response) {
 
 function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/claims?search=${searchTerm}`, {
+    fetch(`${apiRouteRoot}/claims?s=${searchTerm}`, {
       headers: {
         Authorization: Cookies.get('JWT'),
       },

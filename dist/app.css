@@ -467,7 +467,8 @@ input[type='text'], input[type='password'], input[type='number'], input[type='se
   color: black;
   border: 3px solid #cccccc;
   width: 100%;
-  max-width: 100%; }
+  max-width: 100%;
+  margin: 0; }
   input[type='text']:active, input[type='text']:focus, input[type='password']:active, input[type='password']:focus, input[type='number']:active, input[type='number']:focus, input[type='search']:active, input[type='search']:focus, textarea:active, textarea:focus {
     border-color: #5f9aec; }
 
@@ -755,7 +756,8 @@ the eeeeee footer
 .main {
   min-height: 100vh;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  position: relative; }
   .main__header {
     background-color: #111F2E;
     color: white; }
@@ -763,6 +765,9 @@ the eeeeee footer
     margin-top: auto;
     background-color: #eeeeee;
     color: black; }
+  .main__status-bar {
+    background-color: #111F2E;
+    transition: height 0.2s ease; }
 
 /*
 COMPONENTS
@@ -968,13 +973,14 @@ styles are set in sass alongside the components. (in the components folder).
   width: 100%;
   height: 3px;
   position: relative;
-  overflow: hidden;
+  top: -3px;
   margin-bottom: -3px;
+  overflow: hidden;
   opacity: 0.5; }
   .loader__dot {
     position: absolute;
     left: -5%;
-    background: #0a88c5;
+    background: #111F2E;
     width: 20px;
     height: 3px; }
   .loader--is-loading .loader__dot--1 {

@@ -2,7 +2,7 @@ import Cookies from './cookies';
 import Formatter from './formatter';
 
 let JWT = '';
-const apiRouteRoot = '/api';
+const apiRouteRoot = '/api/v1';
 
 function login(username, password) {
   const loggedInPromise = new Promise((resolve, reject) => {

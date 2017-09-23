@@ -8,14 +8,15 @@
   width: 100%;
   height: 3px;
   position: relative;
-  overflow: hidden;
+  top: -3px;
   margin-bottom: -3px;
+  overflow: hidden;
   opacity: 0.5;
 
   &__dot {
     position:absolute;
     left: -5%;
-    background:$link-blue;
+    background:$dark-blue;
     width:20px;
     height:3px;
   }

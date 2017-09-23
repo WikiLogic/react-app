@@ -9,6 +9,7 @@ the eeeeee footer
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   &__header { 
     background-color: $header-background;
@@ -20,5 +21,10 @@ the eeeeee footer
     margin-top: auto;
     background-color: $footer-background;
     color: $footer-color;
+  }
+
+  &__status-bar {
+    background-color: $header-background;
+    transition: height 0.2s ease;
   }
 }

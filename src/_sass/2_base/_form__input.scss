@@ -6,6 +6,7 @@ input[type='text'], input[type='password'], input[type='number'], input[type='se
 	border: 3px solid $rule-color;
 	width: 100%;
 	max-width: 100%;
+	margin: 0;
 
 	&:active,
 	&:focus {
