@@ -773,66 +773,6 @@ the eeeeee footer
 COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
 */
-.add-argument-form__parent-claim {
-  margin-bottom: 1rem; }
-
-.add-argument-form__type-toggle {
-  margin-bottom: 1rem; }
-
-.add-argument-form__premis-finder {
-  margin-bottom: 1rem; }
-
-.add-argument-form__argument-simulator {
-  margin-bottom: 0.5rem; }
-
-.premis-finder__results {
-  min-height: 12.5rem;
-  max-height: 60vh;
-  overflow: auto;
-  padding: 0.5rem; }
-
-.type-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; }
-  .type-toggle__label {
-    cursor: pointer;
-    background-color: #eeeeee;
-    border: 1px solid #eeeeee;
-    text-align: center;
-    padding: 0.5rem;
-    width: 48%; }
-
-.add-argument-form__parent-claim {
-  margin-bottom: 1rem; }
-
-.add-argument-form__type-toggle {
-  margin-bottom: 1rem; }
-
-.add-argument-form__premis-finder {
-  margin-bottom: 1rem; }
-
-.add-argument-form__argument-simulator {
-  margin-bottom: 0.5rem; }
-
-.premis-finder__results {
-  min-height: 12.5rem;
-  max-height: 60vh;
-  overflow: auto;
-  padding: 0.5rem; }
-
-.type-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; }
-  .type-toggle__label {
-    cursor: pointer;
-    background-color: #eeeeee;
-    border: 1px solid #cccccc;
-    text-align: center;
-    padding: 0.5rem;
-    width: 48%; }
-
 .argument {
   padding: 0.5rem;
   border-radius: 5px; }
@@ -916,38 +856,6 @@ styles are set in sass alongside the components. (in the components folder).
     .claim-chain__row .argument {
       width: 21%;
       min-width: 300px; }
-
-.claim-detail {
-  width: 100%;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  padding: 0.5rem; }
-  .claim-detail + .claim-detail {
-    margin-top: 1rem; }
-  .claim-detail__header {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 0.5rem; }
-  .claim-detail__text {
-    font-size: 1.75rem; }
-  .claim-detail__status {
-    margin-bottom: 0.5rem; }
-  .claim-detail__options {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 0.9375rem; }
-    .claim-detail__options .button + .button {
-      margin-left: 0.5rem; }
-  .claim-detail__arguments {
-    padding: 1rem;
-    overflow-x: auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; }
-    .claim-detail__arguments .argument {
-      width: 21%;
-      min-width: 290px;
-      margin: 0.5rem; }
 
 .input-button {
   display: flex;
@@ -1506,6 +1414,37 @@ styles are set in sass alongside the components. (in the components folder).
     left: 0;
     right: 0;
     text-align: center; }
+
+.claim-detail {
+  width: 100%; }
+  .claim-detail + .claim-detail {
+    margin-top: 1rem; }
+  .claim-detail__header {
+    width: 100%;
+    margin-bottom: 1rem;
+    overflow: hidden; }
+  .claim-detail__status {
+    display: block;
+    float: left;
+    margin-right: 10px; }
+  .claim-detail__text {
+    font-size: 1.75rem;
+    position: relative;
+    top: 4px; }
+  .claim-detail__arg-buttons {
+    margin-bottom: 1rem; }
+  .claim-detail__arg-builder {
+    margin-bottom: 1rem; }
+  .claim-detail__arguments {
+    padding: 1rem;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; }
+    .claim-detail__arguments .argument {
+      width: 21%;
+      min-width: 290px;
+      margin: 0.5rem; }
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left {

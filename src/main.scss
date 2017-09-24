@@ -27,6 +27,7 @@ COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
 */
 @import "components/**/*.scss";
+@import "scenes/**/*.scss";
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left { text-align: left !important; }

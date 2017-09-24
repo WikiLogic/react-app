@@ -18,7 +18,7 @@ export default class Argument extends React.Component {
   render() {
     // loop through the premises in this argument
     const premises = this.props.argumentObject.premises.map((premis) => {
-      const isSelected = (premis.id === this.props.highlightedPremisId);
+      // const isSelected = (premis.id === this.props.highlightedPremisId);
 
       return (
         <div className="argument__premis" key={premis.id}>
@@ -49,6 +49,5 @@ Argument.propTypes = {
   argumentObject: React.PropTypes.shape({
     type: React.PropTypes.string.isRequired,
     premises: React.PropTypes.array.isRequired,
-  }).isRequired,
-  highlightedPremisId: React.PropTypes.string.isRequired,
+  }).isRequired
 };

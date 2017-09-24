@@ -9,15 +9,13 @@ import Notify from 'WlServices/notify.js';
 /* Search & select claims to add as premises to an argument
  */
 
-export default class AddArgumentForm extends React.Component {
+export default class ArgumentBuilder extends React.Component {
   constructor(props) {
     super(props);
     // state is bundled inside an argument for ease in passing to the argument element
     this.state = {
-      argument: {
-        type: 'SUPPORTS',
-        premises: [],
-      },
+      type: 'SUPPORTS',
+      premises: [],
       premis_search_results: [],
     };
 
@@ -56,10 +54,10 @@ export default class AddArgumentForm extends React.Component {
     // a premis in the premis search - add it to the new argument when it's clicked
     const newArgument = this.state.argument;
 
-    if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
-      newArgument.premises.push(premis);
-      this.setState({ argument: newArgument });
-    }
+    // if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
+    newArgument.premises.push(premis);
+    this.setState({ argument: newArgument });
+    // }
   }
 
   handleArgumentPremisClick(premis) {
@@ -75,15 +73,16 @@ export default class AddArgumentForm extends React.Component {
 
     const premisIdArray = this.state.argument.premises.map(premis => premis.id);
 
-    API.postNewArgument({
-      parentClaimId: this.props.parentClaim.id,
-      type: this.state.argument.type,
-      premiseIds: premisIdArray,
-    }).then((res) => {
-      this.props.updatedClaimHandler(res.data.claim);
-    }).catch((err) => {
-      Notify.post(err);
-    });
+    this.props.submissionHandler(premisIdArray);
+    // API.postNewArgument({
+    //   parentClaimId: this.props.parentClaim.id,
+    //   type: this.state.argument.type,
+    //   premiseIds: premisIdArray,
+    // }).then((res) => {
+    //   this.props.updatedClaimHandler(res.data.claim);
+    // }).catch((err) => {
+    //   Notify.post(err);
+    // });
   }
 
   render() {
@@ -101,44 +100,9 @@ export default class AddArgumentForm extends React.Component {
 
     return (
       <div className="add-argument-form">
-        <h4 className="add-argument-form__parent-claim">
-          {this.props.parentClaim.text}
-        </h4>
-
-        <div className="add-argument-form__type-toggle">
-          <div className="type-toggle">
-            <label className="type-toggle__label" htmlFor="type-toggle-supports">
-              <input
-                className="type-toggle__input"
-                id="type-toggle-supports"
-                type="radio"
-                value="SUPPORTS"
-                checked={this.state.argument.type === 'SUPPORTS'}
-                onChange={() => this.handleTypeToggle('SUPPORTS')}
-              />
-              <div className="type-toggle__text">SUPPORTS</div>
-            </label>
-
-            <label className="type-toggle__label" htmlFor="type-toggle-opposes" >
-              <input
-                className="type-toggle__input"
-                id="type-toggle-opposes"
-                type="radio"
-                value="OPPOSES"
-                checked={this.state.argument.type === 'OPPOSES'}
-                onChange={() => this.handleTypeToggle('OPPOSES')}
-              />
-              <div className="type-toggle__text">OPPOSES</div>
-            </label>
-          </div>
-        </div>
 
         <div className="add-argument-form__premis-finder">
           <div className="premis-finder">
-            <SearchInput
-              submissionHandler={this.handlePremisSearch}
-              placeholder="Search Premises"
-            />
 
             <div className="premis-finder__results">
               {premisSearchResults}
@@ -147,10 +111,19 @@ export default class AddArgumentForm extends React.Component {
         </div>
 
         <div className="add-argument-form__argument-simulator">
-          <Argument
-            argumentObject={this.state.argument}
-            premisClickHandler={this.handleArgumentPremisClick}
-          />
+          <div className={`argument argument--${this.state.type}`}>
+            <div className="argument__header">
+              New {this.state.type} argument
+            </div>
+            <SearchInput
+              submissionHandler={this.handlePremisSearch}
+              placeholder="Search Claims"
+            />
+            Add existing claims as premises for this argument
+            <div className="argument__body">
+              premises...
+            </div>
+          </div>
         </div>
 
         <div className="add-argument-form__submit">
@@ -161,10 +134,6 @@ export default class AddArgumentForm extends React.Component {
   }
 }
 
-AddArgumentForm.propTypes = {
-  parentClaim: React.PropTypes.shape({
-    _id: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
-  }).isRequired,
-  updatedClaimHandler: React.PropTypes.func.isRequired,
+ArgumentBuilder.propTypes = {
+  submissionHandler: React.PropTypes.func.isRequired,
 };
