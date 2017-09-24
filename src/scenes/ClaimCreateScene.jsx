@@ -1,5 +1,6 @@
 import React from 'react';
 import AddClaimForm from 'WlComponents/AddClaimForm/AddClaimForm.jsx';
+import API from 'WlAPI/api.js';
 
 /**
  * The Search Results page
@@ -11,6 +12,20 @@ export default class ClaimCreateScene extends React.Component {
 
     this.state = {
     };
+
+    this.submitHandler = this.submitHandler.bind(this);
+  }
+
+  submitHandler(newClaimData) {
+
+    API.postNewClaim({
+      text: newClaimData.text,
+      probability: newClaimData.value,
+    }).then((data) => {
+      console.log("new claim!", data);
+    }).catch((err) => {
+      console.error('new claim failed: ', err);
+    });
   }
 
   render() {
@@ -23,7 +38,7 @@ export default class ClaimCreateScene extends React.Component {
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            <AddClaimForm />
+            <AddClaimForm submitHandler={this.submitHandler} />
           </div>
         </div>
       </div>

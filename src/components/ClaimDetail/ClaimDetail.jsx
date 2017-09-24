@@ -107,7 +107,7 @@ export default class ClaimDetail extends React.Component {
 
 
         <div className="claim-detail__status">
-          <StatusIndicator state={this.props.claim.state} />
+          <StatusIndicator probability={this.props.claim.probability} />
         </div>
 
         <div className="claim-detail__options">
@@ -155,9 +155,10 @@ export default class ClaimDetail extends React.Component {
 
 ClaimDetail.propTypes = {
   claim: React.PropTypes.shape({
-    id: React.PropTypes.number.isRequired,
+    _key: React.PropTypes.string.isRequired,
+    _id: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired,
-    state: React.PropTypes.number,
+    probability: React.PropTypes.number,
     arguments: React.PropTypes.array,
   }).isRequired,
   premisClickHandler: React.PropTypes.func.isRequired,
@@ -167,7 +168,7 @@ ClaimDetail.propTypes = {
 
 ClaimDetail.defaultProps = {
   claim: React.PropTypes.shape({
-    state: 0.5,
+    probability: 50,
     arguments: [],
   }),
 };

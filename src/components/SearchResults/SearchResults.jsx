@@ -11,6 +11,7 @@ export default class SearchResults extends React.Component {
   }
 
   renderSearchResults() {
+    console.log("this.props.searchResults", this.props.searchResults);
     if (!this.props.searchResults) {
       return <p>No results</p>;
     }

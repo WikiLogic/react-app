@@ -7,14 +7,14 @@ export default function StatusIndicator(props) {
   if (props.type === 'bar') {
     return (
       <div className="status-bar">
-        <div className={`status-bar__bar status-bar__bar--${props.state}`} />
+        <div className={`status-bar__bar status-bar__bar--${props.probability}`} />
       </div>
     );
   }
 
   if (props.type === 'circle') {
     return (
-      <div className={`status-circle status-circle--${(props.state * 100)}`}>
+      <div className={`status-circle status-circle--${props.probability}`}>
         <svg className="status-circle__svg" viewBox="-5 -5 200 200">
           <circle
             className="status-circle__svg-icon status-circle__svg-bg outer"
@@ -32,7 +32,7 @@ export default function StatusIndicator(props) {
           />
         </svg>
         <div className="status-circle__text">
-          {`${(props.state * 100)}%`}
+          {`${props.probability}%`}
         </div>
       </div>
     );
@@ -42,11 +42,11 @@ export default function StatusIndicator(props) {
 }
 
 StatusIndicator.propTypes = {
-  state: React.PropTypes.number,
+  probability: React.PropTypes.number,
   type: React.PropTypes.string,
 };
 
 StatusIndicator.defaultProps = {
-  state: 0.5,
+  probability: 50,
   type: 'circle',
 };

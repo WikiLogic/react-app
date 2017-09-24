@@ -76,9 +76,9 @@ export default class AddArgumentForm extends React.Component {
     const premisIdArray = this.state.argument.premises.map(premis => premis.id);
 
     API.postNewArgument({
-      parent_claim_id: this.props.parentClaim.id,
+      parentClaimId: this.props.parentClaim.id,
       type: this.state.argument.type,
-      premise_ids: premisIdArray,
+      premiseIds: premisIdArray,
     }).then((res) => {
       this.props.updatedClaimHandler(res.data.claim);
     }).catch((err) => {

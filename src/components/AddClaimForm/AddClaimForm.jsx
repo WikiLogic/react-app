@@ -1,7 +1,5 @@
 import React from 'react';
-import API from 'WlAPI/api.js';
 import Range from 'WlComponents/Range/Range.jsx';
-import Notify from 'WlServices/notify.js';
 
 /* Each Claim in the list of search results
  */
@@ -32,14 +30,9 @@ export default class AddClaimForm extends React.Component {
 
   submitHandler(event) {
     event.preventDefault();
-
-    API.postNewClaim({
+    this.props.submitHandler({
       text: this.state.text,
       value: this.state.value,
-    }).then((data) => {
-      Notify.post(data);
-    }).catch((err) => {
-      Notify.post(err);
     });
   }
 
@@ -56,7 +49,7 @@ export default class AddClaimForm extends React.Component {
             min={1}
             max={99}
             step={1}
-            value={this.state.value}
+            value={Number(this.state.value)}
             inputId="new-claim-value"
             labelText="Assign a value"
             handleValueUpdate={this.handleValueUpdate}
@@ -70,3 +63,7 @@ export default class AddClaimForm extends React.Component {
     );
   }
 }
+
+AddClaimForm.propTypes = {
+  submitHandler: React.PropTypes.func.isRequired
+};

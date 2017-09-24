@@ -13,7 +13,7 @@ function checkStatus(response) {
 
 function searchClaimsByTerm(searchTerm) {
   const searchResultsPromies = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/claims?s=${searchTerm}`, {
+    fetch(`${apiRouteRoot}/claims/search?s=${searchTerm}`, {
       headers: {
         Authorization: Cookies.get('JWT'),
       },
@@ -53,7 +53,7 @@ function getClaimDetailById(claimId) {
 
 function postNewClaim(claim) {
   const newClaimPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/create/claim`, {
+    fetch(`${apiRouteRoot}/claims`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function postNewClaim(claim) {
       body: JSON.stringify(claim),
     })
       .then(checkStatus)
-      .then(Formatter.apiResponceToJSONJSON)
+      .then(Formatter.apiResponceToJSON)
       .then((res) => {
         resolve(res);
       })
@@ -76,16 +76,16 @@ function postNewClaim(claim) {
 
 function postNewArgument(argument) {
   const newArgumentPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/create/argument`, {
+    fetch(`${apiRouteRoot}/arguments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: Cookies.get('JWT'),
       },
       body: JSON.stringify({
-        parent_claim_id: argument.parent_claim_id,
+        parentClaimId: argument.parent_claim_id,
         type: argument.type,
-        premise_ids: argument.premise_ids,
+        premisIds: argument.premise_ids,
       }),
     })
       .then(checkStatus)

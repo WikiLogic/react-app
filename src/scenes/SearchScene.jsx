@@ -39,7 +39,7 @@ export default class SearchScene extends React.Component {
       API.searchClaimsByTerm(search)
         .then((data) => {
           this.setState({
-            searchResults: data.claims,
+            searchResults: data.results,
             isLoading: false
           });
         }).catch((err) => {
