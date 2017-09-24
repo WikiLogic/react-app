@@ -259,7 +259,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-module.exports = __webpack_require__(25);
+module.exports = __webpack_require__(24);
 
 
 /***/ }),
@@ -1259,7 +1259,7 @@ var _prodInvariant = __webpack_require__(4),
 var CallbackQueue = __webpack_require__(80);
 var PooledClass = __webpack_require__(17);
 var ReactFeatureFlags = __webpack_require__(85);
-var ReactReconciler = __webpack_require__(24);
+var ReactReconciler = __webpack_require__(23);
 var Transaction = __webpack_require__(37);
 
 var invariant = __webpack_require__(2);
@@ -2821,7 +2821,7 @@ function Claim(props) {
       _react2.default.createElement(
         'div',
         { className: 'claim__status-circle' },
-        _react2.default.createElement(_StatusIndicator2.default, { state: props.claim.probability, type: 'circle' })
+        _react2.default.createElement(_StatusIndicator2.default, { probability: props.claim.probability, type: 'circle' })
       ),
       _react2.default.createElement(
         _reactRouterDom.Link,
@@ -2850,59 +2850,6 @@ Claim.defaultProps = {
 
 /***/ }),
 /* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//The idea here is to hold onto all the notifications that happen
-//somehow changes in state here should trigger a rendering in the react part
-//think we should wait until something like redux is set up before going any further.
-
-var notes = [];
-var timeout = 10;
-
-function remove(note) {
-  for (var n = 0; n < notes.length; n++) {
-    if (notes[n].title === note) {
-      notes[n].clearTimer();
-      notes.splice(n, 1);
-    }
-  }
-}
-
-function post(message) {
-
-  var notification = function () {
-    var counter = 0;
-
-    var timer = setInterval(function () {
-      counter += 1;
-      if (counter > timeout) {
-        remove(message);
-      }
-    }, 1000);
-
-    return {
-      title: message,
-      clearTimer: function clearTimer() {
-        clearInterval(timer);
-      }
-    };
-  }();
-
-  notes.push(notification);
-}
-
-exports.default = {
-  post: post
-};
-
-/***/ }),
-/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3025,7 +2972,7 @@ DOMLazyTree.queueText = queueText;
 module.exports = DOMLazyTree;
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3199,7 +3146,7 @@ module.exports = ReactReconciler;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3292,6 +3239,59 @@ var React = {
 
 module.exports = React;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//The idea here is to hold onto all the notifications that happen
+//somehow changes in state here should trigger a rendering in the react part
+//think we should wait until something like redux is set up before going any further.
+
+var notes = [];
+var timeout = 10;
+
+function remove(note) {
+  for (var n = 0; n < notes.length; n++) {
+    if (notes[n].title === note) {
+      notes[n].clearTimer();
+      notes.splice(n, 1);
+    }
+  }
+}
+
+function post(message) {
+
+  var notification = function () {
+    var counter = 0;
+
+    var timer = setInterval(function () {
+      counter += 1;
+      if (counter > timeout) {
+        remove(message);
+      }
+    }, 1000);
+
+    return {
+      title: message,
+      clearTimer: function clearTimer() {
+        clearInterval(timer);
+      }
+    };
+  }();
+
+  notes.push(notification);
+}
+
+exports.default = {
+  post: post
+};
 
 /***/ }),
 /* 26 */
@@ -5815,7 +5815,7 @@ exports.default = createTransitionManager;
 
 
 
-var DOMLazyTree = __webpack_require__(23);
+var DOMLazyTree = __webpack_require__(22);
 var Danger = __webpack_require__(155);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactInstrumentation = __webpack_require__(9);
@@ -6369,7 +6369,7 @@ module.exports = KeyEscapeUtils;
 
 var _prodInvariant = __webpack_require__(4);
 
-var React = __webpack_require__(25);
+var React = __webpack_require__(24);
 var ReactPropTypesSecret = __webpack_require__(90);
 
 var invariant = __webpack_require__(2);
@@ -9943,9 +9943,9 @@ module.exports = ReactInputSelection;
 
 var _prodInvariant = __webpack_require__(4);
 
-var DOMLazyTree = __webpack_require__(23);
+var DOMLazyTree = __webpack_require__(22);
 var DOMProperty = __webpack_require__(15);
-var React = __webpack_require__(25);
+var React = __webpack_require__(24);
 var ReactBrowserEventEmitter = __webpack_require__(35);
 var ReactCurrentOwner = __webpack_require__(13);
 var ReactDOMComponentTree = __webpack_require__(6);
@@ -9955,7 +9955,7 @@ var ReactFeatureFlags = __webpack_require__(85);
 var ReactInstanceMap = __webpack_require__(30);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactMarkupChecksum = __webpack_require__(187);
-var ReactReconciler = __webpack_require__(24);
+var ReactReconciler = __webpack_require__(23);
 var ReactUpdateQueue = __webpack_require__(54);
 var ReactUpdates = __webpack_require__(12);
 
@@ -10488,7 +10488,7 @@ module.exports = ReactMount;
 
 var _prodInvariant = __webpack_require__(4);
 
-var React = __webpack_require__(25);
+var React = __webpack_require__(24);
 
 var invariant = __webpack_require__(2);
 
@@ -11731,7 +11731,7 @@ var _user = __webpack_require__(43);
 
 var _user2 = _interopRequireDefault(_user);
 
-var _notify = __webpack_require__(22);
+var _notify = __webpack_require__(25);
 
 var _notify2 = _interopRequireDefault(_notify);
 
@@ -12132,7 +12132,7 @@ var _validate = __webpack_require__(73);
 
 var _validate2 = _interopRequireDefault(_validate);
 
-var _notify = __webpack_require__(22);
+var _notify = __webpack_require__(25);
 
 var _notify2 = _interopRequireDefault(_notify);
 
@@ -12358,7 +12358,7 @@ exports.default = AddArgumentForm;
 
 AddArgumentForm.propTypes = {
   parentClaim: _react2.default.PropTypes.shape({
-    id: _react2.default.PropTypes.number.isRequired,
+    _id: _react2.default.PropTypes.string.isRequired,
     text: _react2.default.PropTypes.string.isRequired
   }).isRequired,
   updatedClaimHandler: _react2.default.PropTypes.func.isRequired
@@ -12518,7 +12518,7 @@ var _validate = __webpack_require__(73);
 
 var _validate2 = _interopRequireDefault(_validate);
 
-var _notify = __webpack_require__(22);
+var _notify = __webpack_require__(25);
 
 var _notify2 = _interopRequireDefault(_notify);
 
@@ -12699,7 +12699,7 @@ exports.default = AddExplanationForm;
 
 AddExplanationForm.propTypes = {
   parentClaim: _react2.default.PropTypes.shape({
-    id: _react2.default.PropTypes.number.isRequired,
+    _id: _react2.default.PropTypes.string.isRequired,
     text: _react2.default.PropTypes.string.isRequired
   }).isRequired,
   updatedClaimHandler: _react2.default.PropTypes.func.isRequired
@@ -12730,7 +12730,7 @@ var _ClaimDetail = __webpack_require__(111);
 
 var _ClaimDetail2 = _interopRequireDefault(_ClaimDetail);
 
-var _notify = __webpack_require__(22);
+var _notify = __webpack_require__(25);
 
 var _notify2 = _interopRequireDefault(_notify);
 
@@ -14839,7 +14839,7 @@ var _urlParameter = __webpack_require__(132);
 
 var _urlParameter2 = _interopRequireDefault(_urlParameter);
 
-var _notify = __webpack_require__(22);
+var _notify = __webpack_require__(25);
 
 var _notify2 = _interopRequireDefault(_notify);
 
@@ -17823,7 +17823,7 @@ module.exports = ChangeEventPlugin;
 
 var _prodInvariant = __webpack_require__(4);
 
-var DOMLazyTree = __webpack_require__(23);
+var DOMLazyTree = __webpack_require__(22);
 var ExecutionEnvironment = __webpack_require__(7);
 
 var createNodesFromMarkup = __webpack_require__(137);
@@ -18328,7 +18328,7 @@ module.exports = HTMLDOMPropertyConfig;
 
 
 
-var ReactReconciler = __webpack_require__(24);
+var ReactReconciler = __webpack_require__(23);
 
 var instantiateReactComponent = __webpack_require__(96);
 var KeyEscapeUtils = __webpack_require__(50);
@@ -18526,14 +18526,14 @@ module.exports = ReactComponentBrowserEnvironment;
 var _prodInvariant = __webpack_require__(4),
     _assign = __webpack_require__(5);
 
-var React = __webpack_require__(25);
+var React = __webpack_require__(24);
 var ReactComponentEnvironment = __webpack_require__(52);
 var ReactCurrentOwner = __webpack_require__(13);
 var ReactErrorUtils = __webpack_require__(53);
 var ReactInstanceMap = __webpack_require__(30);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactNodeTypes = __webpack_require__(89);
-var ReactReconciler = __webpack_require__(24);
+var ReactReconciler = __webpack_require__(23);
 
 if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(210);
@@ -19436,7 +19436,7 @@ module.exports = ReactCompositeComponent;
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDefaultInjection = __webpack_require__(180);
 var ReactMount = __webpack_require__(88);
-var ReactReconciler = __webpack_require__(24);
+var ReactReconciler = __webpack_require__(23);
 var ReactUpdates = __webpack_require__(12);
 var ReactVersion = __webpack_require__(195);
 
@@ -19555,7 +19555,7 @@ var _prodInvariant = __webpack_require__(4),
 
 var AutoFocusUtils = __webpack_require__(151);
 var CSSPropertyOperations = __webpack_require__(153);
-var DOMLazyTree = __webpack_require__(23);
+var DOMLazyTree = __webpack_require__(22);
 var DOMNamespaces = __webpack_require__(48);
 var DOMProperty = __webpack_require__(15);
 var DOMPropertyOperations = __webpack_require__(81);
@@ -20596,7 +20596,7 @@ module.exports = ReactDOMContainerInfo;
 
 var _assign = __webpack_require__(5);
 
-var DOMLazyTree = __webpack_require__(23);
+var DOMLazyTree = __webpack_require__(22);
 var ReactDOMComponentTree = __webpack_require__(6);
 
 var ReactDOMEmptyComponent = function (instantiate) {
@@ -21156,7 +21156,7 @@ module.exports = ReactDOMNullInputValuePropHook;
 
 var _assign = __webpack_require__(5);
 
-var React = __webpack_require__(25);
+var React = __webpack_require__(24);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactDOMSelect = __webpack_require__(83);
 
@@ -21504,7 +21504,7 @@ var _prodInvariant = __webpack_require__(4),
     _assign = __webpack_require__(5);
 
 var DOMChildrenOperations = __webpack_require__(47);
-var DOMLazyTree = __webpack_require__(23);
+var DOMLazyTree = __webpack_require__(22);
 var ReactDOMComponentTree = __webpack_require__(6);
 
 var escapeTextContentForBrowser = __webpack_require__(38);
@@ -23033,7 +23033,7 @@ var ReactInstanceMap = __webpack_require__(30);
 var ReactInstrumentation = __webpack_require__(9);
 
 var ReactCurrentOwner = __webpack_require__(13);
-var ReactReconciler = __webpack_require__(24);
+var ReactReconciler = __webpack_require__(23);
 var ReactChildReconciler = __webpack_require__(160);
 
 var emptyFunction = __webpack_require__(11);

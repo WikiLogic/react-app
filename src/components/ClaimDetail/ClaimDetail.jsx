@@ -89,10 +89,11 @@ export default class ClaimDetail extends React.Component {
     } else {
       argumentMarkup = (
         <div>
-          No arguments -
+          No arguments
+          {/* -
           <a href="http://www.wikilogicfoundation.org/get-involved/" target="_blank" rel="noopener noreferrer">
             sign up
-          </a> to add your own!
+          </a> to add your own! */}
         </div>
       );
     }

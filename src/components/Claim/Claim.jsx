@@ -19,7 +19,7 @@ export default function Claim(props) {
     <div className={cssClass}>
       <div className="claim__body">
         <div className="claim__status-circle">
-          <StatusIndicator state={props.claim.probability} type="circle" />
+          <StatusIndicator probability={props.claim.probability} type="circle" />
         </div>
         <Link to={`/claim/${props.claim._key}`} className="claim__text">
           {props.claim.text}
