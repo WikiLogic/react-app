@@ -3,6 +3,11 @@
     width: 100%;
     position: relative;
 
+    &__label {
+        margin-bottom: 0;
+        line-height: 1.1
+    }
+
     &__input.search-form__input  { //input
         display: block;
         padding-right: 50px;
@@ -11,7 +16,7 @@
 
     &__submit { //button
         position: absolute;
-        top: 0;
+        height: 44px; //===== MAGIC NUMBER!
         right: 0;
         bottom: 0;
 

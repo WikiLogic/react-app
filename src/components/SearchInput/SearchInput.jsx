@@ -9,7 +9,9 @@ import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
 export default class SearchInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = {
+      value: ''
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -34,7 +36,16 @@ export default class SearchInput extends React.Component {
   render() {
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>
+        {(this.props.label &&
+          <label
+            htmlFor={this.props.id}
+            className="search-form__label"
+          >
+            {this.props.label}
+          </label>
+        )}
         <input
+          id={this.props.id}
           className="search-form__input"
           type="text"
           placeholder={this.props.placeholder}
@@ -53,6 +64,8 @@ SearchInput.propTypes = {
   inputValue: React.PropTypes.string,
   submissionHandler: React.PropTypes.func.isRequired,
   placeholder: React.PropTypes.string.isRequired,
+  id: React.PropTypes.string.isRequired,
+  label: React.PropTypes.string.isRequired
 };
 
 SearchInput.defaultProps = {

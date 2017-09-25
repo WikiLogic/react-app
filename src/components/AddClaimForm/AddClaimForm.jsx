@@ -9,7 +9,7 @@ export default class AddClaimForm extends React.Component {
     super(props);
     this.state = {
       text: '',
-      value: 0,
+      value: 50,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleValueUpdate = this.handleValueUpdate.bind(this);
@@ -42,22 +42,24 @@ export default class AddClaimForm extends React.Component {
 
         <div className="form__label">
           <label className="form__label-text" htmlFor="new-claim-text">
-            Write up your new claim
+            {this.props.textboxLabel}
           </label>
           <textarea className="form__input" id="new-claim-text" onChange={this.handleChange} />
-          <Range
-            min={1}
-            max={99}
-            step={1}
-            value={Number(this.state.value)}
-            inputId="new-claim-value"
-            labelText="Assign a value"
-            handleValueUpdate={this.handleValueUpdate}
-          />
+          {(this.props.showValueSetter &&
+            <Range
+              min={1}
+              max={99}
+              step={1}
+              value={Number(this.state.value)}
+              inputId="new-claim-value"
+              labelText="Assign a value"
+              handleValueUpdate={this.handleValueUpdate}
+            />
+          )}
         </div>
 
-        <div className="form__submit">
-          <input className="form__submit-button" type="submit" value="Publish" />
+        <div className="form__submit text-right">
+          <input className="form__submit-button" type="submit" value={this.props.submitBtnLabel} />
         </div>
       </form>
     );
@@ -65,5 +67,15 @@ export default class AddClaimForm extends React.Component {
 }
 
 AddClaimForm.propTypes = {
-  submitHandler: React.PropTypes.func.isRequired
+  submitHandler: React.PropTypes.func.isRequired,
+  textboxLabel: React.PropTypes.string,
+  submitBtnLabel: React.PropTypes.string,
+  showValueSetter: React.PropTypes.bool
 };
+
+AddClaimForm.defaultProps = {
+  textboxLabel: 'Write up your new claim',
+  submitBtnLabel: 'Publish',
+  showValueSetter: false
+};
+

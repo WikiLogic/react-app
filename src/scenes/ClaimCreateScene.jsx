@@ -22,7 +22,7 @@ export default class ClaimCreateScene extends React.Component {
       text: newClaimData.text,
       probability: newClaimData.value,
     }).then((data) => {
-      console.log("new claim!", data);
+      console.log('new claim!', data);
     }).catch((err) => {
       console.error('new claim failed: ', err);
     });

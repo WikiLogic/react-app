@@ -1,0 +1,41 @@
+.argument-builder {
+  border-radius: 5px;
+  
+  &--SUPPORTS {
+    border: 1px solid $WL_Green;
+    .argument-builder__sim {
+      background-color: rgba($WL_Green, 0.2);
+    }
+  }
+  
+  &--OPPOSES {
+    border: 1px solid $WL_Red;
+    .argument-builder__sim {
+      background-color: rgba($WL_Red, 0.2);
+    }
+  }
+  
+  &__sim {
+    padding: rem($pad / 2);
+    
+  }
+    &__title {
+      margin-bottom: rem($pad);
+    }
+    &__body {
+      margin-bottom: rem($pad);
+    }
+    &__submit {
+      text-align: right;
+    }
+
+  &__workbench {
+    padding: rem($pad / 2);
+  }
+    &__search {
+      margin-bottom: rem($pad);
+    }
+    &__create {
+
+    }
+}

@@ -5238,7 +5238,9 @@ var SearchInput = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchInput.__proto__ || Object.getPrototypeOf(SearchInput)).call(this, props));
 
-    _this.state = { value: '' };
+    _this.state = {
+      value: ''
+    };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
@@ -5270,7 +5272,16 @@ var SearchInput = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { className: 'search-form', onSubmit: this.handleSubmit },
+        this.props.label && _react2.default.createElement(
+          'label',
+          {
+            htmlFor: this.props.id,
+            className: 'search-form__label'
+          },
+          this.props.label
+        ),
         _react2.default.createElement('input', {
+          id: this.props.id,
           className: 'search-form__input',
           type: 'text',
           placeholder: this.props.placeholder,
@@ -5295,7 +5306,9 @@ exports.default = SearchInput;
 SearchInput.propTypes = {
   inputValue: _react2.default.PropTypes.string,
   submissionHandler: _react2.default.PropTypes.func.isRequired,
-  placeholder: _react2.default.PropTypes.string.isRequired
+  placeholder: _react2.default.PropTypes.string.isRequired,
+  id: _react2.default.PropTypes.string.isRequired,
+  label: _react2.default.PropTypes.string.isRequired
 };
 
 SearchInput.defaultProps = {
@@ -8017,14 +8030,12 @@ var Argument = function (_React$Component) {
 
       // loop through the premises in this argument
       var premises = this.props.argumentObject.premises.map(function (premis) {
-        // const isSelected = (premis.id === this.props.highlightedPremisId);
-
+        console.log('');
         return _react2.default.createElement(
           'div',
           { className: 'argument__premis', key: premis.id },
           _react2.default.createElement(_Claim2.default, {
             claim: premis,
-            isSelected: isSelected,
             handleClick: function handleClick() {
               _this2.handleClick(premis);
             }
@@ -8110,7 +8121,7 @@ var SearchResults = function (_React$Component) {
   _createClass(SearchResults, [{
     key: 'renderSearchResults',
     value: function renderSearchResults() {
-      console.log("this.props.searchResults", this.props.searchResults);
+      console.log('this.props.searchResults', this.props.searchResults);
       if (!this.props.searchResults) {
         return _react2.default.createElement(
           'p',
@@ -12102,7 +12113,7 @@ var AddClaimForm = function (_React$Component) {
 
     _this.state = {
       text: '',
-      value: 0
+      value: 50
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleValueUpdate = _this.handleValueUpdate.bind(_this);
@@ -12145,10 +12156,10 @@ var AddClaimForm = function (_React$Component) {
           _react2.default.createElement(
             'label',
             { className: 'form__label-text', htmlFor: 'new-claim-text' },
-            'Write up your new claim'
+            this.props.textboxLabel
           ),
           _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleChange }),
-          _react2.default.createElement(_Range2.default, {
+          this.props.showValueSetter && _react2.default.createElement(_Range2.default, {
             min: 1,
             max: 99,
             step: 1,
@@ -12160,8 +12171,8 @@ var AddClaimForm = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'form__submit' },
-          _react2.default.createElement('input', { className: 'form__submit-button', type: 'submit', value: 'Publish' })
+          { className: 'form__submit text-right' },
+          _react2.default.createElement('input', { className: 'form__submit-button', type: 'submit', value: this.props.submitBtnLabel })
         )
       );
     }
@@ -12174,7 +12185,16 @@ exports.default = AddClaimForm;
 
 
 AddClaimForm.propTypes = {
-  submitHandler: _react2.default.PropTypes.func.isRequired
+  submitHandler: _react2.default.PropTypes.func.isRequired,
+  textboxLabel: _react2.default.PropTypes.string,
+  submitBtnLabel: _react2.default.PropTypes.string,
+  showValueSetter: _react2.default.PropTypes.bool
+};
+
+AddClaimForm.defaultProps = {
+  textboxLabel: 'Write up your new claim',
+  submitBtnLabel: 'Publish',
+  showValueSetter: false
 };
 
 /***/ }),
@@ -12194,29 +12214,13 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Argument = __webpack_require__(68);
-
-var _Argument2 = _interopRequireDefault(_Argument);
-
 var _api = __webpack_require__(20);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _SearchInput = __webpack_require__(40);
+var _SearchResults = __webpack_require__(69);
 
-var _SearchInput2 = _interopRequireDefault(_SearchInput);
-
-var _Claim = __webpack_require__(24);
-
-var _Claim2 = _interopRequireDefault(_Claim);
-
-var _validate = __webpack_require__(128);
-
-var _validate2 = _interopRequireDefault(_validate);
-
-var _notify = __webpack_require__(41);
-
-var _notify2 = _interopRequireDefault(_notify);
+var _SearchResults2 = _interopRequireDefault(_SearchResults);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12241,57 +12245,47 @@ var ArgumentBuilder = function (_React$Component) {
     _this.state = {
       type: 'SUPPORTS',
       premises: [],
-      premis_search_results: []
+      textAreaValue: '',
+      searchResults: []
     };
 
-    _this.handleTypeToggle = _this.handleTypeToggle.bind(_this);
-    _this.handlePremisSearch = _this.handlePremisSearch.bind(_this);
-    _this.handlePremisResultClick = _this.handlePremisResultClick.bind(_this);
-    _this.handleArgumentPremisClick = _this.handleArgumentPremisClick.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleTextareaChange = _this.handleTextareaChange.bind(_this);
+    _this.searchForExistingClaims = _this.searchForExistingClaims.bind(_this);
+    _this.addExistingPremis = _this.addExistingPremis.bind(_this);
+    _this.createAndAddNewPremis = _this.createAndAddNewPremis.bind(_this);
     return _this;
   }
 
   _createClass(ArgumentBuilder, [{
-    key: 'handleTypeToggle',
-    value: function handleTypeToggle(type) {
-      var newArgument = this.state.argument;
-      newArgument.type = type;
-      this.setState({ argument: newArgument });
+    key: 'handleTextareaChange',
+    value: function handleTextareaChange(newValue) {
+      this.setState({
+        textAreaValue: newValue
+      });
     }
   }, {
-    key: 'handlePremisSearch',
-    value: function handlePremisSearch(term) {
+    key: 'searchForExistingClaims',
+    value: function searchForExistingClaims() {
       var _this2 = this;
 
+      var term = this.state.textAreaValue;
       if (isNaN(term)) {
         _api2.default.searchClaimsByTerm(term).then(function (data) {
-          _this2.setState({ premis_search_results: data.claims });
+          _this2.setState({ searchResults: data.results });
         }).catch(function (err) {
-          _notify2.default.post(err);
+          console.error('argument builder call to API errored: ', err);
         });
       } else {
         _api2.default.getClaimDetailById(term).then(function (data) {
-          _this2.setState({ premis_search_results: [data.claim] });
+          _this2.setState({ searchResults: [data.claim] });
         }).catch(function (err) {
-          _notify2.default.post(err);
+          console.error('argument builder call to API errored: ', err);
         });
       }
     }
   }, {
-    key: 'handlePremisResultClick',
-    value: function handlePremisResultClick(premis) {
-      // a premis in the premis search - add it to the new argument when it's clicked
-      var newArgument = this.state.argument;
-
-      // if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
-      newArgument.premises.push(premis);
-      this.setState({ argument: newArgument });
-      // }
-    }
-  }, {
-    key: 'handleArgumentPremisClick',
-    value: function handleArgumentPremisClick(premis) {
+    key: 'addExistingPremis',
+    value: function addExistingPremis(premis) {
       // when a premis that has been added to the argument is clicked, remove it from the argument
       var newArgument = this.state.argument;
       newArgument.premises = newArgument.premises.filter(function (statePremis) {
@@ -12300,91 +12294,93 @@ var ArgumentBuilder = function (_React$Component) {
       this.setState({ argument: newArgument });
     }
   }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      // when the publish button is clicked, set up the new argument JSON to be passed to the API
-      event.preventDefault();
-
-      var premisIdArray = this.state.argument.premises.map(function (premis) {
-        return premis.id;
+    key: 'createAndAddNewPremis',
+    value: function createAndAddNewPremis() {
+      _api2.default.postNewClaim({
+        text: this.state.textAreaValue,
+        probability: 50
+      }).then(function (data) {
+        console.log('new claim! add it to this argument :)', data);
+      }).catch(function (err) {
+        console.error('new claim failed: ', err);
       });
-
-      this.props.submissionHandler(premisIdArray);
-      // API.postNewArgument({
-      //   parentClaimId: this.props.parentClaim.id,
-      //   type: this.state.argument.type,
-      //   premiseIds: premisIdArray,
-      // }).then((res) => {
-      //   this.props.updatedClaimHandler(res.data.claim);
-      // }).catch((err) => {
-      //   Notify.post(err);
-      // });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
-      var premisSearchResults = null;
-      if (this.state.premis_search_results.length > 0) {
-        premisSearchResults = this.state.premis_search_results.map(function (premis) {
-          return _react2.default.createElement(_Claim2.default, {
-            claim: premis,
-            key: premis.id,
-            handleClick: _this3.handlePremisResultClick,
-            isSelected: false
-          });
-        });
-      }
-
       return _react2.default.createElement(
         'div',
-        { className: 'add-argument-form' },
+        { className: 'argument-builder argument-builder--' + this.state.type },
         _react2.default.createElement(
           'div',
-          { className: 'add-argument-form__premis-finder' },
+          { className: 'argument-builder__sim' },
           _react2.default.createElement(
             'div',
-            { className: 'premis-finder' },
+            { className: 'argument-builder__title' },
+            this.props.title
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'argument-builder__body' },
+            'premises...'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'argument-builder__submit' },
             _react2.default.createElement(
-              'div',
-              { className: 'premis-finder__results' },
-              premisSearchResults
+              'button',
+              { onClick: this.handleSubmit },
+              'Publish new argument'
             )
           )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'add-argument-form__argument-simulator' },
+          { className: 'argument-builder__workbench' },
           _react2.default.createElement(
             'div',
-            { className: 'argument argument--' + this.state.type },
+            { className: 'argument-builder__create' },
             _react2.default.createElement(
               'div',
-              { className: 'argument__header' },
-              'New ',
-              this.state.type,
-              ' argument'
-            ),
-            _react2.default.createElement(_SearchInput2.default, {
-              submissionHandler: this.handlePremisSearch,
-              placeholder: 'Search Claims'
-            }),
-            'Add existing claims as premises for this argument',
-            _react2.default.createElement(
-              'div',
-              { className: 'argument__body' },
-              'premises...'
+              { className: 'form' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form__label' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'form__label-text', htmlFor: 'new-claim-text' },
+                  'Write up a new premise to use in this argument'
+                ),
+                _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleTextareaChange })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'layout-cols-2__left' },
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: this.searchForExistingClaims },
+                    'Check for existing premises'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'layout-cols-2__right' },
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: this.createAndAddNewPremis },
+                    'Submit new premis'
+                  )
+                )
+              )
             )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'add-argument-form__submit' },
+          ),
           _react2.default.createElement(
-            'button',
-            { onClick: this.handleSubmit },
-            'Publish'
+            'div',
+            { className: 'argument-builder__search' },
+            _react2.default.createElement(_SearchResults2.default, { searchResults: this.state.searchResults })
           )
         )
       );
@@ -12398,7 +12394,11 @@ exports.default = ArgumentBuilder;
 
 
 ArgumentBuilder.propTypes = {
-  submissionHandler: _react2.default.PropTypes.func.isRequired
+  title: _react2.default.PropTypes.string
+};
+
+ArgumentBuilder.defaultProps = {
+  title: 'New argument:'
 };
 
 /***/ }),
@@ -13728,7 +13728,7 @@ var ClaimCreateScene = function (_React$Component) {
         text: newClaimData.text,
         probability: newClaimData.value
       }).then(function (data) {
-        console.log("new claim!", data);
+        console.log('new claim!', data);
       }).catch(function (err) {
         console.error('new claim failed: ', err);
       });
@@ -13902,7 +13902,7 @@ var ClaimDetailScene = function (_React$Component) {
     }
   }, {
     key: 'updatedClaimHandler',
-    value: function updatedClaimHandler(claim) {
+    value: function updatedClaimHandler() {
       // when a new argument is added the API returns the updated parent claim, so we should replace!
       this.setState({
         new_argument_modal_open: false
@@ -14942,40 +14942,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-function newPremis(newPremisObj, argument, parentClaim) {
-  // check 1 - is it the parent?
-  if (newPremisObj.id === parentClaim.id) {
-    return false;
-  }
-
-  // check 2 - is it a duplicate
-  var isDuplicate = argument.premises.some(function (argPremis) {
-    if (argPremis.id === newPremisObj.id) {
-      return true;
-    }
-    return false;
-  });
-
-  if (isDuplicate) {
-    return false;
-  }
-  return true;
-}
-
-exports.default = {
-  newPremis: newPremis
-};
-
-/***/ }),
+/* 128 */,
 /* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 

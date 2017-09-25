@@ -81,7 +81,7 @@ export default class ClaimDetailScene extends React.Component {
     console.log('new argument submission!', submission);
   }
 
-  updatedClaimHandler(claim) {
+  updatedClaimHandler() {
     // when a new argument is added the API returns the updated parent claim, so we should replace!
     this.setState({
       new_argument_modal_open: false,

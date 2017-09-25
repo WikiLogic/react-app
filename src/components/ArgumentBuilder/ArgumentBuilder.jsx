@@ -1,11 +1,6 @@
 import React from 'react';
-import Argument from 'WlComponents/Argument/Argument.jsx';
 import API from 'WlAPI/api.js';
-import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
-import Claim from 'WlComponents/Claim/Claim.jsx';
-import Validate from 'WlServices/validate.js';
-import Notify from 'WlServices/notify.js';
-
+import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 /* Search & select claims to add as premises to an argument
  */
 
@@ -16,118 +11,101 @@ export default class ArgumentBuilder extends React.Component {
     this.state = {
       type: 'SUPPORTS',
       premises: [],
-      premis_search_results: [],
+      textAreaValue: '',
+      searchResults: [],
     };
 
-    this.handleTypeToggle = this.handleTypeToggle.bind(this);
-    this.handlePremisSearch = this.handlePremisSearch.bind(this);
-    this.handlePremisResultClick = this.handlePremisResultClick.bind(this);
-    this.handleArgumentPremisClick = this.handleArgumentPremisClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextareaChange = this.handleTextareaChange.bind(this);
+    this.searchForExistingClaims = this.searchForExistingClaims.bind(this);
+    this.addExistingPremis = this.addExistingPremis.bind(this);
+    this.createAndAddNewPremis = this.createAndAddNewPremis.bind(this);
   }
 
-  handleTypeToggle(type) {
-    const newArgument = this.state.argument;
-    newArgument.type = type;
-    this.setState({ argument: newArgument });
+  handleTextareaChange(newValue) {
+    this.setState({
+      textAreaValue: newValue
+    });
   }
 
-  handlePremisSearch(term) {
+
+  searchForExistingClaims() {
+    const term = this.state.textAreaValue;
     if (isNaN(term)) {
       API.searchClaimsByTerm(term)
         .then((data) => {
-          this.setState({ premis_search_results: data.claims });
+          this.setState({ searchResults: data.results });
         }).catch((err) => {
-          Notify.post(err);
+          console.error('argument builder call to API errored: ', err);
         });
     } else {
       API.getClaimDetailById(term)
         .then((data) => {
-          this.setState({ premis_search_results: [data.claim] });
+          this.setState({ searchResults: [data.claim] });
         }).catch((err) => {
-          Notify.post(err);
+          console.error('argument builder call to API errored: ', err);
         });
     }
   }
 
-  handlePremisResultClick(premis) {
-    // a premis in the premis search - add it to the new argument when it's clicked
-    const newArgument = this.state.argument;
-
-    // if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
-    newArgument.premises.push(premis);
-    this.setState({ argument: newArgument });
-    // }
-  }
-
-  handleArgumentPremisClick(premis) {
+  addExistingPremis(premis) {
     // when a premis that has been added to the argument is clicked, remove it from the argument
     const newArgument = this.state.argument;
     newArgument.premises = newArgument.premises.filter(statePremis => statePremis.id !== premis.id);
     this.setState({ argument: newArgument });
   }
 
-  handleSubmit(event) {
-    // when the publish button is clicked, set up the new argument JSON to be passed to the API
-    event.preventDefault();
-
-    const premisIdArray = this.state.argument.premises.map(premis => premis.id);
-
-    this.props.submissionHandler(premisIdArray);
-    // API.postNewArgument({
-    //   parentClaimId: this.props.parentClaim.id,
-    //   type: this.state.argument.type,
-    //   premiseIds: premisIdArray,
-    // }).then((res) => {
-    //   this.props.updatedClaimHandler(res.data.claim);
-    // }).catch((err) => {
-    //   Notify.post(err);
-    // });
+  createAndAddNewPremis() {
+    API.postNewClaim({
+      text: this.state.textAreaValue,
+      probability: 50,
+    }).then((data) => {
+      console.log('new claim! add it to this argument :)', data);
+    }).catch((err) => {
+      console.error('new claim failed: ', err);
+    });
   }
 
   render() {
-    let premisSearchResults = null;
-    if (this.state.premis_search_results.length > 0) {
-      premisSearchResults = this.state.premis_search_results.map(premis =>
-        (<Claim
-          claim={premis}
-          key={premis.id}
-          handleClick={this.handlePremisResultClick}
-          isSelected={false}
-        />),
-      );
-    }
-
     return (
-      <div className="add-argument-form">
+      <div className={`argument-builder argument-builder--${this.state.type}`}>
 
-        <div className="add-argument-form__premis-finder">
-          <div className="premis-finder">
-
-            <div className="premis-finder__results">
-              {premisSearchResults}
-            </div>
+        <div className="argument-builder__sim">
+          <div className="argument-builder__title">
+            {this.props.title}
+          </div>
+          <div className="argument-builder__body">
+            premises...
+          </div>
+          <div className="argument-builder__submit">
+            <button onClick={this.handleSubmit}>Publish new argument</button>
           </div>
         </div>
 
-        <div className="add-argument-form__argument-simulator">
-          <div className={`argument argument--${this.state.type}`}>
-            <div className="argument__header">
-              New {this.state.type} argument
-            </div>
-            <SearchInput
-              submissionHandler={this.handlePremisSearch}
-              placeholder="Search Claims"
-            />
-            Add existing claims as premises for this argument
-            <div className="argument__body">
-              premises...
-            </div>
-          </div>
-        </div>
+        <div className="argument-builder__workbench">
+          <div className="argument-builder__create">
 
-        <div className="add-argument-form__submit">
-          <button onClick={this.handleSubmit}>Publish</button>
+            <div className="form">
+              <div className="form__label">
+                <label className="form__label-text" htmlFor="new-claim-text">
+                  Write up a new premise to use in this argument
+                </label>
+                <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} />
+              </div>
+
+              <div className="layout-cols-2">
+                <div className="layout-cols-2__left">
+                  <button onClick={this.searchForExistingClaims}>Check for existing premises</button>
+                </div>
+                <div className="layout-cols-2__right">
+                  <button onClick={this.createAndAddNewPremis}>Submit new premis</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div className="argument-builder__search">
+            <SearchResults searchResults={this.state.searchResults} />
+          </div>
         </div>
       </div>
     );
@@ -135,5 +113,9 @@ export default class ArgumentBuilder extends React.Component {
 }
 
 ArgumentBuilder.propTypes = {
-  submissionHandler: React.PropTypes.func.isRequired,
+  title: React.PropTypes.string
+};
+
+ArgumentBuilder.defaultProps = {
+  title: 'New argument:'
 };

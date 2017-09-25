@@ -789,6 +789,29 @@ styles are set in sass alongside the components. (in the components folder).
     background-color: rgba(240, 93, 101, 0.2);
     border: 1px solid #f05d65; }
 
+.argument-builder {
+  border-radius: 5px; }
+  .argument-builder--SUPPORTS {
+    border: 1px solid #31D332; }
+    .argument-builder--SUPPORTS .argument-builder__sim {
+      background-color: rgba(49, 211, 50, 0.2); }
+  .argument-builder--OPPOSES {
+    border: 1px solid #f05d65; }
+    .argument-builder--OPPOSES .argument-builder__sim {
+      background-color: rgba(240, 93, 101, 0.2); }
+  .argument-builder__sim {
+    padding: 0.5rem; }
+  .argument-builder__title {
+    margin-bottom: 1rem; }
+  .argument-builder__body {
+    margin-bottom: 1rem; }
+  .argument-builder__submit {
+    text-align: right; }
+  .argument-builder__workbench {
+    padding: 0.5rem; }
+  .argument-builder__search {
+    margin-bottom: 1rem; }
+
 .argumentCircle {
   padding: 0.5rem;
   border-radius: 5px; }
@@ -956,13 +979,16 @@ styles are set in sass alongside the components. (in the components folder).
   display: block;
   width: 100%;
   position: relative; }
+  .search-form__label {
+    margin-bottom: 0;
+    line-height: 1.1; }
   .search-form__input.search-form__input {
     display: block;
     padding-right: 50px;
     width: 100%; }
   .search-form__submit {
     position: absolute;
-    top: 0;
+    height: 44px;
     right: 0;
     bottom: 0;
     background-color: transparent;
