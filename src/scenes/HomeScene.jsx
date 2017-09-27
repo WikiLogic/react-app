@@ -5,7 +5,7 @@ import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
  * The Home page
  * @prop {*} name 
  */
-export default class SearchScene extends React.Component {
+export default class HomeScene extends React.Component {
   constructor(props) {
     super(props);
 
@@ -28,7 +28,12 @@ export default class SearchScene extends React.Component {
           <div className="max-width-wrap">
             You&#39;ve come home
 
-            <SearchInput submissionHandler={this.searchClaims} placeholder="Search Claims" />
+            <SearchInput
+              id="home-scene-search-input"
+              label="Search"
+              submissionHandler={this.searchClaims}
+              placeholder="Search Claims"
+            />
 
           </div>
         </div>
@@ -37,7 +42,7 @@ export default class SearchScene extends React.Component {
   }
 }
 
-SearchScene.propTypes = {
+HomeScene.propTypes = {
   history: React.PropTypes.shape({
     push: React.PropTypes.func.isRequired,
   }).isRequired,

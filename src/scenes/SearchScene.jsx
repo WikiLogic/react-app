@@ -77,7 +77,9 @@ export default class SearchScene extends React.Component {
             <SearchInput
               submissionHandler={this.searchClaims}
               placeholder="Search Claims"
+              label="Search"
               inputValue={this.state.searchTerm}
+              id="search-scene-input"
             />
             <Loader isLoading={this.state.isLoading} />
 

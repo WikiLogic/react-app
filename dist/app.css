@@ -450,6 +450,11 @@ input[type='button'],
   .button svg {
     width: 1em;
     height: 1em; }
+  button[disabled],
+  input[type='submit'][disabled],
+  input[type='button'][disabled],
+  .button[disabled] {
+    background-color: #cccccc; }
 
 pre {
   font-family: monospace, monospace;
@@ -811,6 +816,11 @@ styles are set in sass alongside the components. (in the components folder).
     padding: 0.5rem; }
   .argument-builder__search {
     margin-bottom: 1rem; }
+  .argument-builder__create-new-premise-button {
+    display: block;
+    position: relative;
+    top: -10px;
+    margin-left: auto; }
 
 .argumentCircle {
   padding: 0.5rem;

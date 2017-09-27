@@ -38,4 +38,8 @@ input[type='button'],
 		width: 1em;
 		height: 1em;
 	}
+
+	&[disabled] {
+		background-color: $rule-color;
+	}
 }

@@ -12,41 +12,67 @@ export default class ArgumentBuilder extends React.Component {
       type: 'SUPPORTS',
       premises: [],
       textAreaValue: '',
+      dupesPresented: false,
       searchResults: [],
     };
 
+    this.newPremiseCheckWait = null;
     this.handleTextareaChange = this.handleTextareaChange.bind(this);
+    this.handlePremisSubmission = this.handlePremisSubmission.bind(this);
     this.searchForExistingClaims = this.searchForExistingClaims.bind(this);
     this.addExistingPremis = this.addExistingPremis.bind(this);
     this.createAndAddNewPremis = this.createAndAddNewPremis.bind(this);
   }
 
-  handleTextareaChange(newValue) {
+  handleTextareaChange(event) {
+
+    clearTimeout(this.newPremiseCheckWait);
+    this.newPremiseCheckWait = setTimeout(() => {
+      this.searchForExistingClaims();
+    }, 3000);
+
     this.setState({
-      textAreaValue: newValue
+      textAreaValue: event.target.value,
+      dupesPresented: false
     });
   }
 
+  handlePremisSubmission() {
+    if (!this.state.dupesPresented) {
+      this.searchForExistingClaims();
+    } else {
 
+    }
+  }
+
+  //Before submitting the premis as a new one, fire off a search to see if there are any existing ones that it might be
   searchForExistingClaims() {
     const term = this.state.textAreaValue;
+    console.log('term', term);
     if (isNaN(term)) {
       API.searchClaimsByTerm(term)
         .then((data) => {
-          this.setState({ searchResults: data.results });
+          this.setState({
+            searchResults: data.results,
+            dupesPresented: true
+          });
         }).catch((err) => {
           console.error('argument builder call to API errored: ', err);
         });
     } else {
       API.getClaimDetailById(term)
         .then((data) => {
-          this.setState({ searchResults: [data.claim] });
+          this.setState({
+            searchResults: [data.claim],
+            dupesPresented: true
+          });
         }).catch((err) => {
           console.error('argument builder call to API errored: ', err);
         });
     }
   }
 
+  //if one of the claims found by the search turns out to be what the user is trying to add to the argument, click it to add it to the argument!
   addExistingPremis(premis) {
     // when a premis that has been added to the argument is clicked, remove it from the argument
     const newArgument = this.state.argument;
@@ -54,6 +80,8 @@ export default class ArgumentBuilder extends React.Component {
     this.setState({ argument: newArgument });
   }
 
+  //run this only after the user has seen a list of premises that might be dups
+  //creates a new claim with a default probability then adds it to the argument we're building
   createAndAddNewPremis() {
     API.postNewClaim({
       text: this.state.textAreaValue,
@@ -89,21 +117,16 @@ export default class ArgumentBuilder extends React.Component {
                 <label className="form__label-text" htmlFor="new-claim-text">
                   Write up a new premise to use in this argument
                 </label>
-                <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} />
-              </div>
-
-              <div className="layout-cols-2">
-                <div className="layout-cols-2__left">
-                  <button onClick={this.searchForExistingClaims}>Check for existing premises</button>
-                </div>
-                <div className="layout-cols-2__right">
-                  <button onClick={this.createAndAddNewPremis}>Submit new premis</button>
-                </div>
+                <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
+                <button className="argument-builder__create-new-premise-button" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create as a new claim and add to this argument</button>
               </div>
             </div>
 
           </div>
           <div className="argument-builder__search">
+            {(this.state.searchResults.length > 0 && 
+              <p>Click one of the existing claims below to add as a premise to this argument</p>
+            )}
             <SearchResults searchResults={this.state.searchResults} />
           </div>
         </div>
