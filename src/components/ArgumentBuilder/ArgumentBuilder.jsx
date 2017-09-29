@@ -1,6 +1,6 @@
 import React from 'react';
 import API from 'WlAPI/api.js';
-import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
+import CandidatePremises from './CandidatePremises.jsx';
 /* Search & select claims to add as premises to an argument
  */
 
@@ -29,7 +29,7 @@ export default class ArgumentBuilder extends React.Component {
     clearTimeout(this.newPremiseCheckWait);
     this.newPremiseCheckWait = setTimeout(() => {
       this.searchForExistingClaims();
-    }, 3000);
+    }, 1000);
 
     this.setState({
       textAreaValue: event.target.value,
@@ -118,16 +118,16 @@ export default class ArgumentBuilder extends React.Component {
                   Write up a new premise to use in this argument
                 </label>
                 <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
-                <button className="argument-builder__create-new-premise-button" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create as a new claim and add to this argument</button>
+                <button className="argument-builder__create-new-premise-button" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
               </div>
             </div>
 
           </div>
           <div className="argument-builder__search">
-            {(this.state.searchResults.length > 0 && 
+            {(this.state.searchResults.length > 0 &&
               <p>Click one of the existing claims below to add as a premise to this argument</p>
             )}
-            <SearchResults searchResults={this.state.searchResults} />
+            <CandidatePremises premises={this.state.searchResults} />
           </div>
         </div>
       </div>

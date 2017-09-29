@@ -43,6 +43,10 @@ export default class SearchScene extends React.Component {
             isLoading: false
           });
         }).catch((err) => {
+          this.setState({
+            searchResults: null,
+            isLoading: false
+          });
           Notify.post(err);
         });
     } else {
@@ -53,6 +57,10 @@ export default class SearchScene extends React.Component {
             isLoading: false
           });
         }).catch((err) => {
+          this.setState({
+            searchResults: null,
+            isLoading: false
+          });
           Notify.post(err);
         });
     }

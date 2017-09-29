@@ -3809,7 +3809,8 @@ module.exports = SyntheticUIEvent;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Claim;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(3);
 
@@ -3823,53 +3824,90 @@ var _StatusIndicator2 = _interopRequireDefault(_StatusIndicator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 /* Each Claim in the list of search results
  */
+var Claim = function (_React$Component) {
+  _inherits(Claim, _React$Component);
 
-function Claim(props) {
-  var cssClass = 'claim';
-  if (props.isSelected) {
-    cssClass = cssClass + ' claim--selected';
+  function Claim(props) {
+    _classCallCheck(this, Claim);
+
+    var _this = _possibleConstructorReturn(this, (Claim.__proto__ || Object.getPrototypeOf(Claim)).call(this, props));
+
+    _this.renderChildren = _this.renderChildren.bind(_this);
+    return _this;
   }
 
-  if (typeof props.claim.labels !== 'undefined' && props.claim.labels.includes('Axiom')) {
-    cssClass = cssClass + ' claim--axiom';
-  }
-  // onClick={() => props.handleClick(props.claim)}
-  return _react2.default.createElement(
-    'div',
-    { className: cssClass },
-    _react2.default.createElement(
-      'div',
-      { className: 'claim__body' },
-      _react2.default.createElement(
+  _createClass(Claim, [{
+    key: 'renderChildren',
+    value: function renderChildren() {
+      var propChildrenMarkup = [];
+      for (var c = 0; c < this.props.children.length; c++) {
+        propChildrenMarkup.push(_react2.default.cloneElement(this.props.children[c], { claim: this.props.claim }));
+      }
+      return propChildrenMarkup;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var cssClass = 'claim';
+
+      //TODO: get this as proper data, labels is a hang over from neo
+      if (typeof this.props.claim.labels !== 'undefined' && this.props.claim.labels.includes('Axiom')) {
+        cssClass = cssClass + ' claim--axiom';
+      }
+      return _react2.default.createElement(
         'div',
-        { className: 'claim__status-circle' },
-        _react2.default.createElement(_StatusIndicator2.default, { probability: props.claim.probability, type: 'circle' })
-      ),
-      _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/claim/' + props.claim._key, className: 'claim__text' },
-        props.claim.text
-      )
-    )
-  );
-}
+        { className: cssClass },
+        _react2.default.createElement(
+          'div',
+          { className: 'claim__info' },
+          _react2.default.createElement(
+            'div',
+            { className: 'claim__status-circle' },
+            _react2.default.createElement(_StatusIndicator2.default, { probability: this.props.claim.probability, type: 'circle' })
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/claim/' + this.props.claim._key, className: 'claim__text' },
+            this.props.claim.text
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'claim__prop-children' },
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return Claim;
+}(_react2.default.Component);
+
+exports.default = Claim;
+
 
 Claim.propTypes = {
-  isSelected: _react2.default.PropTypes.bool,
   claim: _react2.default.PropTypes.shape({
     labels: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
     text: _react2.default.PropTypes.string.isRequired,
     probability: _react2.default.PropTypes.number,
     _key: _react2.default.PropTypes.string.isRequired,
     _id: _react2.default.PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  children: _react2.default.PropTypes.element
 };
 
 Claim.defaultProps = {
-  isSelected: false,
-  probability: 0.5
+  probability: 0.5,
+  children: null
 };
 
 /***/ }),
@@ -5226,7 +5264,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /* The Search Results
- * This is the parent component for the search results list
+ * Takes an array of claims in a prop called searchResults and spits them out in a list
  */
 var SearchResults = function (_React$Component) {
   _inherits(SearchResults, _React$Component);
@@ -5234,15 +5272,12 @@ var SearchResults = function (_React$Component) {
   function SearchResults(props) {
     _classCallCheck(this, SearchResults);
 
-    var _this = _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
-
-    _this.renderSearchResults = _this.renderSearchResults.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (SearchResults.__proto__ || Object.getPrototypeOf(SearchResults)).call(this, props));
   }
 
   _createClass(SearchResults, [{
-    key: 'renderSearchResults',
-    value: function renderSearchResults() {
+    key: 'render',
+    value: function render() {
       console.log('this.props.searchResults', this.props.searchResults);
       if (!this.props.searchResults) {
         return _react2.default.createElement(
@@ -5265,19 +5300,22 @@ var SearchResults = function (_React$Component) {
         searchResultMarkup.push(_react2.default.createElement(
           'div',
           { key: this.props.searchResults[r]._id, className: 'search-results__result' },
-          _react2.default.createElement(_Claim2.default, { claim: this.props.searchResults[r], isSelected: false })
+          _react2.default.createElement(
+            _Claim2.default,
+            { claim: this.props.searchResults[r], isSelected: false },
+            _react2.default.createElement(
+              'p',
+              null,
+              'Child!'
+            )
+          )
         ));
       }
-      return searchResultMarkup;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
 
       return _react2.default.createElement(
         'div',
         { className: 'search-results' },
-        this.renderSearchResults()
+        searchResultMarkup
       );
     }
   }]);
@@ -12118,9 +12156,9 @@ var _api = __webpack_require__(20);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _SearchResults = __webpack_require__(40);
+var _CandidatePremises = __webpack_require__(260);
 
-var _SearchResults2 = _interopRequireDefault(_SearchResults);
+var _CandidatePremises2 = _interopRequireDefault(_CandidatePremises);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12167,7 +12205,7 @@ var ArgumentBuilder = function (_React$Component) {
       clearTimeout(this.newPremiseCheckWait);
       this.newPremiseCheckWait = setTimeout(function () {
         _this2.searchForExistingClaims();
-      }, 3000);
+      }, 1000);
 
       this.setState({
         textAreaValue: event.target.value,
@@ -12290,7 +12328,7 @@ var ArgumentBuilder = function (_React$Component) {
                 _react2.default.createElement(
                   'button',
                   { className: 'argument-builder__create-new-premise-button', onClick: this.createAndAddNewPremis, disabled: !this.state.dupesPresented },
-                  'Create as a new claim and add to this argument'
+                  'Create new claim and add as a premise'
                 )
               )
             )
@@ -12303,7 +12341,7 @@ var ArgumentBuilder = function (_React$Component) {
               null,
               'Click one of the existing claims below to add as a premise to this argument'
             ),
-            _react2.default.createElement(_SearchResults2.default, { searchResults: this.state.searchResults })
+            _react2.default.createElement(_CandidatePremises2.default, { premises: this.state.searchResults })
           )
         )
       );
@@ -14340,6 +14378,10 @@ var SearchScene = function (_React$Component) {
             isLoading: false
           });
         }).catch(function (err) {
+          _this2.setState({
+            searchResults: null,
+            isLoading: false
+          });
           _notify2.default.post(err);
         });
       } else {
@@ -14349,6 +14391,10 @@ var SearchScene = function (_React$Component) {
             isLoading: false
           });
         }).catch(function (err) {
+          _this2.setState({
+            searchResults: null,
+            isLoading: false
+          });
           _notify2.default.post(err);
         });
       }
@@ -29541,6 +29587,132 @@ module.exports = g;
 __webpack_require__(103);
 module.exports = __webpack_require__(104);
 
+
+/***/ }),
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Claim = __webpack_require__(30);
+
+var _Claim2 = _interopRequireDefault(_Claim);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* The Candidate Premises
+ * In the argument builder directory as it's currently specific to the argument builder
+ */
+var CandidatePremises = function (_React$Component) {
+  _inherits(CandidatePremises, _React$Component);
+
+  function CandidatePremises(props) {
+    _classCallCheck(this, CandidatePremises);
+
+    var _this = _possibleConstructorReturn(this, (CandidatePremises.__proto__ || Object.getPrototypeOf(CandidatePremises)).call(this, props));
+
+    _this.handleAddCandidateToArgument = _this.handleAddCandidateToArgument.bind(_this);
+    return _this;
+  }
+
+  _createClass(CandidatePremises, [{
+    key: 'handleAddCandidateToArgument',
+    value: function handleAddCandidateToArgument(claim) {
+      console.log('add claim to argument click!', claim);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      if (!this.props.premises) {
+        return _react2.default.createElement(
+          'p',
+          null,
+          'No results'
+        );
+      }
+
+      if (this.props.premises.length === 0) {
+        return _react2.default.createElement(
+          'p',
+          null,
+          'No results'
+        );
+      }
+
+      var searchResultMarkup = [];
+
+      var _loop = function _loop(r) {
+        searchResultMarkup.push(_react2.default.createElement(
+          'div',
+          { key: _this2.props.premises[r]._id, className: 'search-results__result' },
+          _react2.default.createElement(
+            _Claim2.default,
+            { claim: _this2.props.premises[r], isSelected: false },
+            _react2.default.createElement(
+              'button',
+              {
+                onClick: function onClick() {
+                  _this2.handleAddCandidateToArgument(_this2.props.premises[r]);
+                }
+              },
+              'Add existing claim as a premise'
+            )
+          )
+        ));
+      };
+
+      for (var r = 0; r < this.props.premises.length; r++) {
+        _loop(r);
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'search-results' },
+        searchResultMarkup
+      );
+    }
+  }]);
+
+  return CandidatePremises;
+}(_react2.default.Component);
+
+exports.default = CandidatePremises;
+
+
+CandidatePremises.propTypes = {
+  premises: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object)
+};
+
+CandidatePremises.defaultProps = {
+  premises: []
+};
 
 /***/ })
 /******/ ]);

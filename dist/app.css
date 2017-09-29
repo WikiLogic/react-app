@@ -851,10 +851,12 @@ styles are set in sass alongside the components. (in the components folder).
   border-radius: 5px;
   padding: 0.5rem;
   cursor: pointer;
-  display: block; }
-  .claim__body {
-    display: table;
-    width: 100%; }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  .claim__info {
+    display: table; }
   .claim__status-circle {
     display: table-cell;
     vertical-align: top;
@@ -862,15 +864,8 @@ styles are set in sass alongside the components. (in the components folder).
   .claim__text {
     display: table-cell;
     vertical-align: middle; }
-  .claim + .claim {
-    margin-top: 0.5rem; }
-  .claim:hover {
-    border-color: #5f9aec; }
   .claim--axiom {
     background-color: black;
-    color: white; }
-  .claim--selected {
-    background-color: #5f9aec;
     color: white; }
 
 .claim-chain {

@@ -4,11 +4,15 @@
     border-radius: 5px;
     padding: rem($pad / 2);
     cursor: pointer;
-    display: block;
-
-    &__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    //this part of the claim component is consistent everywhere it is used
+    //in here we display the essential info about a claim
+    &__info {
         display: table;
-        width: 100%;
     }
         &__status-circle {
             display: table-cell;
@@ -19,25 +23,17 @@
             display: table-cell;
             vertical-align: middle;
         }
+    
+    
+    //Wherever this component is used, the context may require different things to be placed in each claim
+    //this is the area in the component that holds those things. Probably just a few buttons, but they 
+    //have to take care of themselves. Here we just give them a container
+    &__prop-children {
 
-
-    + .claim{
-        margin-top: rem($pad / 2);
-    }
-
-
-
-    &:hover {
-        border-color: $WL_Blue;
     }
 
     &--axiom {
         background-color: black;
-        color: white;
-    }
-
-    &--selected {
-        background-color: $WL_Blue;
         color: white;
     }
 }
