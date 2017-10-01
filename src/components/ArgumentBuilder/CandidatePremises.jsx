@@ -2,7 +2,8 @@ import React from 'react';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* The Candidate Premises
- * In the argument builder directory as it's currently specific to the argument builder
+ * Takes an array of claims from the argument builder.
+ * Returns a claim if and when one is selected by the user.
  */
 export default class CandidatePremises extends React.Component {
   constructor(props) {
@@ -10,8 +11,9 @@ export default class CandidatePremises extends React.Component {
     this.handleAddCandidateToArgument = this.handleAddCandidateToArgument.bind(this);
   }
 
-  handleAddCandidateToArgument(claim){
+  handleAddCandidateToArgument(claim) {
     console.log('add claim to argument click!', claim);
+    this.props.premisSelectionHandler(claim);
   }
 
   render() {
@@ -29,6 +31,7 @@ export default class CandidatePremises extends React.Component {
         <div key={this.props.premises[r]._id} className="search-results__result">
           <Claim claim={this.props.premises[r]} isSelected={false}>
             <button
+              className="button--secondary"
               onClick={() => {
                 this.handleAddCandidateToArgument(this.props.premises[r]);
               }}
@@ -48,6 +51,7 @@ export default class CandidatePremises extends React.Component {
 
 CandidatePremises.propTypes = {
   premises: React.PropTypes.arrayOf(React.PropTypes.object),
+  premisSelectionHandler: React.PropTypes.func.isRequired
 };
 
 CandidatePremises.defaultProps = {

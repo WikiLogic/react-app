@@ -28,6 +28,7 @@ input[type='button'],
 		top: 1px;
 	}
 	&:focus {
+		background-color: $link-blue;
 		outline-color: white;
 		outline-offset: -4px;
 		outline-style: solid;
@@ -41,5 +42,28 @@ input[type='button'],
 
 	&[disabled] {
 		background-color: $rule-color;
+	}
+
+	&.button--secondary {
+		background-color: white;
+		color: $dark-blue;
+		border: 3px solid $dark-blue;
+		padding: rem(11) rem(15) rem(12);
+		&:hover { 
+			border-color: $link-blue;
+			background-color: $link-blue;
+			color: white;
+		}
+		&:active { border-color: $link-blue; }
+		&:focus {
+			background-color: $link-blue;
+			border-color: $link-blue;
+			color: white;
+		}
+		&[disabled] {
+			border-color: $rule-color;
+			background-color: $rule-color;
+			color: white;
+		}
 	}
 }

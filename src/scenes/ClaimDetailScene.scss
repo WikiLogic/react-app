@@ -29,11 +29,13 @@
 
 
     &__arg-buttons { //2 column layout classes
-        margin-bottom: rem($pad);
+        padding-top: rem($pad);
+        padding-bottom: rem($pad);
     }
 
-    &__arg-builder { //2 column layout classes
-        margin-bottom: rem($pad);
+    &__arg-builder {
+        padding-top: rem($pad);
+        padding-bottom: rem($pad);
     }
 
     &__arguments {

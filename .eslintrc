@@ -12,7 +12,8 @@
     "comma-dangle": [0],
     "no-plusplus": [0],
     "class-methods-use-this": [0],
-    "no-underscore-dangle": [0]
+    "no-underscore-dangle": [0],
+    "arrow-body-style": ["error", "always"]
   },
   "globals": {
     "window": true,

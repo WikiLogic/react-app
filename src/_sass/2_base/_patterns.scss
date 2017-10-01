@@ -1,0 +1,12 @@
+.bg-pattern-checkered {
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: 
+    linear-gradient(45deg, $grey 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, $grey 75%, $grey 0), 
+    linear-gradient(45deg, $grey 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, $grey 75%, $grey 0), 
+    rgb(255, 255, 255);
+  background-position: 0 0, 10px 10px;
+  background-origin: padding-box;
+  background-clip: border-box;
+  background-size: 20px 20px;
+}

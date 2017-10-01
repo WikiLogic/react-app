@@ -1,5 +1,7 @@
 import React from 'react';
+import _ from 'lodash';
 import API from 'WlAPI/api.js';
+import ArgumentPremises from './ArgumentPremises.jsx';
 import CandidatePremises from './CandidatePremises.jsx';
 /* Search & select claims to add as premises to an argument
  */
@@ -9,6 +11,7 @@ export default class ArgumentBuilder extends React.Component {
     super(props);
     // state is bundled inside an argument for ease in passing to the argument element
     this.state = {
+      title: 'New supporting argument',
       type: 'SUPPORTS',
       premises: [],
       textAreaValue: '',
@@ -17,11 +20,19 @@ export default class ArgumentBuilder extends React.Component {
     };
 
     this.newPremiseCheckWait = null;
+    this.setArgumentType = this.setArgumentType.bind(this);
     this.handleTextareaChange = this.handleTextareaChange.bind(this);
     this.handlePremisSubmission = this.handlePremisSubmission.bind(this);
     this.searchForExistingClaims = this.searchForExistingClaims.bind(this);
     this.addExistingPremis = this.addExistingPremis.bind(this);
+    this.removePremise = this.removePremise.bind(this);
     this.createAndAddNewPremis = this.createAndAddNewPremis.bind(this);
+  }
+
+  setArgumentType(side) {
+    this.setState({
+      type: side
+    });
   }
 
   handleTextareaChange(event) {
@@ -72,12 +83,14 @@ export default class ArgumentBuilder extends React.Component {
     }
   }
 
-  //if one of the claims found by the search turns out to be what the user is trying to add to the argument, click it to add it to the argument!
+  //if one of the claims found by the search turns out to be what the user is trying to add to the argument, 
+  //click it to add it to the argument!
   addExistingPremis(premis) {
-    // when a premis that has been added to the argument is clicked, remove it from the argument
-    const newArgument = this.state.argument;
-    newArgument.premises = newArgument.premises.filter(statePremis => statePremis.id !== premis.id);
-    this.setState({ argument: newArgument });
+    const newPremisesArray = this.state.premises;
+    newPremisesArray.push(premis);
+    this.setState({
+      premises: newPremisesArray
+    });
   }
 
   //run this only after the user has seen a list of premises that might be dups
@@ -93,43 +106,88 @@ export default class ArgumentBuilder extends React.Component {
     });
   }
 
+  removePremise(premiseToRemove) {
+
+    const newPremiseArray = _.remove(this.state.premises, (premise) => {
+      return premise._id !== premiseToRemove._id;
+    });
+
+    this.setState({
+      premises: newPremiseArray
+    });
+  }
+
   render() {
+    let argumentIsValid = false;
+    if (this.state.premises.length > 0) {
+      argumentIsValid = true;
+    }
+    console.log("argumentIsValid", argumentIsValid);
+
     return (
       <div className={`argument-builder argument-builder--${this.state.type}`}>
 
-        <div className="argument-builder__sim">
-          <div className="argument-builder__title">
-            {this.props.title}
+        <div className="argument-builder__side-buttons layout-cols-2">
+          <div className="layout-cols-2__left">
+            <button className="button--secondary" onClick={() => { this.setArgumentType('SUPPORTS'); }} >
+              Build a supporting argument
+            </button>
           </div>
-          <div className="argument-builder__body">
-            premises...
-          </div>
-          <div className="argument-builder__submit">
-            <button onClick={this.handleSubmit}>Publish new argument</button>
+          <div className="layout-cols-2__right">
+            <button className="button--secondary" onClick={() => { this.setArgumentType('OPPOSES'); }} >
+              Build an opposing argument
+            </button>
           </div>
         </div>
 
         <div className="argument-builder__workbench">
-          <div className="argument-builder__create">
+          <div className="argument-builder__sim">
 
-            <div className="form">
-              <div className="form__label">
-                <label className="form__label-text" htmlFor="new-claim-text">
-                  Write up a new premise to use in this argument
-                </label>
-                <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
-                <button className="argument-builder__create-new-premise-button" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
-              </div>
-            </div>
-
-          </div>
-          <div className="argument-builder__search">
-            {(this.state.searchResults.length > 0 &&
-              <p>Click one of the existing claims below to add as a premise to this argument</p>
+            {(this.state.type === 'SUPPORTS' &&
+              <div className="argument-builder__title">New supporting argument:</div>
             )}
-            <CandidatePremises premises={this.state.searchResults} />
+
+            {(this.state.type === 'OPPOSES' &&
+              <div className="argument-builder__title">New opposing argument:</div>
+            )}
+
+            <div className="argument-builder__body">
+              <ArgumentPremises
+                premises={this.state.premises}
+                removePremise={this.removePremise}
+              />
+            </div>
+          </div>
+          <div className="argument-builder__submit">
+            <button onClick={this.handleSubmit} disabled={!argumentIsValid}>Publish new argument</button>
+          </div>
+
+          <div className="argument-builder__crafting-table">
+            <div className="argument-builder__create">
+
+              <div className="form">
+                <div className="form__label">
+                  <label className="form__label-text" htmlFor="new-claim-text">
+                    Write up a new premise to use in this argument
+                  </label>
+                  <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
+                  <button className="argument-builder__create-new-premise-button button--secondary" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
+                </div>
+              </div>
+
+            </div>
+            <div className="argument-builder__search">
+              {(this.state.searchResults.length > 0 &&
+                <p>Click one of the existing claims below to add as a premise to this argument</p>
+              )}
+              <CandidatePremises
+                premises={this.state.searchResults}
+                premisSelectionHandler={this.addExistingPremis}
+              />
+            </div>
           </div>
         </div>
+
       </div>
     );
   }

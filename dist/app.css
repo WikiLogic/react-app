@@ -440,6 +440,7 @@ input[type='button'],
   input[type='submit']:focus,
   input[type='button']:focus,
   .button:focus {
+    background-color: #0a88c5;
     outline-color: white;
     outline-offset: -4px;
     outline-style: solid;
@@ -455,6 +456,40 @@ input[type='button'],
   input[type='button'][disabled],
   .button[disabled] {
     background-color: #cccccc; }
+  button.button--secondary,
+  input[type='submit'].button--secondary,
+  input[type='button'].button--secondary,
+  .button.button--secondary {
+    background-color: white;
+    color: #111F2E;
+    border: 3px solid #111F2E;
+    padding: 0.6875rem 0.9375rem 0.75rem; }
+    button.button--secondary:hover,
+    input[type='submit'].button--secondary:hover,
+    input[type='button'].button--secondary:hover,
+    .button.button--secondary:hover {
+      border-color: #0a88c5;
+      background-color: #0a88c5;
+      color: white; }
+    button.button--secondary:active,
+    input[type='submit'].button--secondary:active,
+    input[type='button'].button--secondary:active,
+    .button.button--secondary:active {
+      border-color: #0a88c5; }
+    button.button--secondary:focus,
+    input[type='submit'].button--secondary:focus,
+    input[type='button'].button--secondary:focus,
+    .button.button--secondary:focus {
+      background-color: #0a88c5;
+      border-color: #0a88c5;
+      color: white; }
+    button.button--secondary[disabled],
+    input[type='submit'].button--secondary[disabled],
+    input[type='button'].button--secondary[disabled],
+    .button.button--secondary[disabled] {
+      border-color: #cccccc;
+      background-color: #cccccc;
+      color: white; }
 
 pre {
   font-family: monospace, monospace;
@@ -475,7 +510,7 @@ input[type='text'], input[type='password'], input[type='number'], input[type='se
   max-width: 100%;
   margin: 0; }
   input[type='text']:active, input[type='text']:focus, input[type='password']:active, input[type='password']:focus, input[type='number']:active, input[type='number']:focus, input[type='search']:active, input[type='search']:focus, textarea:active, textarea:focus {
-    border-color: #5f9aec; }
+    border-color: #0a88c5; }
 
 textarea {
   min-height: 200px; }
@@ -505,6 +540,15 @@ input {
 
 img {
   display: block; }
+
+.bg-pattern-checkered {
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: linear-gradient(45deg, #eeeeee 25%, transparent 25%, transparent 75%, #eeeeee 75%, #eeeeee 0), linear-gradient(45deg, #eeeeee 25%, transparent 25%, transparent 75%, #eeeeee 75%, #eeeeee 0), white;
+  background-position: 0 0, 10px 10px;
+  background-origin: padding-box;
+  background-clip: border-box;
+  background-size: 20px 20px; }
 
 svg {
   width: 0.0625rem;
@@ -796,14 +840,14 @@ styles are set in sass alongside the components. (in the components folder).
 
 .argument-builder {
   border-radius: 5px; }
-  .argument-builder--SUPPORTS {
-    border: 1px solid #31D332; }
-    .argument-builder--SUPPORTS .argument-builder__sim {
-      background-color: rgba(49, 211, 50, 0.2); }
-  .argument-builder--OPPOSES {
-    border: 1px solid #f05d65; }
-    .argument-builder--OPPOSES .argument-builder__sim {
-      background-color: rgba(240, 93, 101, 0.2); }
+  .argument-builder--SUPPORTS .argument-builder__sim {
+    border: 1px solid #31D332;
+    background-color: #d9f7d9; }
+  .argument-builder--OPPOSES .argument-builder__sim {
+    border: 1px solid #f05d65;
+    background-color: #fce1e2; }
+  .argument-builder__side-buttons {
+    padding-bottom: 1rem; }
   .argument-builder__sim {
     padding: 0.5rem; }
   .argument-builder__title {
@@ -811,9 +855,14 @@ styles are set in sass alongside the components. (in the components folder).
   .argument-builder__body {
     margin-bottom: 1rem; }
   .argument-builder__submit {
-    text-align: right; }
-  .argument-builder__workbench {
-    padding: 0.5rem; }
+    text-align: right;
+    margin-bottom: 1rem;
+    position: relative;
+    top: -1px; }
+  .argument-builder__crafting-table {
+    background-color: white;
+    border: 1px solid #cccccc;
+    padding: 1rem; }
   .argument-builder__search {
     margin-bottom: 1rem; }
   .argument-builder__create-new-premise-button {
@@ -1463,9 +1512,11 @@ styles are set in sass alongside the components. (in the components folder).
     position: relative;
     top: 4px; }
   .claim-detail__arg-buttons {
-    margin-bottom: 1rem; }
+    padding-top: 1rem;
+    padding-bottom: 1rem; }
   .claim-detail__arg-builder {
-    margin-bottom: 1rem; }
+    padding-top: 1rem;
+    padding-bottom: 1rem; }
   .claim-detail__arguments {
     padding: 1rem;
     overflow-x: auto;

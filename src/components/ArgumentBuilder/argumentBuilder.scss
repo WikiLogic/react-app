@@ -2,35 +2,50 @@
   border-radius: 5px;
   
   &--SUPPORTS {
-    border: 1px solid $WL_Green;
     .argument-builder__sim {
-      background-color: rgba($WL_Green, 0.2);
+      border: 1px solid $WL_Green;
+      background-color: $WL_Green-light;
     }
   }
   
   &--OPPOSES {
-    border: 1px solid $WL_Red;
     .argument-builder__sim {
-      background-color: rgba($WL_Red, 0.2);
+      border: 1px solid $WL_Red;
+      background-color: $WL_Red-light;
     }
   }
-  
-  &__sim {
-    padding: rem($pad / 2);
+
+  //the buttons that let you select which side your argument is for
+  &__side-buttons {
+    padding-bottom: rem($pad);
+  }
+
+  //This wraps the argument creation content - above are the type buttons, below is the publish option
+  &__workbench {
     
   }
-    &__title {
-      margin-bottom: rem($pad);
-    }
-    &__body {
-      margin-bottom: rem($pad);
-    }
-    &__submit {
-      text-align: right;
-    }
-
-  &__workbench {
+  
+  //this is what the argument will look like when it's published
+  &__sim {
     padding: rem($pad / 2);
+  }
+  &__title {
+    margin-bottom: rem($pad);
+  }
+  &__body {
+    margin-bottom: rem($pad);
+  }
+  &__submit {
+    text-align: right;
+    margin-bottom: rem($pad);
+    position: relative;
+    top: -1px;
+  }
+
+  &__crafting-table {
+    background-color: white;
+    border: 1px solid $rule-color;
+    padding: rem($pad);
   }
     &__search {
       margin-bottom: rem($pad);

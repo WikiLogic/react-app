@@ -127,46 +127,34 @@ export default class ClaimDetailScene extends React.Component {
 
           </div>
         </div>
-        <div className="page__body">
-          <div className="max-width-wrap">
+        {(this.state.claim &&
+          <div className="page__body claim-detail">
 
-            {(this.state.claim &&
-              <div className="claim-detail">
-                <div className="claim-detail__header">
-                  <div className="claim-detail__status">
-                    <StatusIndicator probability={this.state.claim.probability} />
-                  </div>
-                  <div className="claim-detail__text">
-                    {this.state.claim.text}
-                  </div>
-                </div>
+            <div className="claim-detail__header max-width-wrap">
+              <div className="claim-detail__status">
+                <StatusIndicator probability={this.state.claim.probability} />
+              </div>
+              <div className="claim-detail__text">
+                {this.state.claim.text}
+              </div>
+            </div>
 
-                <div className="claim-detail__arg-buttons layout-cols-2">
-                  <div className="layout-cols-2__left">
-                    <button className="button" onClick={this.openArgumentBuilder}>
-                      Build a supporting argument
-                    </button>
-                  </div>
-                  <div className="layout-cols-2__right">
-                    <button className="button" onClick={this.openArgumentBuilder}>
-                      Build an opposing argument
-                    </button>
-                  </div>
-                </div>
+            <div className="bg-pattern-checkered">
+              <div className="max-width-wrap">
 
                 <div className="claim-detail__arg-builder">
                   <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} />
                 </div>
 
-                <div className="claim-detail__arguments">
-                  {this.renderArguments()}
-                </div>
               </div>
-            )}
+            </div>
 
+            <div className="claim-detail__arguments max-width-wrap">
+              {this.renderArguments()}
+            </div>
 
           </div>
-        </div>
+        )}
       </div>
     );
   }
