@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import API from 'WlAPI/api.js';
 import Argument from 'WlComponents/Argument/Argument.jsx';
 import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
@@ -77,8 +78,26 @@ export default class ClaimDetailScene extends React.Component {
     });
   }
 
-  newArgumentSubmissionHandler(submission) {
-    console.log('new argument submission!', submission);
+  newArgumentSubmissionHandler(newArgument) {
+    console.log('new argument submission!', newArgument);
+    const premiseIds = [];
+    _.forEach(newArgument.premises, (premise) => {
+      console.log("premise", premise);
+      premiseIds.push(premise._id);
+    });
+    console.log('premiseIds', premiseIds);
+    API.postNewArgument({
+      parentClaimId: this.state.claim._id,
+      type: newArgument.type,
+      premiseIds: premiseIds
+    }).then((res) => {
+      console.log('claim with new argument returned!', res);
+      this.setState({
+        claims: res.data.claim
+      });
+    }).catch((err) => {
+      console.error('new argument failed', err);
+    });
   }
 
   updatedClaimHandler() {

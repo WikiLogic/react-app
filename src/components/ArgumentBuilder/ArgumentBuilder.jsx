@@ -27,6 +27,7 @@ export default class ArgumentBuilder extends React.Component {
     this.addExistingPremis = this.addExistingPremis.bind(this);
     this.removePremise = this.removePremise.bind(this);
     this.createAndAddNewPremis = this.createAndAddNewPremis.bind(this);
+    this.handlePublish = this.handlePublish.bind(this);
   }
 
   setArgumentType(side) {
@@ -99,8 +100,19 @@ export default class ArgumentBuilder extends React.Component {
     API.postNewClaim({
       text: this.state.textAreaValue,
       probability: 50,
-    }).then((data) => {
-      console.log('new claim! add it to this argument :)', data);
+    }).then((res) => {
+
+      const newPremisesArray = this.state.premises;
+      newPremisesArray.push(res.data.claim);
+
+      const newSearchResultsArray = this.state.searchResults;
+      newSearchResultsArray.push(res.data.claim);
+
+      this.setState({
+        premises: newPremisesArray,
+        searchResults: newSearchResultsArray
+      });
+
     }).catch((err) => {
       console.error('new claim failed: ', err);
     });
@@ -117,12 +129,18 @@ export default class ArgumentBuilder extends React.Component {
     });
   }
 
+  handlePublish() {
+    this.props.submissionHandler({
+      type: 'FOR',
+      premises: this.state.premises //give the ids of the two 'for' claims we created above
+    });
+  }
+
   render() {
     let argumentIsValid = false;
     if (this.state.premises.length > 0) {
       argumentIsValid = true;
     }
-    console.log("argumentIsValid", argumentIsValid);
 
     return (
       <div className={`argument-builder argument-builder--${this.state.type}`}>
@@ -158,8 +176,8 @@ export default class ArgumentBuilder extends React.Component {
               />
             </div>
           </div>
-          <div className="argument-builder__submit">
-            <button onClick={this.handleSubmit} disabled={!argumentIsValid}>Publish new argument</button>
+          <div className="argument-builder__publish">
+            <button onClick={this.handlePublish} disabled={!argumentIsValid}>Publish new argument</button>
           </div>
 
           <div className="argument-builder__crafting-table">
@@ -171,7 +189,9 @@ export default class ArgumentBuilder extends React.Component {
                     Write up a new premise to use in this argument
                   </label>
                   <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
-                  <button className="argument-builder__create-new-premise-button button--secondary" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
+                  <div className="argument-builder__create-new-premise-button">
+                    <button className="button--secondary" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
+                  </div>
                 </div>
               </div>
 
@@ -194,9 +214,5 @@ export default class ArgumentBuilder extends React.Component {
 }
 
 ArgumentBuilder.propTypes = {
-  title: React.PropTypes.string
-};
-
-ArgumentBuilder.defaultProps = {
-  title: 'New argument:'
+  submissionHandler: React.PropTypes.func.isRequired
 };

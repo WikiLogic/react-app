@@ -29,13 +29,13 @@
   &__sim {
     padding: rem($pad / 2);
   }
-  &__title {
-    margin-bottom: rem($pad);
-  }
-  &__body {
-    margin-bottom: rem($pad);
-  }
-  &__submit {
+    &__title {
+      margin-bottom: rem($pad);
+    }
+    &__body {
+      margin-bottom: rem($pad);
+    }
+  &__publish {
     text-align: right;
     margin-bottom: rem($pad);
     position: relative;
@@ -54,9 +54,12 @@
 
     }
     &__create-new-premise-button {
-      display: block;
       position: relative;
       top: -10px;
-      margin-left: auto;
+
+      button {
+        display: block;
+        margin-left: auto;
+      }
     }
 }

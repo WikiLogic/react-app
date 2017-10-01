@@ -854,7 +854,7 @@ styles are set in sass alongside the components. (in the components folder).
     margin-bottom: 1rem; }
   .argument-builder__body {
     margin-bottom: 1rem; }
-  .argument-builder__submit {
+  .argument-builder__publish {
     text-align: right;
     margin-bottom: 1rem;
     position: relative;
@@ -866,10 +866,11 @@ styles are set in sass alongside the components. (in the components folder).
   .argument-builder__search {
     margin-bottom: 1rem; }
   .argument-builder__create-new-premise-button {
-    display: block;
     position: relative;
-    top: -10px;
-    margin-left: auto; }
+    top: -10px; }
+    .argument-builder__create-new-premise-button button {
+      display: block;
+      margin-left: auto; }
 
 .argumentCircle {
   padding: 0.5rem;

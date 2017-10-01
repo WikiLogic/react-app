@@ -2680,6 +2680,14 @@ function postNewClaim(claim) {
 }
 
 function postNewArgument(argument) {
+  var type = '';
+  if (argument.type === 'OPPOSES' || argument.type === 'AGAINST') {
+    type = 'AGAINST';
+  }
+  if (argument.type === 'SUPPORTS' || argument.type === 'FOR') {
+    type = 'FOR';
+  }
+
   var newArgumentPromise = new Promise(function (resolve, reject) {
     fetch(apiRouteRoot + '/arguments', {
       method: 'POST',
@@ -2688,9 +2696,9 @@ function postNewArgument(argument) {
         Authorization: _cookies2.default.get('JWT')
       },
       body: JSON.stringify({
-        parentClaimId: argument.parent_claim_id,
-        type: argument.type,
-        premisIds: argument.premise_ids
+        parentClaimId: argument.parentClaimId,
+        type: type,
+        premiseIds: argument.premiseIds
       })
     }).then(checkStatus).then(_formatter2.default.apiResponceToJSON).then(function (res) {
       resolve(res);
@@ -12232,6 +12240,7 @@ var ArgumentBuilder = function (_React$Component) {
     _this.addExistingPremis = _this.addExistingPremis.bind(_this);
     _this.removePremise = _this.removePremise.bind(_this);
     _this.createAndAddNewPremis = _this.createAndAddNewPremis.bind(_this);
+    _this.handlePublish = _this.handlePublish.bind(_this);
     return _this;
   }
 
@@ -12314,11 +12323,23 @@ var ArgumentBuilder = function (_React$Component) {
   }, {
     key: 'createAndAddNewPremis',
     value: function createAndAddNewPremis() {
+      var _this4 = this;
+
       _api2.default.postNewClaim({
         text: this.state.textAreaValue,
         probability: 50
-      }).then(function (data) {
-        console.log('new claim! add it to this argument :)', data);
+      }).then(function (res) {
+
+        var newPremisesArray = _this4.state.premises;
+        newPremisesArray.push(res.data.claim);
+
+        var newSearchResultsArray = _this4.state.searchResults;
+        newSearchResultsArray.push(res.data.claim);
+
+        _this4.setState({
+          premises: newPremisesArray,
+          searchResults: newSearchResultsArray
+        });
       }).catch(function (err) {
         console.error('new claim failed: ', err);
       });
@@ -12336,15 +12357,22 @@ var ArgumentBuilder = function (_React$Component) {
       });
     }
   }, {
+    key: 'handlePublish',
+    value: function handlePublish() {
+      this.props.submissionHandler({
+        type: 'FOR',
+        premises: this.state.premises //give the ids of the two 'for' claims we created above
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var argumentIsValid = false;
       if (this.state.premises.length > 0) {
         argumentIsValid = true;
       }
-      console.log("argumentIsValid", argumentIsValid);
 
       return _react2.default.createElement(
         'div',
@@ -12358,7 +12386,7 @@ var ArgumentBuilder = function (_React$Component) {
             _react2.default.createElement(
               'button',
               { className: 'button--secondary', onClick: function onClick() {
-                  _this4.setArgumentType('SUPPORTS');
+                  _this5.setArgumentType('SUPPORTS');
                 } },
               'Build a supporting argument'
             )
@@ -12369,7 +12397,7 @@ var ArgumentBuilder = function (_React$Component) {
             _react2.default.createElement(
               'button',
               { className: 'button--secondary', onClick: function onClick() {
-                  _this4.setArgumentType('OPPOSES');
+                  _this5.setArgumentType('OPPOSES');
                 } },
               'Build an opposing argument'
             )
@@ -12402,10 +12430,10 @@ var ArgumentBuilder = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'argument-builder__submit' },
+            { className: 'argument-builder__publish' },
             _react2.default.createElement(
               'button',
-              { onClick: this.handleSubmit, disabled: !argumentIsValid },
+              { onClick: this.handlePublish, disabled: !argumentIsValid },
               'Publish new argument'
             )
           ),
@@ -12428,9 +12456,13 @@ var ArgumentBuilder = function (_React$Component) {
                   ),
                   _react2.default.createElement('textarea', { className: 'form__input', id: 'new-claim-text', onChange: this.handleTextareaChange, value: this.state.textAreaValue }),
                   _react2.default.createElement(
-                    'button',
-                    { className: 'argument-builder__create-new-premise-button button--secondary', onClick: this.createAndAddNewPremis, disabled: !this.state.dupesPresented },
-                    'Create new claim and add as a premise'
+                    'div',
+                    { className: 'argument-builder__create-new-premise-button' },
+                    _react2.default.createElement(
+                      'button',
+                      { className: 'button--secondary', onClick: this.createAndAddNewPremis, disabled: !this.state.dupesPresented },
+                      'Create new claim and add as a premise'
+                    )
                   )
                 )
               )
@@ -12461,11 +12493,7 @@ exports.default = ArgumentBuilder;
 
 
 ArgumentBuilder.propTypes = {
-  title: _react2.default.PropTypes.string
-};
-
-ArgumentBuilder.defaultProps = {
-  title: 'New argument:'
+  submissionHandler: _react2.default.PropTypes.func.isRequired
 };
 
 /***/ }),
@@ -14194,6 +14222,10 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _lodash = __webpack_require__(147);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _api = __webpack_require__(20);
 
 var _api2 = _interopRequireDefault(_api);
@@ -14308,8 +14340,28 @@ var ClaimDetailScene = function (_React$Component) {
     }
   }, {
     key: 'newArgumentSubmissionHandler',
-    value: function newArgumentSubmissionHandler(submission) {
-      console.log('new argument submission!', submission);
+    value: function newArgumentSubmissionHandler(newArgument) {
+      var _this4 = this;
+
+      console.log('new argument submission!', newArgument);
+      var premiseIds = [];
+      _lodash2.default.forEach(newArgument.premises, function (premise) {
+        console.log("premise", premise);
+        premiseIds.push(premise._id);
+      });
+      console.log('premiseIds', premiseIds);
+      _api2.default.postNewArgument({
+        parentClaimId: this.state.claim._id,
+        type: newArgument.type,
+        premiseIds: premiseIds
+      }).then(function (res) {
+        console.log('claim with new argument returned!', res);
+        _this4.setState({
+          claims: res.data.claim
+        });
+      }).catch(function (err) {
+        console.error('new argument failed', err);
+      });
     }
   }, {
     key: 'updatedClaimHandler',

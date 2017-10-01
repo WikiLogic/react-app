@@ -75,6 +75,10 @@ function postNewClaim(claim) {
 }
 
 function postNewArgument(argument) {
+  let type = '';
+  if (argument.type === 'OPPOSES' || argument.type === 'AGAINST') { type = 'AGAINST'; }
+  if (argument.type === 'SUPPORTS' || argument.type === 'FOR') { type = 'FOR'; }
+
   const newArgumentPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/arguments`, {
       method: 'POST',
@@ -83,9 +87,9 @@ function postNewArgument(argument) {
         Authorization: Cookies.get('JWT'),
       },
       body: JSON.stringify({
-        parentClaimId: argument.parent_claim_id,
-        type: argument.type,
-        premisIds: argument.premise_ids,
+        parentClaimId: argument.parentClaimId,
+        type: type,
+        premiseIds: argument.premiseIds,
       }),
     })
       .then(checkStatus)
