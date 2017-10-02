@@ -12,6 +12,7 @@ import Notify from 'WlServices/notify.js';
 // Scenes
 import HomeScene from 'WlScenes/HomeScene.jsx';
 import SearchScene from 'WlScenes/SearchScene.jsx';
+import GraphScene from 'WlScenes/GraphScene.jsx';
 import ClaimDetailScene from 'WlScenes/ClaimDetailScene.jsx';
 import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
 import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
@@ -119,6 +120,7 @@ class Wikilogic extends React.Component {
 
             <div className="header__links">
               <Link to="/search">Search</Link>
+              <Link to="/graph">Graph</Link>
               <Link to="/new-claim">New claim</Link>
               {authLink}
             </div>
@@ -131,6 +133,8 @@ class Wikilogic extends React.Component {
           <Route path="/" exact component={HomeScene} />
 
           <Route path="/search" exact component={SearchScene} />
+
+          <Route path="/graph" exact component={GraphScene} />
 
           <Route path="/claim/:claimId" exact component={ClaimDetailScene} />
 

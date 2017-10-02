@@ -709,6 +709,9 @@ columns, sidebars, grids, layout things!
 
 .page__body {
   padding: 1.25rem 0; }
+  .page__body--graph {
+    padding: 0;
+    position: relative; }
 
 .sidebar-layout {
   display: flex;
@@ -934,6 +937,11 @@ styles are set in sass alongside the components. (in the components folder).
     .claim-chain__row .argument {
       width: 21%;
       min-width: 300px; }
+
+.graph-controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem; }
 
 .input-button {
   display: flex;
@@ -1528,6 +1536,12 @@ styles are set in sass alongside the components. (in the components folder).
       width: 21%;
       min-width: 290px;
       margin: 0.5rem; }
+
+.graph-svg {
+  width: 100%;
+  height: 100vh; }
+  .graph-svg .x {
+    fill: black; }
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left {
