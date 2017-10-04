@@ -127,7 +127,7 @@ export default class ClaimDetailScene extends React.Component {
         argumentMarkup.push(
           <Argument
             argumentObject={this.state.claim.arguments[a]}
-            key={this.state.claim.arguments[a]._id}
+            key={this.state.claim.arguments[a]._key}
             premisClickHandler={this.premisClickHandler}
           />
         );
