@@ -2,6 +2,7 @@ import React from 'react';
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+import DougClaim from 'WlComponents/DougArg/DougArg.jsx';
 
 /**
  * The Home page
@@ -17,6 +18,10 @@ export default class GraphScene extends React.Component {
       topLeftY: -50,
       width: 100,
       height: 100
+      , numberOfArgsInGroup: 2
+      , claimSize: 20
+      , claimText: "change"
+
     };
 
     this.focus = this.focus.bind(this);
@@ -109,16 +114,17 @@ export default class GraphScene extends React.Component {
             viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
           >
 
-            <ClickerDragger x={0} y={0}>
-              <polygon
-                className="x"
-                points="31.112,1.414 29.698,0 15.556,14.142 1.414,0 0,1.414 14.142,15.556 0,29.698 1.414,31.112 15.556,16.97 29.698,31.112 31.112,29.698 16.97,15.556 "
-              />
-            </ClickerDragger>
+            <DougClaim x={-40} y={0} claimSize={`${this.state.claimSize}`} claimText={`${this.state.claimText}`} >
+            </DougClaim>
 
-            <ClickerDragger x={0} y={100}>
-              <circle cx={0} cy={0} r={10} fill="red" />
-            </ClickerDragger>
+            {/* <DougArg x={20} y={0} claimSize={`${this.state.claimSize}`} claimText={"nope"} >
+            </DougArg> */}
+
+            {/* <DougClaim x={20} y={0} claimSize={`${this.state.claimSize}`} claimText={"nope"} >
+            </DougClaim> */}
+
+
+
 
           </svg>
         </div>
