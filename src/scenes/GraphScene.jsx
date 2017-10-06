@@ -2,7 +2,8 @@ import React from 'react';
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import DougClaim from 'WlComponents/DougArg/DougArg.jsx';
+import DougArg from 'WlComponents/DougArg/DougArg.jsx';
+import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 
 /**
  * The Home page
@@ -114,8 +115,7 @@ export default class GraphScene extends React.Component {
             viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
           >
 
-            <DougClaim x={-40} y={0} claimSize={`${this.state.claimSize}`} claimText={`${this.state.claimText}`} >
-            </DougClaim>
+            <DougClaim x={-40} y={0} claimSize={`${this.state.claimSize}`} claimText={`${this.state.claimText}`} />
 
             {/* <DougArg x={20} y={0} claimSize={`${this.state.claimSize}`} claimText={"nope"} >
             </DougArg> */}
