@@ -52,8 +52,6 @@ export default class ArgumentBuilder extends React.Component {
   handlePremisSubmission() {
     if (!this.state.dupesPresented) {
       this.searchForExistingClaims();
-    } else {
-
     }
   }
 
