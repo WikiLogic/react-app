@@ -1,7 +1,8 @@
 import React from 'react';
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
-//import DougClaim from 'WlComponents/DougArg/DougArg.jsx';
+// import DougArg from 'WlComponents/DougArg/DougArg.jsx';
+// import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 
 /**
  * The Home page
