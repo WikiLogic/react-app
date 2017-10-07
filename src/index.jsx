@@ -179,48 +179,56 @@ class Wikilogic extends React.Component {
           <Route
             path="/privacy-policy"
             exact
-            render={() => (
-              <LegalScene page="privacy-policy" />
-            )}
+            render={() => {
+              return (
+                <LegalScene page="privacy-policy" />
+              );
+            }}
           />
 
           <Route
             path="/terms-of-use"
             exact
-            render={() => (
-              <LegalScene page="terms-of-use" />
-            )}
+            render={() => {
+              return (
+                <LegalScene page="terms-of-use" />
+              );
+            }}
           />
 
           <Route
             path="/api-dev"
             exact
-            render={() => (
-              <ApiDev />
-            )}
+            render={() => {
+              return (
+                <ApiDev />
+              );
+            }}
           />
 
           {/* Edit claim page ... not sure if this should really be a thing */}
           <Route
             path="/edit-claim"
             exact
-            render={() => (
-              <div className="sidebar-layout">
-                <div className="sidebar-layout__main">
+            render={() => {
+              return (
+                <div className="sidebar-layout">
+                  <div className="sidebar-layout__main">
 
-                  <EditClaimForm />
+                    <EditClaimForm />
 
+                  </div>
+                  <div className="sidebar-layout__side">
+
+                    <SearchResults
+                      searchResults={this.state.searchResults}
+                      resultClickHandler={this.setNewClaimFocus}
+                    />
+
+                  </div>
                 </div>
-                <div className="sidebar-layout__side">
-
-                  <SearchResults
-                    searchResults={this.state.searchResults}
-                    resultClickHandler={this.setNewClaimFocus}
-                  />
-
-                </div>
-              </div>
-            )}
+              );
+            }}
           />
 
           <Route path="/styleguide" exact component={StyleguideScene} />

@@ -5,6 +5,12 @@ import Claim from 'WlComponents/Claim/Claim.jsx';
  * Takes an array of claims in a prop called searchResults and spits them out in a list
  */
 export default class SearchResults extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+  }
 
   render() {
     console.log('this.props.searchResults', this.props.searchResults);

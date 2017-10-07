@@ -9,11 +9,11 @@ export default class DougArg extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: this.props.x
-      , y: this.props.y
-      , claimSize: this.props.claimSize
-      , claimText: this.props.claimText
-      , numberOfArgsInGroup: 2
+      x: props.x,
+      y: props.y,
+      claimSize: props.claimSize,
+      claimText: props.claimText,
+      numberOfArgsInGroup: 2
     };
   }
 
@@ -31,8 +31,9 @@ export default class DougArg extends React.Component {
   }
 }
 
-ClickerDragger.propTypes = {
-  children: React.PropTypes.element.isRequired,
+DougArg.propTypes = {
+  claimSize: React.PropTypes.number.isRequired,
+  claimText: React.PropTypes.string.isRequired,
   x: React.PropTypes.number.isRequired,
   y: React.PropTypes.number.isRequired
 };

@@ -9,11 +9,11 @@ export default class DougClaim extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: this.props.x
-      , y: this.props.y
-      , claimSize: this.props.claimSize
-      , claimText: this.props.claimText
-      , numberOfArgsInGroup: 2
+      x: props.x,
+      y: props.y,
+      claimSize: props.claimSize,
+      claimText: props.claimText,
+      numberOfArgsInGroup: 2
     };
   }
 
@@ -22,15 +22,16 @@ export default class DougClaim extends React.Component {
     return (
 
       <ClickerDragger x={`${this.state.x}`} y={`${this.state.y}`}>
-        <circle cx="0" cy="0" r={ `${this.state.claimSize}`} stroke="black" strokeWidth="1" fill="red" />
+        <circle cx="0" cy="0" r={`${this.state.claimSize}`} stroke="black" strokeWidth="1" fill="red" />
 
       </ClickerDragger>
     );
   }
 }
 
-ClickerDragger.propTypes = {
-  children: React.PropTypes.element.isRequired,
+DougClaim.propTypes = {
+  claimSize: React.PropTypes.number.isRequired,
+  claimText: React.PropTypes.string.isRequired,
   x: React.PropTypes.number.isRequired,
   y: React.PropTypes.number.isRequired
 };

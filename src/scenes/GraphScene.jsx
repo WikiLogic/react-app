@@ -88,11 +88,11 @@ export default class GraphScene extends React.Component {
             version="1.1"
             viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
           >
-       
+
             <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" />
 
-            <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText={"nope"} />
-        
+            <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" />
+
           </svg>
         </div>
       </div>

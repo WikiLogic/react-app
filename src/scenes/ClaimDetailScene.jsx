@@ -82,7 +82,7 @@ export default class ClaimDetailScene extends React.Component {
     console.log('new argument submission!', newArgument);
     const premiseIds = [];
     _.forEach(newArgument.premises, (premise) => {
-      console.log("premise", premise);
+      console.log('premise', premise);
       premiseIds.push(premise._id);
     });
     console.log('premiseIds', premiseIds);
