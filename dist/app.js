@@ -8334,7 +8334,73 @@ function resolvePathname(to) {
 /* harmony default export */ __webpack_exports__["default"] = (resolvePathname);
 
 /***/ }),
-/* 73 */,
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* The wrapper around svg elements that deals with clicking and dragging
+ * Also just positioning in a standard way
+ */
+var ClickerDragger = function (_React$Component) {
+  _inherits(ClickerDragger, _React$Component);
+
+  function ClickerDragger(props) {
+    _classCallCheck(this, ClickerDragger);
+
+    var _this = _possibleConstructorReturn(this, (ClickerDragger.__proto__ || Object.getPrototypeOf(ClickerDragger)).call(this, props));
+
+    _this.state = {
+      x: _this.props.x,
+      y: _this.props.y
+    };
+    return _this;
+  }
+
+  _createClass(ClickerDragger, [{
+    key: 'render',
+    value: function render() {
+      //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
+      return _react2.default.createElement(
+        'g',
+        { transform: 'translate(' + this.state.x + ' ' + this.state.y + ')' },
+        this.props.children
+      );
+    }
+  }]);
+
+  return ClickerDragger;
+}(_react2.default.Component);
+
+exports.default = ClickerDragger;
+
+
+ClickerDragger.propTypes = {
+  children: _react2.default.PropTypes.element.isRequired,
+  x: _react2.default.PropTypes.number.isRequired,
+  y: _react2.default.PropTypes.number.isRequired
+};
+
+/***/ }),
 /* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31854,7 +31920,85 @@ Code.propTypes = {
 };
 
 /***/ }),
-/* 133 */,
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ClickerDragger = __webpack_require__(73);
+
+var _ClickerDragger2 = _interopRequireDefault(_ClickerDragger);
+
+var _DougClaim = __webpack_require__(301);
+
+var _DougClaim2 = _interopRequireDefault(_DougClaim);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* The wrapper around svg elements that deals with clicking and dragging
+ * Also just positioning in a standard way
+ */
+var DougArg = function (_React$Component) {
+  _inherits(DougArg, _React$Component);
+
+  function DougArg(props) {
+    _classCallCheck(this, DougArg);
+
+    var _this = _possibleConstructorReturn(this, (DougArg.__proto__ || Object.getPrototypeOf(DougArg)).call(this, props));
+
+    _this.state = {
+      x: _this.props.x,
+      y: _this.props.y,
+      claimSize: _this.props.claimSize,
+      claimText: _this.props.claimText,
+      numberOfArgsInGroup: 2
+    };
+    return _this;
+  }
+
+  _createClass(DougArg, [{
+    key: 'render',
+    value: function render() {
+      //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
+      return _react2.default.createElement(
+        _ClickerDragger2.default,
+        { x: '' + this.state.x, y: '' + this.state.y },
+        _react2.default.createElement('circle', { cx: '-40', cy: '-20', r: ('' + this.state.numberOfArgsInGroup) * ('' + this.state.claimSize), stroke: 'black', strokeWidth: '1', fill: 'white' }),
+        _react2.default.createElement(_DougClaim2.default, { x: -40, y: -20, claimSize: '' + this.state.claimSize, claimText: '' + this.state.claimText })
+      );
+    }
+  }]);
+
+  return DougArg;
+}(_react2.default.Component);
+
+exports.default = DougArg;
+
+
+_ClickerDragger2.default.propTypes = {
+  children: _react2.default.PropTypes.element.isRequired,
+  x: _react2.default.PropTypes.number.isRequired,
+  y: _react2.default.PropTypes.number.isRequired
+};
+
+/***/ }),
 /* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33569,6 +33713,14 @@ var _GraphControls = __webpack_require__(135);
 
 var _GraphControls2 = _interopRequireDefault(_GraphControls);
 
+var _DougArg = __webpack_require__(133);
+
+var _DougArg2 = _interopRequireDefault(_DougArg);
+
+var _DougClaim = __webpack_require__(301);
+
+var _DougClaim2 = _interopRequireDefault(_DougClaim);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33576,9 +33728,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import DougArg from 'WlComponents/DougArg/DougArg.jsx';
-// import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 
 /**
  * The Home page
@@ -33678,12 +33827,17 @@ var GraphScene = function (_React$Component) {
             panHandler: this.panHandler,
             zoomHandler: this.zoomHandler
           }),
-          _react2.default.createElement('svg', {
-            className: 'graph-svg',
-            xmlns: 'http://www.w3.org/2000/svg',
-            version: '1.1',
-            viewBox: this.state.topLeftX + ' ' + this.state.topLeftY + ' ' + this.state.width + ' ' + this.state.height
-          })
+          _react2.default.createElement(
+            'svg',
+            {
+              className: 'graph-svg',
+              xmlns: 'http://www.w3.org/2000/svg',
+              version: '1.1',
+              viewBox: this.state.topLeftX + ' ' + this.state.topLeftY + ' ' + this.state.width + ' ' + this.state.height
+            },
+            _react2.default.createElement(_DougClaim2.default, { x: -40, y: -50, claimSize: '' + this.state.claimSize, claimText: 'OriginalClaim' }),
+            _react2.default.createElement(_DougArg2.default, { x: 30, y: 30, claimSize: '' + this.state.claimSize, claimText: "nope" })
+          )
         )
       );
     }
@@ -50455,6 +50609,90 @@ module.exports = function(module) {
 __webpack_require__(125);
 module.exports = __webpack_require__(126);
 
+
+/***/ }),
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ClickerDragger = __webpack_require__(73);
+
+var _ClickerDragger2 = _interopRequireDefault(_ClickerDragger);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
+
+/* The wrapper around svg elements that deals with clicking and dragging
+ * Also just positioning in a standard way
+ */
+var DougClaim = function (_React$Component) {
+  _inherits(DougClaim, _React$Component);
+
+  function DougClaim(props) {
+    _classCallCheck(this, DougClaim);
+
+    var _this = _possibleConstructorReturn(this, (DougClaim.__proto__ || Object.getPrototypeOf(DougClaim)).call(this, props));
+
+    _this.state = {
+      x: _this.props.x,
+      y: _this.props.y,
+      claimSize: _this.props.claimSize,
+      claimText: _this.props.claimText,
+      numberOfArgsInGroup: 2
+    };
+    return _this;
+  }
+
+  _createClass(DougClaim, [{
+    key: 'render',
+    value: function render() {
+      //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
+      return _react2.default.createElement(
+        _ClickerDragger2.default,
+        { x: '' + this.state.x, y: '' + this.state.y },
+        _react2.default.createElement('circle', { cx: '0', cy: '0', r: '' + this.state.claimSize, stroke: 'black', strokeWidth: '1', fill: 'red' })
+      );
+    }
+  }]);
+
+  return DougClaim;
+}(_react2.default.Component);
+
+exports.default = DougClaim;
+
+
+_ClickerDragger2.default.propTypes = {
+  children: _react2.default.PropTypes.element.isRequired,
+  x: _react2.default.PropTypes.number.isRequired,
+  y: _react2.default.PropTypes.number.isRequired
+};
 
 /***/ })
 /******/ ]);

@@ -1,11 +1,11 @@
 import React from 'react';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
+//import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 
 /* The wrapper around svg elements that deals with clicking and dragging
  * Also just positioning in a standard way
  */
-export default class DougArg extends React.Component {
+export default class DougClaim extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,9 +22,7 @@ export default class DougArg extends React.Component {
     return (
 
       <ClickerDragger x={`${this.state.x}`} y={`${this.state.y}`}>
-        <circle cx="-40" cy="-20" r={`${this.state.numberOfArgsInGroup}` * `${this.state.claimSize}`} stroke="black" strokeWidth="1" fill="white" />
-
-        <DougClaim x={-40} y={-20} claimSize={`${this.state.claimSize}`} claimText={`${this.state.claimText}`} />
+        <circle cx="0" cy="0" r={ `${this.state.claimSize}`} stroke="black" strokeWidth="1" fill="red" />
 
       </ClickerDragger>
     );
