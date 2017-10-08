@@ -1,0 +1,19 @@
+.graph-svg {
+    position: relative;
+
+    &__controls {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    
+    &__svg {
+        width: 100%;
+        height: 100vh;
+        
+        .x {
+          fill: black;
+        }
+    }
+}
