@@ -35,6 +35,8 @@ styles are set in sass alongside the components. (in the components folder).
 
 .width-100 { width: 100% !important; }
 .no-margin { margin: 0 !important; }
+.no-padding { padding: 0 !important; }
+.padding { padding: rem($pad / 2); }
 
 .hi {
   color: black;

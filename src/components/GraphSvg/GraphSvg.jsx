@@ -2,36 +2,61 @@ import React from 'react';
 import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
 
 /**
- * The Home page
- * @prop {*} name 
+ * The amazing pannable / zoomable SVG!
+ * TODO: make the controls pretty & accessible
  */
 export default class GraphSvg extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      topLeftX: -50,
-      topLeftY: -50,
-      width: 100,
-      height: 100,
+      topLeftX: -500,
+      topLeftY: -500,
+      width: 1000,
+      height: 1000,
       panEnguaged: false,
       panOriginX: 0,
-      panOriginY: 0
+      panOriginY: 0,
+      zoomEnguaged: false
     };
 
     this.focus = this.focus.bind(this);
     this.zoomHandler = this.zoomHandler.bind(this);
+    this.onKeyDownHandler = this.onKeyDownHandler.bind(this);
+    this.onKeyUpHandler = this.onKeyUpHandler.bind(this);
+    this.wheelHandler = this.wheelHandler.bind(this);
     this.panHandler = this.panHandler.bind(this);
-    this.svgMouseDownHandler = this.svgMouseDownHandler.bind(this);
-    this.svgMouseUpHandler = this.svgMouseUpHandler.bind(this);
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
     this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
   }
 
-  focus(x, y) {
-    this.setState({
-      topLeftX: x,
-      topLeftY: y,
-    });
+  componentWillMount() {
+    document.addEventListener('keyDown', this.onKeyDownHandler, false);
+    document.addEventListener('keyUp', this.onKeyUpHandler, false);
+  }
+
+
+  componentWillUnmount() {
+    document.removeEventListener('keyDown', this.onKeyDownHandler, false);
+    document.removeEventListener('keyUp', this.onKeyUpHandler, false);
+  }
+
+  onKeyDownHandler(e) {
+    console.log('key down', e.keyCode);
+    if (e.keyCode === 16) {
+      this.setState({
+        zoomEnguaged: true
+      });
+    }
+  }
+
+  onKeyUpHandler(e) {
+    if (e.keyCode === 16) {
+      this.setState({
+        zoomEnguaged: false
+      });
+    }
   }
 
   zoomHandler(value) {
@@ -47,6 +72,20 @@ export default class GraphSvg extends React.Component {
     });
   }
 
+  focus(x, y) {
+    this.setState({
+      topLeftX: x,
+      topLeftY: y,
+    });
+  }
+
+  wheelHandler(e) {
+    if (this.state.zoomEnguaged) {
+      console.log('wheel', e.deltaY);
+      this.zoomHandler(e.deltaY);
+    }
+  }
+
   panHandler(x, y) {
     const newTopLeftX = this.state.topLeftX + x;
     const newTopLeftY = this.state.topLeftY + y;
@@ -56,7 +95,7 @@ export default class GraphSvg extends React.Component {
     });
   }
 
-  svgMouseDownHandler(e) {
+  mouseDownHandler(e) {
     this.setState({
       panEnguaged: true,
       panOriginX: e.screenX,
@@ -64,7 +103,7 @@ export default class GraphSvg extends React.Component {
     });
   }
 
-  svgMouseUpHandler() {
+  mouseUpHandler() {
     this.setState({
       panEnguaged: false,
       panOriginX: 0,
@@ -79,8 +118,8 @@ export default class GraphSvg extends React.Component {
       const yDiff = this.state.panOriginY - e.screenY;
 
       //modify the distance - TODO: base this on zoom
-      const newTopLeftX = this.state.topLeftX + (xDiff / 10);
-      const newTopLeftY = this.state.topLeftY + (yDiff / 10);
+      const newTopLeftX = this.state.topLeftX + (xDiff / 1);
+      const newTopLeftY = this.state.topLeftY + (yDiff / 1);
 
       this.setState({
         topLeftX: newTopLeftX,
@@ -108,8 +147,11 @@ export default class GraphSvg extends React.Component {
           version="1.1"
           viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
           onMouseMove={this.mouseMoveHandler}
-          onMouseDown={this.svgMouseDownHandler}
-          onMouseUp={this.svgMouseUpHandler}
+          onMouseDown={this.mouseDownHandler}
+          onMouseUp={this.mouseUpHandler}
+          onWheel={this.wheelHandler}
+          onKeyDown={this.onKeyDownHandler}
+          onKeyUp={this.onKeyUpHandler}
         >
           {this.props.children}
         </svg>

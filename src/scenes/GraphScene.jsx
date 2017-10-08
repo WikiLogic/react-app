@@ -1,6 +1,13 @@
 import React from 'react';
+import _ from 'lodash';
+
+import API from 'WlAPI/api.js';
+
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
+// import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
+import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
 import DougArg from 'WlComponents/DougArg/DougArg.jsx';
 import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 
@@ -13,16 +20,85 @@ export default class GraphScene extends React.Component {
     super(props);
 
     this.state = {
-      search_results: [],
+      searchTerm: '',
+      searchResults: [],
       numberOfArgsInGroup: 2,
       claimSize: 20,
-      claimText: 'change'
+      claimText: 'change',
+      graphClaim: null
     };
 
+    this.searchClaims = this.searchClaims.bind(this);
+    this.resultClickHandler = this.resultClickHandler.bind(this);
+    this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
 
-  searchClaims(term) {
-    console.log('search', term);
+  searchClaims(search) {
+    // run the search
+    if (isNaN(search)) {
+      API.searchClaimsByTerm(search)
+        .then((data) => {
+          this.setState({
+            searchResults: data.results,
+            isLoading: false
+          });
+        }).catch((err) => {
+          this.setState({
+            searchResults: null,
+            isLoading: false
+          });
+          console.log('error', err);
+        });
+    } else {
+      API.getClaimDetailById(search)
+        .then((data) => {
+          this.setState({
+            searchResults: [data.claim],
+            isLoading: false
+          });
+        }).catch((err) => {
+          this.setState({
+            searchResults: null,
+            isLoading: false
+          });
+          console.log('error', err);
+        });
+    }
+
+    // set the state
+    this.setState({
+      searchTerm: search,
+      isLoading: true
+    });
+  }
+
+  resultClickHandler(result) {
+    console.log('result to load onto graph: ', result);
+    this.setState({
+      graphClaim: result
+    });
+  }
+
+  newArgumentSubmissionHandler(newArgument) {
+    console.log('new argument submission!', newArgument);
+    const premiseIds = [];
+    _.forEach(newArgument.premises, (premise) => {
+      console.log('premise', premise);
+      premiseIds.push(premise._id);
+    });
+    console.log('premiseIds', premiseIds);
+    API.postNewArgument({
+      parentClaimId: this.state.claim._id,
+      type: newArgument.type,
+      premiseIds: premiseIds
+    }).then((res) => {
+      console.log('claim with new argument returned!', res);
+      this.setState({
+        claims: res.data.claim
+      });
+    }).catch((err) => {
+      console.error('new argument failed', err);
+    });
   }
 
   render() {
@@ -32,23 +108,41 @@ export default class GraphScene extends React.Component {
           <div className="max-width-wrap">
 
             <SearchInput
-              id="home-scene-search-input"
-              label="Search"
               submissionHandler={this.searchClaims}
               placeholder="Search Claims"
+              label="Search"
+              inputValue={this.state.searchTerm}
+              id="graph-scene-search-input"
             />
 
           </div>
         </div>
-        <div className="page__body page__body--graph">
+        <div className="page__body no-padding">
+          <div className="sidebar-layout">
 
-          <GraphSvg>
+            <div className="sidebar-layout__side padding">
+              <GraphSearchResults
+                results={this.state.searchResults}
+                resultClickHandler={this.resultClickHandler}
+              />
+              {/* <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} /> */}
+            </div>
 
-            <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" />
+            <div className="sidebar-layout__main no-padding">
+              <GraphSvg>
 
-            <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" />
+                <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" />
 
-          </GraphSvg>
+                <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" />
+
+                {(this.state.graphClaim &&
+                  <GraphClaim claim={this.state.graphClaim} />
+                )}
+
+              </GraphSvg>
+            </div>
+
+          </div>
         </div>
       </div>
     );
