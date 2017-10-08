@@ -18,15 +18,20 @@ export default class GraphScene extends React.Component {
       topLeftY: -50,
       width: 100,
       height: 100,
+      panEnguaged: false,
+      panOriginX: 0,
+      panOriginY: 0,
       numberOfArgsInGroup: 2,
       claimSize: 20,
       claimText: 'change'
-
     };
 
     this.focus = this.focus.bind(this);
     this.zoomHandler = this.zoomHandler.bind(this);
     this.panHandler = this.panHandler.bind(this);
+    this.svgMouseDownHandler = this.svgMouseDownHandler.bind(this);
+    this.svgMouseUpHandler = this.svgMouseUpHandler.bind(this);
+    this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
   }
 
   focus(x, y) {
@@ -58,6 +63,41 @@ export default class GraphScene extends React.Component {
     });
   }
 
+  svgMouseDownHandler(e) {
+    this.setState({
+      panEnguaged: true,
+      panOriginX: e.screenX,
+      panOriginY: e.screenY
+    });
+  }
+
+  svgMouseUpHandler() {
+    this.setState({
+      panEnguaged: false,
+      panOriginX: 0,
+      panOriginY: 0
+    });
+  }
+
+  mouseMoveHandler(e) {
+    if (this.state.panEnguaged) {
+      //get the difference between panOrigin and e, apply to coords, reset panOrigin
+      const xDiff = this.state.panOriginX - e.screenX;
+      const yDiff = this.state.panOriginY - e.screenY;
+
+      //modify the distance - TODO: base this on zoom
+      const newTopLeftX = this.state.topLeftX + (xDiff / 10);
+      const newTopLeftY = this.state.topLeftY + (yDiff / 10);
+
+      this.setState({
+        topLeftX: newTopLeftX,
+        topLeftY: newTopLeftY,
+        panOriginX: e.screenX,
+        panOriginY: e.screenY
+      });
+    }
+  }
+
   render() {
     return (
       <div className="page">
@@ -75,7 +115,6 @@ export default class GraphScene extends React.Component {
         </div>
         <div className="page__body page__body--graph">
 
-          {/* Not putting this guy in the graph controls - I have a feeling that focus will be called from other places */}
           <button onClick={() => { this.focus(0, 80); }}>Ja-pan</button>
           <GraphControls
             panHandler={this.panHandler}
@@ -87,6 +126,9 @@ export default class GraphScene extends React.Component {
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
             viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
+            onMouseMove={this.mouseMoveHandler}
+            onMouseDown={this.svgMouseDownHandler}
+            onMouseUp={this.svgMouseUpHandler}
           >
 
             <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" />
