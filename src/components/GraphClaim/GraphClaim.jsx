@@ -16,11 +16,16 @@ export default class GraphClaim extends React.Component {
   render() {
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-      <ClickerDragger x={0} y={0}>
+
+
+      <ClickerDragger x={this.props.x} y={this.props.y}>
         <g className="graph-claim">
-          {/* <circle cx="0" cy="0" r={`${this.state.claimSize}`} stroke="black" strokeWidth="1" fill="red" /> */}
-          <rect rx="1" ry="1" x="0" y="0" width="100" height="60" className="graph-claim__claim" />
-          <text x="0" y="0">{this.props.claim.text}</text>
+
+          <circle cx="0" cy="0" r="100" stroke="black" strokeWidth="1" fill="red" className="graph-claim__claim" />
+
+          <text x="0" y="20">{this.props.claim.text}</text>
+
+          <button>yyyy </button>
         </g>
 
       </ClickerDragger>
@@ -32,5 +37,7 @@ GraphClaim.propTypes = {
   claim: React.PropTypes.shape({
     text: React.PropTypes.string.isRequired,
     _id: React.PropTypes.string.isRequired,
-  }).isRequired
+  }).isRequired,
+  x: React.PropTypes.number.isRequired,
+  y: React.PropTypes.number.isRequired
 };

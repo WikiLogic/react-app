@@ -7,9 +7,6 @@ import Claim from 'WlComponents/Claim/Claim.jsx';
 export default class GraphSearchResults extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
 
     this.resultClickHandler = this.resultClickHandler.bind(this);
   }

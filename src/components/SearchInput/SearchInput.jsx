@@ -10,7 +10,7 @@ export default class SearchInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '158371'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

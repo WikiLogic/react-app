@@ -131,12 +131,18 @@ export default class GraphScene extends React.Component {
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
 
-                <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" />
+                {/* <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" /> */}
 
-                <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" />
+                {/* <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" /> */}
+
+                {/* later on, there will be a button click to expand argumetn groups but for now we load as soon as graph claim true */}
 
                 {(this.state.graphClaim &&
-                  <GraphClaim claim={this.state.graphClaim} />
+                  <DougArg claim={this.state.graphClaim} />
+                )}
+
+                {(this.state.graphClaim &&
+                  <GraphClaim x={0} y={-350} claim={this.state.graphClaim} />
                 )}
 
               </GraphSvg>
