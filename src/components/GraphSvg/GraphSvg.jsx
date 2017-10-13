@@ -134,8 +134,6 @@ export default class GraphSvg extends React.Component {
     return (
       <div className="graph-svg">
         <div className="graph-svg__controls">
-
-          <button onClick={() => { this.focus(0, 80); }}>Ja-pan</button>
           <GraphControls
             panHandler={this.panHandler}
             zoomHandler={this.zoomHandler}
@@ -144,6 +142,7 @@ export default class GraphSvg extends React.Component {
         <svg
           className="graph-svg__svg"
           xmlns="http://www.w3.org/2000/svg"
+          //xmlns:html="http://www.w3.org/1999/xhtml"
           version="1.1"
           viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
           onMouseMove={this.mouseMoveHandler}

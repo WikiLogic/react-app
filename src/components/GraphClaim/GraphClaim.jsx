@@ -1,6 +1,6 @@
 import React from 'react';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-//import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
+import ButtonSVG from 'WlComponents/ButtonSVG/ButtonSVG.jsx';
 
 /* The wrapper around svg elements that deals with clicking and dragging
  * Also just positioning in a standard way
@@ -11,13 +11,17 @@ export default class GraphClaim extends React.Component {
     this.state = {
       numberOfArgsInGroup: 2
     };
+
+    this.expandArgumentsClickHandler = this.expandArgumentsClickHandler.bind(this);
+  }
+
+  expandArgumentsClickHandler(premise) {
+    this.props.expandArgumentsClickHandler(premise);
   }
 
   render() {
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-
-
       <ClickerDragger x={this.props.x} y={this.props.y}>
         <g className="graph-claim">
 
@@ -25,7 +29,7 @@ export default class GraphClaim extends React.Component {
 
           <text x="0" y="20">{this.props.claim.text}</text>
 
-          <button>yyyy </button>
+          <ButtonSVG x={0} y={0} buttonAction={this.props.expandArgumentsClickHandler} />
         </g>
 
       </ClickerDragger>
@@ -39,5 +43,6 @@ GraphClaim.propTypes = {
     _id: React.PropTypes.string.isRequired,
   }).isRequired,
   x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired
+  y: React.PropTypes.number.isRequired,
+  expandArgumentsClickHandler: React.PropTypes.func.isRequired
 };

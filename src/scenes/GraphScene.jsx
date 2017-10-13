@@ -9,7 +9,6 @@ import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResul
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
 import DougArg from 'WlComponents/DougArg/DougArg.jsx';
-import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 
 /**
  * The Home page
@@ -25,11 +24,13 @@ export default class GraphScene extends React.Component {
       numberOfArgsInGroup: 2,
       claimSize: 20,
       claimText: 'change',
-      graphClaim: null
+      graphClaim: null,
+      arguments: null
     };
 
     this.searchClaims = this.searchClaims.bind(this);
     this.resultClickHandler = this.resultClickHandler.bind(this);
+    this.expandArgumentsClickHandler = this.expandArgumentsClickHandler.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
 
@@ -76,6 +77,13 @@ export default class GraphScene extends React.Component {
     console.log('result to load onto graph: ', result);
     this.setState({
       graphClaim: result
+    });
+  }
+
+  expandArgumentsClickHandler(result) {
+    console.log('expand: ', result);
+    this.setState({
+      arguments: result
     });
   }
 
@@ -130,19 +138,16 @@ export default class GraphScene extends React.Component {
 
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
-
-                {/* <DougClaim x={-40} y={-50} claimSize={`${this.state.claimSize}`} claimText="OriginalClaim" /> */}
-
                 {/* <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" /> */}
 
                 {/* later on, there will be a button click to expand argumetn groups but for now we load as soon as graph claim true */}
 
                 {(this.state.graphClaim &&
-                  <DougArg claim={this.state.graphClaim} />
+                  <GraphClaim x={0} y={-350} claim={this.state.graphClaim} expandArgumentsClickHandler={this.expandArgumentsClickHandler} />
                 )}
 
-                {(this.state.graphClaim &&
-                  <GraphClaim x={0} y={-350} claim={this.state.graphClaim} />
+                {(this.state.arguments &&
+                  <DougArg firstArgumentGroup={this.state.graphClaim.arguments[0]} />
                 )}
 
               </GraphSvg>

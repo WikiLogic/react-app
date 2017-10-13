@@ -1,6 +1,5 @@
 import React from 'react';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import DougClaim from 'WlComponents/DougClaim/DougClaim.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
 
 /* The wrapper around svg elements that deals with clicking and dragging
@@ -19,14 +18,15 @@ export default class DougArg extends React.Component {
   }
 
   render() {
-    console.log('ye', this.props.claim.arguments);
-    console.log('arg', this.props.claim.arguments[0]);
-
+    console.log('claim', this.props.firstArgumentGroup);
+    // console.log('claim.arguments', this.props.claim.arguments);
+    // console.log('1:', this.props.claim.arguments[0]);
+    // console.log('2:', this.props.claim.arguments[1]);
 
     const searchResultMarkup = [];
-    for (let r = 0; r < this.props.claim.arguments.length; r++) {
+    for (let r = 0; r < this.props.firstArgumentGroup.premises.length; r++) {
       searchResultMarkup.push(
-        <GraphClaim x={(r*200)-100} y={0} claim={this.props.claim.arguments[r]} />
+        <GraphClaim x={(r * 200) - 100} y={0} claim={this.props.firstArgumentGroup.premises[r]} />
       );
     }
 
@@ -35,11 +35,11 @@ export default class DougArg extends React.Component {
       <g className="graph-arg">
         <rect rx="1" ry="1" x="-250" y="-250" width="500" height="500" stroke="black" fill="white" />
 
-        {searchResultMarkup}
+        {searchResultMarkup }
 
-        {/* <GraphClaim x={0} y={0} claim={this.props.claim.arguments[0]} /> */}
+    {/* <GraphClaim x={0} y={0} claim={this.props.claim.arguments[0]} /> */ }
 
-      </g>
+      </g >
     );
   }
 }
