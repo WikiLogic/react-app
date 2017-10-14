@@ -25197,16 +25197,25 @@ var GraphClaim = function (_React$Component) {
       return _react2.default.createElement(
         'g',
         { className: 'graph-claim' },
-        _react2.default.createElement('circle', { cx: '0', cy: '0', r: '100', stroke: 'black', strokeWidth: '1', fill: 'red', className: 'graph-claim__claim' }),
+        _react2.default.createElement('rect', {
+          rx: '5',
+          ry: '5',
+          width: '345',
+          height: '100',
+          className: 'graph-claim__claim'
+        }),
         _react2.default.createElement(_SVGtext2.default, {
           x: 0,
           y: 0,
-          width: 100,
+          width: 300,
           height: 100,
           text: this.props.claim.text
         }),
         _react2.default.createElement(_SVGbutton2.default, {
-          buttonAction: this.props.expandArgumentsClickHandler
+          buttonAction: this.props.expandArgumentsClickHandler,
+          text: '+',
+          x: 301,
+          y: 56
         })
       );
     }
@@ -31404,6 +31413,14 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ClickerDragger = __webpack_require__(68);
+
+var _ClickerDragger2 = _interopRequireDefault(_ClickerDragger);
+
+var _SVGtext = __webpack_require__(126);
+
+var _SVGtext2 = _interopRequireDefault(_SVGtext);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31426,44 +31443,49 @@ var ButtonSVG = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ButtonSVG.__proto__ || Object.getPrototypeOf(ButtonSVG)).call(this, props));
 
     _this.state = {
-      x: props.x,
-      y: props.y
+      buttonState: 'default'
     };
+    //TODO: switch between states like 'focused' 'active' and others - update class
     _this.buttonAction = _this.buttonAction.bind(_this);
     return _this;
   }
 
   _createClass(ButtonSVG, [{
-    key: "buttonAction",
+    key: 'buttonAction',
     value: function buttonAction(premise) {
       this.props.buttonAction(premise);
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        "g",
-        {
-          className: "button",
-          cursor: "pointer",
-          onClick: function onClick() {
-            _this2.buttonAction('NotNull');
-          }
-        },
-        _react2.default.createElement("rect", {
-          x: "-25",
-          y: "40",
-          width: "50",
-          height: "50",
-          stroke: "black",
-          fill: "White"
-        }),
+        _ClickerDragger2.default,
+        { x: this.props.x, y: this.props.y },
         _react2.default.createElement(
-          "text",
-          { x: "0", y: "80" },
-          "+"
+          'g',
+          {
+            className: 'button',
+            onClick: function onClick() {
+              _this2.buttonAction('NotNull');
+            }
+          },
+          _react2.default.createElement('rect', {
+            x: '0',
+            y: '0',
+            rx: '3',
+            ry: '3',
+            width: '44',
+            height: '44'
+          }),
+          _react2.default.createElement(_SVGtext2.default, {
+            x: '0',
+            y: '0',
+            width: 44,
+            height: 44,
+            text: this.props.text
+          })
         )
       );
     }
@@ -31476,6 +31498,7 @@ exports.default = ButtonSVG;
 
 
 ButtonSVG.propTypes = {
+  text: _react2.default.PropTypes.string.isRequired,
   x: _react2.default.PropTypes.number.isRequired,
   y: _react2.default.PropTypes.number.isRequired,
   buttonAction: _react2.default.PropTypes.func.isRequired

@@ -1,4 +1,6 @@
 import React from 'react';
+import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+import SVGtext from './SVGtext.jsx';
 //import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 
 /* SVG does not provide native buttons
@@ -8,9 +10,9 @@ export default class ButtonSVG extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: props.x,
-      y: props.y
+      buttonState: 'default'
     };
+    //TODO: switch between states like 'focused' 'active' and others - update class
     this.buttonAction = this.buttonAction.bind(this);
   }
 
@@ -20,26 +22,34 @@ export default class ButtonSVG extends React.Component {
 
   render() {
     return (
-      <g
-        className="button"
-        cursor="pointer"
-        onClick={() => { this.buttonAction('NotNull'); }}
-      >
-        <rect
-          x="-25"
-          y="40"
-          width="50"
-          height="50"
-          stroke="black"
-          fill="White"
-        />
-        <text x="0" y="80">+</text>
-      </g>
+      <ClickerDragger x={this.props.x} y={this.props.y}>
+        <g
+          className="button"
+          onClick={() => { this.buttonAction('NotNull'); }}
+        >
+          <rect
+            x="0"
+            y="0"
+            rx="3"
+            ry="3"
+            width="44"
+            height="44"
+          />
+          <SVGtext
+            x="0"
+            y="0"
+            width={44}
+            height={44}
+            text={this.props.text}
+          />
+        </g>
+      </ClickerDragger>
     );
   }
 }
 
 ButtonSVG.propTypes = {
+  text: React.PropTypes.string.isRequired,
   x: React.PropTypes.number.isRequired,
   y: React.PropTypes.number.isRequired,
   buttonAction: React.PropTypes.func.isRequired

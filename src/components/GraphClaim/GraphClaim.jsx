@@ -30,18 +30,27 @@ export default class GraphClaim extends React.Component {
     return (
       <g className="graph-claim">
 
-        <circle cx="0" cy="0" r="100" stroke="black" strokeWidth="1" fill="red" className="graph-claim__claim" />
+        <rect
+          rx="5"
+          ry="5"
+          width="345"
+          height="100"
+          className="graph-claim__claim"
+        />
 
         <SVGtext
           x={0}
           y={0}
-          width={100}
+          width={300}
           height={100}
           text={this.props.claim.text}
         />
 
         <SVGbutton
           buttonAction={this.props.expandArgumentsClickHandler}
+          text="+"
+          x={301}
+          y={56}
         />
       </g>
     );

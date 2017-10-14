@@ -407,6 +407,7 @@ br {
 /*
 input[type='submit'] 
 button
+<g><rect/><text/></g>
 */
 button,
 input[type='submit'],
@@ -422,20 +423,44 @@ input[type='button'],
   display: inline-block;
   background-color: #111F2E;
   color: white;
-  fill: white;
   border-radius: 2px;
   position: relative; }
+  button rect,
+  input[type='submit'] rect,
+  input[type='button'] rect,
+  .button rect {
+    fill: #111F2E; }
+  button text,
+  input[type='submit'] text,
+  input[type='button'] text,
+  .button text {
+    fill: white; }
+  button p,
+  input[type='submit'] p,
+  input[type='button'] p,
+  .button p {
+    line-height: 44px; }
   button:hover,
   input[type='submit']:hover,
   input[type='button']:hover,
   .button:hover {
     background-color: #0a88c5; }
+    button:hover rect,
+    input[type='submit']:hover rect,
+    input[type='button']:hover rect,
+    .button:hover rect {
+      fill: #0a88c5; }
   button:active,
   input[type='submit']:active,
   input[type='button']:active,
   .button:active {
     background-color: #0a88c5;
     top: 1px; }
+    button:active rect,
+    input[type='submit']:active rect,
+    input[type='button']:active rect,
+    .button:active rect {
+      fill: #0a88c5; }
   button:focus,
   input[type='submit']:focus,
   input[type='button']:focus,
@@ -445,6 +470,11 @@ input[type='button'],
     outline-offset: -4px;
     outline-style: solid;
     outline-width: 2px; }
+    button:focus rect,
+    input[type='submit']:focus rect,
+    input[type='button']:focus rect,
+    .button:focus rect {
+      fill: #0a88c5; }
   button svg,
   input[type='submit'] svg,
   input[type='button'] svg,
@@ -456,14 +486,31 @@ input[type='button'],
   input[type='button'][disabled],
   .button[disabled] {
     background-color: #cccccc; }
+    button[disabled] rect,
+    input[type='submit'][disabled] rect,
+    input[type='button'][disabled] rect,
+    .button[disabled] rect {
+      fill: #cccccc; }
   button.button--secondary,
   input[type='submit'].button--secondary,
   input[type='button'].button--secondary,
   .button.button--secondary {
     background-color: white;
-    color: #111F2E;
     border: 3px solid #111F2E;
+    color: #111F2E;
     padding: 0.6875rem 0.9375rem 0.75rem; }
+    button.button--secondary rect,
+    input[type='submit'].button--secondary rect,
+    input[type='button'].button--secondary rect,
+    .button.button--secondary rect {
+      stroke-width: 3;
+      stroke: #111F2E;
+      fill: white; }
+    button.button--secondary text,
+    input[type='submit'].button--secondary text,
+    input[type='button'].button--secondary text,
+    .button.button--secondary text {
+      fill: #111F2E; }
     button.button--secondary:hover,
     input[type='submit'].button--secondary:hover,
     input[type='button'].button--secondary:hover,
@@ -471,11 +518,27 @@ input[type='button'],
       border-color: #0a88c5;
       background-color: #0a88c5;
       color: white; }
+      button.button--secondary:hover rect,
+      input[type='submit'].button--secondary:hover rect,
+      input[type='button'].button--secondary:hover rect,
+      .button.button--secondary:hover rect {
+        fill: #0a88c5;
+        stroke: #0a88c5; }
+      button.button--secondary:hover text,
+      input[type='submit'].button--secondary:hover text,
+      input[type='button'].button--secondary:hover text,
+      .button.button--secondary:hover text {
+        fill: white; }
     button.button--secondary:active,
     input[type='submit'].button--secondary:active,
     input[type='button'].button--secondary:active,
     .button.button--secondary:active {
       border-color: #0a88c5; }
+      button.button--secondary:active rect,
+      input[type='submit'].button--secondary:active rect,
+      input[type='button'].button--secondary:active rect,
+      .button.button--secondary:active rect {
+        stroke: #0a88c5; }
     button.button--secondary:focus,
     input[type='submit'].button--secondary:focus,
     input[type='button'].button--secondary:focus,
@@ -483,6 +546,17 @@ input[type='button'],
       background-color: #0a88c5;
       border-color: #0a88c5;
       color: white; }
+      button.button--secondary:focus rect,
+      input[type='submit'].button--secondary:focus rect,
+      input[type='button'].button--secondary:focus rect,
+      .button.button--secondary:focus rect {
+        fill: #0a88c5;
+        stroke: #0a88c5; }
+      button.button--secondary:focus text,
+      input[type='submit'].button--secondary:focus text,
+      input[type='button'].button--secondary:focus text,
+      .button.button--secondary:focus text {
+        fill: white; }
     button.button--secondary[disabled],
     input[type='submit'].button--secondary[disabled],
     input[type='button'].button--secondary[disabled],
@@ -490,6 +564,17 @@ input[type='button'],
       border-color: #cccccc;
       background-color: #cccccc;
       color: white; }
+      button.button--secondary[disabled] rect,
+      input[type='submit'].button--secondary[disabled] rect,
+      input[type='button'].button--secondary[disabled] rect,
+      .button.button--secondary[disabled] rect {
+        fill: #cccccc;
+        stroke: #cccccc; }
+      button.button--secondary[disabled] text,
+      input[type='submit'].button--secondary[disabled] text,
+      input[type='button'].button--secondary[disabled] text,
+      .button.button--secondary[disabled] text {
+        fill: white; }
 
 pre {
   font-family: monospace, monospace;
@@ -936,7 +1021,7 @@ styles are set in sass alongside the components. (in the components folder).
       min-width: 300px; }
 
 .graph-claim__claim {
-  fill: transparent;
+  fill: white;
   stroke: black; }
 
 .graph-controls {
