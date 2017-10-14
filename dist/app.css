@@ -594,14 +594,9 @@ h2, h3, h4, h5, h6 {
 
 p {
   font-weight: 400;
-  margin: 0;
-  max-width: 35.9375rem; }
+  margin: 0; }
   p + p {
     margin-top: 1rem; }
-
-@media (min-width: 768px) {
-  p {
-    max-width: 38.4375rem; } }
 
 ::selection {
   background-color: rgba(10, 136, 197, 0.5); }
@@ -902,9 +897,8 @@ styles are set in sass alongside the components. (in the components folder).
   padding: 0.5rem;
   cursor: pointer;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center; }
+  flex-direction: column;
+  justify-content: space-between; }
   .claim__info {
     display: table; }
   .claim__status-circle {
@@ -914,6 +908,8 @@ styles are set in sass alongside the components. (in the components folder).
   .claim__text {
     display: table-cell;
     vertical-align: middle; }
+  .claim__prop-children {
+    text-align: right; }
   .claim--axiom {
     background-color: black;
     color: white; }
