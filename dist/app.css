@@ -1020,6 +1020,11 @@ styles are set in sass alongside the components. (in the components folder).
       width: 21%;
       min-width: 300px; }
 
+.graph-arg__rect {
+  fill: transparent;
+  stroke-width: 1px;
+  stroke: black; }
+
 .graph-claim__claim {
   fill: white;
   stroke: black; }
@@ -1640,6 +1645,11 @@ styles are set in sass alongside the components. (in the components folder).
       width: 21%;
       min-width: 290px;
       margin: 0.5rem; }
+
+.grid-square {
+  stroke-width: 1;
+  stroke: blue;
+  fill: rgba(0, 0, 0, 0.2); }
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left {

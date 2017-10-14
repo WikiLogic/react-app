@@ -9,7 +9,6 @@ import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResul
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
-import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
 
 /**
  * The Home page
@@ -22,15 +21,13 @@ export default class GraphScene extends React.Component {
     this.state = {
       searchTerm: '',
       searchResults: [],
-      numberOfArgsInGroup: 2,
-      claimSize: 20,
-      claimText: 'change',
-      graphClaim: null,
-      arguments: null
+      gridUnit: 100,
+      padUnit: 4,
+      graphClaim: null
     };
 
     this.searchClaims = this.searchClaims.bind(this);
-    this.resultClickHandler = this.resultClickHandler.bind(this);
+    this.loadClaim = this.loadClaim.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
 
@@ -73,8 +70,7 @@ export default class GraphScene extends React.Component {
     });
   }
 
-  resultClickHandler(result) {
-    console.log('result to load onto graph: ', result);
+  loadClaim(result) {
     this.setState({
       graphClaim: result
     });
@@ -125,26 +121,25 @@ export default class GraphScene extends React.Component {
             <div className="sidebar-layout__side padding">
               <GraphSearchResults
                 results={this.state.searchResults}
-                resultClickHandler={this.resultClickHandler}
+                resultClickHandler={this.loadClaim}
               />
               {/* <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} /> */}
             </div>
 
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
-                {/* <GraphArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" /> */}
 
                 {/* later on, there will be a button click to expand argumetn groups but for now we load as soon as graph claim true */}
 
                 {(this.state.graphClaim &&
-                  <ClickerDragger x={0} y={0} >
-                    <GraphClaim claim={this.state.graphClaim} expandArgumentsClickHandler={this.expandArgumentsClickHandler} />
-                  </ClickerDragger>
+                  <GraphClaim
+                    claim={this.state.graphClaim}
+                    premiseClickHandler={this.loadClaim}
+                    gridUnit={this.state.gridUnit}
+                    padUnit={this.state.padUnit}
+                  />
                 )}
 
-                {/* {(this.state.arguments &&
-                  <GraphArg firstArgumentGroup={this.state.graphClaim.arguments[0]} />
-                )} */}
 
               </GraphSvg>
             </div>
