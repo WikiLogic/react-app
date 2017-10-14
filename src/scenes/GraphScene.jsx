@@ -74,6 +74,15 @@ export default class GraphScene extends React.Component {
     this.setState({
       graphClaim: result
     });
+    //fire off a request to the API to get the args for this claim
+    API.getClaimDetailById(result._key)
+      .then((data) => {
+        this.setState({
+          graphClaim: data.claim
+        });
+      }).catch((err) => {
+        console.log('Trying to load claim detail error', err);
+      });
   }
 
   newArgumentSubmissionHandler(newArgument) {

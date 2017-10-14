@@ -30624,7 +30624,7 @@ var GraphClaim = function (_React$Component) {
             height: claimHeight,
             text: this.props.claim.text
           }),
-          _react2.default.createElement(_SVGbutton2.default, {
+          this.props.claim.arguments.length > 0 && _react2.default.createElement(_SVGbutton2.default, {
             buttonAction: this.expandArgumentsClickHandler,
             text: '+',
             x: claimWidth - 44,
@@ -30645,7 +30645,8 @@ exports.default = GraphClaim;
 GraphClaim.propTypes = {
   claim: _react2.default.PropTypes.shape({
     text: _react2.default.PropTypes.string.isRequired,
-    _id: _react2.default.PropTypes.string.isRequired
+    _id: _react2.default.PropTypes.string.isRequired,
+    arguments: _react2.default.PropTypes.array
   }).isRequired,
   gridUnit: _react2.default.PropTypes.number.isRequired,
   padUnit: _react2.default.PropTypes.number.isRequired
@@ -32869,14 +32870,24 @@ var GraphScene = function (_React$Component) {
   }, {
     key: 'loadClaim',
     value: function loadClaim(result) {
+      var _this3 = this;
+
       this.setState({
         graphClaim: result
+      });
+      //fire off a request to the API to get the args for this claim
+      _api2.default.getClaimDetailById(result._key).then(function (data) {
+        _this3.setState({
+          graphClaim: data.claim
+        });
+      }).catch(function (err) {
+        console.log('Trying to load claim detail error', err);
       });
     }
   }, {
     key: 'newArgumentSubmissionHandler',
     value: function newArgumentSubmissionHandler(newArgument) {
-      var _this3 = this;
+      var _this4 = this;
 
       console.log('new argument submission!', newArgument);
       var premiseIds = [];
@@ -32891,7 +32902,7 @@ var GraphScene = function (_React$Component) {
         premiseIds: premiseIds
       }).then(function (res) {
         console.log('claim with new argument returned!', res);
-        _this3.setState({
+        _this4.setState({
           claims: res.data.claim
         });
       }).catch(function (err) {
@@ -33238,8 +33249,9 @@ var SearchScene = function (_React$Component) {
         });
       } else {
         _api2.default.getClaimDetailById(search).then(function (data) {
+          //TODO: open the claim detial page when searching by an id and there's one result
           _this2.setState({
-            focused_claim: data.claim,
+            searchResults: [data.claim],
             isLoading: false
           });
         }).catch(function (err) {

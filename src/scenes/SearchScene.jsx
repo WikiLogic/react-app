@@ -52,8 +52,9 @@ export default class SearchScene extends React.Component {
     } else {
       API.getClaimDetailById(search)
         .then((data) => {
+          //TODO: open the claim detial page when searching by an id and there's one result
           this.setState({
-            focused_claim: data.claim,
+            searchResults: [data.claim],
             isLoading: false
           });
         }).catch((err) => {

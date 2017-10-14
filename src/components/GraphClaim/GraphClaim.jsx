@@ -108,12 +108,14 @@ export default class GraphClaim extends React.Component {
             text={this.props.claim.text}
           />
 
-          <SVGbutton
-            buttonAction={this.expandArgumentsClickHandler}
-            text="+"
-            x={claimWidth - 44}
-            y={claimHeight - 44}
-          />
+          {(this.props.claim.arguments.length > 0 &&
+            <SVGbutton
+              buttonAction={this.expandArgumentsClickHandler}
+              text="+"
+              x={claimWidth - 44}
+              y={claimHeight - 44}
+            />
+          )}
         </ClickerDragger>
 
         {this.renderArguments()}
@@ -126,6 +128,7 @@ GraphClaim.propTypes = {
   claim: React.PropTypes.shape({
     text: React.PropTypes.string.isRequired,
     _id: React.PropTypes.string.isRequired,
+    arguments: React.PropTypes.array
   }).isRequired,
   gridUnit: React.PropTypes.number.isRequired,
   padUnit: React.PropTypes.number.isRequired
