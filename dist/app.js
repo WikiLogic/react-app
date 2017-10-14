@@ -25518,6 +25518,10 @@ var _ButtonSVG = __webpack_require__(305);
 
 var _ButtonSVG2 = _interopRequireDefault(_ButtonSVG);
 
+var _GraphArg = __webpack_require__(306);
+
+var _GraphArg2 = _interopRequireDefault(_GraphArg);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25538,21 +25542,34 @@ var GraphClaim = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (GraphClaim.__proto__ || Object.getPrototypeOf(GraphClaim)).call(this, props));
 
     _this.state = {
-      numberOfArgsInGroup: 2
+      numberOfArgsInGroup: 2,
+      arguments: null
     };
-
     _this.expandArgumentsClickHandler = _this.expandArgumentsClickHandler.bind(_this);
     return _this;
   }
 
   _createClass(GraphClaim, [{
     key: 'expandArgumentsClickHandler',
-    value: function expandArgumentsClickHandler(premise) {
-      this.props.expandArgumentsClickHandler(premise);
+    value: function expandArgumentsClickHandler(result) {
+      console.log('expand: ', result);
+      this.setState({
+        arguments: result
+      });
     }
   }, {
     key: 'render',
     value: function render() {
+      console.log('11:', this.props.claim);
+      // console.log('2:', this.props.claim.arguments[1]);
+
+      var argumentsForClaim = [];
+      if (this.props.claim.arguments) {
+        for (var r = 0; r < this.props.claim.arguments.length; r++) {
+          argumentsForClaim.push(_react2.default.createElement(_GraphArg2.default, { x: '-200', y: '100', claimSize: '200', firstArgumentGroup: this.props.claim.arguments[r] }));
+        }
+      }
+
       //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
       return _react2.default.createElement(
         _ClickerDragger2.default,
@@ -25566,7 +25583,8 @@ var GraphClaim = function (_React$Component) {
             { x: '0', y: '20' },
             this.props.claim.text
           ),
-          _react2.default.createElement(_ButtonSVG2.default, { x: 0, y: 0, buttonAction: this.props.expandArgumentsClickHandler })
+          _react2.default.createElement(_ButtonSVG2.default, { x: 0, y: 0, buttonAction: this.expandArgumentsClickHandler }),
+          this.state.arguments && argumentsForClaim
         )
       );
     }
@@ -25584,8 +25602,7 @@ GraphClaim.propTypes = {
     _id: _react2.default.PropTypes.string.isRequired
   }).isRequired,
   x: _react2.default.PropTypes.number.isRequired,
-  y: _react2.default.PropTypes.number.isRequired,
-  expandArgumentsClickHandler: _react2.default.PropTypes.func.isRequired
+  y: _react2.default.PropTypes.number.isRequired
 };
 
 /***/ }),
@@ -32019,96 +32036,7 @@ Code.propTypes = {
 };
 
 /***/ }),
-/* 135 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _ClickerDragger = __webpack_require__(42);
-
-var _ClickerDragger2 = _interopRequireDefault(_ClickerDragger);
-
-var _GraphClaim = __webpack_require__(76);
-
-var _GraphClaim2 = _interopRequireDefault(_GraphClaim);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/* The wrapper around svg elements that deals with clicking and dragging
- * Also just positioning in a standard way
- */
-var DougArg = function (_React$Component) {
-  _inherits(DougArg, _React$Component);
-
-  function DougArg(props) {
-    _classCallCheck(this, DougArg);
-
-    var _this = _possibleConstructorReturn(this, (DougArg.__proto__ || Object.getPrototypeOf(DougArg)).call(this, props));
-
-    _this.state = {
-      // x: props.x,
-      // y: props.y,
-      claimSize: props.claimSize,
-      claimText: props.claimText,
-      numberOfArgsInGroup: 2
-    };
-    return _this;
-  }
-
-  _createClass(DougArg, [{
-    key: 'render',
-    value: function render() {
-      console.log('claim', this.props.firstArgumentGroup);
-      // console.log('claim.arguments', this.props.claim.arguments);
-      // console.log('1:', this.props.claim.arguments[0]);
-      // console.log('2:', this.props.claim.arguments[1]);
-
-      var searchResultMarkup = [];
-      for (var r = 0; r < this.props.firstArgumentGroup.premises.length; r++) {
-        searchResultMarkup.push(_react2.default.createElement(_GraphClaim2.default, { x: r * 200 - 100, y: 0, claim: this.props.firstArgumentGroup.premises[r] }));
-      }
-
-      //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
-      return _react2.default.createElement(
-        'g',
-        { className: 'graph-arg' },
-        _react2.default.createElement('rect', { rx: '1', ry: '1', x: '-250', y: '-250', width: '500', height: '500', stroke: 'black', fill: 'white' }),
-        searchResultMarkup
-      );
-    }
-  }]);
-
-  return DougArg;
-}(_react2.default.Component);
-
-exports.default = DougArg;
-
-
-DougArg.propTypes = {
-  // claimSize: React.PropTypes.number.isRequired,
-  // claimText: React.PropTypes.string.isRequired,
-  // x: React.PropTypes.number.isRequired,
-  // y: React.PropTypes.number.isRequired
-};
-
-/***/ }),
+/* 135 */,
 /* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34178,9 +34106,9 @@ var _GraphClaim = __webpack_require__(76);
 
 var _GraphClaim2 = _interopRequireDefault(_GraphClaim);
 
-var _DougArg = __webpack_require__(135);
+var _GraphArg = __webpack_require__(306);
 
-var _DougArg2 = _interopRequireDefault(_DougArg);
+var _GraphArg2 = _interopRequireDefault(_GraphArg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34216,7 +34144,6 @@ var GraphScene = function (_React$Component) {
 
     _this.searchClaims = _this.searchClaims.bind(_this);
     _this.resultClickHandler = _this.resultClickHandler.bind(_this);
-    _this.expandArgumentsClickHandler = _this.expandArgumentsClickHandler.bind(_this);
     _this.newArgumentSubmissionHandler = _this.newArgumentSubmissionHandler.bind(_this);
     return _this;
   }
@@ -34270,14 +34197,6 @@ var GraphScene = function (_React$Component) {
       });
     }
   }, {
-    key: 'expandArgumentsClickHandler',
-    value: function expandArgumentsClickHandler(result) {
-      console.log('expand: ', result);
-      this.setState({
-        arguments: result
-      });
-    }
-  }, {
     key: 'newArgumentSubmissionHandler',
     value: function newArgumentSubmissionHandler(newArgument) {
       var _this3 = this;
@@ -34305,6 +34224,7 @@ var GraphScene = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+
       return _react2.default.createElement(
         'div',
         { className: 'page' },
@@ -34343,8 +34263,7 @@ var GraphScene = function (_React$Component) {
               _react2.default.createElement(
                 _GraphSvg2.default,
                 null,
-                this.state.graphClaim && _react2.default.createElement(_GraphClaim2.default, { x: 0, y: -350, claim: this.state.graphClaim, expandArgumentsClickHandler: this.expandArgumentsClickHandler }),
-                this.state.arguments && _react2.default.createElement(_DougArg2.default, { firstArgumentGroup: this.state.graphClaim.arguments[0] })
+                this.state.graphClaim && _react2.default.createElement(_GraphClaim2.default, { x: 0, y: -250, claim: this.state.graphClaim })
               )
             )
           )
@@ -51225,6 +51144,91 @@ ButtonSVG.propTypes = {
   x: _react2.default.PropTypes.number.isRequired,
   y: _react2.default.PropTypes.number.isRequired,
   buttonAction: _react2.default.PropTypes.func.isRequired
+};
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ClickerDragger = __webpack_require__(42);
+
+var _ClickerDragger2 = _interopRequireDefault(_ClickerDragger);
+
+var _GraphClaim = __webpack_require__(76);
+
+var _GraphClaim2 = _interopRequireDefault(_GraphClaim);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* The wrapper around svg elements that deals with clicking and dragging
+ * Also just positioning in a standard way
+ */
+var GraphArg = function (_React$Component) {
+  _inherits(GraphArg, _React$Component);
+
+  function GraphArg(props) {
+    _classCallCheck(this, GraphArg);
+
+    var _this = _possibleConstructorReturn(this, (GraphArg.__proto__ || Object.getPrototypeOf(GraphArg)).call(this, props));
+
+    _this.state = {
+      x: props.x,
+      y: props.y,
+      claimSize: props.claimSize
+    };
+    return _this;
+  }
+
+  _createClass(GraphArg, [{
+    key: 'render',
+    value: function render() {
+      //console.log('claim', this.props.firstArgumentGroup);
+
+      var searchResultMarkup = [];
+      for (var r = 0; r < this.props.firstArgumentGroup.premises.length; r++) {
+        searchResultMarkup.push(_react2.default.createElement(_GraphClaim2.default, { x: -(0.5 * this.props.claimSize) + this.props.claimSize * r, y: this.props.claimSize, claim: this.props.firstArgumentGroup.premises[r] }));
+      }
+      //x={this.props.x + (0.5 * this.props.claimSize)}  x="0"
+      //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
+      return _react2.default.createElement(
+        'g',
+        { className: 'graph-arg' },
+        _react2.default.createElement('rect', { rx: '1', ry: '1', x: this.props.x, y: this.props.y, width: this.props.claimSize * this.props.firstArgumentGroup.premises.length, height: this.props.claimSize, stroke: 'black', fill: 'white' }),
+        searchResultMarkup
+      );
+    }
+  }]);
+
+  return GraphArg;
+}(_react2.default.Component);
+
+exports.default = GraphArg;
+
+
+GraphArg.propTypes = {
+  claimSize: _react2.default.PropTypes.number.isRequired,
+  //claimText: React.PropTypes.string.isRequired, 
+  x: _react2.default.PropTypes.number.isRequired,
+  y: _react2.default.PropTypes.number.isRequired
 };
 
 /***/ })

@@ -8,7 +8,7 @@ import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResul
 // import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
-import DougArg from 'WlComponents/DougArg/DougArg.jsx';
+import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
 
 /**
  * The Home page
@@ -30,7 +30,6 @@ export default class GraphScene extends React.Component {
 
     this.searchClaims = this.searchClaims.bind(this);
     this.resultClickHandler = this.resultClickHandler.bind(this);
-    this.expandArgumentsClickHandler = this.expandArgumentsClickHandler.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
 
@@ -80,13 +79,6 @@ export default class GraphScene extends React.Component {
     });
   }
 
-  expandArgumentsClickHandler(result) {
-    console.log('expand: ', result);
-    this.setState({
-      arguments: result
-    });
-  }
-
   newArgumentSubmissionHandler(newArgument) {
     console.log('new argument submission!', newArgument);
     const premiseIds = [];
@@ -110,6 +102,7 @@ export default class GraphScene extends React.Component {
   }
 
   render() {
+
     return (
       <div className="page">
         <div className="page__header">
@@ -138,17 +131,17 @@ export default class GraphScene extends React.Component {
 
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
-                {/* <DougArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" /> */}
+                {/* <GraphArg x={30} y={30} claimSize={`${this.state.claimSize}`} claimText="nope" /> */}
 
                 {/* later on, there will be a button click to expand argumetn groups but for now we load as soon as graph claim true */}
 
                 {(this.state.graphClaim &&
-                  <GraphClaim x={0} y={-350} claim={this.state.graphClaim} expandArgumentsClickHandler={this.expandArgumentsClickHandler} />
+                  <GraphClaim x={0} y={-250} claim={this.state.graphClaim}/>
                 )}
 
-                {(this.state.arguments &&
-                  <DougArg firstArgumentGroup={this.state.graphClaim.arguments[0]} />
-                )}
+                {/* {(this.state.arguments &&
+                  <GraphArg firstArgumentGroup={this.state.graphClaim.arguments[0]} />
+                )} */}
 
               </GraphSvg>
             </div>
