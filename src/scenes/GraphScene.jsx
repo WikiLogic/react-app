@@ -6,6 +6,7 @@ import API from 'WlAPI/api.js';
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
 // import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
+import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
 import DougArg from 'WlComponents/DougArg/DougArg.jsx';
@@ -143,7 +144,9 @@ export default class GraphScene extends React.Component {
                 {/* later on, there will be a button click to expand argumetn groups but for now we load as soon as graph claim true */}
 
                 {(this.state.graphClaim &&
-                  <GraphClaim x={0} y={-350} claim={this.state.graphClaim} expandArgumentsClickHandler={this.expandArgumentsClickHandler} />
+                  <ClickerDragger x={0} y={-350} >
+                    <GraphClaim claim={this.state.graphClaim} expandArgumentsClickHandler={this.expandArgumentsClickHandler} />
+                  </ClickerDragger>
                 )}
 
                 {(this.state.arguments &&
