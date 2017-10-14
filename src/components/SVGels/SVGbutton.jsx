@@ -16,8 +16,8 @@ export default class ButtonSVG extends React.Component {
     this.buttonAction = this.buttonAction.bind(this);
   }
 
-  buttonAction(premise) {
-    this.props.buttonAction(premise);
+  buttonAction() {
+    this.props.buttonAction();
   }
 
   render() {
@@ -25,7 +25,7 @@ export default class ButtonSVG extends React.Component {
       <ClickerDragger x={this.props.x} y={this.props.y}>
         <g
           className="button"
-          onClick={() => { this.buttonAction('NotNull'); }}
+          onClick={this.buttonAction}
         >
           <rect
             x="0"

@@ -1,6 +1,8 @@
 import React from 'react';
 import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
+import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
 
 /* The Claim Wrapper for the graph
  * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
@@ -14,26 +16,43 @@ export default class GraphClaim extends React.Component {
       claim: this.props.claim,
       arguments: null
     };
-
     this.expandArgumentsClickHandler = this.expandArgumentsClickHandler.bind(this);
   }
 
   expandArgumentsClickHandler() {
-    //we already have the premis up here, the button doesn't actually need to know it, just that it was clicked
-    this.props.expandArgumentsClickHandler(this.props.claim);
+    this.setState({
+      arguments: this.state.claim.arguments
+    });
   }
 
   //will need a:
   //this.props.resizeHandler
 
   render() {
+
+    const argumentsForClaim = [];
+    if (this.state.arguments) {
+      for (let r = 0; r < this.state.arguments.length; r++) {
+        argumentsForClaim.push(
+          <ClickerDragger x={r * 300} y={100}>
+            <GraphArg
+              key={r}
+              claimSize="200"
+              arg={this.state.arguments[r]}
+            />
+          </ClickerDragger>
+        );
+      }
+    }
+
+    //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
       <g className="graph-claim">
 
         <rect
           rx="5"
           ry="5"
-          width="345"
+          width="300"
           height="100"
           className="graph-claim__claim"
         />
@@ -41,15 +60,17 @@ export default class GraphClaim extends React.Component {
         <SVGtext
           x={0}
           y={0}
-          width={300}
+          width={250}
           height={100}
           text={this.props.claim.text}
         />
 
+        {(this.state.arguments && argumentsForClaim)}
+
         <SVGbutton
-          buttonAction={this.props.expandArgumentsClickHandler}
+          buttonAction={this.expandArgumentsClickHandler}
           text="+"
-          x={301}
+          x={250}
           y={56}
         />
       </g>
