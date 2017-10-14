@@ -1,3 +1,7 @@
 .graph-premise {
-
+    fill: $premise-fill;
+    stroke: $premise-stroke;
+    p {
+        padding: 0 5px;
+    }
 }

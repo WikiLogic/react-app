@@ -1,8 +1,8 @@
 .graph-arg {
 
     &__rect {
-        fill: transparent;
+        fill: $argument-fill;
         stroke-width: 1px;
-        stroke: black;
+        stroke: $argument-stroke;
     }
 }

@@ -35,8 +35,9 @@ export default class GraphClaim extends React.Component {
     let premiseCounter = 0;
 
     for (let r = 0; r < this.state.arguments.length; r++) {
-      const thisArgumentX = premiseCounter * this.props.gridUnit; //move it right by n previous premises * the gridUnit
+      const thisArgumentX = premiseCounter * (this.props.gridUnit * 2); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
       premiseCounter += this.state.arguments[r].premises.length;
+      console.log("premiseCounter", premiseCounter);
 
       argumentsMarkup.push(
         <ClickerDragger

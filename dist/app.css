@@ -679,14 +679,9 @@ h2, h3, h4, h5, h6 {
 
 p {
   font-weight: 400;
-  margin: 0;
-  max-width: 35.9375rem; }
+  margin: 0; }
   p + p {
     margin-top: 1rem; }
-
-@media (min-width: 768px) {
-  p {
-    max-width: 38.4375rem; } }
 
 ::selection {
   background-color: rgba(10, 136, 197, 0.5); }
@@ -987,9 +982,8 @@ styles are set in sass alongside the components. (in the components folder).
   padding: 0.5rem;
   cursor: pointer;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center; }
+  flex-direction: column;
+  justify-content: space-between; }
   .claim__info {
     display: table; }
   .claim__status-circle {
@@ -999,6 +993,8 @@ styles are set in sass alongside the components. (in the components folder).
   .claim__text {
     display: table-cell;
     vertical-align: middle; }
+  .claim__prop-children {
+    text-align: right; }
   .claim--axiom {
     background-color: black;
     color: white; }
@@ -1021,18 +1017,26 @@ styles are set in sass alongside the components. (in the components folder).
       min-width: 300px; }
 
 .graph-arg__rect {
-  fill: transparent;
+  fill: #eeeeee;
   stroke-width: 1px;
-  stroke: black; }
+  stroke: #eeeeee; }
 
 .graph-claim__claim {
   fill: white;
-  stroke: black; }
+  stroke: #cccccc; }
+  .graph-claim__claim p {
+    padding: 0 5px; }
 
 .graph-controls {
   position: absolute;
   top: 1rem;
   right: 1rem; }
+
+.graph-premise {
+  fill: white;
+  stroke: #cccccc; }
+  .graph-premise p {
+    padding: 0 5px; }
 
 .graph-search-results__result {
   margin-bottom: 0.5rem; }
@@ -1647,9 +1651,7 @@ styles are set in sass alongside the components. (in the components folder).
       margin: 0.5rem; }
 
 .grid-square {
-  stroke-width: 1;
-  stroke: blue;
-  fill: rgba(0, 0, 0, 0.2); }
+  fill: transparent; }
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left {

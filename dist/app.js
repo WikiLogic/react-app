@@ -30550,8 +30550,9 @@ var GraphClaim = function (_React$Component) {
       var premiseCounter = 0;
 
       for (var r = 0; r < this.state.arguments.length; r++) {
-        var thisArgumentX = premiseCounter * this.props.gridUnit; //move it right by n previous premises * the gridUnit
+        var thisArgumentX = premiseCounter * (this.props.gridUnit * 2); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
         premiseCounter += this.state.arguments[r].premises.length;
+        console.log("premiseCounter", premiseCounter);
 
         argumentsMarkup.push(_react2.default.createElement(
           _ClickerDragger2.default,

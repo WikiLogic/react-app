@@ -5,9 +5,8 @@
     padding: rem($pad / 2);
     cursor: pointer;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     
     //this part of the claim component is consistent everywhere it is used
     //in here we display the essential info about a claim
@@ -29,7 +28,7 @@
     //this is the area in the component that holds those things. Probably just a few buttons, but they 
     //have to take care of themselves. Here we just give them a container
     &__prop-children {
-
+        text-align: right;
     }
 
     &--axiom {
