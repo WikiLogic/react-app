@@ -15,7 +15,7 @@ export default class ClickerDragger extends React.Component {
   render() {
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-      <g transform={`translate(${this.state.x} ${this.state.y})`}>
+      <g transform={`translate(${this.state.x} ${this.state.y})`} className={this.props.className}>
         {this.props.children}
         {/* <rect x="0" y="0" width="1" height="1" rx="0.1" ry="0.1" fill="#ccc" /> */}
       </g>
@@ -26,5 +26,10 @@ export default class ClickerDragger extends React.Component {
 ClickerDragger.propTypes = {
   children: React.PropTypes.element.isRequired,
   x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired
+  y: React.PropTypes.number.isRequired,
+  className: React.PropTypes.string
+};
+
+ClickerDragger.defaultProps = {
+  className: ''
 };

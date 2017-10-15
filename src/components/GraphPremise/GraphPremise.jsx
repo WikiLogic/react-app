@@ -9,7 +9,7 @@ import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
  * But it does need to know where it wants to put it's children and then inform the parent about it's size. 
  * It's then up to the parent to accomodate properly.
  */
-export default class GraphClaim extends React.Component {
+export default class GraphPremise extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,9 +35,8 @@ export default class GraphClaim extends React.Component {
     let premiseCounter = 0;
 
     for (let r = 0; r < this.state.arguments.length; r++) {
-      const thisArgumentX = premiseCounter * (this.props.gridUnit * 2); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
+      const thisArgumentX = premiseCounter * this.props.gridUnit; //move it right by n previous premises * the gridUnit
       premiseCounter += this.state.arguments[r].premises.length;
-      console.log("premiseCounter", premiseCounter);
 
       argumentsMarkup.push(
         <ClickerDragger
@@ -60,7 +59,7 @@ export default class GraphClaim extends React.Component {
     return (
       <ClickerDragger
         className="graph-claim__args"
-        x={0} //something's acting relative in the svg
+        x={-this.props.padUnit} //something's acting relative in the svg
         y={this.props.gridUnit}
       >
         {argumentsMarkup}
@@ -70,65 +69,42 @@ export default class GraphClaim extends React.Component {
 
   render() {
 
-    //make claims 2 by 1
-    const claimWidth = (this.props.gridUnit * 2) - (2 * this.props.padUnit);
-    const claimHeight = (this.props.gridUnit * 1) - (2 * this.props.padUnit);
-    const gridSquareWidth = this.props.gridUnit * 2;
-    const gridSquareHeight = this.props.gridUnit * 1;
+    //make premises 2 by 1
+    const premiseWidth = (this.props.gridUnit * 2) - (4 * this.props.padUnit); //premises sit on the innermost box
+    const premiseHeight = (this.props.gridUnit * 1) - (4 * this.props.padUnit);
 
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-      <g className="graph-claim">
+      <g className="graph-premise">
         <rect
-          rx="10"
-          ry="10"
-          width={gridSquareWidth}
-          height={gridSquareHeight}
-          className="grid-square"
+          width={premiseWidth}
+          height={premiseHeight}
+          className="graph-claim__claim"
         />
 
-        <ClickerDragger
-          className="graph-claim__claim"
-          x={this.props.padUnit}
-          y={this.props.padUnit}
-        >
-          <rect
-            rx="5"
-            ry="5"
-            width={claimWidth}
-            height={claimHeight}
-            className="graph-claim__claim"
-          />
+        <SVGtext
+          x={0}
+          y={0}
+          width={premiseWidth}
+          height={premiseHeight}
+          text={this.props.claim.text}
+        />
 
-          <SVGtext
-            x={0}
-            y={0}
-            width={claimWidth}
-            height={claimHeight}
-            text={this.props.claim.text}
-          />
-
-          {(this.props.claim.arguments.length > 0 &&
-            <SVGbutton
-              buttonAction={this.expandArgumentsClickHandler}
-              text="+"
-              x={claimWidth - 44}
-              y={claimHeight - 44}
-            />
-          )}
-        </ClickerDragger>
-
-        {this.renderArguments()}
+        <SVGbutton
+          buttonAction={this.expandArgumentsClickHandler}
+          text="+"
+          x={premiseWidth - 44}
+          y={premiseHeight - 44}
+        />
       </g>
     );
   }
 }
 
-GraphClaim.propTypes = {
+GraphPremise.propTypes = {
   claim: React.PropTypes.shape({
     text: React.PropTypes.string.isRequired,
     _id: React.PropTypes.string.isRequired,
-    arguments: React.PropTypes.array
   }).isRequired,
   gridUnit: React.PropTypes.number.isRequired,
   padUnit: React.PropTypes.number.isRequired

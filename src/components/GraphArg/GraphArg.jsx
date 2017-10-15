@@ -1,36 +1,69 @@
 import React from 'react';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
+import GraphPremise from 'WlComponents/GraphPremise/GraphPremise.jsx';
 
-/* The wrapper around svg elements that deals with clicking and dragging
- * Also just positioning in a standard way
+/* An argument! In an SVG!
  */
 export default class GraphArg extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: props.x,
-      y: props.y,
-      claimSize: props.claimSize,
+
     };
   }
 
   render() {
-    //console.log('claim', this.props.firstArgumentGroup);
+    let premiseCounter = 0;
+    const premisesMarkup = [];
 
-    const searchResultMarkup = [];
-    for (let r = 0; r < this.props.firstArgumentGroup.premises.length; r++) {
-      searchResultMarkup.push(
-        <GraphClaim x={-(0.5 * this.props.claimSize) + (this.props.claimSize * r)} y={this.props.claimSize} claim={this.props.firstArgumentGroup.premises[r]} />
+    for (let p = 0; p < this.props.arg.premises.length; p++) {
+
+      const thisPremisX = (premiseCounter * this.props.gridUnit) + (this.props.padUnit * 2); //premises sit on th innermost box
+      const thisPremiseY = this.props.padUnit * 2
+      premisesMarkup.push(
+        <ClickerDragger
+          x={thisPremisX}
+          y={thisPremiseY}
+          key={p}
+        >
+          <GraphPremise
+            claim={this.props.arg.premises[p]}
+            gridUnit={this.props.gridUnit}
+            padUnit={this.props.padUnit}
+          />
+        </ClickerDragger>
       );
+
+      premiseCounter += this.props.arg.premises.length;
     }
-//x={this.props.x + (0.5 * this.props.claimSize)}  x="0"
-    //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
+
+    //the width and height of the rect that will wrap all of the premises in this argument
+    const argWidth = (premiseCounter * this.props.gridUnit) - (2 * this.props.padUnit);
+    const argHeight = this.props.gridUnit - (2 * this.props.padUnit);
+    const gridSquareWidth = premiseCounter * this.props.gridUnit;
+    const gridSquareHeight = this.props.gridUnit;
+
     return (
       <g className="graph-arg">
-        <rect rx="1" ry="1" x={this.props.x} y={this.props.y} width={this.props.claimSize * this.props.firstArgumentGroup.premises.length} height={this.props.claimSize} stroke="black" fill="white" />
+        <rect
+          rx="10"
+          ry="10"
+          width={gridSquareWidth}
+          height={gridSquareHeight}
+          className="grid-square"
+        />
+        <rect
+          rx="5"
+          ry="5"
+          x={this.props.padUnit}
+          y={this.props.padUnit}
+          width={argWidth}
+          height={argHeight}
+          className="graph-arg__rect"
+        />
 
-        {searchResultMarkup}
+        {/* for each claim in the argument, add it! */}
+        {premisesMarkup}
 
       </g >
     );
@@ -38,8 +71,9 @@ export default class GraphArg extends React.Component {
 }
 
 GraphArg.propTypes = {
-  claimSize: React.PropTypes.number.isRequired,
-  //claimText: React.PropTypes.string.isRequired, 
-  x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired
+  arg: React.PropTypes.shape({
+    premises: React.PropTypes.array
+  }).isRequired,
+  gridUnit: React.PropTypes.number.isRequired,
+  padUnit: React.PropTypes.number.isRequired
 };

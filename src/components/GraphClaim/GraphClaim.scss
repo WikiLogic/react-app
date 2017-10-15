@@ -1,0 +1,11 @@
+.graph-claim {
+
+    &__claim {
+        fill: $claim-fill;
+        stroke: $claim-stroke;
+
+        p {
+            padding: 0 5px;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 /*
 input[type='submit'] 
 button
+<g><rect/><text/></g>
 */
 button,
 input[type='submit'],
@@ -15,20 +16,26 @@ input[type='button'],
 	max-width: 100%;
 	display: inline-block;
 	background-color: $dark-blue;
+	rect { fill: $dark-blue; }
 	color: white;
-	fill: white;
+	text { fill: white; }
 	border-radius: 2px;
 	position: relative;
 
+	p { line-height: 44px; } //there should only be a p in an SVGbutton, this is the vertically center the text
+
 	&:hover {
 		background-color: $link-blue;
+		rect { fill: $link-blue; }
 	}
 	&:active {
 		background-color: $link-blue;
+		rect { fill: $link-blue; }
 		top: 1px;
 	}
 	&:focus {
 		background-color: $link-blue;
+		rect { fill: $link-blue; }
 		outline-color: white;
 		outline-offset: -4px;
 		outline-style: solid;
@@ -42,28 +49,55 @@ input[type='button'],
 
 	&[disabled] {
 		background-color: $rule-color;
+		rect { fill: $rule-color; }
 	}
 
 	&.button--secondary {
 		background-color: white;
-		color: $dark-blue;
 		border: 3px solid $dark-blue;
+		rect { 
+			stroke-width: 3; 
+			stroke: $dark-blue;
+			fill: white;
+		}
+		color: $dark-blue;
+		text { fill: $dark-blue; }
+
 		padding: rem(11) rem(15) rem(12);
+
 		&:hover { 
 			border-color: $link-blue;
 			background-color: $link-blue;
+			rect { 
+				fill: $link-blue;
+				stroke: $link-blue; 
+			}
 			color: white;
+			text { fill: white; }
 		}
-		&:active { border-color: $link-blue; }
+		&:active { 
+			border-color: $link-blue; 
+			rect { stroke: $link-blue; }
+		}
 		&:focus {
 			background-color: $link-blue;
 			border-color: $link-blue;
+			rect {
+				fill: $link-blue;
+				stroke: $link-blue;
+			}
 			color: white;
+			text { fill: white; }
 		}
 		&[disabled] {
 			border-color: $rule-color;
 			background-color: $rule-color;
+			rect {
+				fill: $rule-color;
+				stroke: $rule-color;
+			}
 			color: white;
+			text { fill: white; }
 		}
 	}
 }
