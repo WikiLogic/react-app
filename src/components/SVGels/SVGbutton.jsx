@@ -12,12 +12,9 @@ export default class ButtonSVG extends React.Component {
     this.state = {
       buttonState: 'default'
     };
-    //TODO: switch between states like 'focused' 'active' and others - update class
-    this.buttonAction = this.buttonAction.bind(this);
-  }
 
-  buttonAction() {
-    this.props.buttonAction();
+    //TODO: switch between states like 'focused' 'active' and others - update class
+    //this.buttonAction = this.buttonAction.bind(this);
   }
 
   render() {
@@ -25,7 +22,7 @@ export default class ButtonSVG extends React.Component {
       <ClickerDragger x={this.props.x} y={this.props.y}>
         <g
           className="button"
-          onClick={this.buttonAction}
+          onClick={this.props.buttonAction}
         >
           <rect
             x="0"

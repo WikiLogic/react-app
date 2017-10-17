@@ -3,6 +3,7 @@ import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
 import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+import API from 'WlAPI/api.js';
 
 /* The Claim Wrapper for the graph
  * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
@@ -20,10 +21,17 @@ export default class GraphClaim extends React.Component {
     this.renderArguments = this.renderArguments.bind(this);
   }
 
-  expandArgumentsClickHandler() {
-    this.setState({
-      arguments: this.state.claim.arguments
-    });
+  expandArgumentsClickHandler(result) {
+    console.log('result:', result);
+    console.log('result._key:', result._key);
+    API.getClaimDetailById(result._key)
+      .then((data) => {
+        this.setState({
+          arguments: data.claim.arguments
+        });
+      }).catch((err) => {
+        console.log('Trying to load claim detail error', err);
+      });
   }
 
   //will need a:
@@ -110,7 +118,7 @@ export default class GraphClaim extends React.Component {
 
           {(this.props.claim.arguments.length > 0 &&
             <SVGbutton
-              buttonAction={this.expandArgumentsClickHandler}
+              buttonAction={() => this.expandArgumentsClickHandler(this.props.claim)}
               text="+"
               x={claimWidth - 44}
               y={claimHeight - 44}

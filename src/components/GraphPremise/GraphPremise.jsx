@@ -73,6 +73,9 @@ export default class GraphPremise extends React.Component {
     const premiseWidth = (this.props.gridUnit * 2) - (4 * this.props.padUnit); //premises sit on the innermost box
     const premiseHeight = (this.props.gridUnit * 1) - (4 * this.props.padUnit);
 
+
+    console.log('this.props.claim', this.props.claim);
+
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
       <g className="graph-premise">
@@ -92,7 +95,7 @@ export default class GraphPremise extends React.Component {
 
         <SVGbutton
           buttonAction={this.expandArgumentsClickHandler}
-          text="+"
+          text=" "
           x={premiseWidth - 44}
           y={premiseHeight - 44}
         />
