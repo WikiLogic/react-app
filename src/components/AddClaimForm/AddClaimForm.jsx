@@ -12,7 +12,7 @@ export default class AddClaimForm extends React.Component {
       value: 50,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleValueUpdate = this.handleValueUpdate.bind(this);
+    this.handleProbabilityUpdate = this.handleProbabilityUpdate.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
 
@@ -22,9 +22,9 @@ export default class AddClaimForm extends React.Component {
     });
   }
 
-  handleValueUpdate(newValue) {
+  handleProbabilityUpdate(newProbability) {
     this.setState({
-      value: newValue,
+      probability: newProbability,
     });
   }
 
@@ -32,7 +32,7 @@ export default class AddClaimForm extends React.Component {
     event.preventDefault();
     this.props.submitHandler({
       text: this.state.text,
-      value: this.state.value,
+      probability: this.state.probability,
     });
   }
 
@@ -50,10 +50,10 @@ export default class AddClaimForm extends React.Component {
               min={1}
               max={99}
               step={1}
-              value={Number(this.state.value)}
+              value={Number(this.state.probability)}
               inputId="new-claim-value"
               labelText="Assign a value"
-              handleValueUpdate={this.handleValueUpdate}
+              handleValueUpdate={this.handleProbabilityUpdate}
             />
           )}
         </div>

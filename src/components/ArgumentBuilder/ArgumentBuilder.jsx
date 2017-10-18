@@ -129,7 +129,7 @@ export default class ArgumentBuilder extends React.Component {
 
   handlePublish() {
     this.props.submissionHandler({
-      type: 'FOR',
+      type: this.state.type,
       premises: this.state.premises //give the ids of the two 'for' claims we created above
     });
   }
@@ -145,12 +145,12 @@ export default class ArgumentBuilder extends React.Component {
 
         <div className="argument-builder__side-buttons layout-cols-2">
           <div className="layout-cols-2__left">
-            <button className="button--secondary" onClick={() => { this.setArgumentType('SUPPORTS'); }} >
+            <button className="button--secondary" onClick={() => { this.setArgumentType('FOR'); }} >
               Build a supporting argument
             </button>
           </div>
           <div className="layout-cols-2__right">
-            <button className="button--secondary" onClick={() => { this.setArgumentType('OPPOSES'); }} >
+            <button className="button--secondary" onClick={() => { this.setArgumentType('AGAINST'); }} >
               Build an opposing argument
             </button>
           </div>
@@ -159,11 +159,11 @@ export default class ArgumentBuilder extends React.Component {
         <div className="argument-builder__workbench">
           <div className="argument-builder__sim">
 
-            {(this.state.type === 'SUPPORTS' &&
+            {(this.state.type === 'FOR' &&
               <div className="argument-builder__title">New supporting argument:</div>
             )}
 
-            {(this.state.type === 'OPPOSES' &&
+            {(this.state.type === 'AGAINST' &&
               <div className="argument-builder__title">New opposing argument:</div>
             )}
 

@@ -75,10 +75,6 @@ function postNewClaim(claim) {
 }
 
 function postNewArgument(argument) {
-  let type = '';
-  if (argument.type === 'OPPOSES' || argument.type === 'AGAINST') { type = 'AGAINST'; }
-  if (argument.type === 'SUPPORTS' || argument.type === 'FOR') { type = 'FOR'; }
-
   const newArgumentPromise = new Promise((resolve, reject) => {
     fetch(`${apiRouteRoot}/arguments`, {
       method: 'POST',
@@ -88,7 +84,7 @@ function postNewArgument(argument) {
       },
       body: JSON.stringify({
         parentClaimId: argument.parentClaimId,
-        type: type,
+        type: argument.type,
         premiseIds: argument.premiseIds,
       }),
     })

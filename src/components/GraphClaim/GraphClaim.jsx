@@ -17,13 +17,13 @@ export default class GraphClaim extends React.Component {
       claim: this.props.claim,
       arguments: []
     };
-    this.expandArgumentsClickHandler = this.expandArgumentsClickHandler.bind(this);
+    this.loadArguments = this.loadArguments.bind(this);
     this.renderArguments = this.renderArguments.bind(this);
   }
 
-  expandArgumentsClickHandler() {
-    console.log('tada!', this.props.claim);
-    API.getClaimDetailById(this.props.claim._id)
+  loadArguments() {
+    console.log('tada! All the btn did was say, hey dad, fire that function you passed me! Dad knows what to do.', this.props.claim);
+    API.getClaimDetailById(this.props.claim._key)
       .then((data) => {
         this.setState({
           arguments: data.claim.arguments
@@ -70,7 +70,7 @@ export default class GraphClaim extends React.Component {
         x={0} //something's acting relative in the svg
         y={this.props.gridUnit}
       >
-        {argumentsMarkup}
+        <g>{argumentsMarkup}</g>
       </ClickerDragger>
     );
   }
@@ -99,30 +99,32 @@ export default class GraphClaim extends React.Component {
           x={this.props.padUnit}
           y={this.props.padUnit}
         >
-          <rect
-            rx="5"
-            ry="5"
-            width={claimWidth}
-            height={claimHeight}
-            className="graph-claim__claim"
-          />
-
-          <SVGtext
-            x={0}
-            y={0}
-            width={claimWidth}
-            height={claimHeight}
-            text={this.props.claim.text}
-          />
-
-          {(this.props.claim.arguments.length > 0 &&
-            <SVGbutton
-              buttonAction={this.expandArgumentsClickHandler}
-              text="+"
-              x={claimWidth - 44}
-              y={claimHeight - 44}
+          <g>
+            <rect
+              rx="5"
+              ry="5"
+              width={claimWidth}
+              height={claimHeight}
+              className="graph-claim__claim"
             />
-          )}
+
+            <SVGtext
+              x={0}
+              y={0}
+              width={claimWidth}
+              height={claimHeight}
+              text={this.props.claim.text}
+            />
+
+            {(this.props.claim.arguments &&
+              <SVGbutton
+                clickHandler={this.loadArguments}
+                text="+"
+                x={claimWidth - 44}
+                y={claimHeight - 44}
+              />
+            )}
+          </g>
         </ClickerDragger>
 
         {this.renderArguments()}
@@ -135,6 +137,7 @@ GraphClaim.propTypes = {
   claim: React.PropTypes.shape({
     text: React.PropTypes.string.isRequired,
     _id: React.PropTypes.string.isRequired,
+    _key: React.PropTypes.string.isRequired,
     arguments: React.PropTypes.array
   }).isRequired,
   gridUnit: React.PropTypes.number.isRequired,

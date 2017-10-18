@@ -102,14 +102,6 @@ class Wikilogic extends React.Component {
   }
 
   render() {
-    Notify.post('rendering');
-    let authLink = null;
-    if (this.state.user.isLoggedIn) {
-      authLink = <Link to="/profile">Profile</Link>;
-    } else {
-      authLink = <Link to="/login">Login</Link>;
-    }
-
     return (
       <div className="main">
         <div className="main__header">
@@ -121,8 +113,18 @@ class Wikilogic extends React.Component {
             <div className="header__links">
               <Link to="/search">Search</Link>
               <Link to="/graph">Graph</Link>
-              <Link to="/new-claim">New claim</Link>
-              {authLink}
+
+              {(this.state.user.isLoggedIn &&
+                <Link to="/new-claim">New claim</Link>
+              )}
+
+              {(this.state.user.isLoggedIn &&
+                <Link to="/profile">Profile</Link>
+              )}
+
+              {(!this.state.user.isLoggedIn &&
+                <Link to="/login">Login</Link>
+              )}
             </div>
           </header>
 
@@ -136,7 +138,13 @@ class Wikilogic extends React.Component {
 
           <Route path="/graph" exact component={GraphScene} />
 
-          <Route path="/claim/:claimId" exact component={ClaimDetailScene} />
+          <Route
+            path="/claim/:claimId"
+            exact
+            render={(routeProps) => {
+              return <ClaimDetailScene routeProps={routeProps} isLoggedIn={this.state.user.isLoggedIn} />;
+            }}
+          />
 
           <Route path="/new-claim" exact component={ClaimCreateScene} />
 

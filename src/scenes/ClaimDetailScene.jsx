@@ -27,9 +27,9 @@ export default class ClaimDetailScene extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props', this.props.match.params.claimId);
+    console.log('props', this.props.routeProps.match.params.claimId);
     //get the claim for this detail to show
-    API.getClaimDetailById(this.props.match.params.claimId)
+    API.getClaimDetailById(this.props.routeProps.match.params.claimId)
       .then((data) => {
         this.setState({ claim: data.claim });
       }).catch((err) => {
@@ -158,15 +158,17 @@ export default class ClaimDetailScene extends React.Component {
               </div>
             </div>
 
-            <div className="bg-pattern-checkered">
-              <div className="max-width-wrap">
+            {(this.props.isLoggedIn &&
+              <div className="bg-pattern-checkered">
+                <div className="max-width-wrap">
 
-                <div className="claim-detail__arg-builder">
-                  <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} />
+                  <div className="claim-detail__arg-builder">
+                    <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} />
+                  </div>
+
                 </div>
-
               </div>
-            </div>
+            )}
 
             <div className="claim-detail__arguments max-width-wrap">
               {this.renderArguments()}
@@ -180,30 +182,12 @@ export default class ClaimDetailScene extends React.Component {
 }
 
 ClaimDetailScene.propTypes = {
-  match: React.PropTypes.shape({
-    params: React.PropTypes.shape({
-      claimId: React.PropTypes.string.isRequired,
+  routeProps: React.PropTypes.shape({
+    match: React.PropTypes.shape({
+      params: React.PropTypes.shape({
+        claimId: React.PropTypes.string.isRequired,
+      }).isRequired,
     }).isRequired,
   }).isRequired,
+  isLoggedIn: React.PropTypes.bool.isRequired
 };
-
-
-// ClaimDetail.propTypes = {
-//   claim: React.PropTypes.shape({
-//     _key: React.PropTypes.string.isRequired,
-//     _id: React.PropTypes.string.isRequired,
-//     text: React.PropTypes.string.isRequired,
-//     probability: React.PropTypes.number,
-//     arguments: React.PropTypes.array,
-//   }).isRequired,
-//   premisClickHandler: React.PropTypes.func.isRequired,
-//   updatedClaimHandler: React.PropTypes.func.isRequired,
-//   highlightedPremisId: React.PropTypes.string.isRequired,
-// };
-
-// ClaimDetail.defaultProps = {
-//   claim: React.PropTypes.shape({
-//     probability: 50,
-//     arguments: [],
-//   }),
-// };

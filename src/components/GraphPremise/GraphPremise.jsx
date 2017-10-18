@@ -3,6 +3,7 @@ import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
 import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+import API from 'WlAPI/api.js';
 
 /* The Claim Wrapper for the graph
  * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
@@ -14,16 +15,22 @@ export default class GraphPremise extends React.Component {
     super(props);
     this.state = {
       claim: this.props.claim,
-      arguments: []
+      arguments: [],
+      dupeClaim: null
     };
-    this.expandArgumentsClickHandler = this.expandArgumentsClickHandler.bind(this);
+    this.dupeClaim = this.dupeClaim.bind(this);
     this.renderArguments = this.renderArguments.bind(this);
   }
 
-  expandArgumentsClickHandler() {
-    this.setState({
-      arguments: this.state.claim.arguments
-    });
+  dupeClaim() {
+    API.getClaimDetailById(this.props.claim._key)
+      .then((data) => {
+        this.setState({
+          dupeClaim: data.claim
+        });
+      }).catch((err) => {
+        console.log('Trying to load claim detail error', err);
+      });
   }
 
   //will need a:
@@ -94,7 +101,7 @@ export default class GraphPremise extends React.Component {
         />
 
         <SVGbutton
-          buttonAction={this.expandArgumentsClickHandler}
+          clickHandler={this.dupeClaim}
           text=" "
           x={premiseWidth - 44}
           y={premiseHeight - 44}
@@ -108,6 +115,7 @@ GraphPremise.propTypes = {
   claim: React.PropTypes.shape({
     text: React.PropTypes.string.isRequired,
     _id: React.PropTypes.string.isRequired,
+    _key: React.PropTypes.string.isRequired
   }).isRequired,
   gridUnit: React.PropTypes.number.isRequired,
   padUnit: React.PropTypes.number.isRequired

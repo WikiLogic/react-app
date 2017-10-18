@@ -9,6 +9,7 @@ import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResul
 // import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
+import SVGtext from 'WlComponents/SVGels/SVGtext';
 
 /**
  * The Home page
@@ -138,8 +139,6 @@ export default class GraphScene extends React.Component {
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
 
-                {/* later on, there will be a button click to expand argumetn groups but for now we load as soon as graph claim true */}
-
                 {(this.state.graphClaim &&
                   <GraphClaim
                     claim={this.state.graphClaim}
@@ -148,7 +147,15 @@ export default class GraphScene extends React.Component {
                     padUnit={this.state.padUnit}
                   />
                 )}
-
+                {(!this.state.graphclaim &&
+                  <SVGtext
+                    text="Message to search claims and click them to load into this graph. Also a button to load an example"
+                    x={-200}
+                    y={-300}
+                    width={400}
+                    height={20}
+                  />
+                )}
 
               </GraphSvg>
             </div>

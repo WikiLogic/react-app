@@ -6,15 +6,33 @@ import SVGtext from './SVGtext.jsx';
 /* SVG does not provide native buttons
  * That's what this component is for!
  */
-export default class ButtonSVG extends React.Component {
+export default class SVGbutton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       buttonState: 'default'
     };
 
-    //TODO: switch between states like 'focused' 'active' and others - update class
-    //this.buttonAction = this.buttonAction.bind(this);
+    //TODO: reflect buttons states through the styling to match normal button states
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
+  }
+
+  mouseDownHandler() {
+    this.setState({
+      buttonState: 'down'
+    });
+  }
+
+  clickHandler() {
+    this.props.clickHandler();
+  }
+
+  mouseUpHandler() {
+    this.setState({
+      buttonState: 'default'
+    });
   }
 
   render() {
@@ -22,7 +40,9 @@ export default class ButtonSVG extends React.Component {
       <ClickerDragger x={this.props.x} y={this.props.y}>
         <g
           className="button"
-          onClick={this.props.buttonAction}
+          onMouseDown={this.mouseDownHandler}
+          onClick={this.clickHandler}
+          onMouseUp={this.mouseUpHandler}
         >
           <rect
             x="0"
@@ -33,8 +53,8 @@ export default class ButtonSVG extends React.Component {
             height="44"
           />
           <SVGtext
-            x="0"
-            y="0"
+            x={0}
+            y={0}
             width={44}
             height={44}
             text={this.props.text}
@@ -45,9 +65,9 @@ export default class ButtonSVG extends React.Component {
   }
 }
 
-ButtonSVG.propTypes = {
+SVGbutton.propTypes = {
   text: React.PropTypes.string.isRequired,
   x: React.PropTypes.number.isRequired,
   y: React.PropTypes.number.isRequired,
-  buttonAction: React.PropTypes.func.isRequired
+  clickHandler: React.PropTypes.func.isRequired
 };
