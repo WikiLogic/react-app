@@ -6,7 +6,7 @@ import API from 'WlAPI/api.js';
 import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
 // import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
-import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+// import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
 import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
 

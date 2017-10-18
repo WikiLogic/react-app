@@ -21,10 +21,9 @@ export default class GraphClaim extends React.Component {
     this.renderArguments = this.renderArguments.bind(this);
   }
 
-  expandArgumentsClickHandler(result) {
-    console.log('result:', result);
-    console.log('result._key:', result._key);
-    API.getClaimDetailById(result._key)
+  expandArgumentsClickHandler() {
+    console.log('tada!', this.props.claim);
+    API.getClaimDetailById(this.props.claim._id)
       .then((data) => {
         this.setState({
           arguments: data.claim.arguments
@@ -45,7 +44,7 @@ export default class GraphClaim extends React.Component {
     for (let r = 0; r < this.state.arguments.length; r++) {
       const thisArgumentX = premiseCounter * (this.props.gridUnit * 2); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
       premiseCounter += this.state.arguments[r].premises.length;
-      console.log("premiseCounter", premiseCounter);
+      console.log('premiseCounter', premiseCounter);
 
       argumentsMarkup.push(
         <ClickerDragger
@@ -118,7 +117,7 @@ export default class GraphClaim extends React.Component {
 
           {(this.props.claim.arguments.length > 0 &&
             <SVGbutton
-              buttonAction={() => this.expandArgumentsClickHandler(this.props.claim)}
+              buttonAction={this.expandArgumentsClickHandler}
               text="+"
               x={claimWidth - 44}
               y={claimHeight - 44}

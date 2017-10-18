@@ -19,7 +19,7 @@ export default class GraphArg extends React.Component {
     for (let p = 0; p < this.props.arg.premises.length; p++) {
 
       const thisPremisX = (premiseCounter * this.props.gridUnit) + (this.props.padUnit * 2); //premises sit on th innermost box
-      const thisPremiseY = this.props.padUnit * 2
+      const thisPremiseY = this.props.padUnit * 2;
       premisesMarkup.push(
         <ClickerDragger
           x={thisPremisX}
