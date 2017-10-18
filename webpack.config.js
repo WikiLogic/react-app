@@ -23,9 +23,6 @@ module.exports = {
     path: path.resolve('./dist'),
     filename: '[name].js',
   },
-  watchOptions: {
-    poll: true,
-  },
   module: {
     rules: [
       {

@@ -17,7 +17,7 @@ export default class ClaimCreateScene extends React.Component {
   }
 
   submitHandler(newClaimData) {
-
+    console.log('newClaimData', newClaimData);
     API.postNewClaim({
       text: newClaimData.text,
       probability: newClaimData.value,
