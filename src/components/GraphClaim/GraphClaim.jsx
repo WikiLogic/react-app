@@ -15,10 +15,18 @@ export default class GraphClaim extends React.Component {
     super(props);
     this.state = {
       claim: this.props.claim,
-      arguments: []
+      arguments: [],
+      isFocused: false
     };
     this.loadArguments = this.loadArguments.bind(this);
     this.renderArguments = this.renderArguments.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
+  }
+
+  mouseUpHandler() {
+    this.setState({
+      isFocused: true
+    });
   }
 
   loadArguments() {
@@ -31,20 +39,23 @@ export default class GraphClaim extends React.Component {
       }).catch((err) => {
         console.log('Trying to load claim detail error', err);
       });
+
+    
   }
 
   //will need a:
   //this.props.resizeHandler
 
   renderArguments() {
+    console.log('data.state.arguments', this.state.arguments);
     if (this.state.arguments.length === 0) { return null; }
     const argumentsMarkup = [];
     let premiseCounter = 0;
+    let spaceBetweenArgs = 50;
 
     for (let r = 0; r < this.state.arguments.length; r++) {
-      const thisArgumentX = premiseCounter * (this.props.gridUnit * 2); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
+      const thisArgumentX = (premiseCounter * (this.props.gridUnit * 2)) + (spaceBetweenArgs * r); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
       premiseCounter += this.state.arguments[r].premises.length;
-      console.log('premiseCounter', premiseCounter);
 
       argumentsMarkup.push(
         <ClickerDragger
@@ -85,13 +96,12 @@ export default class GraphClaim extends React.Component {
 
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-      <g className="graph-claim">
-        <rect
+      <g className="graph-claim" onMouseUp={this.mouseUpHandler}>
+        <rect className="grid-square"
           rx="10"
           ry="10"
           width={gridSquareWidth}
           height={gridSquareHeight}
-          className="grid-square"
         />
 
         <ClickerDragger
@@ -116,7 +126,7 @@ export default class GraphClaim extends React.Component {
               text={this.props.claim.text}
             />
 
-            {(this.props.claim.arguments &&
+            {(this.state.isFocused &&
               <SVGbutton
                 clickHandler={this.loadArguments}
                 text="+"

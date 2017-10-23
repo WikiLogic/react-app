@@ -1,6 +1,7 @@
 import React from 'react';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import GraphPremise from 'WlComponents/GraphPremise/GraphPremise.jsx';
+import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
 
 /* An argument! In an SVG!
  */
@@ -16,6 +17,7 @@ export default class GraphArg extends React.Component {
     let premiseCounter = 0;
     const premisesMarkup = [];
 
+    console.log('this.props.arg', this.props.arg);
     for (let p = 0; p < this.props.arg.premises.length; p++) {
 
       const thisPremisX = (premiseCounter * this.props.gridUnit) + (this.props.padUnit * 2); //premises sit on th innermost box
@@ -26,11 +28,19 @@ export default class GraphArg extends React.Component {
           y={thisPremiseY}
           key={p}
         >
-          <GraphPremise
+          {/* <GraphPremise
             claim={this.props.arg.premises[p]}
             gridUnit={this.props.gridUnit}
             padUnit={this.props.padUnit}
+          /> */}
+
+          <GraphClaim
+            claim={this.props.arg.premises[p]}
+            premiseClickHandler={this.loadClaim}
+            gridUnit={this.props.gridUnit}
+            padUnit={this.props.padUnit}
           />
+
         </ClickerDragger>
       );
 
