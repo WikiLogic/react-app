@@ -125,6 +125,10 @@ class Wikilogic extends React.Component {
               {(!this.state.user.isLoggedIn &&
                 <Link to="/login">Login</Link>
               )}
+
+              {(!this.state.user.isLoggedIn &&
+                <Link to="/signup">Signup</Link>
+              )}
             </div>
           </header>
 

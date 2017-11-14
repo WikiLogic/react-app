@@ -13,11 +13,10 @@ RUN chown -R www-data:www-data /var/lib/nginx
 COPY ./nginx.dev.conf /etc/nginx/nginx.conf
 
 # Define mountable directories.
-VOLUME ["/var/www/app", "/root/ssl"]
+VOLUME ["/var/www/app"]
 
 # Define default command.
 CMD ["nginx"]
 
 # Expose ports.
 EXPOSE 80
-EXPOSE 443
