@@ -2,4 +2,3 @@ node_modules
 .htpasswd
 letsencrypt
 *.log
-/dist
