@@ -6,7 +6,7 @@ import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
  * Hands the submission event back up to the parent
  */
 
-export default class SearchInput extends React.Component {
+export default class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +44,7 @@ export default class SearchInput extends React.Component {
             {this.props.label}
           </label>
         )}
+
         <input
           id={this.props.id}
           className="search-form__input"
@@ -52,6 +53,7 @@ export default class SearchInput extends React.Component {
           value={this.state.value}
           onChange={this.handleChange}
         />
+
         <button className="search-form__submit" onClick={this.handleSubmit}>
           <SearchIcon />
         </button>
@@ -60,7 +62,7 @@ export default class SearchInput extends React.Component {
   }
 }
 
-SearchInput.propTypes = {
+SearchForm.propTypes = {
   inputValue: React.PropTypes.string,
   submissionHandler: React.PropTypes.func.isRequired,
   placeholder: React.PropTypes.string.isRequired,
@@ -68,6 +70,6 @@ SearchInput.propTypes = {
   label: React.PropTypes.string.isRequired
 };
 
-SearchInput.defaultProps = {
+SearchForm.defaultProps = {
   inputValue: '',
 };

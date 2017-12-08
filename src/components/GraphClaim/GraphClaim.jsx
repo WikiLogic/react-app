@@ -39,8 +39,6 @@ export default class GraphClaim extends React.Component {
       }).catch((err) => {
         console.log('Trying to load claim detail error', err);
       });
-
-    
   }
 
   //will need a:

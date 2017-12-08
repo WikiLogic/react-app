@@ -1,7 +1,7 @@
 import React from 'react';
 import API from 'WlAPI/api.js';
 import Code from 'WlComponents/Code/Code.jsx';
-import InputButton from 'WlComponents/InputButton/InputButton.jsx';
+import InputButton from 'WlComponents/_Atoms/InputButton.jsx';
 import Loader from 'WlComponents/Loader/Loader.jsx';
 
 /**
@@ -91,10 +91,13 @@ export default class ApiDev extends React.Component {
                 <div className="flex-row">
                   <div style={{ padding: '5px' }}>/api/</div>
                   <InputButton
+                    id="api-input"
+                    labelText="label text!"
                     inputType="text"
-                    buttonText="GET"
+                    inputPlaceholder="placeholder text"
+                    inputInitValue=""
+                    btnText="GET"
                     submitHandler={this.get}
-                    onChange={this.updateUrl}
                   />
                 </div>
 

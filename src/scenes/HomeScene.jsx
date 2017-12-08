@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 
 /**
  * The Home page
@@ -28,7 +28,7 @@ export default class HomeScene extends React.Component {
           <div className="max-width-wrap">
             You&#39;ve come home
 
-            <SearchInput
+            <SearchForm
               id="home-scene-search-input"
               label="Search"
               submissionHandler={this.searchClaims}

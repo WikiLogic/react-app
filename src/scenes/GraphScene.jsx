@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import API from 'WlAPI/api.js';
 
-import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
 // import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
 // import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
@@ -115,7 +115,7 @@ export default class GraphScene extends React.Component {
         <div className="page__header">
           <div className="max-width-wrap">
 
-            <SearchInput
+            <SearchForm
               submissionHandler={this.searchClaims}
               placeholder="Search Claims"
               label="Search"

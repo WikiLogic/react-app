@@ -658,7 +658,10 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-size: 1rem;
-  line-height: 1.5; }
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
   @media (min-width: 768px) {
     body {
       font-size: 1.125rem; } }
@@ -902,6 +905,19 @@ the eeeeee footer
 COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
 */
+.InputButton__input {
+  display: flex; }
+  .InputButton__input input {
+    flex: 1;
+    vertical-align: middle;
+    margin-bottom: 0;
+    border-right-width: 0; }
+  .InputButton__input button {
+    vertical-align: middle;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-right: 0; }
+
 .argument {
   padding: 0.5rem;
   border-radius: 5px; }
@@ -1055,20 +1071,6 @@ styles are set in sass alongside the components. (in the components folder).
     height: 100vh; }
     .graph-svg__svg .x {
       fill: black; }
-
-.input-button {
-  display: flex;
-  width: 100%; }
-  .input-button input {
-    flex: 1;
-    vertical-align: middle;
-    margin-bottom: 0;
-    border-right-width: 0; }
-  .input-button button {
-    vertical-align: middle;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-right: 0; }
 
 @keyframes loading {
   from {

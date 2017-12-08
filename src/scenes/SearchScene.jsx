@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import Loader from 'WlComponents/Loader/Loader.jsx';
 import API from 'WlAPI/api.js';
@@ -83,7 +83,7 @@ export default class SearchScene extends React.Component {
         <div className="page__header">
           <div className="max-width-wrap">
 
-            <SearchInput
+            <SearchForm
               submissionHandler={this.searchClaims}
               placeholder="Search Claims"
               label="Search"

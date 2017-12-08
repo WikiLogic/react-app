@@ -1,7 +1,7 @@
 import React from 'react';
 import Argument from 'WlComponents/Argument/Argument.jsx';
 import API from 'WlAPI/api.js';
-import SearchInput from 'WlComponents/SearchInput/SearchInput.jsx';
+import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 import Validate from 'WlServices/validate.js';
 import Notify from 'WlServices/notify.js';
@@ -131,7 +131,7 @@ export default class AddExplanationForm extends React.Component {
 
         <div className="add-argument-form__premis-finder">
           <div className="premis-finder">
-            <SearchInput
+            <SearchForm
               submissionHandler={this.handlePremisSearch}
               placeholder="Search Premises"
             />
