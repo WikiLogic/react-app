@@ -88,18 +88,15 @@ export default class ApiDev extends React.Component {
             <div className="layout-cols-2">
               <div className="layout-cols-2__left">
 
-                <div className="flex-row">
-                  <div style={{ padding: '5px' }}>/api/</div>
-                  <InputButton
-                    id="api-input"
-                    labelText="label text!"
-                    inputType="text"
-                    inputPlaceholder="placeholder text"
-                    inputInitValue=""
-                    btnText="GET"
-                    submitHandler={this.get}
-                  />
-                </div>
+                <InputButton
+                  id="api-input"
+                  labelText="label text!"
+                  inputType="text"
+                  inputPlaceholder="placeholder text"
+                  inputInitValue="/api/"
+                  btnText="GET"
+                  submitHandler={this.get}
+                />
 
                 <br />
 
