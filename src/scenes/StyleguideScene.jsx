@@ -1,5 +1,7 @@
 import React from 'react';
 import Claim from 'WlComponents/Claim/Claim.jsx';
+import Input from 'WlComponents/_Atoms/Input.jsx';
+import InputButton from 'WlComponents/_Atoms/InputButton.jsx';
 
 /**
  * The Search Results page
@@ -67,8 +69,21 @@ export default class StyleguideScene extends React.Component {
             <section>
               <h2>Forms</h2>
               <form action="#">
-                <input type="text" value="text input" />
+                <Input
+                  id="input"
+                  labelText="An input"
+                  inputType="text"
+                  inputPlaceholder="This is an input"
+                />
+                <div className="pad" />
               </form>
+              <InputButton
+                id="input-btn"
+                labelText="The input button"
+                inputType="text"
+                inputPlaceholder="This is an input..."
+                btnText="button"
+              />
             </section>
             <hr />
             <section>

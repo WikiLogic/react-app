@@ -35359,6 +35359,14 @@ var _Claim = __webpack_require__(19);
 
 var _Claim2 = _interopRequireDefault(_Claim);
 
+var _Input = __webpack_require__(307);
+
+var _Input2 = _interopRequireDefault(_Input);
+
+var _InputButton = __webpack_require__(147);
+
+var _InputButton2 = _interopRequireDefault(_InputButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35506,8 +35514,21 @@ var StyleguideScene = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { action: '#' },
-                _react2.default.createElement('input', { type: 'text', value: 'text input' })
-              )
+                _react2.default.createElement(_Input2.default, {
+                  id: 'input',
+                  labelText: 'An input',
+                  inputType: 'text',
+                  inputPlaceholder: 'This is an input'
+                }),
+                _react2.default.createElement('div', { className: 'pad' })
+              ),
+              _react2.default.createElement(_InputButton2.default, {
+                id: 'input-btn',
+                labelText: 'The input button',
+                inputType: 'text',
+                inputPlaceholder: 'This is an input...',
+                btnText: 'button'
+              })
             ),
             _react2.default.createElement('hr', null),
             _react2.default.createElement(
@@ -51638,6 +51659,123 @@ module.exports = function(module) {
 __webpack_require__(129);
 module.exports = __webpack_require__(130);
 
+
+/***/ }),
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Input = function (_React$Component) {
+  _inherits(Input, _React$Component);
+
+  function Input(props) {
+    _classCallCheck(this, Input);
+
+    var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
+
+    var setInputValue = '';
+    if (Object.prototype.hasOwnProperty.call(props, 'inputInitValue')) {
+      setInputValue = props.inputInitValue;
+    } else {
+      setInputValue = '';
+    }
+
+    _this.state = {
+      value: setInputValue
+    };
+
+    _this.changeHandler = _this.changeHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(Input, [{
+    key: 'changeHandler',
+    value: function changeHandler(e) {
+      this.setState({
+        value: e.target.value
+      });
+
+      if (Object.prototype.hasOwnProperty.call(this.props, 'inputChangeHandler')) {
+        this.props.inputChangeHandler(e.target.value);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'Input' },
+        _react2.default.createElement(
+          'label',
+          { htmlFor: this.props.id },
+          this.props.labelText
+        ),
+        _react2.default.createElement('input', {
+          id: this.props.id,
+          type: this.props.inputType,
+          placeholder: this.props.inputPlaceholder,
+          value: this.state.value,
+          onChange: this.changeHandler,
+          onKeyPress: function onKeyPress(e) {
+            if (e.key === 'Enter') {
+              _this2.props.submitHandler(_this2.state.value);
+            }
+          }
+        })
+      );
+    }
+  }]);
+
+  return Input;
+}(_react2.default.Component);
+
+exports.default = Input;
+
+
+Input.propTypes = {
+  id: _react2.default.PropTypes.string.isRequired,
+  labelText: _react2.default.PropTypes.string.isRequired,
+  inputType: _react2.default.PropTypes.string.isRequired,
+  inputPlaceholder: _react2.default.PropTypes.string.isRequired,
+  inputInitValue: _react2.default.PropTypes.string,
+  inputChangeHandler: _react2.default.PropTypes.func,
+  submitHandler: _react2.default.PropTypes.func.isRequired
+};
+
+Input.defaultProps = {
+  inputChangeHandler: function inputChangeHandler() {},
+  inputInitValue: ''
+};
 
 /***/ })
 /******/ ]);
