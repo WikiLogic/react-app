@@ -3,24 +3,23 @@ VARIABLES & MIXINS
 For Sass
 */
 /* colors */
-.dark-blue {
+.bg-blue-dark {
   background-color: #111F2E; }
 
-.link-blue {
+.bg-blue-light {
   background-color: #0a88c5; }
 
-.rule-color {
+.bg-grey-dark {
   background-color: #cccccc; }
 
-.grey {
+.bg-grey-light {
   background-color: #eeeeee; }
 
-.color-box {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  margin: 10px;
-  vertical-align: middle; }
+.color-white {
+  color: white; }
+
+.color-black {
+  color: black; }
 
 /*
 BASE
@@ -612,7 +611,6 @@ select {
 
 label {
   display: block;
-  text-transform: uppercase;
   font-size: 0.875rem;
   margin-bottom: 7px; }
 
@@ -774,7 +772,7 @@ columns, sidebars, grids, layout things!
       .layout-cols-2__left {
         width: 50%; }
       .layout-cols-2__gap {
-        width: 10px; }
+        width: 1rem; }
       .layout-cols-2__right {
         text-align: right; }
       .layout-cols-2--vertical-center .layout-cols-2__left,
@@ -784,14 +782,14 @@ columns, sidebars, grids, layout things!
 .max-width-wrap {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 0 1.25rem; }
+  padding: 0 1rem; }
 
 .page__header {
   background-color: #eeeeee;
-  padding: 1.25rem 0; }
+  padding: 1rem 0; }
 
 .page__body {
-  padding: 1.25rem 0; }
+  padding: 1rem 0; }
 
 .sidebar-layout {
   display: flex;
@@ -824,10 +822,10 @@ site header, footer, the main layout, things that are on every page
   .footer__col {
     flex-grow: 1;
     text-align: left;
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem; }
+    padding-top: 1rem;
+    padding-bottom: 1rem; }
     .footer__col + .footer__col {
-      padding-left: 1.25rem;
+      padding-left: 1rem;
       text-align: right; }
   .footer__util-link {
     margin: 2px 5px; }
@@ -866,18 +864,18 @@ site header, footer, the main layout, things that are on every page
     .header a:focus {
       outline-color: white; }
   .header a.header__title {
-    margin: 0.5625rem 1.25rem;
+    margin: 0.5625rem 1rem;
     text-align: center;
     display: block;
     font-family: "Rufina", serif;
     font-size: 1.5rem;
     background-position: 0 1.2em; }
   .header__links {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
     text-transform: uppercase;
     font-size: 0.9375rem; }
     .header__links a + a {
-      margin-left: 1.25rem; }
+      margin-left: 1rem; }
 
 /*
 Universal!
@@ -917,6 +915,37 @@ styles are set in sass alongside the components. (in the components folder).
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-right: 0; }
+
+.InputRange {
+  width: 100%; }
+  .InputRange__slider {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-bottom: 0.5rem; }
+  .InputRange__bar {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: #cccccc;
+    margin: 0 10px; }
+  .InputRange__dragger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-10px, -10px);
+    background-color: #111F2E;
+    border-radius: 100%; }
+  @media (min-width: 540px) {
+    .InputRange__input {
+      display: flex; }
+    .InputRange__slider {
+      margin-bottom: 0; }
+    .InputRange input {
+      width: 80px;
+      margin-left: 1rem; } }
 
 .argument {
   padding: 0.5rem;
@@ -1150,29 +1179,6 @@ styles are set in sass alongside the components. (in the components folder).
     margin: 0 1rem 0 0; }
   .modal__content {
     padding: 1rem; }
-
-.range {
-  width: 100%; }
-  .range__slider {
-    display: flex;
-    align-items: center; }
-  .range__bar {
-    position: relative;
-    width: 100%;
-    height: 5px;
-    background-color: #eeeeee;
-    margin: 0 10px; }
-  .range__dragger {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    transform: translate(-10px, -10px);
-    background-color: #111F2E;
-    border-radius: 100%; }
-  .range__input {
-    margin-top: 1rem; }
 
 .search-form {
   display: block;
@@ -1683,6 +1689,9 @@ styles are set in sass alongside the components. (in the components folder).
 .text-right {
   text-align: right !important; }
 
+.display-inline-block {
+  display: inline-block; }
+
 .width-100 {
   width: 100% !important; }
 
@@ -1693,7 +1702,7 @@ styles are set in sass alongside the components. (in the components folder).
   padding: 0 !important; }
 
 .padding {
-  padding: 0.5rem; }
+  padding: 0.4375rem 1rem 0.5625rem; }
 
 .pad {
   margin: 1rem 1rem -1px 0;

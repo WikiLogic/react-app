@@ -14,7 +14,7 @@
     }
     
     a.header__title {
-        margin: rem(9) rem($pad-small);
+        margin: rem(9) rem($pad);
         text-align: center;
         display: block;
         font-family: $fancy;
@@ -23,9 +23,9 @@
     }
 
     &__links {
-        padding: 0 rem($pad-small);
+        padding: 0 rem($pad);
         text-transform: uppercase;
         font-size: rem(15);
-        a + a { margin-left: rem($pad-small); }
+        a + a { margin-left: rem($pad); }
     }
 }

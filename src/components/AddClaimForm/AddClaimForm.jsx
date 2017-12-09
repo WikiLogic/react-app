@@ -1,5 +1,5 @@
 import React from 'react';
-import Range from 'WlComponents/Range/Range.jsx';
+import InputRange from 'WlComponents/_Atoms/InputRange.jsx';
 
 /* Each Claim in the list of search results
  */
@@ -46,14 +46,11 @@ export default class AddClaimForm extends React.Component {
           </label>
           <textarea className="form__input" id="new-claim-text" onChange={this.handleChange} />
           {(this.props.showValueSetter &&
-            <Range
-              min={1}
-              max={99}
-              step={1}
-              value={Number(this.state.probability)}
-              inputId="new-claim-value"
+            <InputRange
+              id="new-claim-value"
+              initValue={Number(this.state.probability)}
               labelText="Assign a value"
-              handleValueUpdate={this.handleProbabilityUpdate}
+              changeHandler={this.handleProbabilityUpdate}
             />
           )}
         </div>

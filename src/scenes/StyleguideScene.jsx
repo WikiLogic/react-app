@@ -2,10 +2,11 @@ import React from 'react';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 import Input from 'WlComponents/_Atoms/Input.jsx';
 import InputButton from 'WlComponents/_Atoms/InputButton.jsx';
+import InputRange from 'WlComponents/_Atoms/InputRange.jsx';
 
 /**
  * The Search Results page
- * @prop {*} name 
+ * @prop {*} name
  */
 export default class StyleguideScene extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class StyleguideScene extends React.Component {
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
-            <h1>Style guide!</h1>
+            <h1>Style guide! (Heading 1)</h1>
           </div>
         </div>
         <div className="page__body">
@@ -52,38 +53,55 @@ export default class StyleguideScene extends React.Component {
             <section>
               <h2>Colors</h2>
               <p>
-                <span className="color-box dark-blue" />
-                <span className="color-box link-blue" />
-                <span className="color-box rule-color" />
-                <span className="color-box grey" />
+                <span className="bg-blue-dark color-white display-inline-block padding">blue-dark</span>
+                <span className="pad" />
+                <span className="bg-blue-light color-white display-inline-block padding">blue-light</span>
+                <div className="pad" />
+                <span className="bg-grey-dark display-inline-block padding">grey-dark</span>
+                <span className="pad" />
+                <span className="bg-grey-light display-inline-block padding">grey-light</span>
               </p>
             </section>
             <hr />
             <section>
               <h2>Buttons</h2>
               <button>Button</button>
+              <span className="pad" />
               <input type="button" value="input type='button'" />
+              <span className="pad" />
               <input type="submit" value="input type='submit'" />
             </section>
             <hr />
             <section>
-              <h2>Forms</h2>
-              <form action="#">
-                <Input
-                  id="input"
-                  labelText="An input"
-                  inputType="text"
-                  inputPlaceholder="This is an input"
-                />
-                <div className="pad" />
-              </form>
+              <h2>Form elements</h2>
+              <Input
+                id="input"
+                labelText="An input"
+                inputType="text"
+                inputPlaceholder="This is an input"
+              />
+              <div className="pad" />
+              <Input
+                id="input-password"
+                labelText="An input type='password'"
+                inputType="password"
+                inputPlaceholder="This is a password input"
+              />
+              <div className="pad" />
               <InputButton
                 id="input-btn"
-                labelText="The input button"
+                labelText="An input with a button!"
                 inputType="text"
                 inputPlaceholder="This is an input..."
                 btnText="button"
               />
+              <div className="pad" />
+              <InputRange
+                id="inpu-range"
+                labelText="A Range Input"
+                changeHandler={() => {}}
+              />
+
             </section>
             <hr />
             <section>

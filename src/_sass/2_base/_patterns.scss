@@ -2,8 +2,8 @@
   -o-text-overflow: clip;
   text-overflow: clip;
   background: 
-    linear-gradient(45deg, $grey 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, $grey 75%, $grey 0), 
-    linear-gradient(45deg, $grey 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, $grey 75%, $grey 0), 
+    linear-gradient(45deg, $grey-light 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, $grey-light 75%, $grey-light 0), 
+    linear-gradient(45deg, $grey-light 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, $grey-light 75%, $grey-light 0), 
     rgb(255, 255, 255);
   background-position: 0 0, 10px 10px;
   background-origin: padding-box;

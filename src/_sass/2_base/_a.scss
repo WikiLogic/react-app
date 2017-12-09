@@ -1,12 +1,12 @@
 .a, a {
 	text-decoration: none;
-	color: $link-blue;
+	color: $blue-light;
 	&:hover,
 	&:active {
 		text-decoration: underline;
 	}
 	&:focus {
-		outline-color: $link-blue;
+		outline-color: $blue-light;
 		outline-offset: 2px;
 		outline-style: solid;
 		outline-width: 2px;

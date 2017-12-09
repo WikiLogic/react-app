@@ -15,8 +15,8 @@ input[type='button'],
 	cursor: pointer;
 	max-width: 100%;
 	display: inline-block;
-	background-color: $dark-blue;
-	rect { fill: $dark-blue; }
+	background-color: $blue-dark;
+	rect { fill: $blue-dark; }
 	color: white;
 	text { fill: white; }
 	border-radius: 2px;
@@ -25,17 +25,17 @@ input[type='button'],
 	p { line-height: 44px; } //there should only be a p in an SVGbutton, this is the vertically center the text
 
 	&:hover {
-		background-color: $link-blue;
-		rect { fill: $link-blue; }
+		background-color: $blue-light;
+		rect { fill: $blue-light; }
 	}
 	&:active {
-		background-color: $link-blue;
-		rect { fill: $link-blue; }
+		background-color: $blue-light;
+		rect { fill: $blue-light; }
 		top: 1px;
 	}
 	&:focus {
-		background-color: $link-blue;
-		rect { fill: $link-blue; }
+		background-color: $blue-light;
+		rect { fill: $blue-light; }
 		outline-color: white;
 		outline-offset: -4px;
 		outline-style: solid;
@@ -48,53 +48,53 @@ input[type='button'],
 	}
 
 	&[disabled] {
-		background-color: $rule-color;
-		rect { fill: $rule-color; }
+		background-color: $grey-dark;
+		rect { fill: $grey-dark; }
 	}
 
 	&.button--secondary {
 		background-color: white;
-		border: 3px solid $dark-blue;
+		border: 3px solid $blue-dark;
 		rect { 
 			stroke-width: 3; 
-			stroke: $dark-blue;
+			stroke: $blue-dark;
 			fill: white;
 		}
-		color: $dark-blue;
-		text { fill: $dark-blue; }
+		color: $blue-dark;
+		text { fill: $blue-dark; }
 
 		padding: rem(11) rem(15) rem(12);
 
 		&:hover { 
-			border-color: $link-blue;
-			background-color: $link-blue;
+			border-color: $blue-light;
+			background-color: $blue-light;
 			rect { 
-				fill: $link-blue;
-				stroke: $link-blue; 
+				fill: $blue-light;
+				stroke: $blue-light; 
 			}
 			color: white;
 			text { fill: white; }
 		}
 		&:active { 
-			border-color: $link-blue; 
-			rect { stroke: $link-blue; }
+			border-color: $blue-light; 
+			rect { stroke: $blue-light; }
 		}
 		&:focus {
-			background-color: $link-blue;
-			border-color: $link-blue;
+			background-color: $blue-light;
+			border-color: $blue-light;
 			rect {
-				fill: $link-blue;
-				stroke: $link-blue;
+				fill: $blue-light;
+				stroke: $blue-light;
 			}
 			color: white;
 			text { fill: white; }
 		}
 		&[disabled] {
-			border-color: $rule-color;
-			background-color: $rule-color;
+			border-color: $grey-dark;
+			background-color: $grey-dark;
 			rect {
-				fill: $rule-color;
-				stroke: $rule-color;
+				fill: $grey-dark;
+				stroke: $grey-dark;
 			}
 			color: white;
 			text { fill: white; }

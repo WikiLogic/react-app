@@ -1,17 +1,25 @@
 /* colors */
 
-$highlight:      #ff0000;
-$dark-blue:      #111F2E; .dark-blue { background-color: $dark-blue; }
-$link-blue:      #0a88c5;
-.link-blue { background-color: $link-blue; } $link-color: $link-blue;
-$rule-color:     #cccccc; .rule-color { background-color: $rule-color; }
-$grey:		       #eeeeee; .grey { background-color: $grey; }
+$blue-dark: #111F2E; 
+$blue-light: #0a88c5;
+
+$grey-dark: #cccccc;
+$grey-light: #eeeeee;
+
+.bg-blue-dark { background-color: $blue-dark; }
+.bg-blue-light { background-color: $blue-light; } 
+.bg-grey-dark { background-color: $grey-dark; }
+.bg-grey-light { background-color: $grey-light; }
+
+.color-white { color: white; }
+.color-black { color: black; }
+
 
 // Main block colors
-$header-background: $dark-blue;
-$page-title-background: $grey;
+$header-background: $blue-dark;
+$page-title-background: $grey-light;
 $body-background: white;
-$footer-background: $grey;
+$footer-background: $grey-light;
 
 $header-color: white;
 $page-title-color: black;
@@ -20,16 +28,18 @@ $footer-color: black;
 
 
 //component colors
-$state-primary: $dark-blue;
-$state-bg: $grey;
+$state-primary: $blue-dark;
+$state-bg: $grey-light;
+
+$input-border: $grey-dark;
 
 //graph colors
 $claim-fill: white; 
-$claim-stroke: $rule-color;
-$argument-fill: $grey;
-$argument-stroke: $grey;
+$claim-stroke: $grey-dark;
+$argument-fill: $grey-light;
+$argument-stroke: $grey-light;
 $premise-fill: white;
-$premise-stroke: $rule-color;
+$premise-stroke: $grey-dark;
 
 //$light-blue:    #0a4471;
 $WL_Red:		  #f05d65; 
@@ -37,12 +47,3 @@ $WL_Red-light:   #fce1e2;
 $WL_Green:		  #31D332;
 $WL_Green-light: #d9f7d9;
 $WL_Blue: 		  #5f9aec;
-
-
-.color-box {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  margin: 10px;
-  vertical-align: middle;
-}

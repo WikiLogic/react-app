@@ -16,7 +16,7 @@
         }
         
         &__left { width: 50%; }
-        &__gap { width: 10px; }
+        &__gap { width: rem($pad); }
         &__right { text-align: right; }
         
         &--vertical-center {

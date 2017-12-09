@@ -41,8 +41,8 @@ p {
 	}
 }
 
-::selection { background-color: rgba($link-color, 0.5); }
-::-moz-selection { background-color: rgba($link-color, 0.5); }
+::selection { background-color: rgba($blue-light, 0.5); }
+::-moz-selection { background-color: rgba($blue-light, 0.5); }
 
 a::selection { color: white; }
 a::-moz-selection { color: white; }
@@ -53,6 +53,6 @@ span {
 
 hr {
 	border: 0;
-	border-top: 1px solid $rule-color;
+	border-top: 1px solid $grey-dark;
 	margin: 0 0 -1px 0;
 }

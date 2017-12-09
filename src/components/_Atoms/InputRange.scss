@@ -1,0 +1,47 @@
+.InputRange {
+    width: 100%;
+
+    &__input {
+        
+    }
+    
+    &__slider {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        margin-bottom: rem($pad / 2);
+    }
+
+    &__bar {
+        position: relative;
+        width: 100%;
+        height: 3px;
+        background-color: $input-border;
+        margin: 0 10px;
+    }
+
+    &__dragger {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        transform: translate(-10px, -10px);
+        background-color: $state-primary;
+        border-radius: 100%;
+    }
+
+    @include breakpoint(small) {
+        &__input {
+            display: flex;
+        }
+        &__slider {
+            margin-bottom: 0;
+        }
+
+        input {
+            width: 80px;
+            margin-left: rem($pad);
+        }
+    }
+}
