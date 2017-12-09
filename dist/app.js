@@ -26021,12 +26021,15 @@ var InputRange = function (_React$Component) {
     _this.state = {
       value: props.initValue,
       preDragValue: props.initValue,
-      originX: 0
+      originX: 0,
+      barWidth: 100,
+      dragDivider: 10
     };
 
     _this.dragStartHandler = _this.dragStartHandler.bind(_this);
     _this.dragHandler = _this.dragHandler.bind(_this);
     _this.updateValue = _this.updateValue.bind(_this);
+    _this.renderBarHandler = _this.renderBarHandler.bind(_this);
     return _this;
   }
 
@@ -26044,7 +26047,7 @@ var InputRange = function (_React$Component) {
       if (e.screenX === 0) {
         return;
       }
-      var newValue = Math.floor(this.state.preDragValue + (e.screenX - this.state.originX) / 20);
+      var newValue = Math.ceil(this.state.preDragValue + (e.screenX - this.state.originX) / this.state.dragDivider);
 
       if (newValue > this.props.max) {
         newValue = this.props.max;
@@ -26092,6 +26095,16 @@ var InputRange = function (_React$Component) {
       this.props.changeHandler(Number(newValue));
     }
   }, {
+    key: 'renderBarHandler',
+    value: function renderBarHandler(barEl) {
+      if (barEl) {
+        console.log('barEl.offsetWidth / (this.props.max - this.props.min)', barEl.offsetWidth / (this.props.max - this.props.min));
+        this.setState({
+          dragDivider: barEl.offsetWidth / (this.props.max - this.props.min)
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -26123,7 +26136,10 @@ var InputRange = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'InputRange__bar' },
+              {
+                className: 'InputRange__bar',
+                ref: this.renderBarHandler
+              },
               _react2.default.createElement('div', {
                 draggable: 'true',
                 onDragStart: this.dragStartHandler,
