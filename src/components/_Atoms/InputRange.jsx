@@ -77,7 +77,6 @@ export default class InputRange extends React.Component {
 
   renderBarHandler(barEl) {
     if (barEl) {
-      console.log('barEl.offsetWidth / (this.props.max - this.props.min)', barEl.offsetWidth / (this.props.max - this.props.min));
       this.setState({
         dragDivider: barEl.offsetWidth / (this.props.max - this.props.min)
       });
