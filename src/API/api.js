@@ -1,8 +1,8 @@
 import 'whatwg-fetch';
-import Cookies from 'WlServices/cookies.js';
 import Formatter from 'WlServices/formatter.js';
 
 const apiRouteRoot = '/api/v1';
+const Cookies = window.wl.utils.cookies;
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {

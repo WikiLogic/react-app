@@ -20,7 +20,12 @@ function set(name, value) {
   document.cookie = `${name}=${value}; path=/`;
 }
 
+function init() {
+  window.wl.utils.cookies = {
+    get, set
+  };
+}
+
 export default {
-  get,
-  set,
+  init
 };

@@ -27,6 +27,10 @@ import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
 import Notifyer from 'WlComponents/Notifyer/Notifyer.jsx';
 
+import wlutils from './utils/_index.js';
+
+wlutils.init();
+
 const history = createHashHistory();
 
 class Wikilogic extends React.Component {
