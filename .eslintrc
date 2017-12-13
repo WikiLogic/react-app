@@ -6,6 +6,7 @@
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
     "import/extensions": 0,
+    "import/first": [0],
     "max-len": [1, 200],
     "padded-blocks": [0],
     "spaced-comment": [0],
@@ -15,7 +16,7 @@
     "no-underscore-dangle": [0],
     "arrow-body-style": ["error", "always"],
     "object-shorthand": [0],
-    "no-console": [0]
+    "no-console": [0],
   },
   "globals": {
     "window": true,

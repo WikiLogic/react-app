@@ -33,7 +33,7 @@ export default class ClaimCreateScene extends React.Component {
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
-            Create a new Claim
+            <h1>New Claim</h1>
           </div>
         </div>
         <div className="page__body">

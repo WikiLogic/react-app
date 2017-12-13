@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom';
 import { Router, Link, Route } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 
+//utilities init themselves
+import './utils';
+
 // JS
 import API from 'WlAPI/api.js';
 import User from 'WlServices/user.js';
 
 // Scenes
-import HomeScene from 'WlScenes/HomeScene.jsx';
-import SearchScene from 'WlScenes/SearchScene.jsx';
 import GraphScene from 'WlScenes/GraphScene.jsx';
 import ClaimDetailScene from 'WlScenes/ClaimDetailScene.jsx';
 import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
@@ -24,10 +25,6 @@ import ApiDev from 'WlScenes/ApiDev.jsx';
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
-
-import wlutils from './utils/_index.js';
-
-wlutils.init();
 
 const history = createHashHistory();
 
@@ -108,8 +105,6 @@ class Wikilogic extends React.Component {
             <Link to="/" className="header__title">Wikilogic</Link>
 
             <div className="header__links">
-              <Link to="/search">Search</Link>
-              <Link to="/graph">Graph</Link>
 
               {(this.state.user.isLoggedIn &&
                 <Link to="/new-claim">New claim</Link>
@@ -133,11 +128,7 @@ class Wikilogic extends React.Component {
 
         <main className="main__body">
 
-          <Route path="/" exact component={HomeScene} />
-
-          <Route path="/search" exact component={SearchScene} />
-
-          <Route path="/graph" exact component={GraphScene} />
+          <Route path="/" exact component={GraphScene} />
 
           <Route
             path="/claim/:claimId"

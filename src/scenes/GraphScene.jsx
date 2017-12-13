@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 
 import API from 'WlAPI/api.js';
 
@@ -89,7 +88,7 @@ export default class GraphScene extends React.Component {
   newArgumentSubmissionHandler(newArgument) {
     console.log('new argument submission!', newArgument);
     const premiseIds = [];
-    _.forEach(newArgument.premises, (premise) => {
+    newArgument.premises.each((premise) => {
       console.log('premise', premise);
       premiseIds.push(premise._id);
     });
