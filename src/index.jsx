@@ -10,6 +10,7 @@ import './utils';
 // JS
 import API from 'WlAPI/api.js';
 import User from 'WlServices/user.js';
+import Claims from 'WlServices/claims.js';
 
 // Scenes
 import GraphScene from 'WlScenes/GraphScene.jsx';
@@ -63,6 +64,7 @@ class Wikilogic extends React.Component {
       }).catch((err) => {
         this.state.notifications.push(err);
       });
+    Claims.init();
   }
 
   setNewClaimFocus(claim) {

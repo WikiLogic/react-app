@@ -1,12 +1,14 @@
 import Formatter from './formatter';
+// import Api from '../utils/api.js';
 
 let JWT = '';
 const apiRouteRoot = '/api/v1';
+// const userApi = new Api('/api/v1/user');
 const Cookies = window.wl.utils.cookies;
 
 function login(username, password) {
   const loggedInPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/login`, {
+    fetch(`${apiRouteRoot}/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +40,7 @@ function logout() {
 
 function signup(email, username, password) {
   const signupPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/signup`, {
+    fetch(`${apiRouteRoot}/user/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

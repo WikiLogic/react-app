@@ -1,6 +1,7 @@
 import React from 'react';
 
 import API from 'WlAPI/api.js';
+import Claims from '../services/claims.js';
 
 import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
@@ -29,6 +30,17 @@ export default class GraphScene extends React.Component {
     this.searchClaims = this.searchClaims.bind(this);
     this.loadClaim = this.loadClaim.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
+  }
+
+  componentDidMount() {
+    Claims.getList().then((claims) => {
+      console.log('CLAIMS!', claims);
+      this.setState({
+        searchResults: claims
+      });
+    }).catch((err) => {
+      console.error('get claims error', err);
+    });
   }
 
   searchClaims(search) {
