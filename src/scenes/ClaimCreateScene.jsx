@@ -21,8 +21,10 @@ export default class ClaimCreateScene extends React.Component {
     API.postNewClaim({
       text: newClaimData.text,
       probability: newClaimData.probability,
-    }).then((data) => {
-      console.log('new claim!', data);
+    }).then((res) => {
+      console.log('new claim!', res);
+      //go to res.data.claim._key
+      this.props.history.push(`/claim/${res.data.claim._key}`);
     }).catch((err) => {
       console.error('new claim failed: ', err);
     });
@@ -45,3 +47,9 @@ export default class ClaimCreateScene extends React.Component {
     );
   }
 }
+
+ClaimCreateScene.propTypes = {
+  history: React.PropTypes.shape({
+    push: React.PropTypes.func.isRequired,
+  }).isRequired,
+};

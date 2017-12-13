@@ -13,6 +13,7 @@ export default class ArgumentBuilder extends React.Component {
     this.state = {
       title: 'New supporting argument',
       type: 'SUPPORTS',
+      showWorkBench: false,
       premises: [],
       textAreaValue: '',
       dupesPresented: false,
@@ -20,7 +21,7 @@ export default class ArgumentBuilder extends React.Component {
     };
 
     this.newPremiseCheckWait = null;
-    this.setArgumentType = this.setArgumentType.bind(this);
+    this.setNewArgumentType = this.setNewArgumentType.bind(this);
     this.handleTextareaChange = this.handleTextareaChange.bind(this);
     this.handlePremisSubmission = this.handlePremisSubmission.bind(this);
     this.searchForExistingClaims = this.searchForExistingClaims.bind(this);
@@ -30,9 +31,10 @@ export default class ArgumentBuilder extends React.Component {
     this.handlePublish = this.handlePublish.bind(this);
   }
 
-  setArgumentType(side) {
+  setNewArgumentType(side) {
     this.setState({
-      type: side
+      type: side,
+      showWorkBench: true
     });
   }
 
@@ -145,66 +147,81 @@ export default class ArgumentBuilder extends React.Component {
 
         <div className="argument-builder__side-buttons layout-cols-2">
           <div className="layout-cols-2__left">
-            <button className="button--secondary" onClick={() => { this.setArgumentType('FOR'); }} >
+            <button className="button--secondary" onClick={() => { this.setNewArgumentType('FOR'); }} >
               Build a supporting argument
             </button>
           </div>
           <div className="layout-cols-2__right">
-            <button className="button--secondary" onClick={() => { this.setArgumentType('AGAINST'); }} >
+            <button className="button--secondary" onClick={() => { this.setNewArgumentType('AGAINST'); }} >
               Build an opposing argument
             </button>
           </div>
         </div>
 
-        <div className="argument-builder__workbench">
-          <div className="argument-builder__sim">
+        {(this.state.showWorkBench &&
+          <div className="argument-builder__workbench">
+            <div className="argument-builder__sim">
 
-            {(this.state.type === 'FOR' &&
-              <div className="argument-builder__title">New supporting argument:</div>
-            )}
-
-            {(this.state.type === 'AGAINST' &&
-              <div className="argument-builder__title">New opposing argument:</div>
-            )}
-
-            <div className="argument-builder__body">
-              <ArgumentPremises
-                premises={this.state.premises}
-                removePremise={this.removePremise}
-              />
-            </div>
-          </div>
-          <div className="argument-builder__publish">
-            <button onClick={this.handlePublish} disabled={!argumentIsValid}>Publish new argument</button>
-          </div>
-
-          <div className="argument-builder__crafting-table">
-            <div className="argument-builder__create">
-
-              <div className="form">
-                <div className="form__label">
-                  <label className="form__label-text" htmlFor="new-claim-text">
-                    Write up a new premise to use in this argument
-                  </label>
-                  <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
-                  <div className="argument-builder__create-new-premise-button">
-                    <button className="button--secondary" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
-                  </div>
+              <div className="layout-cols-2">
+                <div className="layout-cols-2__left">
+                  {(this.state.type === 'FOR' &&
+                    <h2>New supporting argument:</h2>
+                  )}
+                  {(this.state.type === 'AGAINST' &&
+                    <h2>New opposing argument:</h2>
+                  )}
+                </div>
+                <div className="layout-cols-2__right">
+                  <button
+                    className="button--secondary"
+                    onClick={() => {
+                      this.setState({ showWorkBench: false });
+                    }}
+                  >Close argument builder</button>
                 </div>
               </div>
 
+
+              <div className="argument-builder__body">
+                <ArgumentPremises
+                  premises={this.state.premises}
+                  removePremise={this.removePremise}
+                />
+              </div>
             </div>
-            <div className="argument-builder__search">
-              {(this.state.searchResults.length > 0 &&
-                <p>Click one of the existing claims below to add as a premise to this argument</p>
-              )}
-              <CandidatePremises
-                premises={this.state.searchResults}
-                premisSelectionHandler={this.addExistingPremis}
-              />
+            <div className="argument-builder__publish">
+              <button onClick={this.handlePublish} disabled={!argumentIsValid}>Publish new argument</button>
             </div>
+
+            <div className="argument-builder__crafting-table">
+              <div className="argument-builder__create">
+
+                <div className="form">
+                  <div className="form__label">
+                    <label className="form__label-text" htmlFor="new-claim-text">
+                      Write up a new premise to use in this argument
+                    </label>
+                    <textarea className="form__input" id="new-claim-text" onChange={this.handleTextareaChange} value={this.state.textAreaValue} />
+                    <div className="argument-builder__create-new-premise-button">
+                      <button className="button--secondary" onClick={this.createAndAddNewPremis} disabled={!this.state.dupesPresented}>Create new claim and add as a premise</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div className="argument-builder__search">
+                {(this.state.searchResults.length > 0 &&
+                  <p>Click one of the existing claims below to add as a premise to this argument</p>
+                )}
+                <CandidatePremises
+                  premises={this.state.searchResults}
+                  premisSelectionHandler={this.addExistingPremis}
+                />
+              </div>
+            </div>
+
           </div>
-        </div>
+        )}
 
       </div>
     );

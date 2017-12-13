@@ -1,4 +1,5 @@
 import React from 'react';
+import User from '../services/user.js';
 
 /**
  * The User profile & settings page
@@ -10,9 +11,25 @@ export default class UserProfileScene extends React.Component {
     super(props);
 
     this.state = {
+      email: '',
+      signUpDate: '',
+      username: ''
     };
 
     this.logoutHandler = this.logoutHandler.bind(this);
+  }
+
+  componentDidMount() {
+    User.get().then((data) => {
+      console.log('Got user data!', data);
+      this.setState({
+        email: data.email,
+        signUpDate: data.signUpDate,
+        username: data.username
+      });
+    }).catch((err) => {
+      console.error('get user data failed', err);
+    });
   }
 
   logoutHandler() {
@@ -26,7 +43,7 @@ export default class UserProfileScene extends React.Component {
           <div className="max-width-wrap">
             <div className="layout-cols-2">
               <div className="layout-cols-2__left">
-                {this.props.user.name}
+                <h1>{this.state.username}</h1>
               </div>
               <div className="layout-cols-2__right">
                 <button onClick={this.logoutHandler}>LOGOUT</button>
@@ -37,6 +54,10 @@ export default class UserProfileScene extends React.Component {
         <div className="page__body">
           <div className="max-width-wrap">
             Currently only the demo login is running, it has no profile data. Proper profiles will be coming!
+            <ul>
+              <li>Email: {this.state.email}</li>
+              <li>Signup date: {this.state.signUpDate}</li>
+            </ul>
           </div>
         </div>
       </div>

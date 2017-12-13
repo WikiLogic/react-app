@@ -136,11 +136,27 @@ class Wikilogic extends React.Component {
             path="/claim/:claimId"
             exact
             render={(routeProps) => {
-              return <ClaimDetailScene routeProps={routeProps} isLoggedIn={this.state.user.isLoggedIn} />;
+              return (
+                <ClaimDetailScene
+                  routeProps={routeProps}
+                  history={history}
+                  isLoggedIn={this.state.user.isLoggedIn}
+                />
+              );
             }}
           />
 
-          <Route path="/new-claim" exact component={ClaimCreateScene} />
+          <Route
+            path="/new-claim"
+            exact
+            render={() => {
+              return (
+                <ClaimCreateScene
+                  history={history}
+                />
+              );
+            }}
+          />
 
           <Route
             path="/login"
@@ -150,7 +166,12 @@ class Wikilogic extends React.Component {
                 history.push('/profile');
                 return null;
               }
-              return <AuthenticationScene loginSuccessHandler={this.loginSuccessHandler} />;
+              return (
+                <AuthenticationScene
+                  loginSuccessHandler={this.loginSuccessHandler}
+                  history={history}
+                />
+              );
             }}
           />
 

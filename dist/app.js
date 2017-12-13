@@ -5576,13 +5576,15 @@ var _formatter = __webpack_require__(79);
 
 var _formatter2 = _interopRequireDefault(_formatter);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _api = __webpack_require__(155);
 
-// import Api from '../utils/api.js';
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var JWT = '';
 var apiRouteRoot = '/api/v1';
-// const userApi = new Api('/api/v1/user');
+var userApi = new _api2.default('/api/v1/user');
 var Cookies = window.wl.utils.cookies;
 
 function login(username, password) {
@@ -5638,27 +5640,40 @@ function signup(email, username, password) {
   return signupPromise;
 }
 
-function get() {
-  if (JWT === '') {
-    JWT = Cookies.get('JWT');
-    if (JWT === '') {
-      return false;
-    }
-  }
+// function get() {
+//   if (JWT === '') {
+//     JWT = Cookies.get('JWT');
+//     if (JWT === '') {
+//       return false;
+//     }
+//   }
 
-  var userPromise = new Promise(function (resolve, reject) {
-    fetch(apiRouteRoot + '/user', {
-      headers: {
-        Authorization: Cookies.get('JWT')
-      }
-    }).then(_formatter2.default.apiResponceToJSON).then(function (res) {
-      resolve(res.data.user);
+//   const userPromise = new Promise((resolve, reject) => {
+//     fetch(`${apiRouteRoot}/user`, {
+//       headers: {
+//         Authorization: Cookies.get('JWT'),
+//       },
+//     })
+//       .then(Formatter.apiResponceToJSON)
+//       .then((res) => {
+//         resolve(res.data.user);
+//       })
+//       .catch((err) => {
+//         reject(err);
+//       });
+//   });
+
+//   return userPromise;
+// }
+
+function get() {
+  return new Promise(function (resolve, reject) {
+    userApi.get('/').then(function (data) {
+      resolve(data.data.user);
     }).catch(function (err) {
       reject(err);
     });
   });
-
-  return userPromise;
 }
 
 exports.default = {
@@ -31217,10 +31232,22 @@ var Wikilogic = function (_React$Component) {
             path: '/claim/:claimId',
             exact: true,
             render: function render(routeProps) {
-              return _react2.default.createElement(_ClaimDetailScene2.default, { routeProps: routeProps, isLoggedIn: _this4.state.user.isLoggedIn });
+              return _react2.default.createElement(_ClaimDetailScene2.default, {
+                routeProps: routeProps,
+                history: history,
+                isLoggedIn: _this4.state.user.isLoggedIn
+              });
             }
           }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/new-claim', exact: true, component: _ClaimCreateScene2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, {
+            path: '/new-claim',
+            exact: true,
+            render: function render() {
+              return _react2.default.createElement(_ClaimCreateScene2.default, {
+                history: history
+              });
+            }
+          }),
           _react2.default.createElement(_reactRouterDom.Route, {
             path: '/login',
             exact: true,
@@ -31229,7 +31256,10 @@ var Wikilogic = function (_React$Component) {
                 history.push('/profile');
                 return null;
               }
-              return _react2.default.createElement(_AuthenticationScene2.default, { loginSuccessHandler: _this4.loginSuccessHandler });
+              return _react2.default.createElement(_AuthenticationScene2.default, {
+                loginSuccessHandler: _this4.loginSuccessHandler,
+                history: history
+              });
             }
           }),
           _react2.default.createElement(_reactRouterDom.Route, {
@@ -31546,6 +31576,7 @@ var ArgumentBuilder = function (_React$Component) {
     _this.state = {
       title: 'New supporting argument',
       type: 'SUPPORTS',
+      showWorkBench: false,
       premises: [],
       textAreaValue: '',
       dupesPresented: false,
@@ -31553,7 +31584,7 @@ var ArgumentBuilder = function (_React$Component) {
     };
 
     _this.newPremiseCheckWait = null;
-    _this.setArgumentType = _this.setArgumentType.bind(_this);
+    _this.setNewArgumentType = _this.setNewArgumentType.bind(_this);
     _this.handleTextareaChange = _this.handleTextareaChange.bind(_this);
     _this.handlePremisSubmission = _this.handlePremisSubmission.bind(_this);
     _this.searchForExistingClaims = _this.searchForExistingClaims.bind(_this);
@@ -31565,10 +31596,11 @@ var ArgumentBuilder = function (_React$Component) {
   }
 
   _createClass(ArgumentBuilder, [{
-    key: 'setArgumentType',
-    value: function setArgumentType(side) {
+    key: 'setNewArgumentType',
+    value: function setNewArgumentType(side) {
       this.setState({
-        type: side
+        type: side,
+        showWorkBench: true
       });
     }
   }, {
@@ -31706,7 +31738,7 @@ var ArgumentBuilder = function (_React$Component) {
             _react2.default.createElement(
               'button',
               { className: 'button--secondary', onClick: function onClick() {
-                  _this5.setArgumentType('FOR');
+                  _this5.setNewArgumentType('FOR');
                 } },
               'Build a supporting argument'
             )
@@ -31717,27 +31749,49 @@ var ArgumentBuilder = function (_React$Component) {
             _react2.default.createElement(
               'button',
               { className: 'button--secondary', onClick: function onClick() {
-                  _this5.setArgumentType('AGAINST');
+                  _this5.setNewArgumentType('AGAINST');
                 } },
               'Build an opposing argument'
             )
           )
         ),
-        _react2.default.createElement(
+        this.state.showWorkBench && _react2.default.createElement(
           'div',
           { className: 'argument-builder__workbench' },
           _react2.default.createElement(
             'div',
             { className: 'argument-builder__sim' },
-            this.state.type === 'FOR' && _react2.default.createElement(
+            _react2.default.createElement(
               'div',
-              { className: 'argument-builder__title' },
-              'New supporting argument:'
-            ),
-            this.state.type === 'AGAINST' && _react2.default.createElement(
-              'div',
-              { className: 'argument-builder__title' },
-              'New opposing argument:'
+              { className: 'layout-cols-2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2__left' },
+                this.state.type === 'FOR' && _react2.default.createElement(
+                  'h2',
+                  null,
+                  'New supporting argument:'
+                ),
+                this.state.type === 'AGAINST' && _react2.default.createElement(
+                  'h2',
+                  null,
+                  'New opposing argument:'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'layout-cols-2__right' },
+                _react2.default.createElement(
+                  'button',
+                  {
+                    className: 'button--secondary',
+                    onClick: function onClick() {
+                      _this5.setState({ showWorkBench: false });
+                    }
+                  },
+                  'Close argument builder'
+                )
+              )
             ),
             _react2.default.createElement(
               'div',
@@ -34101,12 +34155,16 @@ var ClaimCreateScene = function (_React$Component) {
   _createClass(ClaimCreateScene, [{
     key: 'submitHandler',
     value: function submitHandler(newClaimData) {
+      var _this2 = this;
+
       console.log('newClaimData', newClaimData);
       _api2.default.postNewClaim({
         text: newClaimData.text,
         probability: newClaimData.probability
-      }).then(function (data) {
-        console.log('new claim!', data);
+      }).then(function (res) {
+        console.log('new claim!', res);
+        //go to res.data.claim._key
+        _this2.props.history.push('/claim/' + res.data.claim._key);
       }).catch(function (err) {
         console.error('new claim failed: ', err);
       });
@@ -34147,6 +34205,13 @@ var ClaimCreateScene = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = ClaimCreateScene;
+
+
+ClaimCreateScene.propTypes = {
+  history: _react2.default.PropTypes.shape({
+    push: _react2.default.PropTypes.func.isRequired
+  }).isRequired
+};
 
 /***/ }),
 /* 149 */
@@ -34360,7 +34425,11 @@ var ClaimDetailScene = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'max-width-wrap' },
-            'Claim Detail / inspector / explorer.'
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Claim editor'
+            )
           )
         ),
         this.state.claim && _react2.default.createElement(
@@ -35150,6 +35219,10 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _user = __webpack_require__(44);
+
+var _user2 = _interopRequireDefault(_user);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35171,56 +35244,96 @@ var UserProfileScene = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (UserProfileScene.__proto__ || Object.getPrototypeOf(UserProfileScene)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      email: '',
+      signUpDate: '',
+      username: ''
+    };
 
     _this.logoutHandler = _this.logoutHandler.bind(_this);
     return _this;
   }
 
   _createClass(UserProfileScene, [{
-    key: "logoutHandler",
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _user2.default.get().then(function (data) {
+        console.log('Got user data!', data);
+        _this2.setState({
+          email: data.email,
+          signUpDate: data.signUpDate,
+          username: data.username
+        });
+      }).catch(function (err) {
+        console.error('get user data failed', err);
+      });
+    }
+  }, {
+    key: 'logoutHandler',
     value: function logoutHandler() {
       this.props.logoutHandler();
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "page" },
+        'div',
+        { className: 'page' },
         _react2.default.createElement(
-          "div",
-          { className: "page__header" },
+          'div',
+          { className: 'page__header' },
           _react2.default.createElement(
-            "div",
-            { className: "max-width-wrap" },
+            'div',
+            { className: 'max-width-wrap' },
             _react2.default.createElement(
-              "div",
-              { className: "layout-cols-2" },
+              'div',
+              { className: 'layout-cols-2' },
               _react2.default.createElement(
-                "div",
-                { className: "layout-cols-2__left" },
-                this.props.user.name
+                'div',
+                { className: 'layout-cols-2__left' },
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  this.state.username
+                )
               ),
               _react2.default.createElement(
-                "div",
-                { className: "layout-cols-2__right" },
+                'div',
+                { className: 'layout-cols-2__right' },
                 _react2.default.createElement(
-                  "button",
+                  'button',
                   { onClick: this.logoutHandler },
-                  "LOGOUT"
+                  'LOGOUT'
                 )
               )
             )
           )
         ),
         _react2.default.createElement(
-          "div",
-          { className: "page__body" },
+          'div',
+          { className: 'page__body' },
           _react2.default.createElement(
-            "div",
-            { className: "max-width-wrap" },
-            "Currently only the demo login is running, it has no profile data. Proper profiles will be coming!"
+            'div',
+            { className: 'max-width-wrap' },
+            'Currently only the demo login is running, it has no profile data. Proper profiles will be coming!',
+            _react2.default.createElement(
+              'ul',
+              null,
+              _react2.default.createElement(
+                'li',
+                null,
+                'Email: ',
+                this.state.email
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                'Signup date: ',
+                this.state.signUpDate
+              )
+            )
           )
         )
       );
@@ -35275,8 +35388,17 @@ var Api = function () {
 
   _createClass(Api, [{
     key: 'call',
-    value: function call(url, fetchConfig) {
+    value: function call(url, passedFetchConfig) {
       var _this = this;
+
+      //if there is an auth JWT in the cookies, include it window.wl.utils.cookies;
+      var fetchConfig = Object.assign({}, passedFetchConfig);
+      var JWT = window.wl.utils.cookies.get('JWT');
+      if (JWT.length > 0) {
+        fetchConfig.headers = {
+          Authorization: JWT
+        };
+      }
 
       return new Promise(function (resolve, reject) {
         fetch(_this.baseUrl + url, fetchConfig).then(function (res) {

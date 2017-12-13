@@ -141,9 +141,7 @@ export default class ClaimDetailScene extends React.Component {
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
-
-            Claim Detail / inspector / explorer.
-
+            <h1>Claim editor</h1>
           </div>
         </div>
         {(this.state.claim &&

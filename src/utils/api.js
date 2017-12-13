@@ -8,7 +8,16 @@ export default class Api {
     this.getCaches = {};
   }
 
-  call(url, fetchConfig) {
+  call(url, passedFetchConfig) {
+    //if there is an auth JWT in the cookies, include it window.wl.utils.cookies;
+    const fetchConfig = Object.assign({}, passedFetchConfig);
+    const JWT = window.wl.utils.cookies.get('JWT');
+    if (JWT.length > 0) {
+      fetchConfig.headers = {
+        Authorization: JWT
+      };
+    }
+
     return new Promise((resolve, reject) => {
       fetch(this.baseUrl + url, fetchConfig).then((res) => {
         return res.json();
