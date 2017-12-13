@@ -997,29 +997,6 @@ styles are set in sass alongside the components. (in the components folder).
       display: block;
       margin-left: auto; }
 
-.argumentCircle {
-  padding: 0.5rem;
-  border-radius: 5px; }
-  .argumentCircle__header {
-    margin-bottom: 0.5rem; }
-  .argumentCircle__premis {
-    cursor: pointer;
-    line-height: 50px; }
-    .argumentCircle__premis + .argument__premis {
-      margin-top: 0.5rem; }
-  .argumentCircle--true {
-    display: inline-block;
-    line-height: 600px;
-    width: 600px;
-    height: 600px;
-    background: rgba(49, 211, 50, 0.2);
-    -webkit-border-radius: 300px;
-    -moz-border-radius: 300px;
-    border-radius: 300px; }
-  .argumentCircle--false {
-    background-color: rgba(240, 93, 101, 0.2);
-    border: 1px solid #f05d65; }
-
 .claim {
   border: 1px solid #cccccc;
   background-color: white;
@@ -1061,45 +1038,13 @@ styles are set in sass alongside the components. (in the components folder).
       width: 21%;
       min-width: 300px; }
 
-.graph-arg__rect {
-  fill: #eeeeee;
-  stroke-width: 1px;
-  stroke: #eeeeee; }
-
-.graph-claim__claim {
-  fill: white;
-  stroke: #cccccc; }
-  .graph-claim__claim p {
-    padding: 0 5px; }
-
 .graph-controls {
   position: absolute;
   top: 1rem;
   right: 1rem; }
 
-.graph-premise {
-  fill: white;
-  stroke: #cccccc; }
-  .graph-premise p {
-    padding: 0 5px; }
-
 .graph-search-results__result {
   margin-bottom: 0.5rem; }
-
-.graph-svg {
-  position: relative; }
-  .graph-svg__controls {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0; }
-  .graph-svg__svg {
-    background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23cccccc' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    width: 100%;
-    height: 100vh; }
-    .graph-svg__svg .x {
-      fill: black; }
 
 @keyframes loading {
   from {
@@ -1645,6 +1590,38 @@ styles are set in sass alongside the components. (in the components folder).
     left: 0;
     right: 0;
     text-align: center; }
+
+.graph-arg__rect {
+  fill: #eeeeee;
+  stroke-width: 1px;
+  stroke: #eeeeee; }
+
+.graph-claim__claim {
+  fill: white;
+  stroke: #cccccc; }
+  .graph-claim__claim p {
+    padding: 0 5px; }
+
+.graph-premise {
+  fill: white;
+  stroke: #cccccc; }
+  .graph-premise p {
+    padding: 0 5px; }
+
+.graph-svg {
+  position: relative; }
+  .graph-svg__controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; }
+  .graph-svg__svg {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23cccccc' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    width: 100%;
+    height: 100vh; }
+    .graph-svg__svg .x {
+      fill: black; }
 
 .claim-detail {
   width: 100%; }

@@ -7,8 +7,8 @@ import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
 // import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
 // import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import GraphSvg from 'WlComponents/GraphSvg/GraphSvg.jsx';
-import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
+import GraphSvg from 'WlComponents/SVG/GraphSvg.jsx';
+import GraphClaim from 'WlComponents/SVG/GraphClaim.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext';
 
 /**

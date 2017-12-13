@@ -51,56 +51,65 @@ function formatStringForUrl(unsafeString) {
   return saferString;
 }
 
+function get(paramName, queryString) {
+  if (typeof paramName !== 'string' || typeof queryString !== 'string') {
+    return false;
+  }
+
+  // find the index of paramName
+  let startSlice = queryString.indexOf(paramName);
+  if (startSlice === -1) {
+    // it's not in there, return false
+    return false;
+  }
+  // start slice for the actual value. Param name + "="
+  startSlice = startSlice + paramName.length + 1;
+
+  // find index of the next &
+  const endSlice = queryString.indexOf('&', startSlice);
+  if (endSlice === -1) {
+    // it's the last / only one!
+    return queryString.substr(startSlice, queryString.length);
+  }
+
+  // end slice is index. substr needs length
+  return queryString.substr(startSlice, endSlice - startSlice);
+}
+
+function set(paramName, value, queryString, isEncoded) {
+  let formattedParamName;
+  let formattedValue;
+
+  if (typeof paramName !== 'string') {
+    return false;
+  }
+
+  const cleanQueryString = removeQueryFromString(queryString, paramName);
+  if (value === '') {
+    return cleanQueryString;
+  }
+
+  if (!isEncoded) {
+    // param name and value have passed, so format them 
+    formattedParamName = formatStringForUrl(paramName);
+    formattedValue = formatStringForUrl(value);
+  } else {
+    formattedParamName = paramName;
+    formattedValue = value;
+  }
+
+  // and return the new string!
+  const newQuery = addToQueryString(cleanQueryString, formattedParamName, formattedValue);
+
+  return newQuery;
+}
+
+function init() {
+  window.wl.utils.urlParameter = {
+    get, set
+  };
+}
+
 export default {
-  get(paramName, queryString) {
-    if (typeof paramName !== 'string' || typeof queryString !== 'string') {
-      return false;
-    }
-
-    // find the index of paramName
-    let startSlice = queryString.indexOf(paramName);
-    if (startSlice === -1) {
-      // it's not in there, return false
-      return false;
-    }
-    // start slice for the actual value. Param name + "="
-    startSlice = startSlice + paramName.length + 1;
-
-    // find index of the next &
-    const endSlice = queryString.indexOf('&', startSlice);
-    if (endSlice === -1) {
-      // it's the last / only one!
-      return queryString.substr(startSlice, queryString.length);
-    }
-
-    // end slice is index. substr needs length
-    return queryString.substr(startSlice, endSlice - startSlice);
-  },
-  set(paramName, value, queryString, isEncoded) {
-    let formattedParamName;
-    let formattedValue;
-
-    if (typeof paramName !== 'string') {
-      return false;
-    }
-
-    const cleanQueryString = removeQueryFromString(queryString, paramName);
-    if (value === '') {
-      return cleanQueryString;
-    }
-
-    if (!isEncoded) {
-      // param name and value have passed, so format them 
-      formattedParamName = formatStringForUrl(paramName);
-      formattedValue = formatStringForUrl(value);
-    } else {
-      formattedParamName = paramName;
-      formattedValue = value;
-    }
-
-    // and return the new string!
-    const newQuery = addToQueryString(cleanQueryString, formattedParamName, formattedValue);
-
-    return newQuery;
-  },
+  init
 };

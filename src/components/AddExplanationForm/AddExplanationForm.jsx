@@ -4,7 +4,6 @@ import API from 'WlAPI/api.js';
 import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 import Validate from 'WlServices/validate.js';
-import Notify from 'WlServices/notify.js';
 
 /* Search & select claims to add as premises to an argument
  */
@@ -39,14 +38,14 @@ export default class AddExplanationForm extends React.Component {
         .then((data) => {
           this.setState({ premis_search_results: data.claims });
         }).catch((err) => {
-          Notify.post(err);
+          console.error('err: ', err);
         });
     } else {
       API.getClaimDetailById(term)
         .then((data) => {
           this.setState({ premis_search_results: [data.claim] });
         }).catch((err) => {
-          Notify.post(err);
+          console.error('err: ', err);
         });
     }
   }
@@ -81,7 +80,7 @@ export default class AddExplanationForm extends React.Component {
     }).then((res) => {
       this.props.updatedClaimHandler(res.data.claim);
     }).catch((err) => {
-      Notify.post(err);
+      console.error('err: ', err);
     });
   }
 

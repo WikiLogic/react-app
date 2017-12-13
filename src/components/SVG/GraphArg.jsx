@@ -1,7 +1,7 @@
 import React from 'react';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import GraphPremise from 'WlComponents/GraphPremise/GraphPremise.jsx';
-import GraphClaim from 'WlComponents/GraphClaim/GraphClaim.jsx';
+// import GraphPremise from 'WlComponents/SVG/GraphPremise.jsx';
+import GraphClaim from 'WlComponents/SVG/GraphClaim.jsx';
 
 /* An argument! In an SVG!
  */

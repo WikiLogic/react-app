@@ -7,7 +7,6 @@ import createHashHistory from 'history/createHashHistory';
 // JS
 import API from 'WlAPI/api.js';
 import User from 'WlServices/user.js';
-import Notify from 'WlServices/notify.js';
 
 // Scenes
 import HomeScene from 'WlScenes/HomeScene.jsx';
@@ -25,7 +24,6 @@ import ApiDev from 'WlScenes/ApiDev.jsx';
 // React components
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
-import Notifyer from 'WlComponents/Notifyer/Notifyer.jsx';
 
 import wlutils from './utils/_index.js';
 
@@ -49,7 +47,6 @@ class Wikilogic extends React.Component {
     };
 
     this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
-    this.notifyerHandler = this.notifyerHandler.bind(this);
     this.loginSuccessHandler = this.loginSuccessHandler.bind(this);
     this.logoutHandler = this.logoutHandler.bind(this);
   }
@@ -80,10 +77,6 @@ class Wikilogic extends React.Component {
       });
   }
 
-  notifyerHandler(message) {
-    // this.state.notifications.push(message);
-    Notify.post(message);
-  }
 
   loginSuccessHandler(res) {
     this.setState({
@@ -270,7 +263,7 @@ class Wikilogic extends React.Component {
         </div>
 
         <div className="main__status-bar">
-          <Notifyer notifications={this.state.notifications} />
+          ...
         </div>
       </div>
     );

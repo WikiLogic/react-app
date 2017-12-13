@@ -3,8 +3,6 @@ import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
 import Loader from 'WlComponents/Loader/Loader.jsx';
 import API from 'WlAPI/api.js';
-import urlParameter from 'WlServices/urlParameter.js';
-import Notify from 'WlServices/notify.js';
 
 /**
  * The Search Results page
@@ -24,7 +22,7 @@ export default class SearchScene extends React.Component {
 
   componentDidMount() {
     // get the search param to see if there is anything there
-    const URLsearchTerm = urlParameter.get('s', this.props.location.search);
+    const URLsearchTerm = window.wl.utils.urlParameter.get('s', this.props.location.search);
 
     // if there is
     if (URLsearchTerm) {
@@ -47,7 +45,7 @@ export default class SearchScene extends React.Component {
             searchResults: null,
             isLoading: false
           });
-          Notify.post(err);
+          console.error('err: ', err);
         });
     } else {
       API.getClaimDetailById(search)
@@ -62,7 +60,7 @@ export default class SearchScene extends React.Component {
             searchResults: null,
             isLoading: false
           });
-          Notify.post(err);
+          console.error('err: ', err);
         });
     }
 

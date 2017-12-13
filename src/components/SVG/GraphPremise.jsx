@@ -1,7 +1,7 @@
 import React from 'react';
 import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
-import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
+import GraphArg from 'WlComponents/SVG/GraphArg.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import API from 'WlAPI/api.js';
 

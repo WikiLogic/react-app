@@ -1,7 +1,7 @@
 import React from 'react';
 import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
-import GraphArg from 'WlComponents/GraphArg/GraphArg.jsx';
+import GraphArg from 'WlComponents/SVG/GraphArg.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import API from 'WlAPI/api.js';
 
@@ -49,7 +49,7 @@ export default class GraphClaim extends React.Component {
     if (this.state.arguments.length === 0) { return null; }
     const argumentsMarkup = [];
     let premiseCounter = 0;
-    let spaceBetweenArgs = 50;
+    const spaceBetweenArgs = 50;
 
     for (let r = 0; r < this.state.arguments.length; r++) {
       const thisArgumentX = (premiseCounter * (this.props.gridUnit * 2)) + (spaceBetweenArgs * r); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
@@ -95,7 +95,8 @@ export default class GraphClaim extends React.Component {
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
       <g className="graph-claim" onMouseUp={this.mouseUpHandler}>
-        <rect className="grid-square"
+        <rect
+          className="grid-square"
           rx="10"
           ry="10"
           width={gridSquareWidth}
