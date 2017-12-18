@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { observer } from 'mobx-react';
 import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
 
 /* Each Claim in the list of search results
  */
-export default class Claim extends React.Component {
+
+@observer
+class Claim extends React.Component {
   constructor(props) {
     super(props);
     this.renderChildren = this.renderChildren.bind(this);
@@ -58,3 +61,5 @@ Claim.defaultProps = {
   probability: 0.5,
   children: null
 };
+
+export default Claim;

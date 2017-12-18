@@ -3,7 +3,7 @@ import Argument from 'WlComponents/Argument/Argument.jsx';
 import API from 'WlAPI/api.js';
 import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import Claim from 'WlComponents/Claim/Claim.jsx';
-import Validate from 'WlServices/validate.js';
+// import Validate from 'WlStores/validate.js';
 
 /* Search & select claims to add as premises to an argument
  */
@@ -54,10 +54,10 @@ export default class AddExplanationForm extends React.Component {
     // a premis in the premis search - add it to the new argument when it's clicked
     const newArgument = this.state.argument;
 
-    if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
+    // if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
       newArgument.premises.push(premis);
       this.setState({ argument: newArgument });
-    }
+    // }
   }
 
   handleArgumentPremisClick(premis) {

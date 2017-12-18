@@ -1,5 +1,5 @@
 import React from 'react';
-import User from '../services/user.js';
+import User from 'WLStores/user.js';
 
 /**
  * The User profile & settings page

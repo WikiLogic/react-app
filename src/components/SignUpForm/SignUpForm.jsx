@@ -1,5 +1,5 @@
 import React from 'react';
-import User from 'WlServices/user.js';
+import User from 'WlStores/user.js';
 
 /**
  * Logging in!

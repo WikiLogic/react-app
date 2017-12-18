@@ -9,8 +9,8 @@ import './utils';
 
 // JS
 import API from 'WlAPI/api.js';
-import User from 'WlServices/user.js';
-import Claims from 'WlServices/claims.js';
+import User from 'WlStores/user.js';
+import Claims from 'WlStores/claims.js';
 
 // Scenes
 import GraphScene from 'WlScenes/GraphScene.jsx';

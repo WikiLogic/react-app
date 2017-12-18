@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import Formatter from 'WlServices/formatter.js';
+import Formatter from 'WlStores/formatter.js';
 
 const apiRouteRoot = '/api/v1';
 const Cookies = window.wl.utils.cookies;
