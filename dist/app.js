@@ -36594,16 +36594,13 @@ UserProfileScene.defaultProps = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = undefined;
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _desc2, _value2, _class3, _descriptor6;
 
 var _mobx = __webpack_require__(86);
-
-var _api = __webpack_require__(81);
-
-var _api2 = _interopRequireDefault(_api);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -36650,14 +36647,12 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-/**
- * The search results, newly created claims, claims in detail, everything claim data!
- */
+// import Api from '../utils/api.js';
 
-//This is the shape of a claim object
 var Claim = (_class =
+
 //0. or % ? 0. would give us more flexability - the ability to extend "accuracy"
-function Claim(value) {
+function Claim(claim) {
   _classCallCheck(this, Claim);
 
   _initDefineProp(this, 'text', _descriptor, this);
@@ -36669,7 +36664,14 @@ function Claim(value) {
   _initDefineProp(this, '_key', _descriptor4, this);
 
   _initDefineProp(this, '_id', _descriptor5, this);
-}
+
+  this.text = claim.text;
+  this.probability = claim.probability;
+  this.labels = claim.labels;
+  this._key = claim._key;
+  this._id = claim._id;
+} //might be computed value...
+
 //an array of strings, eg 'axiom'
 , (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'text', [_mobx.observable], {
   enumerable: true,
@@ -36687,35 +36689,57 @@ function Claim(value) {
   enumerable: true,
   initializer: null
 })), _class);
+var ClaimList = (_class3 = function () {
+  function ClaimList() {
+    _classCallCheck(this, ClaimList);
 
+    _initDefineProp(this, 'claims', _descriptor6, this);
+  }
 
-var claimApi = new _api2.default('/api/v1/claims');
+  _createClass(ClaimList, [{
+    key: 'addClaim',
+    value: function addClaim(claim) {
+      this.claims.push(new Claim(claim));
+    }
+  }]);
 
-function init() {
-  //first load, just get a list of claims
-  claimApi.get('/').then(function (data) {
-    console.log('claims init data!', data);
-  }).catch(function (err) {
-    console.error('claims init error: ', err);
-  });
-}
+  return ClaimList;
+}(), (_descriptor6 = _applyDecoratedDescriptor(_class3.prototype, 'claims', [_mobx.observable], {
+  enumerable: true,
+  initializer: function initializer() {
+    return [];
+  }
+}), _applyDecoratedDescriptor(_class3.prototype, 'addClaim', [_mobx.action], Object.getOwnPropertyDescriptor(_class3.prototype, 'addClaim'), _class3.prototype)), _class3);
 
-function getList() {
-  return new Promise(function (resolve, reject) {
-    claimApi.get('/').then(function (data) {
-      resolve(data.data.results);
-    }).catch(function (err) {
-      reject(err);
-    });
-  });
-}
+// const claimApi = new Api('/api/v1/claims');
 
-function createClaim() {}
+// function init() {
+//   //first load, just get a list of claims
+//   claimApi.get('/').then((data) => {
+//     console.log('claims init data!', data);
+//   }).catch((err) => {
+//     console.error('claims init error: ', err);
+//   });
+// }
 
-exports.default = {
-  init: init,
-  getList: getList
-};
+// function getList() {
+//   return new Promise((resolve, reject) => {
+//     claimApi.get('/').then((data) => {
+//       resolve(data.data.results);
+//     }).catch((err) => {
+//       reject(err);
+//     });
+//   });
+// }
+
+// function createClaim() {}
+
+// export default {
+//   init,
+//   getList
+// };
+
+exports.default = ClaimList;
 
 /***/ }),
 /* 141 */
