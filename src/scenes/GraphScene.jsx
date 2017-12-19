@@ -189,7 +189,7 @@ export default class GraphScene extends React.Component {
 }
 
 GraphScene.propTypes = {
-  store: React.PropTypes.shape({
+  store: React.PropTypes.observableObject({
     search: React.PropTypes.shape({
       term: React.PropTypes.string.isRequired
     }).isRequired
