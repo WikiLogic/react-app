@@ -1,14 +1,20 @@
-import Formatter from './formatter';
-import Api from '../utils/api.js';
+import { observable, action } from 'mobx';
 
-let JWT = '';
-const apiRouteRoot = '/api/v1';
-const userApi = new Api('/api/v1/user');
+const Formatter = window.wl.utils.formatter;
 const Cookies = window.wl.utils.cookies;
 
-function login(username, password) {
-  const loggedInPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/user/login`, {
+export default class User {
+  @observable isLoggedIn = false;
+  @observable history = [];
+  @observable JWT = '';
+  @observable username = '';
+  @observable email = '';
+  @observable signUpDate = '';
+
+
+  @action
+  logIn(username, password) {
+    fetch('/api/v1/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -20,27 +26,27 @@ function login(username, password) {
     })
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
-        JWT = res.data.token;
+        this.JWT = res.data.token;
+        this.isLoggedIn = true;
+        this.username = username;
         Cookies.set('JWT', `JWT ${res.data.token}`);
-        resolve(res);
       })
       .catch((err) => {
-        reject(err);
+        console.error('user log in error: ', err);
       });
-  });
+  }
 
-  return loggedInPromise;
-}
+  @action
+  logOut() {
+    this.JWT = '';
+    this.isLoggedIn = false;
+    Cookies.set('JWT', '');
+    // tell the server?
+  }
 
-function logout() {
-  JWT = '';
-  Cookies.set('JWT', '');
-  // tell the server?
-}
-
-function signup(email, username, password) {
-  const signupPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/user/signup`, {
+  @action
+  signUp(email, username, password) {
+    fetch('/api/v1/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -53,57 +59,12 @@ function signup(email, username, password) {
     })
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
-        JWT = res.data.token;
+        this.JWT = res.data.token;
+        this.isLoggedIn = true;
         Cookies.set('JWT', `JWT ${res.data.token}`);
-        resolve(res);
       })
       .catch((err) => {
-        reject(err);
+        console.error('User sign up error: ', err);
       });
-  });
-
-  return signupPromise;
+  }
 }
-
-// function get() {
-//   if (JWT === '') {
-//     JWT = Cookies.get('JWT');
-//     if (JWT === '') {
-//       return false;
-//     }
-//   }
-
-//   const userPromise = new Promise((resolve, reject) => {
-//     fetch(`${apiRouteRoot}/user`, {
-//       headers: {
-//         Authorization: Cookies.get('JWT'),
-//       },
-//     })
-//       .then(Formatter.apiResponceToJSON)
-//       .then((res) => {
-//         resolve(res.data.user);
-//       })
-//       .catch((err) => {
-//         reject(err);
-//       });
-//   });
-
-//   return userPromise;
-// }
-
-function get() {
-  return new Promise((resolve, reject) => {
-    userApi.get('/').then((data) => {
-      resolve(data.data.user);
-    }).catch((err) => {
-      reject(err);
-    });
-  });
-}
-
-export default {
-  login,
-  get,
-  logout,
-  signup,
-};

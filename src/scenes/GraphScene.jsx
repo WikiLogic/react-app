@@ -1,7 +1,9 @@
 import React from 'react';
+import { action } from 'mobx';
+import { observer } from 'mobx-react';
 
 import API from 'WlAPI/api.js';
-import Claims from '../services/claims.js';
+import Claims from 'WlStores/claims.js';
 
 import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
@@ -15,6 +17,8 @@ import SVGtext from 'WlComponents/SVGels/SVGtext';
  * The Home page
  * @prop {*} name 
  */
+
+@observer
 export default class GraphScene extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +32,7 @@ export default class GraphScene extends React.Component {
     };
 
     this.searchClaims = this.searchClaims.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.loadClaim = this.loadClaim.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
@@ -41,6 +46,11 @@ export default class GraphScene extends React.Component {
     }).catch((err) => {
       console.error('get claims error', err);
     });
+  }
+
+  @action
+  handleSearchSubmit(search) {
+    this.props.store.search.term = search;
   }
 
   searchClaims(search) {
@@ -127,10 +137,10 @@ export default class GraphScene extends React.Component {
           <div className="max-width-wrap">
 
             <SearchForm
-              submissionHandler={this.searchClaims}
+              submissionHandler={this.handleSearchSubmit}
               placeholder="Search Claims"
               label="Search"
-              inputValue={this.state.searchTerm}
+              inputValue={this.props.store.search.term}
               id="graph-scene-search-input"
             />
 
@@ -179,7 +189,9 @@ export default class GraphScene extends React.Component {
 }
 
 GraphScene.propTypes = {
-  history: React.PropTypes.shape({
-    push: React.PropTypes.func.isRequired,
-  }).isRequired,
+  store: React.PropTypes.shape({
+    search: React.PropTypes.shape({
+      term: React.PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
