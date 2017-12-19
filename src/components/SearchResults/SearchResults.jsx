@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* The Search Results
@@ -42,7 +43,7 @@ export default class SearchResults extends React.Component {
 }
 
 SearchResults.propTypes = {
-  searchResults: React.PropTypes.arrayOf(React.PropTypes.object),
+  searchResults: PropTypes.arrayOf(PropTypes.object),
 };
 
 SearchResults.defaultProps = {

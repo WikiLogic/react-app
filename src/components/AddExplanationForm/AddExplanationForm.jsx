@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Argument from 'WlComponents/Argument/Argument.jsx';
 import API from 'WlAPI/api.js';
 import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
@@ -154,9 +155,9 @@ export default class AddExplanationForm extends React.Component {
 }
 
 AddExplanationForm.propTypes = {
-  parentClaim: React.PropTypes.shape({
-    _id: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
+  parentClaim: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
   }).isRequired,
-  updatedClaimHandler: React.PropTypes.func.isRequired,
+  updatedClaimHandler: PropTypes.func.isRequired,
 };

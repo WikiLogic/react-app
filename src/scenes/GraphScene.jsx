@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { action } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, PropTypes as MobxTypes } from 'mobx-react';
 
 import API from 'WlAPI/api.js';
 import Claims from 'WlStores/claims.js';
@@ -189,9 +190,9 @@ export default class GraphScene extends React.Component {
 }
 
 GraphScene.propTypes = {
-  store: React.PropTypes.observableObject({
-    search: React.PropTypes.shape({
-      term: React.PropTypes.string.isRequired
+  store: MobxTypes.observableObject({
+    search: PropTypes.shape({
+      term: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
 };

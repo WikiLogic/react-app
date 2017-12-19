@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* The modal layout
  *
@@ -28,8 +29,8 @@ export default function Modal(props) {
 }
 
 Modal.propTypes = {
-  show: React.PropTypes.bool.isRequired,
-  title: React.PropTypes.string.isRequired,
-  onClose: React.PropTypes.func.isRequired,
-  children: React.PropTypes.element.isRequired,
+  show: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };

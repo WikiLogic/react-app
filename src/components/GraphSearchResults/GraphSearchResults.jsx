@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* The Argument Premises
@@ -50,8 +51,8 @@ export default class GraphSearchResults extends React.Component {
 }
 
 GraphSearchResults.propTypes = {
-  results: React.PropTypes.arrayOf(React.PropTypes.object),
-  resultClickHandler: React.PropTypes.func.isRequired
+  results: PropTypes.arrayOf(PropTypes.object),
+  resultClickHandler: PropTypes.func.isRequired
 };
 
 GraphSearchResults.defaultProps = {

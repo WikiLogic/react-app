@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
 
 /**
@@ -160,8 +161,8 @@ export default class GraphSvg extends React.Component {
 }
 
 GraphSvg.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.arrayOf(React.PropTypes.node),
-    React.PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
   ]).isRequired
 };

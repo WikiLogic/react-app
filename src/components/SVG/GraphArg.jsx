@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 // import GraphPremise from 'WlComponents/SVG/GraphPremise.jsx';
 import GraphClaim from 'WlComponents/SVG/GraphClaim.jsx';
@@ -81,9 +82,9 @@ export default class GraphArg extends React.Component {
 }
 
 GraphArg.propTypes = {
-  arg: React.PropTypes.shape({
-    premises: React.PropTypes.array
+  arg: PropTypes.shape({
+    premises: PropTypes.array
   }).isRequired,
-  gridUnit: React.PropTypes.number.isRequired,
-  padUnit: React.PropTypes.number.isRequired
+  gridUnit: PropTypes.number.isRequired,
+  padUnit: PropTypes.number.isRequired
 };

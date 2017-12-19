@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* The Candidate Premises
@@ -50,8 +51,8 @@ export default class CandidatePremises extends React.Component {
 }
 
 CandidatePremises.propTypes = {
-  premises: React.PropTypes.arrayOf(React.PropTypes.object),
-  premisSelectionHandler: React.PropTypes.func.isRequired
+  premises: PropTypes.arrayOf(PropTypes.object),
+  premisSelectionHandler: PropTypes.func.isRequired
 };
 
 CandidatePremises.defaultProps = {

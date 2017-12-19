@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * The Legal documents
@@ -43,5 +44,5 @@ export default function LegalScene(props) {
 
 
 LegalScene.propTypes = {
-  page: React.PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
 };

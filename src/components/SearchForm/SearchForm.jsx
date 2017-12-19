@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
 
 /* Listens to the search form for input and submission
@@ -63,11 +64,11 @@ export default class SearchForm extends React.Component {
 }
 
 SearchForm.propTypes = {
-  inputValue: React.PropTypes.string,
-  submissionHandler: React.PropTypes.func.isRequired,
-  placeholder: React.PropTypes.string.isRequired,
-  id: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string.isRequired
+  inputValue: PropTypes.string,
+  submissionHandler: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 SearchForm.defaultProps = {

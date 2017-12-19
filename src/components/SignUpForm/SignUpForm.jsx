@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import User from 'WlStores/user.js';
 
 /**
@@ -94,5 +95,5 @@ export default class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  loginSuccessHandler: React.PropTypes.func.isRequired,
+  loginSuccessHandler: PropTypes.func.isRequired,
 };

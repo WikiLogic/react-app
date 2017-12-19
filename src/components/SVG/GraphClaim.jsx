@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
 import GraphArg from 'WlComponents/SVG/GraphArg.jsx';
@@ -143,12 +144,12 @@ export default class GraphClaim extends React.Component {
 }
 
 GraphClaim.propTypes = {
-  claim: React.PropTypes.shape({
-    text: React.PropTypes.string.isRequired,
-    _id: React.PropTypes.string.isRequired,
-    _key: React.PropTypes.string.isRequired,
-    arguments: React.PropTypes.array
+  claim: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    _key: PropTypes.string.isRequired,
+    arguments: PropTypes.array
   }).isRequired,
-  gridUnit: React.PropTypes.number.isRequired,
-  padUnit: React.PropTypes.number.isRequired
+  gridUnit: PropTypes.number.isRequired,
+  padUnit: PropTypes.number.isRequired
 };

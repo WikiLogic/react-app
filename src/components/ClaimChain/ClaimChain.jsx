@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import API from 'WlAPI/api.js';
 import ClaimDetail from 'WlComponents/ClaimDetail/ClaimDetail.jsx';
 
@@ -104,5 +105,5 @@ export default class ClaimChain extends React.Component {
 }
 
 ClaimChain.propTypes = {
-  topClaimId: React.PropTypes.string.isRequired,
+  topClaimId: PropTypes.string.isRequired,
 };

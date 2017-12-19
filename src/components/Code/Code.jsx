@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* Code
  * Displays code like JSON
@@ -31,8 +32,8 @@ export default class Code extends React.Component {
 }
 
 Code.propTypes = {
-  code: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
+  code: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
   ]).isRequired
 };

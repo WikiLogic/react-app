@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 
 /**
@@ -41,10 +42,10 @@ export default class UserProfileScene extends React.Component {
 }
 
 UserProfileScene.propTypes = {
-  store: React.PropTypes.shape({
-    username: React.PropTypes.string,
-    signUpDate: React.PropTypes.string,
-    email: React.PropTypes.string,
-    logOut: React.PropTypes.func
+  store: PropTypes.shape({
+    username: PropTypes.string,
+    signUpDate: PropTypes.string,
+    email: PropTypes.string,
+    logOut: PropTypes.func
   }).isRequired
 };

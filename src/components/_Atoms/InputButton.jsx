@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* 
 +------------------------+
@@ -67,14 +68,14 @@ export default class InputButton extends React.Component {
 }
 
 InputButton.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  labelText: React.PropTypes.string.isRequired,
-  inputType: React.PropTypes.string.isRequired,
-  inputPlaceholder: React.PropTypes.string.isRequired,
-  inputInitValue: React.PropTypes.string,
-  inputChangeHandler: React.PropTypes.func,
-  btnText: React.PropTypes.string.isRequired,
-  submitHandler: React.PropTypes.func.isRequired
+  id: PropTypes.string.isRequired,
+  labelText: PropTypes.string.isRequired,
+  inputType: PropTypes.string.isRequired,
+  inputPlaceholder: PropTypes.string.isRequired,
+  inputInitValue: PropTypes.string,
+  inputChangeHandler: PropTypes.func,
+  btnText: PropTypes.string.isRequired,
+  submitHandler: PropTypes.func.isRequired
 };
 
 InputButton.defaultProps = {

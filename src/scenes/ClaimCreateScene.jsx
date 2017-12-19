@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AddClaimForm from 'WlComponents/AddClaimForm/AddClaimForm.jsx';
 import API from 'WlAPI/api.js';
 
@@ -49,7 +50,7 @@ export default class ClaimCreateScene extends React.Component {
 }
 
 ClaimCreateScene.propTypes = {
-  history: React.PropTypes.shape({
-    push: React.PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
 };

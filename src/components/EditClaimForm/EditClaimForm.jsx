@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* Each Claim in the list of search results
@@ -40,9 +41,9 @@ export default class EditClaimForm extends React.Component {
 }
 
 EditClaimForm.propTypes = {
-  claim: React.PropTypes.shape({
-    id: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
-    state: React.PropTypes.number.isRequired,
+  claim: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    state: PropTypes.number.isRequired,
   }).isRequired,
 };

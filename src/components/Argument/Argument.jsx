@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* An argument group
@@ -43,9 +44,9 @@ export default class Argument extends React.Component {
 }
 
 Argument.propTypes = {
-  premisClickHandler: React.PropTypes.func.isRequired,
-  argumentObject: React.PropTypes.shape({
-    type: React.PropTypes.string.isRequired,
-    premises: React.PropTypes.array.isRequired,
+  premisClickHandler: PropTypes.func.isRequired,
+  argumentObject: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    premises: PropTypes.array.isRequired,
   }).isRequired
 };

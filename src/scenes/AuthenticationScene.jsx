@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoginForm from 'WlComponents/LoginForm/LoginForm.jsx';
 import Loader from 'WlComponents/Loader/Loader.jsx';
 import { Link } from 'react-router-dom';
@@ -49,5 +50,5 @@ export default class AuthenticationScene extends React.Component {
 }
 
 AuthenticationScene.propTypes = {
-  loginSuccessHandler: React.PropTypes.func.isRequired,
+  loginSuccessHandler: PropTypes.func.isRequired,
 };

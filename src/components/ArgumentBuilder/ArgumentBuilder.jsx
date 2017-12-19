@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import API from 'WlAPI/api.js';
 import ArgumentPremises from './ArgumentPremises.jsx';
@@ -229,5 +230,5 @@ export default class ArgumentBuilder extends React.Component {
 }
 
 ArgumentBuilder.propTypes = {
-  submissionHandler: React.PropTypes.func.isRequired
+  submissionHandler: PropTypes.func.isRequired
 };

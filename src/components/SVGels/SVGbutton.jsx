@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 import SVGtext from './SVGtext.jsx';
 //import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
@@ -66,8 +67,8 @@ export default class SVGbutton extends React.Component {
 }
 
 SVGbutton.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired,
-  clickHandler: React.PropTypes.func.isRequired
+  text: PropTypes.string.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  clickHandler: PropTypes.func.isRequired
 };

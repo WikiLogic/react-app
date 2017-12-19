@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import API from 'WlAPI/api.js';
 import Argument from 'WlComponents/Argument/Argument.jsx';
@@ -180,12 +181,12 @@ export default class ClaimDetailScene extends React.Component {
 }
 
 ClaimDetailScene.propTypes = {
-  routeProps: React.PropTypes.shape({
-    match: React.PropTypes.shape({
-      params: React.PropTypes.shape({
-        claimId: React.PropTypes.string.isRequired,
+  routeProps: PropTypes.shape({
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        claimId: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  isLoggedIn: React.PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired
 };

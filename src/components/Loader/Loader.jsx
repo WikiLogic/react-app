@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* Loader
  * the little dots that fly accross to indicate that something is loading
@@ -40,5 +41,5 @@ export default class Loader extends React.Component {
 }
 
 Loader.propTypes = {
-  isLoading: React.PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired
 };

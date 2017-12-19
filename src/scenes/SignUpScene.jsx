@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SignUpForm from 'WlComponents/SignUpForm/SignUpForm.jsx';
 import { Link } from 'react-router-dom';
 
@@ -46,5 +47,5 @@ export default class SignUpScene extends React.Component {
 }
 
 SignUpScene.propTypes = {
-  loginSuccessHandler: React.PropTypes.func.isRequired,
+  loginSuccessHandler: PropTypes.func.isRequired,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
@@ -47,14 +48,14 @@ class Claim extends React.Component {
 }
 
 Claim.propTypes = {
-  claim: React.PropTypes.shape({
-    labels: React.PropTypes.arrayOf(React.PropTypes.string),
-    text: React.PropTypes.string.isRequired,
-    probability: React.PropTypes.number,
-    _key: React.PropTypes.string.isRequired,
-    _id: React.PropTypes.string.isRequired
+  claim: PropTypes.shape({
+    labels: PropTypes.arrayOf(PropTypes.string),
+    text: PropTypes.string.isRequired,
+    probability: PropTypes.number,
+    _key: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired
   }).isRequired,
-  children: React.PropTypes.element
+  children: PropTypes.element
 };
 
 Claim.defaultProps = {
