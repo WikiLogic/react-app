@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { action } from 'mobx';
+import { observer } from 'mobx-react';
 import Claim from 'WlComponents/Claim/Claim.jsx';
 
 /* The Argument Premises
  * Displays the claims that have been selected to be a part of the new argument.
  */
+@observer
 export default class GraphSearchResults extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
@@ -22,7 +25,7 @@ export default class GraphSearchResults extends React.Component {
   }
 
   render() {
-    console.log('rendering', this.props);
+    console.log('rendering graph results', this.props);
     if (!this.props.store.results) {
       return <p>No results</p>;
     }

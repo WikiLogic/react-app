@@ -144,7 +144,6 @@ export default class GraphScene extends React.Component {
               store={this.props.store.searchStore}
               placeholder="Search Claims"
               label="Search"
-              inputValue={this.props.store.search.term}
               id="graph-scene-search-input"
             />
 

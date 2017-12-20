@@ -49,7 +49,7 @@ class Wikilogic extends React.Component {
 
   componentDidMount() {
     // This is the place to trigger any network requests that need to go out on the first load
-    Claims.init();
+    // Claims.init();
   }
 
   setNewClaimFocus(claim) {
