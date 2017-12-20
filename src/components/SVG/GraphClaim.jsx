@@ -4,7 +4,7 @@ import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
 import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
 import GraphArg from 'WlComponents/SVG/GraphArg.jsx';
 import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import API from 'WlAPI/api.js';
+// import API from 'WlAPI/api.js';
 
 /* The Claim Wrapper for the graph
  * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
@@ -13,13 +13,15 @@ import API from 'WlAPI/api.js';
  */
 export default class GraphClaim extends React.Component {
   static propTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    gridUnit: PropTypes.number.isRequired,
+    padUnit: PropTypes.number.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      claim: this.props.claim,
+      claim: this.props.store.rootClaim,
       arguments: [],
       isFocused: false
     };
@@ -35,15 +37,15 @@ export default class GraphClaim extends React.Component {
   }
 
   loadArguments() {
-    console.log('tada! All the btn did was say, hey dad, fire that function you passed me! Dad knows what to do.', this.props.claim);
-    API.getClaimDetailById(this.props.claim._key)
-      .then((data) => {
-        this.setState({
-          arguments: data.claim.arguments
-        });
-      }).catch((err) => {
-        console.log('Trying to load claim detail error', err);
-      });
+    console.log('tada! All the btn did was say, hey dad, fire that function you passed me! Dad knows what to do.');
+    // API.getClaimDetailById(this.props.claim._key)
+    //   .then((data) => {
+    //     this.setState({
+    //       arguments: data.claim.arguments
+    //     });
+    //   }).catch((err) => {
+    //     console.log('Trying to load claim detail error', err);
+    //   });
   }
 
   //will need a:
@@ -127,7 +129,7 @@ export default class GraphClaim extends React.Component {
               y={0}
               width={claimWidth}
               height={claimHeight}
-              text={this.props.claim.text}
+              text={this.props.store.rootClaim.text}
             />
 
             {(this.state.isFocused &&
@@ -147,13 +149,13 @@ export default class GraphClaim extends React.Component {
   }
 }
 
-GraphClaim.propTypes = {
-  claim: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
-    _key: PropTypes.string.isRequired,
-    arguments: PropTypes.array
-  }).isRequired,
-  gridUnit: PropTypes.number.isRequired,
-  padUnit: PropTypes.number.isRequired
-};
+// GraphClaim.propTypes = {
+//   claim: PropTypes.shape({
+//     text: PropTypes.string.isRequired,
+//     _id: PropTypes.string.isRequired,
+//     _key: PropTypes.string.isRequired,
+//     arguments: PropTypes.array
+//   }).isRequired,
+//   gridUnit: PropTypes.number.isRequired,
+//   padUnit: PropTypes.number.isRequired
+// };

@@ -1,6 +1,6 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import SearchStore from '../stores/search.js';
-import GraphStore from '../stores/graph.js';
+import GraphClaimStore from '../stores/graphClaim.js';
 
 //main pulls in the scene and assigns this controller as it's state.
 // post about this. Nearly went down the route of splitting up the areas in a scene into 'views', but realised that way 
@@ -12,10 +12,18 @@ export default class GraphController {
   //Search & results
   @observable searchStore;
   //set up the graph component & store
-  @observable graphStore;
+  @observable graphClaimStore;
+  @observable hasGraphData;
 
   constructor() {
     this.searchStore = new SearchStore();
-    this.graphStore = new GraphStore();
+    this.graphClaimStore = new GraphClaimStore();
+    this.hasGraphData = false;
+  }
+
+  @action
+  loadClaim(claim) {
+    this.graphClaimStore.setRootClaim(claim);
+    this.hasGraphData = true;
   }
 }

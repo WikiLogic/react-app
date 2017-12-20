@@ -4,7 +4,6 @@ import { action } from 'mobx';
 import { observer } from 'mobx-react';
 
 import API from 'WlAPI/api.js';
-import Claims from 'WlStores/claims.js';
 
 import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
 import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
@@ -29,87 +28,17 @@ export default class GraphScene extends React.Component {
     super(props);
 
     this.state = {
-      searchTerm: '',
-      searchResults: [],
       gridUnit: 100,
-      padUnit: 4,
-      graphClaim: null
+      padUnit: 4
     };
 
-    // this.searchClaims = this.searchClaims.bind(this);
-    // this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.loadClaim = this.loadClaim.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
 
-  componentDidMount() {
-    // Claims.getList().then((claims) => {
-    //   console.log('CLAIMS!', claims);
-    //   this.setState({
-    //     searchResults: claims
-    //   });
-    // }).catch((err) => {
-    //   console.error('get claims error', err);
-    // });
-  }
-
-  // @action
-  // handleSearchSubmit(search) {
-  //   this.props.store.search.term = search;
-  // }
-
-  // searchClaims(search) {
-  //   // run the search
-  //   if (isNaN(search)) {
-  //     API.searchClaimsByTerm(search)
-  //       .then((data) => {
-  //         this.setState({
-  //           searchResults: data.results,
-  //           isLoading: false
-  //         });
-  //       }).catch((err) => {
-  //         this.setState({
-  //           searchResults: null,
-  //           isLoading: false
-  //         });
-  //         console.log('error', err);
-  //       });
-  //   } else {
-  //     API.getClaimDetailById(search)
-  //       .then((data) => {
-  //         this.setState({
-  //           searchResults: [data.claim],
-  //           isLoading: false
-  //         });
-  //       }).catch((err) => {
-  //         this.setState({
-  //           searchResults: null,
-  //           isLoading: false
-  //         });
-  //         console.log('error', err);
-  //       });
-  //   }
-
-  //   // set the state
-  //   this.setState({
-  //     searchTerm: search,
-  //     isLoading: true
-  //   });
-  // }
-
+  @action
   loadClaim(result) {
-    this.setState({
-      graphClaim: result
-    });
-    //fire off a request to the API to get the args for this claim
-    API.getClaimDetailById(result._key)
-      .then((data) => {
-        this.setState({
-          graphClaim: data.claim
-        });
-      }).catch((err) => {
-        console.log('Trying to load claim detail error', err);
-      });
+    this.props.store.loadClaim(result);
   }
 
   newArgumentSubmissionHandler(newArgument) {
@@ -163,16 +92,15 @@ export default class GraphScene extends React.Component {
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
 
-                {(this.state.graphClaim &&
+                {(this.props.store.hasGraphData &&
                   <GraphClaim
-                    store={this.state.store.graphStore}
-                    claim={this.state.graphClaim}
+                    store={this.props.store.graphClaimStore}
                     premiseClickHandler={this.loadClaim}
                     gridUnit={this.state.gridUnit}
                     padUnit={this.state.padUnit}
                   />
                 )}
-                {(!this.state.graphclaim &&
+                {(!this.props.store.hasGraphData &&
                   <SVGtext
                     text="Message to search claims and click them to load into this graph. Also a button to load an example"
                     x={-200}
