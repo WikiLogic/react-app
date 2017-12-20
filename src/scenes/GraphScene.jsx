@@ -156,7 +156,6 @@ export default class GraphScene extends React.Component {
             <div className="sidebar-layout__side padding">
               <GraphSearchResults
                 store={this.props.store.searchStore}
-                results={this.state.searchResults}
                 resultClickHandler={this.loadClaim}
               />
               {/* <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} /> */}

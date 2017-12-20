@@ -12,6 +12,10 @@ import API from 'WlAPI/api.js';
  * It's then up to the parent to accomodate properly.
  */
 export default class GraphClaim extends React.Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
