@@ -2,14 +2,17 @@ import { observable, action } from 'mobx';
 //Holds onto all the searches & their settings
 
 export default class Search {
-  @observable term = '';
-  @observable history = [];
+  @observable term;
+  @observable results;
+
+  constructor() {
+    this.term = '';
+    this.results = [];
+  }
 
   @action
-  setTerm(term) {
-    if (this.term !== '') {
-      this.history.push(this.term);
-    }
-    this.term = term;
+  submit() {
+    //get claims from the server
+    //update the results array
   }
 }

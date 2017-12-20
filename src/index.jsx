@@ -111,7 +111,7 @@ class Wikilogic extends React.Component {
             render={(routeProps) => {
               return (
                 <GraphScene
-                  store={GraphStore}
+                  store={new GraphStore()}
                   routeProps={routeProps}
                 />
               );
@@ -276,3 +276,14 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root'),
 );
+
+
+// We have a little news to share, our time in Philadelphia is coming to a close. 
+// We are returning to the place it all began (for us), Edinburgh!
+// Stay in touch and we hope to see you in the coming year
+// Wishing you merryment and joy for all the year round!
+
+// Lots of love, 
+// Christina, Iain, Tink, & Sebastian
+
+

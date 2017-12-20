@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { action } from 'mobx';
+import { observer } from 'mobx-react';
 import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
 
 /* Listens to the search form for input and submission
@@ -7,31 +9,30 @@ import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
  * Hands the submission event back up to the parent
  */
 
+@observer
 export default class SearchForm extends React.Component {
+
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      value: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.inputValue !== '') {
-      this.setState({
-        value: nextProps.inputValue,
-      });
-    }
-  }
-
+  @action
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.props.store.term = event.target.value;
   }
 
+  @action
   handleSubmit(event) {
     event.preventDefault();
-    this.props.submissionHandler(this.state.value);
+    this.props.store.submit();
   }
 
   render() {
@@ -51,7 +52,7 @@ export default class SearchForm extends React.Component {
           className="search-form__input"
           type="text"
           placeholder={this.props.placeholder}
-          value={this.state.value}
+          value={this.props.store.term}
           onChange={this.handleChange}
         />
 
@@ -62,15 +63,3 @@ export default class SearchForm extends React.Component {
     );
   }
 }
-
-SearchForm.propTypes = {
-  inputValue: PropTypes.string,
-  submissionHandler: PropTypes.func.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
-};
-
-SearchForm.defaultProps = {
-  inputValue: '',
-};

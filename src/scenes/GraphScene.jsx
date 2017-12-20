@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { action } from 'mobx';
-import { observer, PropTypes as MobxTypes } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import API from 'WlAPI/api.js';
 import Claims from 'WlStores/claims.js';
@@ -21,6 +21,10 @@ import SVGtext from 'WlComponents/SVGels/SVGtext';
 
 @observer
 export default class GraphScene extends React.Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -32,66 +36,66 @@ export default class GraphScene extends React.Component {
       graphClaim: null
     };
 
-    this.searchClaims = this.searchClaims.bind(this);
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    // this.searchClaims = this.searchClaims.bind(this);
+    // this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.loadClaim = this.loadClaim.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
   }
 
   componentDidMount() {
-    Claims.getList().then((claims) => {
-      console.log('CLAIMS!', claims);
-      this.setState({
-        searchResults: claims
-      });
-    }).catch((err) => {
-      console.error('get claims error', err);
-    });
+    // Claims.getList().then((claims) => {
+    //   console.log('CLAIMS!', claims);
+    //   this.setState({
+    //     searchResults: claims
+    //   });
+    // }).catch((err) => {
+    //   console.error('get claims error', err);
+    // });
   }
 
-  @action
-  handleSearchSubmit(search) {
-    this.props.store.search.term = search;
-  }
+  // @action
+  // handleSearchSubmit(search) {
+  //   this.props.store.search.term = search;
+  // }
 
-  searchClaims(search) {
-    // run the search
-    if (isNaN(search)) {
-      API.searchClaimsByTerm(search)
-        .then((data) => {
-          this.setState({
-            searchResults: data.results,
-            isLoading: false
-          });
-        }).catch((err) => {
-          this.setState({
-            searchResults: null,
-            isLoading: false
-          });
-          console.log('error', err);
-        });
-    } else {
-      API.getClaimDetailById(search)
-        .then((data) => {
-          this.setState({
-            searchResults: [data.claim],
-            isLoading: false
-          });
-        }).catch((err) => {
-          this.setState({
-            searchResults: null,
-            isLoading: false
-          });
-          console.log('error', err);
-        });
-    }
+  // searchClaims(search) {
+  //   // run the search
+  //   if (isNaN(search)) {
+  //     API.searchClaimsByTerm(search)
+  //       .then((data) => {
+  //         this.setState({
+  //           searchResults: data.results,
+  //           isLoading: false
+  //         });
+  //       }).catch((err) => {
+  //         this.setState({
+  //           searchResults: null,
+  //           isLoading: false
+  //         });
+  //         console.log('error', err);
+  //       });
+  //   } else {
+  //     API.getClaimDetailById(search)
+  //       .then((data) => {
+  //         this.setState({
+  //           searchResults: [data.claim],
+  //           isLoading: false
+  //         });
+  //       }).catch((err) => {
+  //         this.setState({
+  //           searchResults: null,
+  //           isLoading: false
+  //         });
+  //         console.log('error', err);
+  //       });
+  //   }
 
-    // set the state
-    this.setState({
-      searchTerm: search,
-      isLoading: true
-    });
-  }
+  //   // set the state
+  //   this.setState({
+  //     searchTerm: search,
+  //     isLoading: true
+  //   });
+  // }
 
   loadClaim(result) {
     this.setState({
@@ -131,14 +135,13 @@ export default class GraphScene extends React.Component {
   }
 
   render() {
-
     return (
       <div className="page">
         <div className="page__header">
           <div className="max-width-wrap">
 
             <SearchForm
-              submissionHandler={this.handleSearchSubmit}
+              store={this.props.store.searchStore}
               placeholder="Search Claims"
               label="Search"
               inputValue={this.props.store.search.term}
@@ -152,6 +155,7 @@ export default class GraphScene extends React.Component {
 
             <div className="sidebar-layout__side padding">
               <GraphSearchResults
+                store={this.props.store.searchStore}
                 results={this.state.searchResults}
                 resultClickHandler={this.loadClaim}
               />
@@ -163,6 +167,7 @@ export default class GraphScene extends React.Component {
 
                 {(this.state.graphClaim &&
                   <GraphClaim
+                    store={this.state.store.graphStore}
                     claim={this.state.graphClaim}
                     premiseClickHandler={this.loadClaim}
                     gridUnit={this.state.gridUnit}
@@ -188,11 +193,3 @@ export default class GraphScene extends React.Component {
     );
   }
 }
-
-GraphScene.propTypes = {
-  store: MobxTypes.observableObject({
-    search: PropTypes.shape({
-      term: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
-};

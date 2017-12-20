@@ -36861,7 +36861,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _desc, _value, _class2;
+var _class, _class2, _temp;
 // import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
 // import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
 
@@ -36914,41 +36914,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-  var desc = {};
-  Object['ke' + 'ys'](descriptor).forEach(function (key) {
-    desc[key] = descriptor[key];
-  });
-  desc.enumerable = !!desc.enumerable;
-  desc.configurable = !!desc.configurable;
-
-  if ('value' in desc || desc.initializer) {
-    desc.writable = true;
-  }
-
-  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-    return decorator(target, property, desc) || desc;
-  }, desc);
-
-  if (context && desc.initializer !== void 0) {
-    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-    desc.initializer = undefined;
-  }
-
-  if (desc.initializer === void 0) {
-    Object['define' + 'Property'](target, property, desc);
-    desc = null;
-  }
-
-  return desc;
-}
-
 /**
  * The Home page
  * @prop {*} name 
  */
 
-var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$Component) {
+var GraphScene = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
   _inherits(GraphScene, _React$Component);
 
   function GraphScene(props) {
@@ -36964,8 +36935,8 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
       graphClaim: null
     };
 
-    _this.searchClaims = _this.searchClaims.bind(_this);
-    _this.handleSearchSubmit = _this.handleSearchSubmit.bind(_this);
+    // this.searchClaims = this.searchClaims.bind(this);
+    // this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     _this.loadClaim = _this.loadClaim.bind(_this);
     _this.newArgumentSubmissionHandler = _this.newArgumentSubmissionHandler.bind(_this);
     return _this;
@@ -36973,74 +36944,72 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
 
   _createClass(GraphScene, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+    value: function componentDidMount() {}
+    // Claims.getList().then((claims) => {
+    //   console.log('CLAIMS!', claims);
+    //   this.setState({
+    //     searchResults: claims
+    //   });
+    // }).catch((err) => {
+    //   console.error('get claims error', err);
+    // });
 
-      _claims2.default.getList().then(function (claims) {
-        console.log('CLAIMS!', claims);
-        _this2.setState({
-          searchResults: claims
-        });
-      }).catch(function (err) {
-        console.error('get claims error', err);
-      });
-    }
-  }, {
-    key: 'handleSearchSubmit',
-    value: function handleSearchSubmit(search) {
-      this.props.store.search.term = search;
-    }
-  }, {
-    key: 'searchClaims',
-    value: function searchClaims(search) {
-      var _this3 = this;
 
-      // run the search
-      if (isNaN(search)) {
-        _api2.default.searchClaimsByTerm(search).then(function (data) {
-          _this3.setState({
-            searchResults: data.results,
-            isLoading: false
-          });
-        }).catch(function (err) {
-          _this3.setState({
-            searchResults: null,
-            isLoading: false
-          });
-          console.log('error', err);
-        });
-      } else {
-        _api2.default.getClaimDetailById(search).then(function (data) {
-          _this3.setState({
-            searchResults: [data.claim],
-            isLoading: false
-          });
-        }).catch(function (err) {
-          _this3.setState({
-            searchResults: null,
-            isLoading: false
-          });
-          console.log('error', err);
-        });
-      }
+    // @action
+    // handleSearchSubmit(search) {
+    //   this.props.store.search.term = search;
+    // }
 
-      // set the state
-      this.setState({
-        searchTerm: search,
-        isLoading: true
-      });
-    }
+    // searchClaims(search) {
+    //   // run the search
+    //   if (isNaN(search)) {
+    //     API.searchClaimsByTerm(search)
+    //       .then((data) => {
+    //         this.setState({
+    //           searchResults: data.results,
+    //           isLoading: false
+    //         });
+    //       }).catch((err) => {
+    //         this.setState({
+    //           searchResults: null,
+    //           isLoading: false
+    //         });
+    //         console.log('error', err);
+    //       });
+    //   } else {
+    //     API.getClaimDetailById(search)
+    //       .then((data) => {
+    //         this.setState({
+    //           searchResults: [data.claim],
+    //           isLoading: false
+    //         });
+    //       }).catch((err) => {
+    //         this.setState({
+    //           searchResults: null,
+    //           isLoading: false
+    //         });
+    //         console.log('error', err);
+    //       });
+    //   }
+
+    //   // set the state
+    //   this.setState({
+    //     searchTerm: search,
+    //     isLoading: true
+    //   });
+    // }
+
   }, {
     key: 'loadClaim',
     value: function loadClaim(result) {
-      var _this4 = this;
+      var _this2 = this;
 
       this.setState({
         graphClaim: result
       });
       //fire off a request to the API to get the args for this claim
       _api2.default.getClaimDetailById(result._key).then(function (data) {
-        _this4.setState({
+        _this2.setState({
           graphClaim: data.claim
         });
       }).catch(function (err) {
@@ -37050,7 +37019,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
   }, {
     key: 'newArgumentSubmissionHandler',
     value: function newArgumentSubmissionHandler(newArgument) {
-      var _this5 = this;
+      var _this3 = this;
 
       console.log('new argument submission!', newArgument);
       var premiseIds = [];
@@ -37065,7 +37034,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
         premiseIds: premiseIds
       }).then(function (res) {
         console.log('claim with new argument returned!', res);
-        _this5.setState({
+        _this3.setState({
           claims: res.data.claim
         });
       }).catch(function (err) {
@@ -37075,7 +37044,6 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
   }, {
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'div',
         { className: 'page' },
@@ -37086,7 +37054,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
             'div',
             { className: 'max-width-wrap' },
             _react2.default.createElement(_SearchForm2.default, {
-              submissionHandler: this.handleSearchSubmit,
+              store: this.props.store.searchStore,
               placeholder: 'Search Claims',
               label: 'Search',
               inputValue: this.props.store.search.term,
@@ -37104,6 +37072,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
               'div',
               { className: 'sidebar-layout__side padding' },
               _react2.default.createElement(_GraphSearchResults2.default, {
+                store: this.props.store.searchStore,
                 results: this.state.searchResults,
                 resultClickHandler: this.loadClaim
               })
@@ -37115,6 +37084,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
                 _GraphSvg2.default,
                 null,
                 this.state.graphClaim && _react2.default.createElement(_GraphClaim2.default, {
+                  store: this.state.store.graphStore,
                   claim: this.state.graphClaim,
                   premiseClickHandler: this.loadClaim,
                   gridUnit: this.state.gridUnit,
@@ -37136,18 +37106,11 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = function (_React$C
   }]);
 
   return GraphScene;
-}(_react2.default.Component), (_applyDecoratedDescriptor(_class2.prototype, 'handleSearchSubmit', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleSearchSubmit'), _class2.prototype)), _class2)) || _class;
+}(_react2.default.Component), _class2.propTypes = {
+  store: _propTypes2.default.object.isRequired
+}, _temp)) || _class;
 
 exports.default = GraphScene;
-
-
-GraphScene.propTypes = {
-  store: _mobxReact.PropTypes.observableObject({
-    search: _propTypes2.default.shape({
-      term: _propTypes2.default.string.isRequired
-    }).isRequired
-  }).isRequired
-};
 
 /***/ }),
 /* 136 */
@@ -37161,13 +37124,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _desc, _value, _class, _descriptor;
+var _desc, _value, _class, _descriptor, _descriptor2;
 
 var _mobx = __webpack_require__(22);
 
 var _search = __webpack_require__(159);
 
 var _search2 = _interopRequireDefault(_search);
+
+var _graph = __webpack_require__(299);
+
+var _graph2 = _interopRequireDefault(_graph);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37222,18 +37189,23 @@ function _initializerWarningHelper(descriptor, context) {
 // Mapped it out, then thought state is basically the same, map it out alongside
 // taken to it's conclusion, the scene needs a state - but as scenes are seperate from components, so shall their 
 // state be seperate from stores. Enter the controller! The state's version of a scene!
-var GraphController = (_class =
-//set up the list component & store
-//set up the graph component & store
-function GraphController() {
+var GraphController = (_class = function GraphController() {
   _classCallCheck(this, GraphController);
 
-  _initDefineProp(this, 'search', _descriptor, this);
-}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'search', [_mobx.observable], {
+  _initDefineProp(this, 'searchStore', _descriptor, this);
+
+  _initDefineProp(this, 'graphStore', _descriptor2, this);
+
+  this.searchStore = new _search2.default();
+  this.graphStore = new _graph2.default();
+}
+//set up the graph component & store
+, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'searchStore', [_mobx.observable], {
   enumerable: true,
-  initializer: function initializer() {
-    return new _search2.default();
-  }
+  initializer: null
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'graphStore', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
 })), _class);
 exports.default = GraphController;
 
@@ -39680,6 +39652,8 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _class, _desc, _value, _class2, _class3, _temp;
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -39687,6 +39661,10 @@ var _react2 = _interopRequireDefault(_react);
 var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _mobx = __webpack_require__(22);
+
+var _mobxReact = __webpack_require__(50);
 
 var _SearchIconSvg = __webpack_require__(157);
 
@@ -39700,12 +39678,41 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+  var desc = {};
+  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+    desc[key] = descriptor[key];
+  });
+  desc.enumerable = !!desc.enumerable;
+  desc.configurable = !!desc.configurable;
+
+  if ('value' in desc || desc.initializer) {
+    desc.writable = true;
+  }
+
+  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+    return decorator(target, property, desc) || desc;
+  }, desc);
+
+  if (context && desc.initializer !== void 0) {
+    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+    desc.initializer = undefined;
+  }
+
+  if (desc.initializer === void 0) {
+    Object['define' + 'Property'](target, property, desc);
+    desc = null;
+  }
+
+  return desc;
+}
+
 /* Listens to the search form for input and submission
  * Publishes search submissions (for text or number searches)
  * Hands the submission event back up to the parent
  */
 
-var SearchForm = function (_React$Component) {
+var SearchForm = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 = function (_React$Component) {
   _inherits(SearchForm, _React$Component);
 
   function SearchForm(props) {
@@ -39713,33 +39720,20 @@ var SearchForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
 
-    _this.state = {
-      value: ''
-    };
-    _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
   _createClass(SearchForm, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.inputValue !== '') {
-        this.setState({
-          value: nextProps.inputValue
-        });
-      }
-    }
-  }, {
     key: 'handleChange',
     value: function handleChange(event) {
-      this.setState({ value: event.target.value });
+      this.props.store.term = event.target.value;
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      this.props.submissionHandler(this.state.value);
+      this.props.store.submit();
     }
   }, {
     key: 'render',
@@ -39760,7 +39754,7 @@ var SearchForm = function (_React$Component) {
           className: 'search-form__input',
           type: 'text',
           placeholder: this.props.placeholder,
-          value: this.state.value,
+          value: this.props.store.term,
           onChange: this.handleChange
         }),
         _react2.default.createElement(
@@ -39773,22 +39767,14 @@ var SearchForm = function (_React$Component) {
   }]);
 
   return SearchForm;
-}(_react2.default.Component);
-
-exports.default = SearchForm;
-
-
-SearchForm.propTypes = {
-  inputValue: _propTypes2.default.string,
-  submissionHandler: _propTypes2.default.func.isRequired,
+}(_react2.default.Component), _class3.propTypes = {
+  store: _propTypes2.default.object.isRequired,
   placeholder: _propTypes2.default.string.isRequired,
   id: _propTypes2.default.string.isRequired,
   label: _propTypes2.default.string.isRequired
-};
+}, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'handleChange', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleChange'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'handleSubmit', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleSubmit'), _class2.prototype)), _class2)) || _class;
 
-SearchForm.defaultProps = {
-  inputValue: ''
-};
+exports.default = SearchForm;
 
 /***/ }),
 /* 155 */
@@ -40313,7 +40299,7 @@ var Wikilogic = function (_React$Component) {
             exact: true,
             render: function render(routeProps) {
               return _react2.default.createElement(_GraphScene2.default, {
-                store: _GraphStore2.default,
+                store: new _GraphStore2.default(),
                 routeProps: routeProps
               });
             }
@@ -40481,6 +40467,14 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(Wikilogic, null)
 ), document.getElementById('root'));
 
+// We have a little news to share, our time in Philadelphia is coming to a close. 
+// We are returning to the place it all began (for us), Edinburgh!
+// Stay in touch and we hope to see you in the coming year
+// Wishing you merryment and joy for all the year round!
+
+// Lots of love, 
+// Christina, Iain, Tink, & Sebastian
+
 /***/ }),
 /* 159 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -40552,31 +40546,28 @@ var Search = (_class = function () {
 
     _initDefineProp(this, 'term', _descriptor, this);
 
-    _initDefineProp(this, 'history', _descriptor2, this);
+    _initDefineProp(this, 'results', _descriptor2, this);
+
+    this.term = '';
+    this.results = [];
   }
 
   _createClass(Search, [{
-    key: 'setTerm',
-    value: function setTerm(term) {
-      if (this.term !== '') {
-        this.history.push(this.term);
-      }
-      this.term = term;
+    key: 'submit',
+    value: function submit() {
+      //get claims from the server
+      //update the results array
     }
   }]);
 
   return Search;
 }(), (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'term', [_mobx.observable], {
   enumerable: true,
-  initializer: function initializer() {
-    return '';
-  }
-}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'history', [_mobx.observable], {
+  initializer: null
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'results', [_mobx.observable], {
   enumerable: true,
-  initializer: function initializer() {
-    return [];
-  }
-}), _applyDecoratedDescriptor(_class.prototype, 'setTerm', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setTerm'), _class.prototype)), _class);
+  initializer: null
+}), _applyDecoratedDescriptor(_class.prototype, 'submit', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'submit'), _class.prototype)), _class);
 exports.default = Search;
 
 /***/ }),
@@ -56698,6 +56689,92 @@ module.exports = function(module) {
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
+
+/***/ }),
+/* 299 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _desc, _value, _class, _descriptor;
+
+var _mobx = __webpack_require__(22);
+
+function _initDefineProp(target, property, descriptor, context) {
+  if (!descriptor) return;
+  Object.defineProperty(target, property, {
+    enumerable: descriptor.enumerable,
+    configurable: descriptor.configurable,
+    writable: descriptor.writable,
+    value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+  });
+}
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+  var desc = {};
+  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+    desc[key] = descriptor[key];
+  });
+  desc.enumerable = !!desc.enumerable;
+  desc.configurable = !!desc.configurable;
+
+  if ('value' in desc || desc.initializer) {
+    desc.writable = true;
+  }
+
+  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+    return decorator(target, property, desc) || desc;
+  }, desc);
+
+  if (context && desc.initializer !== void 0) {
+    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+    desc.initializer = undefined;
+  }
+
+  if (desc.initializer === void 0) {
+    Object['define' + 'Property'](target, property, desc);
+    desc = null;
+  }
+
+  return desc;
+}
+
+function _initializerWarningHelper(descriptor, context) {
+  throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+}
+
+var Graph = (_class = function () {
+  function Graph(rootClaim) {
+    _classCallCheck(this, Graph);
+
+    _initDefineProp(this, 'rootClaim', _descriptor, this);
+
+    this.rootClaim = rootClaim;
+  }
+
+  _createClass(Graph, [{
+    key: 'expandClaim',
+    value: function expandClaim() {
+      //hmm
+    }
+  }]);
+
+  return Graph;
+}(), (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'rootClaim', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _applyDecoratedDescriptor(_class.prototype, 'expandClaim', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'expandClaim'), _class.prototype)), _class);
+exports.default = Graph;
 
 /***/ })
 /******/ ]);
