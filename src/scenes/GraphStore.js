@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
-import SearchStore from '../stores/search.js';
-import GraphClaimStore from '../stores/graphClaim.js';
+import SearchStore from 'src/stores/search.js';
+import GraphClaimStore from 'src/stores/graphClaim.js';
 
 //main pulls in the scene and assigns this controller as it's state.
 // post about this. Nearly went down the route of splitting up the areas in a scene into 'views', but realised that way 

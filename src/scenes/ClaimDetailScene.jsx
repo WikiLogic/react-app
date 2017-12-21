@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import API from '../API/api.js';
-import Argument from '../components/Argument/Argument.jsx';
-import StatusIndicator from '../components/StatusIndicator/StatusIndicator.jsx';
-import ArgumentBuilder from '../components/ArgumentBuilder/ArgumentBuilder.jsx';
+import API from 'src/API/api.js';
+import Argument from 'src/components/Argument/Argument.jsx';
+import StatusIndicator from 'src/components/StatusIndicator/StatusIndicator.jsx';
+import ArgumentBuilder from 'src/components/ArgumentBuilder/ArgumentBuilder.jsx';
 
 /**
  * The Search Results page

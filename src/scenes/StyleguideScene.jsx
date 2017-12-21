@@ -1,8 +1,8 @@
 import React from 'react';
-import Claim from '../components/Claim/Claim.jsx';
-import Input from '../components/_Atoms/Input.jsx';
-import InputButton from '../components/_Atoms/InputButton.jsx';
-import InputRange from '../components/_Atoms/InputRange.jsx';
+import Claim from 'src/components/Claim/Claim.jsx';
+import Input from 'src/components/_Atoms/Input.jsx';
+import InputButton from 'src/components/_Atoms/InputButton.jsx';
+import InputRange from 'src/components/_Atoms/InputRange.jsx';
 
 /**
  * The Search Results page

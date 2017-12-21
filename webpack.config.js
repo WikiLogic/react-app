@@ -4,6 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      src: path.resolve(__dirname, 'src')
+    },
+  },
   entry: {
     app: [
       './src/index.jsx',

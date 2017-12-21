@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import API from '../../API/api.js';
+import API from 'src/API/api.js';
 import ArgumentPremises from './ArgumentPremises.jsx';
 import CandidatePremises from './CandidatePremises.jsx';
 /* Search & select claims to add as premises to an argument
