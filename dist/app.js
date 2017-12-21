@@ -40440,6 +40440,12 @@ var _desc, _value, _class, _descriptor;
 
 var _mobx = __webpack_require__(15);
 
+var _api = __webpack_require__(161);
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
   Object.defineProperty(target, property, {
@@ -40489,6 +40495,8 @@ function _initializerWarningHelper(descriptor, context) {
  * Each claim on the graph and all it's children
  */
 
+var claimApi = new _api2.default('/api/v1/claims');
+
 var GraphClaim = (_class = function () {
   function GraphClaim(rootClaim) {
     _classCallCheck(this, GraphClaim);
@@ -40501,17 +40509,17 @@ var GraphClaim = (_class = function () {
   _createClass(GraphClaim, [{
     key: 'setRootClaim',
     value: function setRootClaim(claim) {
+      var _this = this;
+
       //may not be a full claim - get it's children
+      console.log('setting root claim: ', claim);
       this.rootClaim = claim;
 
-      // API.getClaimDetailById(result._key)
-      //   .then((data) => {
-      //     this.setState({
-      //       graphClaim: data.claim
-      //     });
-      //   }).catch((err) => {
-      //     console.log('Trying to load claim detail error', err);
-      //   });
+      claimApi.get('/' + claim._key).then(function (res) {
+        _this.rootClaim = res.data.claim;
+      }).catch(function (err) {
+        console.error('Get claim detail error: ', err);
+      });
     }
   }]);
 
@@ -40520,6 +40528,15 @@ var GraphClaim = (_class = function () {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'setRootClaim', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setRootClaim'), _class.prototype)), _class);
+exports.default = GraphClaim;
+
+var GraphRow = function GraphRow() {
+  _classCallCheck(this, GraphRow);
+};
+
+var GraphColumn = function GraphColumn() {
+  _classCallCheck(this, GraphColumn);
+};
 
 // export default class GraphClaims {
 //   @observable graphClaims;
@@ -40528,8 +40545,6 @@ var GraphClaim = (_class = function () {
 //     this.graphClaims = [];
 //   }
 // }
-
-exports.default = GraphClaim;
 
 /***/ }),
 /* 160 */

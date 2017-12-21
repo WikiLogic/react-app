@@ -1,8 +1,11 @@
 import { observable, action } from 'mobx';
+import Api from 'src/utils/api.js';
 
 /**
  * Each claim on the graph and all it's children
  */
+
+const claimApi = new Api('/api/v1/claims');
 
 export default class GraphClaim {
   @observable rootClaim;
@@ -14,17 +17,23 @@ export default class GraphClaim {
   @action
   setRootClaim(claim) {
     //may not be a full claim - get it's children
+    console.log('setting root claim: ', claim);
     this.rootClaim = claim;
 
-    // API.getClaimDetailById(result._key)
-    //   .then((data) => {
-    //     this.setState({
-    //       graphClaim: data.claim
-    //     });
-    //   }).catch((err) => {
-    //     console.log('Trying to load claim detail error', err);
-    //   });
+    claimApi.get(`/${claim._key}`).then((res) => {
+      this.rootClaim = res.data.claim;
+    }).catch((err) => {
+      console.error('Get claim detail error: ', err);
+    });
   }
+}
+
+class GraphRow {
+
+}
+
+class GraphColumn {
+  
 }
 
 // export default class GraphClaims {

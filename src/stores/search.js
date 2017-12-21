@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import Api from '../utils/api.js';
+import Api from 'src/utils/api.js';
 //Holds onto all the searches & their settings
 
 const claimApi = new Api('/api/v1/claims');
