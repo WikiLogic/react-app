@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AddClaimForm from 'WlComponents/AddClaimForm/AddClaimForm.jsx';
-import API from 'WlAPI/api.js';
+import AddClaimForm from '../components/AddClaimForm/AddClaimForm.jsx';
+import API from '../API/api.js';
 
 /**
  * The Search Results page

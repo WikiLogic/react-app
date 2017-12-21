@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
 
-import API from 'WlAPI/api.js';
+import API from '../API/api.js';
 
-import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
-import GraphSearchResults from 'WlComponents/GraphSearchResults/GraphSearchResults.jsx';
-// import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
-// import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import GraphSvg from 'WlComponents/SVG/GraphSvg.jsx';
-import GraphClaim from 'WlComponents/SVG/GraphClaim.jsx';
-import SVGtext from 'WlComponents/SVGels/SVGtext';
+import SearchForm from '../components/SearchForm/SearchForm.jsx';
+import GraphSearchResults from '../components/GraphSearchResults/GraphSearchResults.jsx';
+// import ArgumentBuilder from '../components/ArgumentBuilder/ArgumentBuilder.jsx';
+// import ClickerDragger from '../components/ClickerDragger/ClickerDragger.jsx';
+import GraphSvg from '../components/SVG/GraphSvg.jsx';
+import GraphClaim from '../components/SVG/GraphClaim.jsx';
+import SVGtext from '../components/SVGels/SVGtext.jsx';
 
 /**
  * The Home page

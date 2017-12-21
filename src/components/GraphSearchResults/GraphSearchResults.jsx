@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* The Argument Premises
  * Displays the claims that have been selected to be a part of the new argument.

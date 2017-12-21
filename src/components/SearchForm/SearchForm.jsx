@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
-import SearchIcon from 'WlComponents/_Icons/SearchIcon.svg.jsx';
+import SearchIcon from '../_Icons/SearchIcon.svg.jsx';
 
 @observer
 export default class SearchForm extends React.Component {

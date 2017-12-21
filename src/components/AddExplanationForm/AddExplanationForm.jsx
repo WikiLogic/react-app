@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Argument from 'WlComponents/Argument/Argument.jsx';
-import API from 'WlAPI/api.js';
-import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import Argument from '../Argument/Argument.jsx';
+import API from '../../API/api.js';
+import SearchForm from '../SearchForm/SearchForm.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* Search & select claims to add as premises to an argument
  */

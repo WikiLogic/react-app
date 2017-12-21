@@ -8,25 +8,25 @@ import createHashHistory from 'history/createHashHistory';
 import './utils';
 
 // JS
-import API from 'WlAPI/api.js';
+import API from './API/api.js';
 import User from './stores/user.js';
-import Claims from 'WlStores/claims.js';
+import Claims from './stores/claims.js';
 
 // Scenes
-import GraphScene from 'WlScenes/GraphScene.jsx';
-import GraphStore from 'WlScenes/GraphStore.js';
-import ClaimDetailScene from 'WlScenes/ClaimDetailScene.jsx';
-import ClaimCreateScene from 'WlScenes/ClaimCreateScene.jsx';
-import StyleguideScene from 'WlScenes/StyleguideScene.jsx';
-import AuthenticationScene from 'WlScenes/AuthenticationScene.jsx';
-import UserProfileScene from 'WlScenes/UserProfileScene.jsx';
-import LegalScene from 'WlScenes/LegalScene.jsx';
-import SignUpScene from 'WlScenes/SignUpScene.jsx';
-import ApiDev from 'WlScenes/ApiDev.jsx';
+import GraphScene from './scenes/GraphScene.jsx';
+import GraphStore from './scenes/GraphStore.js';
+import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
+import ClaimCreateScene from './scenes/ClaimCreateScene.jsx';
+import StyleguideScene from './scenes/StyleguideScene.jsx';
+import AuthenticationScene from './scenes/AuthenticationScene.jsx';
+import UserProfileScene from './scenes/UserProfileScene.jsx';
+import LegalScene from './scenes/LegalScene.jsx';
+import SignUpScene from './scenes/SignUpScene.jsx';
+import ApiDev from './scenes/ApiDev.jsx';
 
 // React components
-import SearchResults from 'WlComponents/SearchResults/SearchResults.jsx';
-import EditClaimForm from 'WlComponents/EditClaimForm/EditClaimForm.jsx';
+import SearchResults from './components/SearchResults/SearchResults.jsx';
+import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 
 const UserStore = new User();
 const history = createHashHistory();

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import User from 'WlStores/user.js';
+import User from '../../stores/user.js';
 
 /**
  * Logging in!

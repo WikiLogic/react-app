@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
-import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
+import StatusIndicator from '../StatusIndicator/StatusIndicator.jsx';
 
 /* Each Claim in the list of search results
  */

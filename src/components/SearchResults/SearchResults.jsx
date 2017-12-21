@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* The Search Results
  * Takes an array of claims in a prop called searchResults and spits them out in a list

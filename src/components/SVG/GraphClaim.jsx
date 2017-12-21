@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
-import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
-import GraphArg from 'WlComponents/SVG/GraphArg.jsx';
-import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-// import API from 'WlAPI/api.js';
+import SVGbutton from '../SVGels/SVGbutton.jsx';
+import SVGtext from '../SVGels/SVGtext.jsx';
+import GraphArg from '../SVG/GraphArg.jsx';
+import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
+// import API from '../../api.js';
 
 /* The Claim Wrapper for the graph
  * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)

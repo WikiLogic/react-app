@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoginForm from 'WlComponents/LoginForm/LoginForm.jsx';
-import Loader from 'WlComponents/Loader/Loader.jsx';
+import LoginForm from '../components/LoginForm/LoginForm.jsx';
+import Loader from '../components/Loader/Loader.jsx';
 import { Link } from 'react-router-dom';
 
 /**

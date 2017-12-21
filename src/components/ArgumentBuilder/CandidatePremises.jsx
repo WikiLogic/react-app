@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* The Candidate Premises
  * Takes an array of claims from the argument builder.

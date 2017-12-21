@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
+import GraphControls from '../GraphControls/GraphControls.jsx';
 
 /**
  * The amazing pannable / zoomable SVG!

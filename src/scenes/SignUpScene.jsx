@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SignUpForm from 'WlComponents/SignUpForm/SignUpForm.jsx';
+import SignUpForm from '../components/SignUpForm/SignUpForm.jsx';
 import { Link } from 'react-router-dom';
 
 /**

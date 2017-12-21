@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputRange from 'WlComponents/_Atoms/InputRange.jsx';
+import InputRange from '../_Atoms/InputRange.jsx';
 
 /* Each Claim in the list of search results
  */

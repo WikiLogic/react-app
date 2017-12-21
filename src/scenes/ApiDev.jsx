@@ -1,8 +1,8 @@
 import React from 'react';
-import API from 'WlAPI/api.js';
-import Code from 'WlComponents/Code/Code.jsx';
-import InputButton from 'WlComponents/_Atoms/InputButton.jsx';
-import Loader from 'WlComponents/Loader/Loader.jsx';
+import API from '../API/api.js';
+import Code from '../components/Code/Code.jsx';
+import InputButton from '../components/_Atoms/InputButton.jsx';
+import Loader from '../components/Loader/Loader.jsx';
 
 /**
  * The Search Results page

@@ -4,17 +4,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
-  resolve: {
-    extensions: ['.js', '.jsx'],
-    alias: {
-      WlAPI: path.resolve(__dirname, 'src/API'),
-      WlScenes: path.resolve(__dirname, 'src/scenes'),
-      WlComponents: path.resolve(__dirname, 'src/components'),
-      WlStores: path.resolve(__dirname, 'src/stores'),
-    },
-  },
   entry: {
-    app: './src/index.jsx',
+    app: [
+      './src/index.jsx',
+      './src/main.scss',
+    ],
   },
   output: {
     path: path.resolve('./dist'),

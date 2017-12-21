@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
+import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
 import SVGtext from './SVGtext.jsx';
-//import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
+//import SVGbutton from '../SVGels/SVGbutton.jsx';
 
 /* SVG does not provide native buttons
  * That's what this component is for!
