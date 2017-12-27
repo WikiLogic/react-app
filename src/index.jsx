@@ -14,7 +14,7 @@ import Claims from './stores/claims.js';
 
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
-import GraphStore from './scenes/GraphStore.js';
+import GraphSceneStore from './scenes/GraphScene.js';
 import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
 import ClaimCreateScene from './scenes/ClaimCreateScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
@@ -111,7 +111,7 @@ class Wikilogic extends React.Component {
             render={(routeProps) => {
               return (
                 <GraphScene
-                  store={new GraphStore()}
+                  store={new GraphSceneStore()}
                   routeProps={routeProps}
                 />
               );

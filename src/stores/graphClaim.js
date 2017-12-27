@@ -2,44 +2,50 @@ import { observable, action } from 'mobx';
 import Api from 'src/utils/api.js';
 
 /**
- * Each claim on the graph and all it's children
+ * A claim in the graph
  */
 
 const claimApi = new Api('/api/v1/claims');
 
 export default class GraphClaim {
-  @observable rootClaim;
+  @observable claim;
+  @observable x;
+  @observable y;
+  @observable width;
+  @observable height;
 
-  constructor(rootClaim) {
-    this.rootClaim = rootClaim;
+  constructor(claim) {
+    this.claim = claim;
   }
 
   @action
-  setRootClaim(claim) {
-    //may not be a full claim - get it's children
-    console.log('setting root claim: ', claim);
-    this.rootClaim = claim;
+  loadArgs() {
+    //create the row of arguments for this claim - extends out to the right of the current claim
+    //each gets an x position depending on the number of premises
+    claimApi.get(`/${this.claim._key}`).then((res) => {
+      //find the claim / add it
+      // this.rootClaim = res.data.claim;
+      console.log('claim got claim data: ', res.data);
 
-    claimApi.get(`/${claim._key}`).then((res) => {
-      this.rootClaim = res.data.claim;
     }).catch((err) => {
       console.error('Get claim detail error: ', err);
     });
+
+    //TODO: tell the graph that it needs to align things again
+  }
+
+  // ? Move to graph probably
+  loadPremise() {
+    //take a premise, drop it down into it's own row as a childClaim
+    //childClaims inherit their x position from their parent premise
+    //childClaims get their Y from right to left total of other child premises
+
+    //TODO: tell the graph that it needs to align things again
+  }
+
+  @action
+  setPosition(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
-
-class GraphRow {
-
-}
-
-class GraphColumn {
-  
-}
-
-// export default class GraphClaims {
-//   @observable graphClaims;
-
-//   constructor() {
-//     this.graphClaims = [];
-//   }
-// }

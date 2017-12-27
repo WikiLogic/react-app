@@ -94,7 +94,7 @@ export default class GraphScene extends React.Component {
 
                 {(this.props.store.hasGraphData &&
                   <GraphClaim
-                    store={this.props.store.graphClaimStore}
+                    store={this.props.store.graphStore}
                     premiseClickHandler={this.loadClaim}
                     gridUnit={this.state.gridUnit}
                     padUnit={this.state.padUnit}
