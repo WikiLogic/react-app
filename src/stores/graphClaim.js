@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import Api from 'src/utils/api.js';
 
 /**
@@ -9,24 +9,22 @@ const claimApi = new Api('/api/v1/claims');
 
 export default class GraphClaim {
   @observable claim;
+  @observable args;
   @observable x;
   @observable y;
   @observable width;
-  @observable height;
+  // @observable height; height is always 1, we don't count the children here.
 
   constructor(claim) {
     this.claim = claim;
+    this.args = [];
   }
 
   @action
   loadArgs() {
-    //create the row of arguments for this claim - extends out to the right of the current claim
-    //each gets an x position depending on the number of premises
     claimApi.get(`/${this.claim._key}`).then((res) => {
-      //find the claim / add it
-      // this.rootClaim = res.data.claim;
-      console.log('claim got claim data: ', res.data);
-
+      console.log('claim got claim arg data: ', res.data.claim.arguments);
+      this.args = res.data.claim.arguments;
     }).catch((err) => {
       console.error('Get claim detail error: ', err);
     });
@@ -47,5 +45,12 @@ export default class GraphClaim {
   setPosition(x, y) {
     this.x = x;
     this.y = y;
+  }
+
+  @computed
+  get width() {
+    // count the number of premises used by arguments open for this claim
+    // + 1 for the claim itself
+
   }
 }

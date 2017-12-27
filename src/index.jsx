@@ -8,9 +8,9 @@ import createHashHistory from 'history/createHashHistory';
 import './utils';
 
 // JS
-import API from './API/api.js';
+// import API from './API/api.js';
 import User from './stores/user.js';
-import Claims from './stores/claims.js';
+// import Claims from './stores/claims.js';
 
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
@@ -28,48 +28,31 @@ import ApiDev from './scenes/ApiDev.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
 import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 
-const UserStore = new User();
 const history = createHashHistory();
 
 class Wikilogic extends React.Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       searchResults: [],
       focused_claim: {},
       notifications: [],
-      user: {},
+      UserStore: new User()
     };
 
     this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
-    this.loginSuccessHandler = this.loginSuccessHandler.bind(this);
-  }
-
-  componentDidMount() {
-    // This is the place to trigger any network requests that need to go out on the first load
-    // Claims.init();
   }
 
   setNewClaimFocus(claim) {
-    API.getClaimDetailById(claim.id)
-      .then((data) => {
-        this.setState({ focused_claim: data.claim });
-      }).catch((err) => {
-        this.state.notifications.push(err);
-      });
-  }
-
-
-  loginSuccessHandler(res) {
-    this.setState({
-      user: {
-        isLoggedIn: true,
-        profile: res.data.user,
-      },
-    });
-    history.push('/profile');
+    //TODO: mobxify this
+    console.log('hihihih ehh - todo here!', claim);
+    // API.getClaimDetailById(claim.id)
+    //   .then((data) => {
+    //     this.setState({ focused_claim: data.claim });
+    //   }).catch((err) => {
+    //     this.state.notifications.push(err);
+    //   });
   }
 
   render() {
@@ -83,19 +66,19 @@ class Wikilogic extends React.Component {
 
             <div className="header__links">
 
-              {(UserStore.isLoggedIn &&
+              {(this.state.UserStore.isLoggedIn &&
                 <Link to="/new-claim">New claim</Link>
               )}
 
-              {(UserStore.isLoggedIn &&
+              {(this.state.UserStore.isLoggedIn &&
                 <Link to="/profile">Profile</Link>
               )}
 
-              {(!UserStore.isLoggedIn &&
+              {(!this.state.UserStore.isLoggedIn &&
                 <Link to="/login">Login</Link>
               )}
 
-              {(!UserStore.isLoggedIn &&
+              {(!this.state.UserStore.isLoggedIn &&
                 <Link to="/signup">Signup</Link>
               )}
             </div>
@@ -126,7 +109,7 @@ class Wikilogic extends React.Component {
                 <ClaimDetailScene
                   routeProps={routeProps}
                   history={history}
-                  isLoggedIn={UserStore.isLoggedIn}
+                  isLoggedIn={this.state.UserStore.isLoggedIn}
                 />
               );
             }}
@@ -148,14 +131,14 @@ class Wikilogic extends React.Component {
             path="/login"
             exact
             render={() => {
-              if (UserStore.isLoggedIn) {
+              if (this.state.UserStore.isLoggedIn) {
                 history.push('/profile');
                 return null;
               }
               return (
                 <AuthenticationScene
-                  loginSuccessHandler={this.loginSuccessHandler}
                   history={history}
+                  userStore={this.state.UserStore}
                 />
               );
             }}
@@ -165,11 +148,13 @@ class Wikilogic extends React.Component {
             path="/signup"
             exact
             render={() => {
-              if (UserStore.isLoggedIn) {
+              if (this.state.UserStore.isLoggedIn) {
                 history.push('/profile');
                 return null;
               }
-              return <SignUpScene loginSuccessHandler={this.loginSuccessHandler} />;
+              return (<SignUpScene
+                userStore={this.state.UserStore}
+              />);
             }}
           />
 
@@ -177,8 +162,8 @@ class Wikilogic extends React.Component {
             path="/profile"
             exact
             render={() => {
-              if (UserStore.isLoggedIn) {
-                return <UserProfileScene store={UserStore} />;
+              if (this.state.UserStore.isLoggedIn) {
+                return <UserProfileScene store={this.state.UserStore} />;
               }
               history.push('/login');
               return null;
@@ -276,14 +261,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root'),
 );
-
-
-// We have a little news to share, our time in Philadelphia is coming to a close. 
-// We are returning to the place it all began (for us), Edinburgh!
-// Stay in touch and we hope to see you in the coming year
-// Wishing you merryment and joy for all the year round!
-
-// Lots of love, 
-// Christina, Iain, Tink, & Sebastian
-
-

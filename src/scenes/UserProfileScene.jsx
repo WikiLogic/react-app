@@ -11,6 +11,9 @@ import { observer } from 'mobx-react';
 
 @observer
 export default class UserProfileScene extends React.Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  };
 
   render() {
     return (
@@ -40,12 +43,3 @@ export default class UserProfileScene extends React.Component {
     );
   }
 }
-
-UserProfileScene.propTypes = {
-  store: PropTypes.shape({
-    username: PropTypes.string,
-    signUpDate: PropTypes.string,
-    email: PropTypes.string,
-    logOut: PropTypes.func
-  }).isRequired
-};

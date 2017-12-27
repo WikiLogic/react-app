@@ -21,11 +21,9 @@ export default class GraphClaim extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      claim: this.props.store.rootClaim,
-      arguments: [],
       isFocused: false
     };
-    this.loadArguments = this.loadArguments.bind(this);
+
     this.renderArguments = this.renderArguments.bind(this);
     this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
@@ -36,31 +34,15 @@ export default class GraphClaim extends React.Component {
     });
   }
 
-  loadArguments() {
-    console.log('tada! All the btn did was say, hey dad, fire that function you passed me! Dad knows what to do.');
-    // API.getClaimDetailById(this.props.claim._key)
-    //   .then((data) => {
-    //     this.setState({
-    //       arguments: data.claim.arguments
-    //     });
-    //   }).catch((err) => {
-    //     console.log('Trying to load claim detail error', err);
-    //   });
-  }
-
-  //will need a:
-  //this.props.resizeHandler
-
   renderArguments() {
-    console.log('data.state.arguments', this.state.arguments);
-    if (this.state.arguments.length === 0) { return null; }
+    if (this.props.store.args.length === 0) { return null; }
     const argumentsMarkup = [];
     let premiseCounter = 0;
     const spaceBetweenArgs = 50;
 
-    for (let r = 0; r < this.state.arguments.length; r++) {
+    for (let r = 0; r < this.props.store.args.length; r++) {
       const thisArgumentX = (premiseCounter * (this.props.gridUnit * 2)) + (spaceBetweenArgs * r); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
-      premiseCounter += this.state.arguments[r].premises.length;
+      premiseCounter += this.props.store.args[r].premises.length;
 
       argumentsMarkup.push(
         <ClickerDragger
@@ -72,7 +54,7 @@ export default class GraphClaim extends React.Component {
             key={r}
             gridUnit={this.props.gridUnit}
             padUnit={this.props.padUnit}
-            arg={this.state.arguments[r]}
+            arg={this.props.store.args[r]}
           />
         </ClickerDragger>
       );
@@ -92,6 +74,7 @@ export default class GraphClaim extends React.Component {
   }
 
   render() {
+    console.log('this.props.store.claim', this.props.store.claim);
 
     //make claims 2 by 1
     const claimWidth = (this.props.gridUnit * 2) - (2 * this.props.padUnit);
@@ -129,12 +112,14 @@ export default class GraphClaim extends React.Component {
               y={0}
               width={claimWidth}
               height={claimHeight}
-              text={this.props.store.rootClaim.text}
+              text={this.props.store.claim.text}
             />
 
             {(this.state.isFocused &&
               <SVGbutton
-                clickHandler={this.loadArguments}
+                clickHandler={() => {
+                  this.props.store.loadArgs();
+                }}
                 text="+"
                 x={claimWidth - 44}
                 y={claimHeight - 44}
@@ -143,19 +128,8 @@ export default class GraphClaim extends React.Component {
           </g>
         </ClickerDragger>
 
-        {this.renderArguments()}
+        {/* {this.renderArguments()} */}
       </g>
     );
   }
 }
-
-// GraphClaim.propTypes = {
-//   claim: PropTypes.shape({
-//     text: PropTypes.string.isRequired,
-//     _id: PropTypes.string.isRequired,
-//     _key: PropTypes.string.isRequired,
-//     arguments: PropTypes.array
-//   }).isRequired,
-//   gridUnit: PropTypes.number.isRequired,
-//   padUnit: PropTypes.number.isRequired
-// };

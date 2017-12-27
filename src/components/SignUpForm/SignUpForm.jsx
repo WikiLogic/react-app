@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import User from '../../stores/user.js';
 
 /**
  * Logging in!
@@ -8,6 +7,10 @@ import User from '../../stores/user.js';
  */
 
 export default class LoginForm extends React.Component {
+  static propTypes = {
+    userStore: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -44,13 +47,7 @@ export default class LoginForm extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    User.signup(this.state.email, this.state.username, this.state.password)
-      .then((res) => {
-        // it's looking for the user
-        this.props.loginSuccessHandler(res);
-      }).catch((err) => {
-        window.err = err;
-      });
+    this.props.userStore.signup(this.state.email, this.state.username, this.state.password);
   }
 
   render() {
@@ -93,7 +90,3 @@ export default class LoginForm extends React.Component {
     );
   }
 }
-
-LoginForm.propTypes = {
-  loginSuccessHandler: PropTypes.func.isRequired,
-};

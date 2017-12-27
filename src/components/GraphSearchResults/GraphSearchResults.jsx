@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { action } from 'mobx';
+// import { action } from 'mobx';
 import { observer } from 'mobx-react';
 import Claim from '../Claim/Claim.jsx';
 

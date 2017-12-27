@@ -10,7 +10,7 @@ export default class GraphScene {
   //Search & results
   @observable searchStore;
   //set up the graph component & store
-  @observable graphClaimStore;
+  @observable graphStore;
   @observable hasGraphData;
 
   constructor() {

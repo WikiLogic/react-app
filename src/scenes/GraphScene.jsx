@@ -10,7 +10,7 @@ import GraphSearchResults from 'src/components/GraphSearchResults/GraphSearchRes
 // import ArgumentBuilder from 'src/components/ArgumentBuilder/ArgumentBuilder.jsx';
 // import ClickerDragger from 'src/components/ClickerDragger/ClickerDragger.jsx';
 import GraphSvg from 'src/components/SVG/GraphSvg.jsx';
-import GraphClaim from 'src/components/SVG/GraphClaim.jsx';
+import Graph from 'src/components/SVG/Graph.jsx';
 import SVGtext from 'src/components/SVGels/SVGtext.jsx';
 
 /**
@@ -26,11 +26,6 @@ export default class GraphScene extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      gridUnit: 100,
-      padUnit: 4
-    };
 
     this.loadClaim = this.loadClaim.bind(this);
     this.newArgumentSubmissionHandler = this.newArgumentSubmissionHandler.bind(this);
@@ -93,12 +88,7 @@ export default class GraphScene extends React.Component {
               <GraphSvg>
 
                 {(this.props.store.hasGraphData &&
-                  <GraphClaim
-                    store={this.props.store.graphStore}
-                    premiseClickHandler={this.loadClaim}
-                    gridUnit={this.state.gridUnit}
-                    padUnit={this.state.padUnit}
-                  />
+                  <Graph store={this.props.store.graphStore} />
                 )}
                 {(!this.props.store.hasGraphData &&
                   <SVGtext
