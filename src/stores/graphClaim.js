@@ -16,6 +16,7 @@ export default class GraphClaim {
   @observable y;
   @observable w;
   @observable h;
+  @observable padding;
 
   constructor(claim, position) {
     this.claim = claim;
@@ -24,6 +25,7 @@ export default class GraphClaim {
     this.y = position.y;
     this.w = position.w;
     this.h = position.h;
+    this.padding = GraphConfig.padUnit;
   }
 
   @action

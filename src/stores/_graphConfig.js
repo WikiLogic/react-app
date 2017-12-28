@@ -1,7 +1,7 @@
-import { observable } from 'mobx';
+// import { observable } from 'mobx';
 
-export default class GraphConfig {
-  @observable gridUnit = 100;
-  @observable padUnit = 4;
-  @observable spaceBetweenArgs = 50;
-}
+export default {
+  gridUnit: 100,
+  padUnit: 4,
+  spaceBetweenArgs: 50
+};

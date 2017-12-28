@@ -9,8 +9,7 @@ import Group from './group.jsx';
 @observer
 export default class GraphClaimArgs extends React.Component {
   static propTypes = {
-    claimStore: PropTypes.object.isRequired,
-    graphConfig: PropTypes.object.isRequired
+    claimStore: PropTypes.object.isRequired
   };
 
   constructor(props) {
