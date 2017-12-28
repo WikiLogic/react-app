@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SVGbutton from '../SVGels/SVGbutton.jsx';
 import SVGtext from '../SVGels/SVGtext.jsx';
-import GraphArg from '../SVG/GraphArg.jsx';
+import GraphClaimArgs from './GraphClaimArgs.jsx';
 import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
 // import API from '../../api.js';
 
@@ -14,8 +14,7 @@ import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
 export default class GraphClaim extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
-    gridUnit: PropTypes.number.isRequired,
-    padUnit: PropTypes.number.isRequired
+    graphConfig: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -24,7 +23,6 @@ export default class GraphClaim extends React.Component {
       isFocused: false
     };
 
-    this.renderArguments = this.renderArguments.bind(this);
     this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
 
@@ -34,48 +32,14 @@ export default class GraphClaim extends React.Component {
     });
   }
 
-  renderArguments() {
-    if (this.props.store.args.length === 0) { return null; }
-    const argumentsMarkup = [];
-
-    this.props.store.args.forEach((arg) => {
-      argumentsMarkup.push(
-        <ClickerDragger
-          key={arg._id}
-          x={arg.x}
-          y={0}
-        >
-          <GraphArg
-            key={arg._id}
-            gridUnit={this.props.gridUnit}
-            padUnit={this.props.padUnit}
-            arg={arg}
-          />
-        </ClickerDragger>
-      );
-    });
-
-    //The arguments area will fill the grid squares 
-    //it's up to the individual arguments to position themselves within the grid squares
-    return (
-      <ClickerDragger
-        className="graph-claim__args"
-        x={0} //something's acting relative in the svg
-        y={this.props.gridUnit}
-      >
-        <g>{argumentsMarkup}</g>
-      </ClickerDragger>
-    );
-  }
-
   render() {
     console.log('this.props.store.claim', this.props.store.claim);
 
     //make claims 2 by 1
-    const claimWidth = (this.props.gridUnit * 2) - (2 * this.props.padUnit);
-    const claimHeight = (this.props.gridUnit * 1) - (2 * this.props.padUnit);
-    const gridSquareWidth = this.props.gridUnit * 2;
-    const gridSquareHeight = this.props.gridUnit * 1;
+    const claimWidth = (this.props.graphConfig.gridUnit * 2) - (2 * this.props.graphConfig.padUnit);
+    const claimHeight = (this.props.graphConfig.gridUnit * 1) - (2 * this.props.graphConfig.padUnit);
+    const gridSquareWidth = this.props.graphConfig.gridUnit * 2;
+    const gridSquareHeight = this.props.graphConfig.gridUnit * 1;
 
     //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
@@ -90,8 +54,8 @@ export default class GraphClaim extends React.Component {
 
         <ClickerDragger
           className="graph-claim__claim"
-          x={this.props.padUnit}
-          y={this.props.padUnit}
+          x={this.props.graphConfig.padUnit}
+          y={this.props.graphConfig.padUnit}
         >
           <g>
             <rect
@@ -123,7 +87,10 @@ export default class GraphClaim extends React.Component {
           </g>
         </ClickerDragger>
 
-        {/* {this.renderArguments()} */}
+        <GraphClaimArgs
+          store={this.props.store}
+          graphConfig={this.props.graphConfig}
+        />
       </g>
     );
   }

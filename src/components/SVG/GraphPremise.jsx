@@ -4,7 +4,7 @@ import SVGbutton from '../SVGels/SVGbutton.jsx';
 import SVGtext from '../SVGels/SVGtext.jsx';
 import GraphArg from '../SVG/GraphArg.jsx';
 import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
-import API from '../../api.js';
+// import API from '../../api.js';
 
 /* The Claim Wrapper for the graph
  * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
@@ -24,14 +24,14 @@ export default class GraphPremise extends React.Component {
   }
 
   dupeClaim() {
-    API.getClaimDetailById(this.props.claim._key)
-      .then((data) => {
-        this.setState({
-          dupeClaim: data.claim
-        });
-      }).catch((err) => {
-        console.log('Trying to load claim detail error', err);
-      });
+    // API.getClaimDetailById(this.props.claim._key)
+    //   .then((data) => {
+    //     this.setState({
+    //       dupeClaim: data.claim
+    //     });
+    //   }).catch((err) => {
+    //     console.log('Trying to load claim detail error', err);
+    //   });
   }
 
   //will need a:
@@ -43,7 +43,7 @@ export default class GraphPremise extends React.Component {
     let premiseCounter = 0;
 
     for (let r = 0; r < this.state.arguments.length; r++) {
-      const thisArgumentX = premiseCounter * this.props.gridUnit; //move it right by n previous premises * the gridUnit
+      const thisArgumentX = premiseCounter * this.props.graphConfig.gridUnit; //move it right by n previous premises * the gridUnit
       premiseCounter += this.state.arguments[r].premises.length;
 
       argumentsMarkup.push(
@@ -54,8 +54,8 @@ export default class GraphPremise extends React.Component {
         >
           <GraphArg
             key={r}
-            gridUnit={this.props.gridUnit}
-            padUnit={this.props.padUnit}
+            gridUnit={this.props.graphConfig.gridUnit}
+            padUnit={this.props.graphConfig.padUnit}
             arg={this.state.arguments[r]}
           />
         </ClickerDragger>
@@ -67,8 +67,8 @@ export default class GraphPremise extends React.Component {
     return (
       <ClickerDragger
         className="graph-claim__args"
-        x={-this.props.padUnit} //something's acting relative in the svg
-        y={this.props.gridUnit}
+        x={-this.props.graphConfig.padUnit} //something's acting relative in the svg
+        y={this.props.graphConfig.gridUnit}
       >
         {argumentsMarkup}
       </ClickerDragger>
@@ -78,8 +78,8 @@ export default class GraphPremise extends React.Component {
   render() {
 
     //make premises 2 by 1
-    const premiseWidth = (this.props.gridUnit * 2) - (4 * this.props.padUnit); //premises sit on the innermost box
-    const premiseHeight = (this.props.gridUnit * 1) - (4 * this.props.padUnit);
+    const premiseWidth = (this.props.graphConfig.gridUnit * 2) - (4 * this.props.graphConfig.padUnit); //premises sit on the innermost box
+    const premiseHeight = (this.props.graphConfig.gridUnit * 1) - (4 * this.props.graphConfig.padUnit);
 
 
     console.log('this.props.claim', this.props.claim);
@@ -118,6 +118,5 @@ GraphPremise.propTypes = {
     _id: PropTypes.string.isRequired,
     _key: PropTypes.string.isRequired
   }).isRequired,
-  gridUnit: PropTypes.number.isRequired,
-  padUnit: PropTypes.number.isRequired
+  graphConfig: PropTypes.object.isRequired
 };

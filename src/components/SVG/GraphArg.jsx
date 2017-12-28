@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
-// import GraphPremise from '../SVG/GraphPremise.jsx';
-import GraphClaim from '../SVG/GraphClaim.jsx';
+import GraphPremise from '../SVG/GraphPremise.jsx';
+// import GraphClaim from '../SVG/GraphClaim.jsx';
 
 /* An argument! In an SVG!
  */
 export default class GraphArg extends React.Component {
+  static propTypes = {
+    arg: PropTypes.object.isRequired,
+    graphConfig: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,26 +26,25 @@ export default class GraphArg extends React.Component {
     console.log('this.props.arg', this.props.arg);
     for (let p = 0; p < this.props.arg.premises.length; p++) {
 
-      const thisPremisX = (premiseCounter * this.props.gridUnit) + (this.props.padUnit * 2); //premises sit on th innermost box
-      const thisPremiseY = this.props.padUnit * 2;
+      const thisPremisX = (premiseCounter * this.props.graphConfig.gridUnit) + (this.props.graphConfig.padUnit * 2); //premises sit on th innermost box
+      const thisPremiseY = this.props.graphConfig.padUnit * 2;
       premisesMarkup.push(
         <ClickerDragger
           x={thisPremisX}
           y={thisPremiseY}
           key={p}
         >
-          {/* <GraphPremise
+          <GraphPremise
             claim={this.props.arg.premises[p]}
-            gridUnit={this.props.gridUnit}
-            padUnit={this.props.padUnit}
-          /> */}
+            graphConfig={this.props.graphConfig}
+          />
 
-          <GraphClaim
+          {/* <GraphClaim
             claim={this.props.arg.premises[p]}
             premiseClickHandler={this.loadClaim}
             gridUnit={this.props.gridUnit}
             padUnit={this.props.padUnit}
-          />
+          /> */}
 
         </ClickerDragger>
       );
@@ -49,10 +53,10 @@ export default class GraphArg extends React.Component {
     }
 
     //the width and height of the rect that will wrap all of the premises in this argument
-    const argWidth = (premiseCounter * this.props.gridUnit) - (2 * this.props.padUnit);
-    const argHeight = this.props.gridUnit - (2 * this.props.padUnit);
-    const gridSquareWidth = premiseCounter * this.props.gridUnit;
-    const gridSquareHeight = this.props.gridUnit;
+    const argWidth = (premiseCounter * this.props.graphConfig.gridUnit) - (2 * this.props.graphConfig.padUnit);
+    const argHeight = this.props.graphConfig.gridUnit - (2 * this.props.graphConfig.padUnit);
+    const gridSquareWidth = premiseCounter * this.props.graphConfig.gridUnit;
+    const gridSquareHeight = this.props.graphConfig.gridUnit;
 
     return (
       <g className="graph-arg">
@@ -66,8 +70,8 @@ export default class GraphArg extends React.Component {
         <rect
           rx="5"
           ry="5"
-          x={this.props.padUnit}
-          y={this.props.padUnit}
+          x={this.props.graphConfig.padUnit}
+          y={this.props.graphConfig.padUnit}
           width={argWidth}
           height={argHeight}
           className="graph-arg__rect"
@@ -80,11 +84,3 @@ export default class GraphArg extends React.Component {
     );
   }
 }
-
-GraphArg.propTypes = {
-  arg: PropTypes.shape({
-    premises: PropTypes.array
-  }).isRequired,
-  gridUnit: PropTypes.number.isRequired,
-  padUnit: PropTypes.number.isRequired
-};

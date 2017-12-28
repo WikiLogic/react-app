@@ -38,6 +38,8 @@ export default class GraphClaim {
         return arg;
       });
 
+      console.log('this.args', this.args);
+
     }).catch((err) => {
       console.error('Load claim arguments error: ', err);
     });
