@@ -1,5 +1,7 @@
 import { observable, action, computed } from 'mobx';
+import GraphConfig from './_graphConfig.js';
 import Api from 'src/utils/api.js';
+import GraphArg from './graphArg.js';
 
 /**
  * A claim in the graph
@@ -12,13 +14,16 @@ export default class GraphClaim {
   @observable args;
   @observable x;
   @observable y;
-  @observable width;
-  // @observable height; height is always 1, we don't count the children here.
+  @observable w;
+  @observable h;
 
-  constructor(claim, graphConfig) {
+  constructor(claim, position) {
     this.claim = claim;
     this.args = [];
-    this.graphConfig = graphConfig;
+    this.x = position.x;
+    this.y = position.y;
+    this.w = position.w;
+    this.h = position.h;
   }
 
   @action
@@ -28,14 +33,20 @@ export default class GraphClaim {
       // this.args = res.data.claim.arguments;
 
       let premiseCounter = 0;
-      const spaceBetweenArgs = 50;
 
       //set x position for each arg & it's premises
       this.args = res.data.claim.arguments.map((arg, i) => {
         //move it right by n previous premises * the gridUnit, premises are 2 units wide too
-        arg.x = (premiseCounter * (this.graphConfig.gridUnit * 2)) + (spaceBetweenArgs * i);
+        arg.x = (premiseCounter * (GraphConfig.gridUnit * 2)) + (GraphConfig.spaceBetweenArgs * i);
         premiseCounter += arg.premises.length;
-        return arg;
+        const argPosition = {
+          x: (premiseCounter * (GraphConfig.gridUnit * 2)) + (GraphConfig.spaceBetweenArgs * i),
+          y: 0,
+          w: 100,
+          h: 100
+        };
+
+        return new GraphArg(arg, argPosition);
       });
 
       console.log('this.args', this.args);

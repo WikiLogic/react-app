@@ -1,49 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 import SVGbutton from '../SVGels/SVGbutton.jsx';
 import SVGtext from '../SVGels/SVGtext.jsx';
 import GraphClaimArgs from './GraphClaimArgs.jsx';
-import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
-// import API from '../../api.js';
+import Group from './group.jsx';
 
-/* The Claim Wrapper for the graph
- * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
- * But it does need to know where it wants to put it's children and then inform the parent about it's size. 
- * It's then up to the parent to accomodate properly.
- */
+@observer
 export default class GraphClaim extends React.Component {
   static propTypes = {
     claimStore: PropTypes.object.isRequired,
-    graphConfig: PropTypes.object.isRequired
+    graphConfig: PropTypes.object.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      isFocused: false
+      isFocused: true
     };
 
-    this.mouseUpHandler = this.mouseUpHandler.bind(this);
+    // this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
 
-  mouseUpHandler() {
-    this.setState({
-      isFocused: true
-    });
-  }
+  // mouseUpHandler() {
+  //   this.setState({
+  //     isFocused: true
+  //   });
+  // }
 
   render() {
-    console.log('this.props.store.claim', this.props.claimStore.claim);
-
     //make claims 2 by 1
     const claimWidth = (this.props.graphConfig.gridUnit * 2) - (2 * this.props.graphConfig.padUnit);
     const claimHeight = (this.props.graphConfig.gridUnit * 1) - (2 * this.props.graphConfig.padUnit);
     const gridSquareWidth = this.props.graphConfig.gridUnit * 2;
     const gridSquareHeight = this.props.graphConfig.gridUnit * 1;
 
-    //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-      <g className="graph-claim" onMouseUp={this.mouseUpHandler}>
+      <Group
+        className="graph-claim"
+        x={this.props.x}
+        y={this.props.y}
+      >
         <rect
           className="grid-square"
           rx="10"
@@ -52,46 +51,44 @@ export default class GraphClaim extends React.Component {
           height={gridSquareHeight}
         />
 
-        <ClickerDragger
+        <Group
           className="graph-claim__claim"
           x={this.props.graphConfig.padUnit}
           y={this.props.graphConfig.padUnit}
         >
-          <g>
-            <rect
-              rx="5"
-              ry="5"
-              width={claimWidth}
-              height={claimHeight}
-              className="graph-claim__claim"
-            />
+          <rect
+            rx="5"
+            ry="5"
+            width={claimWidth}
+            height={claimHeight}
+            className="graph-claim__claim"
+          />
 
-            <SVGtext
-              x={0}
-              y={0}
-              width={claimWidth}
-              height={claimHeight}
-              text={this.props.claimStore.claim.text}
-            />
+          <SVGtext
+            x={0}
+            y={0}
+            width={claimWidth}
+            height={claimHeight}
+            text={this.props.claimStore.claim.text}
+          />
 
-            {(this.state.isFocused &&
-              <SVGbutton
-                clickHandler={() => {
-                  this.props.claimStore.loadArgs();
-                }}
-                text="+"
-                x={claimWidth - 44}
-                y={claimHeight - 44}
-              />
-            )}
-          </g>
-        </ClickerDragger>
+          {(this.state.isFocused &&
+            <SVGbutton
+              clickHandler={() => {
+                this.props.claimStore.loadArgs();
+              }}
+              text="+"
+              x={claimWidth - 44}
+              y={claimHeight - 44}
+            />
+          )}
+        </Group>
 
         <GraphClaimArgs
           claimStore={this.props.claimStore}
           graphConfig={this.props.graphConfig}
         />
-      </g>
+      </Group>
     );
   }
 }

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
+import { observer } from 'mobx-react';
+import Group from './group.jsx';
 import GraphPremise from '../SVG/GraphPremise.jsx';
 
 /* An argument! In an SVG!
  */
+
+@observer
 export default class GraphArg extends React.Component {
   static propTypes = {
     argStore: PropTypes.object.isRequired,
@@ -25,19 +28,13 @@ export default class GraphArg extends React.Component {
 
     this.props.argStore.premises.forEach((premise) => {
 
-      const thisPremisX = (premiseCounter * this.props.graphConfig.gridUnit) + (this.props.graphConfig.padUnit * 2); //premises sit on th innermost box
+      const thisPremiseX = (premiseCounter * this.props.graphConfig.gridUnit) + (this.props.graphConfig.padUnit * 2); //premises sit on th innermost box
       const thisPremiseY = this.props.graphConfig.padUnit * 2;
       premisesMarkup.push(
-        <ClickerDragger
-          x={thisPremisX}
-          y={thisPremiseY}
+        <GraphPremise
           key={premise._key}
-        >
-          <GraphPremise
-            premiseStore={premise}
-            graphConfig={this.props.graphConfig}
-          />
-        </ClickerDragger>
+          premiseStore={premise}
+        />
       );
 
       premiseCounter += this.props.argStore.premises.length;

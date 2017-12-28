@@ -7,15 +7,16 @@ import GraphClaimStore from 'src/stores/graphClaim.js';
 
 export default class Graph {
   @observable rootClaim;
-  graphConfig = {
-    gridUnit: 100,
-    padUnit: 4
-  }
 
   @action
   setRootClaim(claim) {
-    //may not be a full claim - get it's children
-    console.log('setting root claim: ', claim);
-    this.rootClaim = new GraphClaimStore(claim, this.graphConfig);
+    const claimPositin = {
+      x: 0,
+      y: 0,
+      w: 100,
+      h: 100
+    };
+
+    this.rootClaim = new GraphClaimStore(claim, claimPositin);
   }
 }
