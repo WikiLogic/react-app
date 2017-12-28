@@ -20,6 +20,7 @@ export default class GraphPremise extends React.Component {
       w: PropTypes.number.isRequired,
       h: PropTypes.number.isRequired
     }).isRequired,
+    loadPremiseClickHandler: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -29,6 +30,7 @@ export default class GraphPremise extends React.Component {
 
   openPremise() {
     console.log('open premise button clicked!');
+    this.props.loadPremiseClickHandler();
   }
 
   render() {

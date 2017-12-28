@@ -18,8 +18,7 @@ export default class Graph extends React.Component {
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired,
         w: PropTypes.number.isRequired,
-        h: PropTypes.number.isRequired,
-        padding: PropTypes.number.isRequired
+        h: PropTypes.number.isRequired
       }).isRequired
     }).isRequired,
   };

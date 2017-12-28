@@ -54,7 +54,9 @@ export default class GraphClaim {
   }
 
   // ? Move to graph probably
+  @action
   loadPremise() {
+    console.log("Claim store - load premise!");
     //take a premise, drop it down into it's own row as a childClaim
     //childClaims inherit their x position from their parent premise
     //childClaims get their Y from right to left total of other child premises

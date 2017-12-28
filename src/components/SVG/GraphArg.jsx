@@ -12,13 +12,19 @@ import GraphConfig from 'src/stores/_graphConfig.js';
 @observer
 export default class GraphArg extends React.Component {
   static propTypes = {
-    argStore: PropTypes.object.isRequired
+    argStore: PropTypes.object.isRequired,
+    loadPremiseClickHandler: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
     };
+    this.loadPremiseClickHandler = this.loadPremiseClickHandler.bind(this);
+  }
+
+  loadPremiseClickHandler() {
+    this.props.loadPremiseClickHandler();
   }
 
   render() {
@@ -29,6 +35,7 @@ export default class GraphArg extends React.Component {
         <GraphPremise
           key={premise._key}
           premiseStore={premise}
+          loadPremiseClickHandler={this.loadPremiseClickHandler}
         />
       );
     });

@@ -19,7 +19,12 @@ export default class GraphClaim extends React.Component {
       isFocused: true
     };
 
+    this.loadPremiseClickHandler = this.loadPremiseClickHandler.bind(this);
     // this.mouseUpHandler = this.mouseUpHandler.bind(this);
+  }
+
+  loadPremiseClickHandler() {
+    this.props.claimStore.loadPremise();
   }
 
   // mouseUpHandler() {
@@ -71,6 +76,7 @@ export default class GraphClaim extends React.Component {
 
         <GraphClaimArgs
           claimStore={this.props.claimStore}
+          loadPremiseClickHandler={this.loadPremiseClickHandler}
         />
       </Group>
     );
