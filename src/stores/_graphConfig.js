@@ -2,6 +2,6 @@
 
 export default {
   gridUnit: 100,
-  padUnit: 4,
+  padding: 4,
   spaceBetweenArgs: 50
 };

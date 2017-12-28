@@ -10235,7 +10235,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = {
   gridUnit: 100,
-  padUnit: 4,
+  padding: 4,
   spaceBetweenArgs: 50
 };
 
@@ -37556,6 +37556,10 @@ var _GraphPremise = __webpack_require__(146);
 
 var _GraphPremise2 = _interopRequireDefault(_GraphPremise);
 
+var _graphConfig = __webpack_require__(45);
+
+var _graphConfig2 = _interopRequireDefault(_graphConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37564,7 +37568,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/* An argument! In an SVG!
+/**
+ * An argument with it's own premises
  */
 
 var GraphArg = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
@@ -37591,31 +37596,29 @@ var GraphArg = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_R
         }));
       });
 
-      //the width and height of the rect that will wrap all of the premises in this argument
-      // const argWidth = (premiseCounter * this.props.graphConfig.gridUnit) - (2 * this.props.graphConfig.padUnit);
-      // const argHeight = this.props.graphConfig.gridUnit - (2 * this.props.graphConfig.padUnit);
-      // const gridSquareWidth = premiseCounter * this.props.graphConfig.gridUnit;
-      // const gridSquareHeight = this.props.graphConfig.gridUnit;
-
       return _react2.default.createElement(
-        'g',
-        { className: 'graph-arg' },
+        _group2.default,
+        {
+          className: 'graph-arg',
+          x: this.props.argStore.x,
+          y: this.props.argStore.y
+        },
         _react2.default.createElement('rect', {
           rx: '10',
           ry: '10',
-          x: this.props.argStore.x,
-          y: this.props.argStore.y,
-          width: this.props.argStore.w,
-          height: this.props.argStore.h,
+          x: this.props.argStore.x + _graphConfig2.default.padding,
+          y: this.props.argStore.y + _graphConfig2.default.padding,
+          width: this.props.argStore.w - _graphConfig2.default.padding * 2,
+          height: this.props.argStore.h - _graphConfig2.default.padding * 2,
           className: 'grid-square'
         }),
         _react2.default.createElement('rect', {
           rx: '5',
           ry: '5',
-          x: this.props.argStore.x,
-          y: this.props.argStore.y,
-          width: this.props.argStore.w,
-          height: this.props.argStore.h,
+          x: this.props.argStore.x + _graphConfig2.default.padding,
+          y: this.props.argStore.y + _graphConfig2.default.padding,
+          width: this.props.argStore.w - _graphConfig2.default.padding * 2,
+          height: this.props.argStore.h - _graphConfig2.default.padding * 2,
           className: 'graph-arg__rect'
         }),
         premisesMarkup
@@ -37672,6 +37675,10 @@ var _group = __webpack_require__(35);
 
 var _group2 = _interopRequireDefault(_group);
 
+var _graphConfig = __webpack_require__(45);
+
+var _graphConfig2 = _interopRequireDefault(_graphConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37718,21 +37725,21 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
           _group2.default,
           {
             className: 'graph-claim__claim',
-            x: this.props.claimStore.padding,
-            y: this.props.claimStore.padding
+            x: _graphConfig2.default.padding,
+            y: _graphConfig2.default.padding
           },
           _react2.default.createElement('rect', {
             rx: '5',
             ry: '5',
-            width: this.props.claimStore.w,
-            height: this.props.claimStore.h,
+            width: this.props.claimStore.w - _graphConfig2.default.padding * 2,
+            height: this.props.claimStore.h - _graphConfig2.default.padding * 2,
             className: 'graph-claim__claim'
           }),
           _react2.default.createElement(_SVGtext2.default, {
             x: 0,
             y: 0,
-            width: this.props.claimStore.w,
-            height: this.props.claimStore.h,
+            width: this.props.claimStore.w - _graphConfig2.default.padding * 2,
+            height: this.props.claimStore.h - _graphConfig2.default.padding * 2,
             text: this.props.claimStore.claim.text
           }),
           this.state.isFocused && _react2.default.createElement(_SVGbutton2.default, {
@@ -37740,8 +37747,8 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
               _this2.props.claimStore.loadArgs();
             },
             text: '+',
-            x: this.props.claimStore.w - 44,
-            y: this.props.claimStore.h - 44
+            x: this.props.claimStore.w - 50,
+            y: this.props.claimStore.h - 50
           })
         ),
         _react2.default.createElement(_GraphClaimArgs2.default, {
@@ -37803,6 +37810,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/**
+ * Wraps all the args in a claim
+ * Claim
+ *   ClaimArgs <- we're here
+ *     Arg
+ *       Premise
+ */
+
 var GraphClaimArgs = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
   _inherits(GraphClaimArgs, _React$Component);
 
@@ -37825,18 +37840,10 @@ var GraphClaimArgs = (0, _mobxReact.observer)(_class = (_temp = _class2 = functi
 
       this.props.claimStore.args.forEach(function (arg) {
         console.log('GraphClaimArg JSX arg: ', arg);
-        argumentsMarkup.push(_react2.default.createElement(
-          _group2.default,
-          {
-            key: arg.arg._id,
-            x: arg.x,
-            y: arg.y
-          },
-          _react2.default.createElement(_GraphArg2.default, {
-            key: arg._id,
-            argStore: arg
-          })
-        ));
+        argumentsMarkup.push(_react2.default.createElement(_GraphArg2.default, {
+          key: arg.arg._id,
+          argStore: arg
+        }));
       });
 
       return _react2.default.createElement(
@@ -37901,6 +37908,10 @@ var _SVGtext = __webpack_require__(36);
 
 var _SVGtext2 = _interopRequireDefault(_SVGtext);
 
+var _graphConfig = __webpack_require__(45);
+
+var _graphConfig2 = _interopRequireDefault(_graphConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37941,22 +37952,24 @@ var GraphPremise = (_temp = _class = function (_React$Component) {
           y: this.props.premiseStore.y
         },
         _react2.default.createElement('rect', {
-          width: this.props.premiseStore.w,
-          height: this.props.premiseStore.h,
+          x: _graphConfig2.default.padding * 2,
+          y: _graphConfig2.default.padding * 2,
+          width: this.props.premiseStore.w - _graphConfig2.default.padding * 4,
+          height: this.props.premiseStore.h - _graphConfig2.default.padding * 4,
           className: 'graph-claim__claim'
         }),
         _react2.default.createElement(_SVGtext2.default, {
-          x: 0,
-          y: 0,
-          width: this.props.premiseStore.w,
-          height: this.props.premiseStore.h,
+          x: _graphConfig2.default.padding * 2,
+          y: _graphConfig2.default.padding * 2,
+          width: this.props.premiseStore.w - _graphConfig2.default.padding * 4,
+          height: this.props.premiseStore.h - _graphConfig2.default.padding * 4,
           text: this.props.premiseStore.text
         }),
         _react2.default.createElement(_SVGbutton2.default, {
           clickHandler: this.openPremise,
           text: '\uD83E\uDC7B',
-          x: this.props.premiseStore.w - 44,
-          y: this.props.premiseStore.h - 44
+          x: this.props.premiseStore.w - 50,
+          y: this.props.premiseStore.h - 50
         })
       );
     }
@@ -40555,10 +40568,10 @@ var GraphArg = (_class = function GraphArg(arg, argPosition) {
   arg.premises.forEach(function (premise, i) {
     //set up the position of each premise in this argument
     var premisePosition = {
-      x: i * (_graphConfig2.default.gridUnit * 2) + _graphConfig2.default.padUnit * 2, //premises sit on the innermost box
-      y: _graphConfig2.default.padUnit * 2,
-      w: _graphConfig2.default.gridUnit * 2 - 4 * _graphConfig2.default.padUnit, //premises sit on the innermost box
-      h: _graphConfig2.default.gridUnit * 1 - 4 * _graphConfig2.default.padUnit
+      x: i * (_graphConfig2.default.gridUnit * 2), // + (GraphConfig.padUnit * 2), //premises sit on the innermost box
+      y: 0, // GraphConfig.padUnit * 2,
+      w: _graphConfig2.default.gridUnit * 2, //premises sit on the innermost box - (4 * GraphConfig.padUnit)
+      h: _graphConfig2.default.gridUnit * 1 //- (4 * GraphConfig.padUnit)
     };
 
     _this.premises.push(new _graphPremise2.default(premise, premisePosition));
@@ -40600,7 +40613,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
 
 var _mobx = __webpack_require__(14);
 
@@ -40683,17 +40696,15 @@ var GraphClaim = (_class = function () {
 
     _initDefineProp(this, 'h', _descriptor5, this);
 
-    _initDefineProp(this, 'padding', _descriptor6, this);
+    _initDefineProp(this, 'args', _descriptor6, this);
 
-    _initDefineProp(this, 'args', _descriptor7, this);
+    _initDefineProp(this, 'argsX', _descriptor7, this);
 
-    _initDefineProp(this, 'argsX', _descriptor8, this);
+    _initDefineProp(this, 'argsY', _descriptor8, this);
 
-    _initDefineProp(this, 'argsY', _descriptor9, this);
+    _initDefineProp(this, 'argsW', _descriptor9, this);
 
-    _initDefineProp(this, 'argsW', _descriptor10, this);
-
-    _initDefineProp(this, 'argsH', _descriptor11, this);
+    _initDefineProp(this, 'argsH', _descriptor10, this);
 
     this.claim = claim;
     this.args = [];
@@ -40702,7 +40713,6 @@ var GraphClaim = (_class = function () {
     //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
-    this.padding = _graphConfig2.default.padUnit;
     this.argsX = _graphConfig2.default.gridUnit * 2;
     this.argsY = 0;
     this.argsW = 0;
@@ -40719,7 +40729,7 @@ var GraphClaim = (_class = function () {
         _this.args = res.data.claim.arguments.map(function (arg, i) {
           //figure out the position of each premise
           var argPosition = {
-            x: i * (_graphConfig2.default.gridUnit * 2) + _graphConfig2.default.spaceBetweenArgs * i,
+            x: i * (_graphConfig2.default.gridUnit * 2),
             y: 0
           };
 
@@ -40778,22 +40788,19 @@ var GraphClaim = (_class = function () {
 }), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, 'h', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, 'padding', [_mobx.observable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, 'args', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, 'args', [_mobx.observable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, 'argsX', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'argsX', [_mobx.observable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'argsY', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, 'argsY', [_mobx.observable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, 'argsW', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'argsW', [_mobx.observable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'argsH', [_mobx.observable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'argsH', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'loadArgs', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadArgs'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setPosition', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setPosition'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'width', [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, 'width'), _class.prototype)), _class);

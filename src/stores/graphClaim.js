@@ -15,7 +15,6 @@ export default class GraphClaim {
   @observable y;
   @observable w;
   @observable h;
-  @observable padding;
   @observable args;
   @observable argsX;
   @observable argsY;
@@ -30,7 +29,6 @@ export default class GraphClaim {
     //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
-    this.padding = GraphConfig.padUnit;
     this.argsX = (GraphConfig.gridUnit * 2);
     this.argsY = 0;
     this.argsW = 0;
@@ -44,7 +42,7 @@ export default class GraphClaim {
       this.args = res.data.claim.arguments.map((arg, i) => {
         //figure out the position of each premise
         const argPosition = {
-          x: (i * (GraphConfig.gridUnit * 2)) + (GraphConfig.spaceBetweenArgs * i),
+          x: i * (GraphConfig.gridUnit * 2),
           y: 0
         };
 

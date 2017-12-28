@@ -6,6 +6,14 @@ import { observer } from 'mobx-react';
 import GraphArg from '../SVG/GraphArg.jsx';
 import Group from './group.jsx';
 
+/**
+ * Wraps all the args in a claim
+ * Claim
+ *   ClaimArgs <- we're here
+ *     Arg
+ *       Premise
+ */
+
 @observer
 export default class GraphClaimArgs extends React.Component {
   static propTypes = {
@@ -25,16 +33,10 @@ export default class GraphClaimArgs extends React.Component {
     this.props.claimStore.args.forEach((arg) => {
       console.log('GraphClaimArg JSX arg: ', arg);
       argumentsMarkup.push(
-        <Group
+        <GraphArg
           key={arg.arg._id}
-          x={arg.x}
-          y={arg.y}
-        >
-          <GraphArg
-            key={arg._id}
-            argStore={arg}
-          />
-        </Group>
+          argStore={arg}
+        />
       );
     });
 

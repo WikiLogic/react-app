@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Group from './group.jsx';
 import SVGbutton from '../SVGels/SVGbutton.jsx';
 import SVGtext from '../SVGels/SVGtext.jsx';
+import GraphConfig from 'src/stores/_graphConfig.js';
 
 /**
  * A premise inside an argument on the graph
@@ -38,24 +39,26 @@ export default class GraphPremise extends React.Component {
         y={this.props.premiseStore.y}
       >
         <rect
-          width={this.props.premiseStore.w}
-          height={this.props.premiseStore.h}
+          x={(GraphConfig.padding * 2)}
+          y={(GraphConfig.padding * 2)}
+          width={this.props.premiseStore.w - (GraphConfig.padding * 4)}
+          height={this.props.premiseStore.h - (GraphConfig.padding * 4)}
           className="graph-claim__claim"
         />
 
         <SVGtext
-          x={0}
-          y={0}
-          width={this.props.premiseStore.w}
-          height={this.props.premiseStore.h}
+          x={(GraphConfig.padding * 2)}
+          y={(GraphConfig.padding * 2)}
+          width={this.props.premiseStore.w - (GraphConfig.padding * 4)}
+          height={this.props.premiseStore.h - (GraphConfig.padding * 4)}
           text={this.props.premiseStore.text}
         />
 
         <SVGbutton
           clickHandler={this.openPremise}
           text="🡻"
-          x={this.props.premiseStore.w - 44}
-          y={this.props.premiseStore.h - 44}
+          x={this.props.premiseStore.w - 50}
+          y={this.props.premiseStore.h - 50}
         />
       </Group>
     );

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import Group from './group.jsx';
 import GraphPremise from '../SVG/GraphPremise.jsx';
+import GraphConfig from 'src/stores/_graphConfig.js';
 
-/* An argument! In an SVG!
+/**
+ * An argument with it's own premises
  */
 
 @observer
@@ -31,36 +33,34 @@ export default class GraphArg extends React.Component {
       );
     });
 
-    //the width and height of the rect that will wrap all of the premises in this argument
-    // const argWidth = (premiseCounter * this.props.graphConfig.gridUnit) - (2 * this.props.graphConfig.padUnit);
-    // const argHeight = this.props.graphConfig.gridUnit - (2 * this.props.graphConfig.padUnit);
-    // const gridSquareWidth = premiseCounter * this.props.graphConfig.gridUnit;
-    // const gridSquareHeight = this.props.graphConfig.gridUnit;
-
     return (
-      <g className="graph-arg">
+      <Group
+        className="graph-arg"
+        x={this.props.argStore.x}
+        y={this.props.argStore.y}
+      >
         <rect
           rx="10"
           ry="10"
-          x={this.props.argStore.x}
-          y={this.props.argStore.y}
-          width={this.props.argStore.w}
-          height={this.props.argStore.h}
+          x={this.props.argStore.x + GraphConfig.padding}
+          y={this.props.argStore.y + GraphConfig.padding}
+          width={this.props.argStore.w - (GraphConfig.padding * 2)}
+          height={this.props.argStore.h - (GraphConfig.padding * 2)}
           className="grid-square"
         />
         <rect
           rx="5"
           ry="5"
-          x={this.props.argStore.x}
-          y={this.props.argStore.y}
-          width={this.props.argStore.w}
-          height={this.props.argStore.h}
+          x={this.props.argStore.x + GraphConfig.padding}
+          y={this.props.argStore.y + GraphConfig.padding}
+          width={this.props.argStore.w - (GraphConfig.padding * 2)}
+          height={this.props.argStore.h - (GraphConfig.padding * 2)}
           className="graph-arg__rect"
         />
 
         {premisesMarkup}
 
-      </g >
+      </Group>
     );
   }
 }

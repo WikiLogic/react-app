@@ -5,6 +5,7 @@ import SVGbutton from '../SVGels/SVGbutton.jsx';
 import SVGtext from '../SVGels/SVGtext.jsx';
 import GraphClaimArgs from './GraphClaimArgs.jsx';
 import Group from './group.jsx';
+import GraphConfig from 'src/stores/_graphConfig.js';
 
 @observer
 export default class GraphClaim extends React.Component {
@@ -37,22 +38,22 @@ export default class GraphClaim extends React.Component {
 
         <Group
           className="graph-claim__claim"
-          x={this.props.claimStore.padding}
-          y={this.props.claimStore.padding}
+          x={GraphConfig.padding}
+          y={GraphConfig.padding}
         >
           <rect
             rx="5"
             ry="5"
-            width={this.props.claimStore.w}
-            height={this.props.claimStore.h}
+            width={this.props.claimStore.w - (GraphConfig.padding * 2)}
+            height={this.props.claimStore.h - (GraphConfig.padding * 2)}
             className="graph-claim__claim"
           />
 
           <SVGtext
             x={0}
             y={0}
-            width={this.props.claimStore.w}
-            height={this.props.claimStore.h}
+            width={this.props.claimStore.w - (GraphConfig.padding * 2)}
+            height={this.props.claimStore.h - (GraphConfig.padding * 2)}
             text={this.props.claimStore.claim.text}
           />
 
@@ -62,8 +63,8 @@ export default class GraphClaim extends React.Component {
                 this.props.claimStore.loadArgs();
               }}
               text="+"
-              x={this.props.claimStore.w - 44}
-              y={this.props.claimStore.h - 44}
+              x={this.props.claimStore.w - 50}
+              y={this.props.claimStore.h - 50}
             />
           )}
         </Group>
