@@ -37,28 +37,23 @@ export default class GraphClaim extends React.Component {
   renderArguments() {
     if (this.props.store.args.length === 0) { return null; }
     const argumentsMarkup = [];
-    let premiseCounter = 0;
-    const spaceBetweenArgs = 50;
 
-    for (let r = 0; r < this.props.store.args.length; r++) {
-      const thisArgumentX = (premiseCounter * (this.props.gridUnit * 2)) + (spaceBetweenArgs * r); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
-      premiseCounter += this.props.store.args[r].premises.length;
-
+    this.props.store.args.forEach((arg) => {
       argumentsMarkup.push(
         <ClickerDragger
-          key={r}
-          x={thisArgumentX}
+          key={arg._id}
+          x={arg.x}
           y={0}
         >
           <GraphArg
-            key={r}
+            key={arg._id}
             gridUnit={this.props.gridUnit}
             padUnit={this.props.padUnit}
-            arg={this.props.store.args[r]}
+            arg={arg}
           />
         </ClickerDragger>
       );
-    }
+    });
 
     //The arguments area will fill the grid squares 
     //it's up to the individual arguments to position themselves within the grid squares

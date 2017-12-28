@@ -15,18 +15,31 @@ export default class GraphClaim {
   @observable width;
   // @observable height; height is always 1, we don't count the children here.
 
-  constructor(claim) {
+  constructor(claim, graphConfig) {
     this.claim = claim;
     this.args = [];
+    this.graphConfig = graphConfig;
   }
 
   @action
   loadArgs() {
     claimApi.get(`/${this.claim._key}`).then((res) => {
       console.log('claim got claim arg data: ', res.data.claim.arguments);
-      this.args = res.data.claim.arguments;
+      // this.args = res.data.claim.arguments;
+
+      let premiseCounter = 0;
+      const spaceBetweenArgs = 50;
+
+      //set x position for each arg & it's premises
+      this.args = res.data.claim.arguments.map((arg, i) => {
+        //move it right by n previous premises * the gridUnit, premises are 2 units wide too
+        arg.x = (premiseCounter * (this.graphConfig.gridUnit * 2)) + (spaceBetweenArgs * i);
+        premiseCounter += arg.premises.length;
+        return arg;
+      });
+
     }).catch((err) => {
-      console.error('Get claim detail error: ', err);
+      console.error('Load claim arguments error: ', err);
     });
 
     //TODO: tell the graph that it needs to align things again
@@ -52,5 +65,11 @@ export default class GraphClaim {
     // count the number of premises used by arguments open for this claim
     // + 1 for the claim itself
 
+    let width = 1;
+    this.args.forEach((arg) => {
+      width += arg.premises.length;
+    });
+
+    return width;
   }
 }

@@ -27,7 +27,8 @@
     "no-underscore-dangle": [0],
     "arrow-body-style": ["error", "always"],
     "object-shorthand": [0],
-    "no-console": [0]
+    "no-console": [0],
+    "no-param-reassign": [0]
   },
   "globals": {
     "window": true,
