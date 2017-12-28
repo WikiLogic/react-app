@@ -34,13 +34,6 @@ export default class GraphClaim extends React.Component {
         x={this.props.claimStore.x}
         y={this.props.claimStore.y}
       >
-        <rect
-          className="grid-square"
-          rx="10"
-          ry="10"
-          width={this.props.claimStore.w}
-          height={this.props.claimStore.h}
-        />
 
         <Group
           className="graph-claim__claim"

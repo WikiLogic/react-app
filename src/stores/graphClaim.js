@@ -11,53 +11,48 @@ const claimApi = new Api('/api/v1/claims');
 
 export default class GraphClaim {
   @observable claim;
-  @observable args;
   @observable x;
   @observable y;
   @observable w;
   @observable h;
   @observable padding;
+  @observable args;
+  @observable argsX;
+  @observable argsY;
+  @observable argsW;
+  @observable argsH;
 
   constructor(claim, position) {
     this.claim = claim;
     this.args = [];
     this.x = position.x;
     this.y = position.y;
+    //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
     this.padding = GraphConfig.padUnit;
+    this.argsX = (GraphConfig.gridUnit * 2);
+    this.argsY = 0;
+    this.argsW = 0;
+    this.argsH = 0;
   }
 
   @action
   loadArgs() {
     claimApi.get(`/${this.claim._key}`).then((res) => {
-      console.log('claim got claim arg data: ', res.data.claim.arguments);
-      // this.args = res.data.claim.arguments;
-
-      let premiseCounter = 0;
-
-      //set x position for each arg & it's premises
+      //turn each argument into a GraphArg class
       this.args = res.data.claim.arguments.map((arg, i) => {
-        //move it right by n previous premises * the gridUnit, premises are 2 units wide too
-        arg.x = (premiseCounter * (GraphConfig.gridUnit * 2)) + (GraphConfig.spaceBetweenArgs * i);
-        premiseCounter += arg.premises.length;
+        //figure out the position of each premise
         const argPosition = {
-          x: (premiseCounter * (GraphConfig.gridUnit * 2)) + (GraphConfig.spaceBetweenArgs * i),
-          y: 0,
-          w: 100,
-          h: 100
+          x: (i * (GraphConfig.gridUnit * 2)) + (GraphConfig.spaceBetweenArgs * i),
+          y: 0
         };
 
         return new GraphArg(arg, argPosition);
       });
-
-      console.log('this.args', this.args);
-
     }).catch((err) => {
       console.error('Load claim arguments error: ', err);
     });
-
-    //TODO: tell the graph that it needs to align things again
   }
 
   // ? Move to graph probably

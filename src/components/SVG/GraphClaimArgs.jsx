@@ -26,13 +26,12 @@ export default class GraphClaimArgs extends React.Component {
       console.log('GraphClaimArg JSX arg: ', arg);
       argumentsMarkup.push(
         <Group
-          key={arg._id}
+          key={arg.arg._id}
           x={arg.x}
-          y={0}
+          y={arg.y}
         >
           <GraphArg
             key={arg._id}
-            graphConfig={this.props.graphConfig}
             argStore={arg}
           />
         </Group>
@@ -42,10 +41,17 @@ export default class GraphClaimArgs extends React.Component {
     return (
       <Group
         className="graph-claim__args"
-        x={0} //something's acting relative in the svg
-        y={this.props.graphConfig.gridUnit}
+        x={this.props.claimStore.argsX}
+        y={this.props.claimStore.argsY}
       >
-        <g>{argumentsMarkup}</g>
+        <rect
+          rx="5"
+          ry="5"
+          width={this.props.claimStore.argsW}
+          height={this.props.claimStore.argsH}
+          className="graph-claim__claim"
+        />
+        {argumentsMarkup}
       </Group>
     );
   }
