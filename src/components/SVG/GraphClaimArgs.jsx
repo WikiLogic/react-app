@@ -7,7 +7,7 @@ import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
 
 export default class GraphClaimArgs extends React.Component {
   static propTypes = {
-    store: PropTypes.object.isRequired,
+    claimStore: PropTypes.object.isRequired,
     graphConfig: PropTypes.object.isRequired
   };
 
@@ -18,10 +18,10 @@ export default class GraphClaimArgs extends React.Component {
   }
 
   render() {
-    if (this.props.store.args.length === 0) { return null; }
+    if (this.props.claimStore.args.length === 0) { return null; }
     const argumentsMarkup = [];
 
-    this.props.store.args.forEach((arg) => {
+    this.props.claimStore.args.forEach((arg) => {
       console.log('GraphClaimArg JSX arg: ', arg);
       argumentsMarkup.push(
         <ClickerDragger
@@ -32,7 +32,7 @@ export default class GraphClaimArgs extends React.Component {
           <GraphArg
             key={arg._id}
             graphConfig={this.props.graphConfig}
-            arg={arg}
+            argStore={arg}
           />
         </ClickerDragger>
       );

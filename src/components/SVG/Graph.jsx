@@ -17,7 +17,7 @@ export default class Graph extends React.Component {
       <g className="graph">
         <ClickerDragger key="root" x={0} y={0} >
           <GraphClaim
-            store={this.props.store.rootClaim}
+            claimStore={this.props.store.rootClaim}
             graphConfig={this.props.store.graphConfig}
           />
         </ClickerDragger>

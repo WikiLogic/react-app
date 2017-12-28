@@ -13,7 +13,7 @@ import ClickerDragger from '../ClickerDragger/ClickerDragger.jsx';
  */
 export default class GraphClaim extends React.Component {
   static propTypes = {
-    store: PropTypes.object.isRequired,
+    claimStore: PropTypes.object.isRequired,
     graphConfig: PropTypes.object.isRequired
   };
 
@@ -33,7 +33,7 @@ export default class GraphClaim extends React.Component {
   }
 
   render() {
-    console.log('this.props.store.claim', this.props.store.claim);
+    console.log('this.props.store.claim', this.props.claimStore.claim);
 
     //make claims 2 by 1
     const claimWidth = (this.props.graphConfig.gridUnit * 2) - (2 * this.props.graphConfig.padUnit);
@@ -71,13 +71,13 @@ export default class GraphClaim extends React.Component {
               y={0}
               width={claimWidth}
               height={claimHeight}
-              text={this.props.store.claim.text}
+              text={this.props.claimStore.claim.text}
             />
 
             {(this.state.isFocused &&
               <SVGbutton
                 clickHandler={() => {
-                  this.props.store.loadArgs();
+                  this.props.claimStore.loadArgs();
                 }}
                 text="+"
                 x={claimWidth - 44}
@@ -88,7 +88,7 @@ export default class GraphClaim extends React.Component {
         </ClickerDragger>
 
         <GraphClaimArgs
-          store={this.props.store}
+          claimStore={this.props.claimStore}
           graphConfig={this.props.graphConfig}
         />
       </g>
