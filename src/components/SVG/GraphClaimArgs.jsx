@@ -17,7 +17,13 @@ import Group from './group.jsx';
 @observer
 export default class GraphClaimArgs extends React.Component {
   static propTypes = {
-    claimStore: PropTypes.object.isRequired,
+    claimStore: PropTypes.shape({
+      argsX: PropTypes.number.isRequired,
+      argsY: PropTypes.number.isRequired,
+      argsW: PropTypes.number.isRequired,
+      argsH: PropTypes.number.isRequired,
+      args: PropTypes.object.isRequired
+    }).isRequired,
     loadPremiseClickHandler: PropTypes.func.isRequired
   };
 
@@ -28,8 +34,8 @@ export default class GraphClaimArgs extends React.Component {
     this.loadPremiseClickHandler = this.loadPremiseClickHandler.bind(this);
   }
 
-  loadPremiseClickHandler() {
-    this.props.loadPremiseClickHandler();
+  loadPremiseClickHandler(premiseStore) {
+    this.props.loadPremiseClickHandler(premiseStore);
   }
 
   render() {

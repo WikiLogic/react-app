@@ -30,7 +30,7 @@ export default class GraphPremise extends React.Component {
 
   openPremise() {
     console.log('open premise button clicked!');
-    this.props.loadPremiseClickHandler();
+    this.props.loadPremiseClickHandler(this.props.premiseStore);
   }
 
   render() {

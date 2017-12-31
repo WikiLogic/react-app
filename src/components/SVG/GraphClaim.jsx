@@ -10,7 +10,18 @@ import GraphConfig from 'src/stores/_graphConfig.js';
 @observer
 export default class GraphClaim extends React.Component {
   static propTypes = {
-    claimStore: PropTypes.object.isRequired
+    claimStore: PropTypes.shape({
+      loadPremise: PropTypes.func.isRequired,
+      loadArgs: PropTypes.func.isRequired,
+      claim: PropTypes.shape({
+        text: PropTypes.string.isRequired
+      }).isRequired,
+      children: PropTypes.array.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      w: PropTypes.number.isRequired,
+      h: PropTypes.number.isRequired
+    }).isRequired
   };
 
   constructor(props) {
@@ -23,8 +34,8 @@ export default class GraphClaim extends React.Component {
     // this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
 
-  loadPremiseClickHandler() {
-    this.props.claimStore.loadPremise();
+  loadPremiseClickHandler(premiseStore) {
+    this.props.claimStore.loadPremise(premiseStore);
   }
 
   // mouseUpHandler() {
@@ -32,6 +43,22 @@ export default class GraphClaim extends React.Component {
   //     isFocused: true
   //   });
   // }
+
+  renderChildren(children) {
+    const childrenMarkup = [];
+    children.forEach((child) => {
+      childrenMarkup.push(
+        <GraphClaim
+          claimStore={child}
+        />
+      );
+    });
+    return (
+      <g>
+        {childrenMarkup}
+      </g>
+    );
+  }
 
   render() {
     return (
@@ -78,6 +105,8 @@ export default class GraphClaim extends React.Component {
           claimStore={this.props.claimStore}
           loadPremiseClickHandler={this.loadPremiseClickHandler}
         />
+
+        {this.renderChildren(this.props.claimStore.children)}
       </Group>
     );
   }

@@ -20,19 +20,21 @@ export default class GraphClaim {
   @observable argsY;
   @observable argsW;
   @observable argsH;
+  @observable children;
 
   constructor(claim, position) {
     this.claim = claim;
-    this.args = [];
     this.x = position.x;
     this.y = position.y;
     //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
+    this.args = [];
     this.argsX = (GraphConfig.gridUnit * 2);
     this.argsY = 0;
     this.argsW = 0;
     this.argsH = 0;
+    this.children = [];
   }
 
   @action
@@ -55,8 +57,22 @@ export default class GraphClaim {
 
   // ? Move to graph probably
   @action
-  loadPremise() {
-    console.log("Claim store - load premise!");
+  loadPremise(premiseStore) {
+    console.log('Claim store - load premise! as new graphclaim', premiseStore);
+    //x is claim + parent arg position
+    const x = GraphConfig.gridUnit * 2;
+    //y is claim + number of child claims open to the right
+    const y = GraphConfig.gridUnit;
+
+    const childPositin = {
+      x: x,
+      y: y,
+      w: (GraphConfig.gridUnit * 2),
+      h: GraphConfig.gridUnit
+    };
+
+    this.children.push(new GraphClaim(premiseStore, childPositin));
+
     //take a premise, drop it down into it's own row as a childClaim
     //childClaims inherit their x position from their parent premise
     //childClaims get their Y from right to left total of other child premises

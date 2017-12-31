@@ -12,7 +12,13 @@ import GraphConfig from 'src/stores/_graphConfig.js';
 @observer
 export default class GraphArg extends React.Component {
   static propTypes = {
-    argStore: PropTypes.object.isRequired,
+    argStore: PropTypes.shape({
+      premises: PropTypes.array.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      w: PropTypes.number.isRequired,
+      h: PropTypes.number.isRequired
+    }).isRequired,
     loadPremiseClickHandler: PropTypes.func.isRequired
   };
 
@@ -23,8 +29,8 @@ export default class GraphArg extends React.Component {
     this.loadPremiseClickHandler = this.loadPremiseClickHandler.bind(this);
   }
 
-  loadPremiseClickHandler() {
-    this.props.loadPremiseClickHandler();
+  loadPremiseClickHandler(premiseStore) {
+    this.props.loadPremiseClickHandler(premiseStore);
   }
 
   render() {

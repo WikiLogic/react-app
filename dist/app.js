@@ -37586,8 +37586,8 @@ var GraphArg = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_R
 
   _createClass(GraphArg, [{
     key: 'loadPremiseClickHandler',
-    value: function loadPremiseClickHandler() {
-      this.props.loadPremiseClickHandler();
+    value: function loadPremiseClickHandler(premiseStore) {
+      this.props.loadPremiseClickHandler(premiseStore);
     }
   }, {
     key: 'render',
@@ -37636,7 +37636,13 @@ var GraphArg = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_R
 
   return GraphArg;
 }(_react2.default.Component), _class2.propTypes = {
-  argStore: _propTypes2.default.object.isRequired,
+  argStore: _propTypes2.default.shape({
+    premises: _propTypes2.default.array.isRequired,
+    x: _propTypes2.default.number.isRequired,
+    y: _propTypes2.default.number.isRequired,
+    w: _propTypes2.default.number.isRequired,
+    h: _propTypes2.default.number.isRequired
+  }).isRequired,
   loadPremiseClickHandler: _propTypes2.default.func.isRequired
 }, _temp)) || _class;
 
@@ -37715,8 +37721,8 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
 
   _createClass(GraphClaim, [{
     key: 'loadPremiseClickHandler',
-    value: function loadPremiseClickHandler() {
-      this.props.claimStore.loadPremise();
+    value: function loadPremiseClickHandler(premiseStore) {
+      this.props.claimStore.loadPremise(premiseStore);
     }
 
     // mouseUpHandler() {
@@ -37725,6 +37731,21 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
     //   });
     // }
 
+  }, {
+    key: 'renderChildren',
+    value: function renderChildren(children) {
+      var childrenMarkup = [];
+      children.forEach(function (child) {
+        childrenMarkup.push(_react2.default.createElement(GraphClaim, {
+          claimStore: child
+        }));
+      });
+      return _react2.default.createElement(
+        'g',
+        null,
+        childrenMarkup
+      );
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -37770,14 +37791,26 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
         _react2.default.createElement(_GraphClaimArgs2.default, {
           claimStore: this.props.claimStore,
           loadPremiseClickHandler: this.loadPremiseClickHandler
-        })
+        }),
+        this.renderChildren(this.props.claimStore.children)
       );
     }
   }]);
 
   return GraphClaim;
 }(_react2.default.Component), _class2.propTypes = {
-  claimStore: _propTypes2.default.object.isRequired
+  claimStore: _propTypes2.default.shape({
+    loadPremise: _propTypes2.default.func.isRequired,
+    loadArgs: _propTypes2.default.func.isRequired,
+    claim: _propTypes2.default.shape({
+      text: _propTypes2.default.string.isRequired
+    }).isRequired,
+    children: _propTypes2.default.array.isRequired,
+    x: _propTypes2.default.number.isRequired,
+    y: _propTypes2.default.number.isRequired,
+    w: _propTypes2.default.number.isRequired,
+    h: _propTypes2.default.number.isRequired
+  }).isRequired
 }, _temp)) || _class;
 
 exports.default = GraphClaim;
@@ -37850,8 +37883,8 @@ var GraphClaimArgs = (0, _mobxReact.observer)(_class = (_temp = _class2 = functi
 
   _createClass(GraphClaimArgs, [{
     key: 'loadPremiseClickHandler',
-    value: function loadPremiseClickHandler() {
-      this.props.loadPremiseClickHandler();
+    value: function loadPremiseClickHandler(premiseStore) {
+      this.props.loadPremiseClickHandler(premiseStore);
     }
   }, {
     key: 'render',
@@ -37893,7 +37926,13 @@ var GraphClaimArgs = (0, _mobxReact.observer)(_class = (_temp = _class2 = functi
 
   return GraphClaimArgs;
 }(_react2.default.Component), _class2.propTypes = {
-  claimStore: _propTypes2.default.object.isRequired,
+  claimStore: _propTypes2.default.shape({
+    argsX: _propTypes2.default.number.isRequired,
+    argsY: _propTypes2.default.number.isRequired,
+    argsW: _propTypes2.default.number.isRequired,
+    argsH: _propTypes2.default.number.isRequired,
+    args: _propTypes2.default.object.isRequired
+  }).isRequired,
   loadPremiseClickHandler: _propTypes2.default.func.isRequired
 }, _temp)) || _class;
 
@@ -37967,7 +38006,7 @@ var GraphPremise = (_temp = _class = function (_React$Component) {
     key: 'openPremise',
     value: function openPremise() {
       console.log('open premise button clicked!');
-      this.props.loadPremiseClickHandler();
+      this.props.loadPremiseClickHandler(this.props.premiseStore);
     }
   }, {
     key: 'render',
@@ -40642,7 +40681,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
 
 var _mobx = __webpack_require__(14);
 
@@ -40735,17 +40774,20 @@ var GraphClaim = (_class = function () {
 
     _initDefineProp(this, 'argsH', _descriptor10, this);
 
+    _initDefineProp(this, 'children', _descriptor11, this);
+
     this.claim = claim;
-    this.args = [];
     this.x = position.x;
     this.y = position.y;
     //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
+    this.args = [];
     this.argsX = _graphConfig2.default.gridUnit * 2;
     this.argsY = 0;
     this.argsW = 0;
     this.argsH = 0;
+    this.children = [];
   }
 
   _createClass(GraphClaim, [{
@@ -40773,8 +40815,22 @@ var GraphClaim = (_class = function () {
 
   }, {
     key: 'loadPremise',
-    value: function loadPremise() {
-      console.log("Claim store - load premise!");
+    value: function loadPremise(premiseStore) {
+      console.log('Claim store - load premise! as new graphclaim', premiseStore);
+      //x is claim + parent arg position
+      var x = _graphConfig2.default.gridUnit * 2;
+      //y is claim + number of child claims open to the right
+      var y = _graphConfig2.default.gridUnit;
+
+      var childPositin = {
+        x: x,
+        y: y,
+        w: _graphConfig2.default.gridUnit * 2,
+        h: _graphConfig2.default.gridUnit
+      };
+
+      this.children.push(new GraphClaim(premiseStore, childPositin));
+
       //take a premise, drop it down into it's own row as a childClaim
       //childClaims inherit their x position from their parent premise
       //childClaims get their Y from right to left total of other child premises
@@ -40831,6 +40887,9 @@ var GraphClaim = (_class = function () {
   enumerable: true,
   initializer: null
 }), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'argsH', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'children', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'loadArgs', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadArgs'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'loadPremise', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadPremise'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setPosition', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setPosition'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'width', [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, 'width'), _class.prototype)), _class);
