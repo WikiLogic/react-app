@@ -44,7 +44,6 @@ export default class GraphSvg extends React.Component {
   }
 
   onKeyDownHandler(e) {
-    console.log('key down', e.keyCode);
     if (e.keyCode === 16) {
       this.setState({
         zoomEnguaged: true
@@ -82,7 +81,6 @@ export default class GraphSvg extends React.Component {
 
   wheelHandler(e) {
     if (this.state.zoomEnguaged) {
-      console.log('wheel', e.deltaY);
       this.zoomHandler(e.deltaY);
     }
   }

@@ -43,7 +43,6 @@ export default class GraphClaimArgs extends React.Component {
     const argumentsMarkup = [];
 
     this.props.claimStore.args.forEach((arg) => {
-      console.log('GraphClaimArg JSX arg: ', arg);
       argumentsMarkup.push(
         <GraphArg
           key={arg.arg._id}

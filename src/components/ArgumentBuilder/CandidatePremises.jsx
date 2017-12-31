@@ -13,7 +13,6 @@ export default class CandidatePremises extends React.Component {
   }
 
   handleAddCandidateToArgument(claim) {
-    console.log('add claim to argument click!', claim);
     this.props.premisSelectionHandler(claim);
   }
 

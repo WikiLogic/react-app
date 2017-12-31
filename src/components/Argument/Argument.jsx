@@ -19,7 +19,6 @@ export default class Argument extends React.Component {
   render() {
     // loop through the premises in this argument
     const premises = this.props.argumentObject.premises.map((premis) => {
-      console.log('');
       return (
         <div className="argument__premis" key={premis.id}>
           <Claim

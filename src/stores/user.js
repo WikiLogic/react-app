@@ -14,7 +14,6 @@ export default class User {
 
   @action
   logIn(username, password) {
-    console.log('sending login request: ', username, password);
     fetch('/api/v1/user/login', {
       method: 'POST',
       headers: {
@@ -27,7 +26,6 @@ export default class User {
     })
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
-        console.log('login returnedddd: ', res);
         this.JWT = res.data.token;
         this.isLoggedIn = true;
         this.username = username;

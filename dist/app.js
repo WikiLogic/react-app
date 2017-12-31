@@ -36191,7 +36191,6 @@ var ArgumentBuilder = function (_React$Component) {
       var _this3 = this;
 
       var term = this.state.textAreaValue;
-      console.log('term', term);
       if (isNaN(term)) {
         _api2.default.searchClaimsByTerm(term).then(function (data) {
           _this3.setState({
@@ -36607,7 +36606,6 @@ var CandidatePremises = function (_React$Component) {
   _createClass(CandidatePremises, [{
     key: 'handleAddCandidateToArgument',
     value: function handleAddCandidateToArgument(claim) {
-      console.log('add claim to argument click!', claim);
       this.props.premisSelectionHandler(claim);
     }
   }, {
@@ -36742,7 +36740,6 @@ var Argument = function (_React$Component) {
 
       // loop through the premises in this argument
       var premises = this.props.argumentObject.premises.map(function (premis) {
-        console.log('');
         return _react2.default.createElement(
           'div',
           { className: 'argument__premis', key: premis.id },
@@ -37242,7 +37239,6 @@ var GraphSearchResults = (0, _mobxReact.observer)(_class = (_temp = _class2 = fu
     value: function render() {
       var _this2 = this;
 
-      console.log('rendering graph results', this.props);
       if (!this.props.store.results) {
         return _react2.default.createElement(
           'p',
@@ -37898,7 +37894,6 @@ var GraphClaimArgs = (0, _mobxReact.observer)(_class = (_temp = _class2 = functi
       var argumentsMarkup = [];
 
       this.props.claimStore.args.forEach(function (arg) {
-        console.log('GraphClaimArg JSX arg: ', arg);
         argumentsMarkup.push(_react2.default.createElement(_GraphArg2.default, {
           key: arg.arg._id,
           argStore: arg,
@@ -38006,7 +38001,6 @@ var GraphPremise = (_temp = _class = function (_React$Component) {
   _createClass(GraphPremise, [{
     key: 'openPremise',
     value: function openPremise() {
-      console.log('open premise button clicked!');
       this.props.loadPremiseClickHandler(this.props.premiseStore);
     }
   }, {
@@ -38142,7 +38136,6 @@ var GraphSvg = function (_React$Component) {
   }, {
     key: 'onKeyDownHandler',
     value: function onKeyDownHandler(e) {
-      console.log('key down', e.keyCode);
       if (e.keyCode === 16) {
         this.setState({
           zoomEnguaged: true
@@ -38184,7 +38177,6 @@ var GraphSvg = function (_React$Component) {
     key: 'wheelHandler',
     value: function wheelHandler(e) {
       if (this.state.zoomEnguaged) {
-        console.log('wheel', e.deltaY);
         this.zoomHandler(e.deltaY);
       }
     }
@@ -38464,7 +38456,6 @@ var SearchResults = function (_React$Component) {
   _createClass(SearchResults, [{
     key: 'render',
     value: function render() {
-      console.log('this.props.searchResults', this.props.searchResults);
       if (!this.props.searchResults) {
         return _react2.default.createElement(
           'p',
@@ -39111,7 +39102,6 @@ var AuthenticationScene = (0, _mobxReact.observer)(_class = (_temp = _class2 = f
     key: 'render',
     value: function render() {
       if (this.props.userStore.isLoggedIn) {
-        console.log('running loggedin!');
         this.props.history.push('/profile');
       }
       return _react2.default.createElement(
@@ -39213,12 +39203,10 @@ var ClaimCreateScene = function (_React$Component) {
     value: function submitHandler(newClaimData) {
       var _this2 = this;
 
-      console.log('newClaimData', newClaimData);
       _api2.default.postNewClaim({
         text: newClaimData.text,
         probability: newClaimData.probability
       }).then(function (res) {
-        console.log('new claim!', res);
         //go to res.data.claim._key
         _this2.props.history.push('/claim/' + res.data.claim._key);
       }).catch(function (err) {
@@ -39291,10 +39279,6 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _lodash = __webpack_require__(85);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _api = __webpack_require__(30);
 
 var _api2 = _interopRequireDefault(_api);
@@ -39350,12 +39334,11 @@ var ClaimDetailScene = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      console.log('props', this.props.routeProps.match.params.claimId);
       //get the claim for this detail to show
       _api2.default.getClaimDetailById(this.props.routeProps.match.params.claimId).then(function (data) {
         _this2.setState({ claim: data.claim });
       }).catch(function (err) {
-        console.log('error', err);
+        console.error('claim detail scene component did mount error: ', err);
       });
     }
 
@@ -39412,19 +39395,16 @@ var ClaimDetailScene = function (_React$Component) {
     value: function newArgumentSubmissionHandler(newArgument) {
       var _this4 = this;
 
-      console.log('new argument submission!', newArgument);
       var premiseIds = [];
-      _lodash2.default.forEach(newArgument.premises, function (premise) {
-        console.log('premise', premise);
+      newArgument.premises.forEach(function (premise) {
         premiseIds.push(premise._id);
       });
-      console.log('premiseIds', premiseIds);
+
       _api2.default.postNewArgument({
         parentClaimId: this.state.claim._id,
         type: newArgument.type,
         premiseIds: premiseIds
       }).then(function (res) {
-        console.log('claim with new argument returned!', res);
         _this4.setState({
           claims: res.data.claim
         });
@@ -39784,19 +39764,15 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
     value: function newArgumentSubmissionHandler(newArgument) {
       var _this2 = this;
 
-      console.log('new argument submission!', newArgument);
       var premiseIds = [];
       newArgument.premises.each(function (premise) {
-        console.log('premise', premise);
         premiseIds.push(premise._id);
       });
-      console.log('premiseIds', premiseIds);
       _api2.default.postNewArgument({
         parentClaimId: this.state.claim._id,
         type: newArgument.type,
         premiseIds: premiseIds
       }).then(function (res) {
-        console.log('claim with new argument returned!', res);
         _this2.setState({
           claims: res.data.claim
         });
@@ -40682,7 +40658,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12;
 
 var _mobx = __webpack_require__(14);
 
@@ -40752,7 +40728,7 @@ function _initializerWarningHelper(descriptor, context) {
 var claimApi = new _api2.default('/api/v1/claims');
 
 var GraphClaim = (_class = function () {
-  function GraphClaim(claim, position) {
+  function GraphClaim(claim, position, parent) {
     _classCallCheck(this, GraphClaim);
 
     _initDefineProp(this, 'claim', _descriptor, this);
@@ -40777,18 +40753,22 @@ var GraphClaim = (_class = function () {
 
     _initDefineProp(this, 'childClaims', _descriptor11, this);
 
+    _initDefineProp(this, 'totalHeight', _descriptor12, this);
+
     this.claim = claim;
     this.x = position.x;
     this.y = position.y;
     //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
+    this.totalHeight = position.h;
     this.args = [];
     this.argsX = _graphConfig2.default.gridUnit * 2;
     this.argsY = 0;
     this.argsW = 0;
     this.argsH = 0;
     this.childClaims = [];
+    this.parent = parent;
   }
 
   _createClass(GraphClaim, [{
@@ -40829,7 +40809,7 @@ var GraphClaim = (_class = function () {
         h: _graphConfig2.default.gridUnit
       };
 
-      var baby = new GraphClaim(premiseStore, childPositin);
+      var baby = new GraphClaim(premiseStore, childPositin, this);
       this.childClaims.push(baby);
       this.updateLayout();
     }
@@ -40844,8 +40824,15 @@ var GraphClaim = (_class = function () {
       var yTracker = _graphConfig2.default.gridUnit;
       this.childClaims.forEach(function (child) {
         child.y = yTracker;
-        yTracker += child.h;
+        yTracker += child.totalHeight;
       });
+
+      //update this claim to keep track of it's total height
+      this.totalHeight = yTracker;
+      //now make the parent run it's layout again
+      if (typeof this.parent !== 'undefined') {
+        this.parent.updateLayout();
+      }
     }
   }]);
 
@@ -40881,6 +40868,9 @@ var GraphClaim = (_class = function () {
   enumerable: true,
   initializer: null
 }), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'childClaims', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor12 = _applyDecoratedDescriptor(_class.prototype, 'totalHeight', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'loadArgs', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadArgs'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'loadPremise', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadPremise'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'updateLayout', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'updateLayout'), _class.prototype)), _class);
@@ -41224,7 +41214,6 @@ var User = (_class = function () {
     value: function logIn(username, password) {
       var _this = this;
 
-      console.log('sending login request: ', username, password);
       fetch('/api/v1/user/login', {
         method: 'POST',
         headers: {
@@ -41235,7 +41224,6 @@ var User = (_class = function () {
           password: password
         })
       }).then(Formatter.apiResponceToJSON).then(function (res) {
-        console.log('login returnedddd: ', res);
         _this.JWT = res.data.token;
         _this.isLoggedIn = true;
         _this.username = username;

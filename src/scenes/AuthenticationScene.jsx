@@ -27,7 +27,6 @@ export default class AuthenticationScene extends React.Component {
 
   render() {
     if (this.props.userStore.isLoggedIn) {
-      console.log('running loggedin!');
       this.props.history.push('/profile');
     }
     return (

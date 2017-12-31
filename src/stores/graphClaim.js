@@ -21,20 +21,24 @@ export default class GraphClaim {
   @observable argsW;
   @observable argsH;
   @observable childClaims;
+  @observable totalHeight;
+  parent;
 
-  constructor(claim, position) {
+  constructor(claim, position, parent) {
     this.claim = claim;
     this.x = position.x;
     this.y = position.y;
     //width and height probably assume no arguments are yet loaded
     this.w = position.w;
     this.h = position.h;
+    this.totalHeight = position.h;
     this.args = [];
     this.argsX = (GraphConfig.gridUnit * 2);
     this.argsY = 0;
     this.argsW = 0;
     this.argsH = 0;
     this.childClaims = [];
+    this.parent = parent;
   }
 
   @action
@@ -70,7 +74,7 @@ export default class GraphClaim {
       h: GraphConfig.gridUnit
     };
 
-    const baby = new GraphClaim(premiseStore, childPositin);
+    const baby = new GraphClaim(premiseStore, childPositin, this);
     this.childClaims.push(baby);
     this.updateLayout();
   }
@@ -85,7 +89,14 @@ export default class GraphClaim {
     let yTracker = GraphConfig.gridUnit;
     this.childClaims.forEach((child) => {
       child.y = yTracker;
-      yTracker += child.h;
+      yTracker += child.totalHeight;
     });
+
+    //update this claim to keep track of it's total height
+    this.totalHeight = yTracker;
+    //now make the parent run it's layout again
+    if (typeof this.parent !== 'undefined') {
+      this.parent.updateLayout();
+    }
   }
 }

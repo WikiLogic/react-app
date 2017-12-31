@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import API from 'src/API/api.js';
 import ArgumentPremises from './ArgumentPremises.jsx';
 import CandidatePremises from './CandidatePremises.jsx';
@@ -61,7 +60,6 @@ export default class ArgumentBuilder extends React.Component {
   //Before submitting the premis as a new one, fire off a search to see if there are any existing ones that it might be
   searchForExistingClaims() {
     const term = this.state.textAreaValue;
-    console.log('term', term);
     if (isNaN(term)) {
       API.searchClaimsByTerm(term)
         .then((data) => {
@@ -120,9 +118,12 @@ export default class ArgumentBuilder extends React.Component {
   }
 
   removePremise(premiseToRemove) {
+    let newPremiseArray = [];
 
-    const newPremiseArray = _.remove(this.state.premises, (premise) => {
-      return premise._id !== premiseToRemove._id;
+    this.state.premises.forEach((premise, i) => {
+      if (premise._id === premiseToRemove._id) {
+        newPremiseArray = this.state.premises.splice(i, 1);
+      }
     });
 
     this.setState({

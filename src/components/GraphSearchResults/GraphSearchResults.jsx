@@ -25,7 +25,6 @@ export default class GraphSearchResults extends React.Component {
   }
 
   render() {
-    console.log('rendering graph results', this.props);
     if (!this.props.store.results) {
       return <p>No results</p>;
     }

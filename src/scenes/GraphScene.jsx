@@ -37,19 +37,15 @@ export default class GraphScene extends React.Component {
   }
 
   newArgumentSubmissionHandler(newArgument) {
-    console.log('new argument submission!', newArgument);
     const premiseIds = [];
     newArgument.premises.each((premise) => {
-      console.log('premise', premise);
       premiseIds.push(premise._id);
     });
-    console.log('premiseIds', premiseIds);
     API.postNewArgument({
       parentClaimId: this.state.claim._id,
       type: newArgument.type,
       premiseIds: premiseIds
     }).then((res) => {
-      console.log('claim with new argument returned!', res);
       this.setState({
         claims: res.data.claim
       });
