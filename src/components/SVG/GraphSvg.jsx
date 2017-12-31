@@ -35,25 +35,22 @@ export default class GraphSvg extends React.Component {
     this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
   }
 
-  componentWillMount() {
-    document.addEventListener('keyDown', this.onKeyDownHandler, false);
-    document.addEventListener('keyUp', this.onKeyUpHandler, false);
-  }
-
-
-  componentWillUnmount() {
-    document.removeEventListener('keyDown', this.onKeyDownHandler, false);
-    document.removeEventListener('keyUp', this.onKeyUpHandler, false);
-  }
-
   onKeyDownHandler(e) {
+
     if (e.keyCode === 16) {
       this.setState({
         zoomEnguaged: true
       });
     }
-  }
 
+    if (e.key === 'ArrowUp') { this.panHandler(0, 10); }
+    if (e.key === 'ArrowDown') { this.panHandler(0, -10); }
+    if (e.key === 'ArrowLeft') { this.panHandler(10, 0); }
+    if (e.key === 'ArrowRight') { this.panHandler(-10, 0); }
+
+    e.preventDefault();
+    e.stopPropagation();
+  }
   onKeyUpHandler(e) {
     if (e.keyCode === 16) {
       this.setState({
@@ -95,7 +92,7 @@ export default class GraphSvg extends React.Component {
 
   wheelHandler(e) {
     if (this.state.svgFocused) {
-      this.zoomHandler(e.deltaY);
+      this.zoomHandler(-e.deltaY);
       e.preventDefault();
       e.stopPropagation();
     }
@@ -117,7 +114,6 @@ export default class GraphSvg extends React.Component {
       panOriginY: e.screenY
     });
   }
-
   mouseUpHandler() {
     this.setState({
       panEnguaged: false,
