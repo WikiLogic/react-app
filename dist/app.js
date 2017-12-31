@@ -37733,9 +37733,9 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
 
   }, {
     key: 'renderChildren',
-    value: function renderChildren(children) {
+    value: function renderChildren(childClaims) {
       var childrenMarkup = [];
-      children.forEach(function (child) {
+      childClaims.forEach(function (child) {
         childrenMarkup.push(_react2.default.createElement(GraphClaim, {
           key: child.claim._key,
           claimStore: child
@@ -37793,7 +37793,7 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
           claimStore: this.props.claimStore,
           loadPremiseClickHandler: this.loadPremiseClickHandler
         }),
-        this.renderChildren(this.props.claimStore.children)
+        this.renderChildren(this.props.claimStore.childClaims)
       );
     }
   }]);
@@ -37806,7 +37806,7 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
     claim: _propTypes2.default.shape({
       text: _propTypes2.default.string.isRequired
     }).isRequired,
-    children: _propTypes2.default.object.isRequired,
+    childClaims: _propTypes2.default.object.isRequired,
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired,
     w: _propTypes2.default.number.isRequired,
@@ -40775,7 +40775,7 @@ var GraphClaim = (_class = function () {
 
     _initDefineProp(this, 'argsH', _descriptor10, this);
 
-    _initDefineProp(this, 'children', _descriptor11, this);
+    _initDefineProp(this, 'childClaims', _descriptor11, this);
 
     this.claim = claim;
     this.x = position.x;
@@ -40788,7 +40788,7 @@ var GraphClaim = (_class = function () {
     this.argsY = 0;
     this.argsW = 0;
     this.argsH = 0;
-    this.children = [];
+    this.childClaims = [];
   }
 
   _createClass(GraphClaim, [{
@@ -40817,11 +40817,9 @@ var GraphClaim = (_class = function () {
   }, {
     key: 'loadPremise',
     value: function loadPremise(premiseStore) {
-      console.log('Claim store - load premise! as new graphclaim', premiseStore);
       //x is claim + parent arg position
       var x = _graphConfig2.default.gridUnit * 2 + premiseStore.x;
-      //y is claim + number of child claims open to the right
-      //go through this.args and their premises backwards - make sure this.children are in the same order - increment the children
+      //set y to one down by default
       var y = _graphConfig2.default.gridUnit;
 
       var childPositin = {
@@ -40831,34 +40829,23 @@ var GraphClaim = (_class = function () {
         h: _graphConfig2.default.gridUnit
       };
 
-      this.children.push(new GraphClaim(premiseStore, childPositin));
-
-      //now run the layout calculation function
-
-      //take a premise, drop it down into it's own row as a childClaim
-      //childClaims inherit their x position from their parent premise
-      //childClaims get their Y from right to left total of other child premises
-
-      //TODO: tell the graph that it needs to align things again
+      var baby = new GraphClaim(premiseStore, childPositin);
+      this.childClaims.push(baby);
+      this.updateLayout();
     }
   }, {
-    key: 'setPosition',
-    value: function setPosition(x, y) {
-      this.x = x;
-      this.y = y;
-    }
-  }, {
-    key: 'width',
-    get: function get() {
-      // count the number of premises used by arguments open for this claim
-      // + 1 for the claim itself
-
-      var width = 1;
-      this.args.forEach(function (arg) {
-        width += arg.premises.length;
+    key: 'updateLayout',
+    value: function updateLayout() {
+      this.childClaims = this.childClaims.sort(function (a, b) {
+        return b.x - a.x; //sort in reverse order
       });
 
-      return width;
+      //set their y positions
+      var yTracker = _graphConfig2.default.gridUnit;
+      this.childClaims.forEach(function (child) {
+        child.y = yTracker;
+        yTracker += child.h;
+      });
     }
   }]);
 
@@ -40893,10 +40880,10 @@ var GraphClaim = (_class = function () {
 }), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'argsH', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'children', [_mobx.observable], {
+}), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'childClaims', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _applyDecoratedDescriptor(_class.prototype, 'loadArgs', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadArgs'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'loadPremise', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadPremise'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setPosition', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setPosition'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'width', [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, 'width'), _class.prototype)), _class);
+}), _applyDecoratedDescriptor(_class.prototype, 'loadArgs', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadArgs'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'loadPremise', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'loadPremise'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'updateLayout', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'updateLayout'), _class.prototype)), _class);
 exports.default = GraphClaim;
 
 /***/ }),

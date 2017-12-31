@@ -16,7 +16,7 @@ export default class GraphClaim extends React.Component {
       claim: PropTypes.shape({
         text: PropTypes.string.isRequired
       }).isRequired,
-      children: PropTypes.object.isRequired,
+      childClaims: PropTypes.object.isRequired,
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
       w: PropTypes.number.isRequired,
@@ -44,9 +44,9 @@ export default class GraphClaim extends React.Component {
   //   });
   // }
 
-  renderChildren(children) {
+  renderChildren(childClaims) {
     const childrenMarkup = [];
-    children.forEach((child) => {
+    childClaims.forEach((child) => {
       childrenMarkup.push(
         <GraphClaim
           key={child.claim._key}
@@ -107,7 +107,7 @@ export default class GraphClaim extends React.Component {
           loadPremiseClickHandler={this.loadPremiseClickHandler}
         />
 
-        {this.renderChildren(this.props.claimStore.children)}
+        {this.renderChildren(this.props.claimStore.childClaims)}
       </Group>
     );
   }

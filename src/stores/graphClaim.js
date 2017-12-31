@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx';
 import GraphConfig from './_graphConfig.js';
 import Api from 'src/utils/api.js';
 import GraphArg from './graphArg.js';
@@ -20,7 +20,7 @@ export default class GraphClaim {
   @observable argsY;
   @observable argsW;
   @observable argsH;
-  @observable children;
+  @observable childClaims;
 
   constructor(claim, position) {
     this.claim = claim;
@@ -34,7 +34,7 @@ export default class GraphClaim {
     this.argsY = 0;
     this.argsW = 0;
     this.argsH = 0;
-    this.children = [];
+    this.childClaims = [];
   }
 
   @action
@@ -58,13 +58,10 @@ export default class GraphClaim {
   // ? Move to graph probably
   @action
   loadPremise(premiseStore) {
-    console.log('Claim store - load premise! as new graphclaim', premiseStore);
     //x is claim + parent arg position
     const x = (GraphConfig.gridUnit * 2) + premiseStore.x;
-    //y is claim + number of child claims open to the right
-    //go through this.args and their premises backwards - make sure this.children are in the same order - increment the children
+    //set y to one down by default
     const y = GraphConfig.gridUnit;
-
 
     const childPositin = {
       x: x,
@@ -73,33 +70,22 @@ export default class GraphClaim {
       h: GraphConfig.gridUnit
     };
 
-    this.children.push(new GraphClaim(premiseStore, childPositin));
-
-    //now run the layout calculation function
-
-    //take a premise, drop it down into it's own row as a childClaim
-    //childClaims inherit their x position from their parent premise
-    //childClaims get their Y from right to left total of other child premises
-
-    //TODO: tell the graph that it needs to align things again
+    const baby = new GraphClaim(premiseStore, childPositin);
+    this.childClaims.push(baby);
+    this.updateLayout();
   }
 
   @action
-  setPosition(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  @computed
-  get width() {
-    // count the number of premises used by arguments open for this claim
-    // + 1 for the claim itself
-
-    let width = 1;
-    this.args.forEach((arg) => {
-      width += arg.premises.length;
+  updateLayout() {
+    this.childClaims = this.childClaims.sort((a, b) => {
+      return b.x - a.x; //sort in reverse order
     });
 
-    return width;
+    //set their y positions
+    let yTracker = GraphConfig.gridUnit;
+    this.childClaims.forEach((child) => {
+      child.y = yTracker;
+      yTracker += child.h;
+    });
   }
 }
