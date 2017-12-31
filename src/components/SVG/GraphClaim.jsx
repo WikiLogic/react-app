@@ -16,7 +16,7 @@ export default class GraphClaim extends React.Component {
       claim: PropTypes.shape({
         text: PropTypes.string.isRequired
       }).isRequired,
-      children: PropTypes.array.isRequired,
+      children: PropTypes.object.isRequired,
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
       w: PropTypes.number.isRequired,
@@ -49,6 +49,7 @@ export default class GraphClaim extends React.Component {
     children.forEach((child) => {
       childrenMarkup.push(
         <GraphClaim
+          key={child.claim._key}
           claimStore={child}
         />
       );

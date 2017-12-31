@@ -60,9 +60,11 @@ export default class GraphClaim {
   loadPremise(premiseStore) {
     console.log('Claim store - load premise! as new graphclaim', premiseStore);
     //x is claim + parent arg position
-    const x = GraphConfig.gridUnit * 2;
+    const x = (GraphConfig.gridUnit * 2) + premiseStore.x;
     //y is claim + number of child claims open to the right
+    //go through this.args and their premises backwards - make sure this.children are in the same order - increment the children
     const y = GraphConfig.gridUnit;
+
 
     const childPositin = {
       x: x,
@@ -72,6 +74,8 @@ export default class GraphClaim {
     };
 
     this.children.push(new GraphClaim(premiseStore, childPositin));
+
+    //now run the layout calculation function
 
     //take a premise, drop it down into it's own row as a childClaim
     //childClaims inherit their x position from their parent premise

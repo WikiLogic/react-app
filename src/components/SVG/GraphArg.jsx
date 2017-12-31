@@ -13,7 +13,7 @@ import GraphConfig from 'src/stores/_graphConfig.js';
 export default class GraphArg extends React.Component {
   static propTypes = {
     argStore: PropTypes.shape({
-      premises: PropTypes.array.isRequired,
+      premises: PropTypes.object.isRequired,
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
       w: PropTypes.number.isRequired,

@@ -37637,7 +37637,7 @@ var GraphArg = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_R
   return GraphArg;
 }(_react2.default.Component), _class2.propTypes = {
   argStore: _propTypes2.default.shape({
-    premises: _propTypes2.default.array.isRequired,
+    premises: _propTypes2.default.object.isRequired,
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired,
     w: _propTypes2.default.number.isRequired,
@@ -37737,6 +37737,7 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
       var childrenMarkup = [];
       children.forEach(function (child) {
         childrenMarkup.push(_react2.default.createElement(GraphClaim, {
+          key: child.claim._key,
           claimStore: child
         }));
       });
@@ -37805,7 +37806,7 @@ var GraphClaim = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (
     claim: _propTypes2.default.shape({
       text: _propTypes2.default.string.isRequired
     }).isRequired,
-    children: _propTypes2.default.array.isRequired,
+    children: _propTypes2.default.object.isRequired,
     x: _propTypes2.default.number.isRequired,
     y: _propTypes2.default.number.isRequired,
     w: _propTypes2.default.number.isRequired,
@@ -40818,8 +40819,9 @@ var GraphClaim = (_class = function () {
     value: function loadPremise(premiseStore) {
       console.log('Claim store - load premise! as new graphclaim', premiseStore);
       //x is claim + parent arg position
-      var x = _graphConfig2.default.gridUnit * 2;
+      var x = _graphConfig2.default.gridUnit * 2 + premiseStore.x;
       //y is claim + number of child claims open to the right
+      //go through this.args and their premises backwards - make sure this.children are in the same order - increment the children
       var y = _graphConfig2.default.gridUnit;
 
       var childPositin = {
@@ -40830,6 +40832,8 @@ var GraphClaim = (_class = function () {
       };
 
       this.children.push(new GraphClaim(premiseStore, childPositin));
+
+      //now run the layout calculation function
 
       //take a premise, drop it down into it's own row as a childClaim
       //childClaims inherit their x position from their parent premise
