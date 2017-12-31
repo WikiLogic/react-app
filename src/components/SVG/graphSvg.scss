@@ -17,5 +17,18 @@
         .x {
           fill: black;
         }
+        
+        &:focus {
+            cursor: move;
+            user-select: none;
+        }
+    }
+
+
+    &--panning {
+        &, * {
+            cursor: move;
+            user-select: none;
+        }
     }
 }

@@ -2,4 +2,11 @@
   position: absolute;
   top: rem($pad);
   right: rem($pad);
+
+  button {
+    display: block;
+    width: 36px;
+    padding: rem(7) rem(13) rem(9);
+    margin: 4px;
+  }
 }

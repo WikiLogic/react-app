@@ -20,7 +20,6 @@ input[type='button'],
 	color: white;
 	text { fill: white; }
 	border-radius: 2px;
-	position: relative;
 
 	p { line-height: 44px; } //there should only be a p in an SVGbutton, this is the vertically center the text
 
@@ -31,7 +30,6 @@ input[type='button'],
 	&:active {
 		background-color: $blue-light;
 		rect { fill: $blue-light; }
-		top: 1px;
 	}
 	&:focus {
 		background-color: $blue-light;

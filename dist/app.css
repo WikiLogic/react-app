@@ -422,8 +422,7 @@ input[type='button'],
   display: inline-block;
   background-color: #111F2E;
   color: white;
-  border-radius: 2px;
-  position: relative; }
+  border-radius: 2px; }
   button rect,
   input[type='submit'] rect,
   input[type='button'] rect,
@@ -453,8 +452,7 @@ input[type='button'],
   input[type='submit']:active,
   input[type='button']:active,
   .button:active {
-    background-color: #0a88c5;
-    top: 1px; }
+    background-color: #0a88c5; }
     button:active rect,
     input[type='submit']:active rect,
     input[type='button']:active rect,
@@ -1042,6 +1040,11 @@ styles are set in sass alongside the components. (in the components folder).
   position: absolute;
   top: 1rem;
   right: 1rem; }
+  .graph-controls button {
+    display: block;
+    width: 36px;
+    padding: 0.4375rem 0.8125rem 0.5625rem;
+    margin: 4px; }
 
 .graph-search-results__result {
   margin-bottom: 0.5rem; }
@@ -1622,6 +1625,12 @@ styles are set in sass alongside the components. (in the components folder).
     height: 100vh; }
     .graph-svg__svg .x {
       fill: black; }
+    .graph-svg__svg:focus {
+      cursor: move;
+      user-select: none; }
+  .graph-svg--panning, .graph-svg--panning * {
+    cursor: move;
+    user-select: none; }
 
 .claim-detail {
   width: 100%; }

@@ -18,13 +18,16 @@ export default class GraphSvg extends React.Component {
       panEnguaged: false,
       panOriginX: 0,
       panOriginY: 0,
-      zoomEnguaged: false
+      zoomEnguaged: false,
+      svgFocused: false
     };
 
     this.focus = this.focus.bind(this);
     this.zoomHandler = this.zoomHandler.bind(this);
     this.onKeyDownHandler = this.onKeyDownHandler.bind(this);
     this.onKeyUpHandler = this.onKeyUpHandler.bind(this);
+    this.svgFocusHandler = this.svgFocusHandler.bind(this);
+    this.svgBlurHandler = this.svgBlurHandler.bind(this);
     this.wheelHandler = this.wheelHandler.bind(this);
     this.panHandler = this.panHandler.bind(this);
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
@@ -59,6 +62,17 @@ export default class GraphSvg extends React.Component {
     }
   }
 
+  svgFocusHandler() {
+    this.setState({
+      svgFocused: true
+    });
+  }
+  svgBlurHandler() {
+    this.setState({
+      svgFocused: false
+    });
+  }
+
   zoomHandler(value) {
     const newTopLeftX = this.state.topLeftX + value;
     const newTopLeftY = this.state.topLeftY + value;
@@ -80,8 +94,10 @@ export default class GraphSvg extends React.Component {
   }
 
   wheelHandler(e) {
-    if (this.state.zoomEnguaged) {
+    if (this.state.svgFocused) {
       this.zoomHandler(e.deltaY);
+      e.preventDefault();
+      e.stopPropagation();
     }
   }
 
@@ -130,8 +146,12 @@ export default class GraphSvg extends React.Component {
   }
 
   render() {
+    let panClass = '';
+    if (this.state.panEnguaged) {
+      panClass = 'graph-svg--panning';
+    }
     return (
-      <div className="graph-svg">
+      <div className={`graph-svg ${panClass}`}>
         <div className="graph-svg__controls">
           <GraphControls
             panHandler={this.panHandler}
@@ -139,6 +159,7 @@ export default class GraphSvg extends React.Component {
           />
         </div>
         <svg
+          tabIndex="0"
           className="graph-svg__svg"
           xmlns="http://www.w3.org/2000/svg"
           //xmlns:html="http://www.w3.org/1999/xhtml"
@@ -150,6 +171,8 @@ export default class GraphSvg extends React.Component {
           onWheel={this.wheelHandler}
           onKeyDown={this.onKeyDownHandler}
           onKeyUp={this.onKeyUpHandler}
+          onFocus={this.svgFocusHandler}
+          onBlur={this.svgBlurHandler}
         >
           {this.props.children}
         </svg>
