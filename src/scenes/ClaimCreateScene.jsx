@@ -1,6 +1,7 @@
 import React from 'react';
-import AddClaimForm from 'WlComponents/AddClaimForm/AddClaimForm.jsx';
-import API from 'WlAPI/api.js';
+import PropTypes from 'prop-types';
+import AddClaimForm from 'src/components/AddClaimForm/AddClaimForm.jsx';
+import API from 'src/API/api.js';
 
 /**
  * The Search Results page
@@ -17,12 +18,10 @@ export default class ClaimCreateScene extends React.Component {
   }
 
   submitHandler(newClaimData) {
-    console.log('newClaimData', newClaimData);
     API.postNewClaim({
       text: newClaimData.text,
       probability: newClaimData.probability,
     }).then((res) => {
-      console.log('new claim!', res);
       //go to res.data.claim._key
       this.props.history.push(`/claim/${res.data.claim._key}`);
     }).catch((err) => {
@@ -49,7 +48,7 @@ export default class ClaimCreateScene extends React.Component {
 }
 
 ClaimCreateScene.propTypes = {
-  history: React.PropTypes.shape({
-    push: React.PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
 };

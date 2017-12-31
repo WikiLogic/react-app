@@ -1,5 +1,6 @@
 import React from 'react';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import PropTypes from 'prop-types';
+import Claim from '../Claim/Claim.jsx';
 
 /* The Search Results
  * Takes an array of claims in a prop called searchResults and spits them out in a list
@@ -13,7 +14,6 @@ export default class SearchResults extends React.Component {
   }
 
   render() {
-    console.log('this.props.searchResults', this.props.searchResults);
     if (!this.props.searchResults) {
       return <p>No results</p>;
     }
@@ -42,7 +42,7 @@ export default class SearchResults extends React.Component {
 }
 
 SearchResults.propTypes = {
-  searchResults: React.PropTypes.arrayOf(React.PropTypes.object),
+  searchResults: PropTypes.arrayOf(PropTypes.object),
 };
 
 SearchResults.defaultProps = {

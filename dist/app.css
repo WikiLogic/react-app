@@ -1125,25 +1125,25 @@ styles are set in sass alongside the components. (in the components folder).
   .modal__content {
     padding: 1rem; }
 
-.search-form {
+.SearchForm {
   display: block;
   width: 100%;
   position: relative; }
-  .search-form__label {
+  .SearchForm__label {
     margin-bottom: 0;
     line-height: 1.1; }
-  .search-form__input.search-form__input {
+  .SearchForm__input.search-form__input {
     display: block;
     padding-right: 50px;
     width: 100%; }
-  .search-form__submit {
+  .SearchForm__submit {
     position: absolute;
     height: 44px;
     right: 0;
     bottom: 0;
     background-color: transparent;
     border-color: transparent; }
-    .search-form__submit svg {
+    .SearchForm__submit svg {
       fill: #111F2E; }
 
 .search-results__result {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* The native svg <text> el does not allow for text wrapping
  * This component provides that
@@ -17,9 +18,9 @@ export default function SVGtext(props) {
 }
 
 SVGtext.propTypes = {
-  text: React.PropTypes.string.isRequired,
-  x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired,
-  width: React.PropTypes.number.isRequired,
-  height: React.PropTypes.number.isRequired
+  text: PropTypes.string.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* The wrapper around svg elements that deals with clicking and dragging
  * Also just positioning in a standard way
@@ -24,10 +25,10 @@ export default class ClickerDragger extends React.Component {
 }
 
 ClickerDragger.propTypes = {
-  children: React.PropTypes.element.isRequired,
-  x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired,
-  className: React.PropTypes.string
+  children: PropTypes.element.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  className: PropTypes.string
 };
 
 ClickerDragger.defaultProps = {

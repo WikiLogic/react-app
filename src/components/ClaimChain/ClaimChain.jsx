@@ -1,6 +1,7 @@
 import React from 'react';
-import API from 'WlAPI/api.js';
-import ClaimDetail from 'WlComponents/ClaimDetail/ClaimDetail.jsx';
+import PropTypes from 'prop-types';
+import API from '../../api.js';
+import ClaimDetail from '../ClaimDetail/ClaimDetail.jsx';
 
 /* Start with a claim ID. Ask the API for that claim.
  * Lets the user go deeper into the premises bloew that claim.
@@ -104,5 +105,5 @@ export default class ClaimChain extends React.Component {
 }
 
 ClaimChain.propTypes = {
-  topClaimId: React.PropTypes.string.isRequired,
+  topClaimId: PropTypes.string.isRequired,
 };

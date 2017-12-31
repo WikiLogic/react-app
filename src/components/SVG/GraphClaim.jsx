@@ -1,154 +1,114 @@
 import React from 'react';
-import SVGbutton from 'WlComponents/SVGels/SVGbutton.jsx';
-import SVGtext from 'WlComponents/SVGels/SVGtext.jsx';
-import GraphArg from 'WlComponents/SVG/GraphArg.jsx';
-import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-import API from 'WlAPI/api.js';
+import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+import SVGbutton from '../SVGels/SVGbutton.jsx';
+import SVGtext from '../SVGels/SVGtext.jsx';
+import GraphClaimArgs from './GraphClaimArgs.jsx';
+import Group from './group.jsx';
+import GraphConfig from 'src/stores/_graphConfig.js';
 
-/* The Claim Wrapper for the graph
- * It doesn't need to know where it is on the graph, that's handled by whoever the parent is (probably the graph scene)
- * But it does need to know where it wants to put it's children and then inform the parent about it's size. 
- * It's then up to the parent to accomodate properly.
- */
+@observer
 export default class GraphClaim extends React.Component {
+  static propTypes = {
+    claimStore: PropTypes.shape({
+      loadPremise: PropTypes.func.isRequired,
+      loadArgs: PropTypes.func.isRequired,
+      claim: PropTypes.shape({
+        text: PropTypes.string.isRequired
+      }).isRequired,
+      childClaims: PropTypes.object.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      w: PropTypes.number.isRequired,
+      h: PropTypes.number.isRequired
+    }).isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      claim: this.props.claim,
-      arguments: [],
-      isFocused: false
-    };
-    this.loadArguments = this.loadArguments.bind(this);
-    this.renderArguments = this.renderArguments.bind(this);
-    this.mouseUpHandler = this.mouseUpHandler.bind(this);
-  }
-
-  mouseUpHandler() {
-    this.setState({
       isFocused: true
-    });
+    };
+
+    this.loadPremiseClickHandler = this.loadPremiseClickHandler.bind(this);
+    // this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
 
-  loadArguments() {
-    console.log('tada! All the btn did was say, hey dad, fire that function you passed me! Dad knows what to do.', this.props.claim);
-    API.getClaimDetailById(this.props.claim._key)
-      .then((data) => {
-        this.setState({
-          arguments: data.claim.arguments
-        });
-      }).catch((err) => {
-        console.log('Trying to load claim detail error', err);
-      });
+  loadPremiseClickHandler(premiseStore) {
+    this.props.claimStore.loadPremise(premiseStore);
   }
 
-  //will need a:
-  //this.props.resizeHandler
+  // mouseUpHandler() {
+  //   this.setState({
+  //     isFocused: true
+  //   });
+  // }
 
-  renderArguments() {
-    console.log('data.state.arguments', this.state.arguments);
-    if (this.state.arguments.length === 0) { return null; }
-    const argumentsMarkup = [];
-    let premiseCounter = 0;
-    const spaceBetweenArgs = 50;
-
-    for (let r = 0; r < this.state.arguments.length; r++) {
-      const thisArgumentX = (premiseCounter * (this.props.gridUnit * 2)) + (spaceBetweenArgs * r); //move it right by n previous premises * the gridUnit, premises are 2 units wide too
-      premiseCounter += this.state.arguments[r].premises.length;
-
-      argumentsMarkup.push(
-        <ClickerDragger
-          key={r}
-          x={thisArgumentX}
-          y={0}
-        >
-          <GraphArg
-            key={r}
-            gridUnit={this.props.gridUnit}
-            padUnit={this.props.padUnit}
-            arg={this.state.arguments[r]}
-          />
-        </ClickerDragger>
+  renderChildren(childClaims) {
+    const childrenMarkup = [];
+    childClaims.forEach((child) => {
+      childrenMarkup.push(
+        <GraphClaim
+          key={child.claim._key}
+          claimStore={child}
+        />
       );
-    }
-
-    //The arguments area will fill the grid squares 
-    //it's up to the individual arguments to position themselves within the grid squares
+    });
     return (
-      <ClickerDragger
-        className="graph-claim__args"
-        x={0} //something's acting relative in the svg
-        y={this.props.gridUnit}
-      >
-        <g>{argumentsMarkup}</g>
-      </ClickerDragger>
+      <g>
+        {childrenMarkup}
+      </g>
     );
   }
 
   render() {
-
-    //make claims 2 by 1
-    const claimWidth = (this.props.gridUnit * 2) - (2 * this.props.padUnit);
-    const claimHeight = (this.props.gridUnit * 1) - (2 * this.props.padUnit);
-    const gridSquareWidth = this.props.gridUnit * 2;
-    const gridSquareHeight = this.props.gridUnit * 1;
-
-    //not making the wrapper visible around the whole of it's children for now - that would require feedback from the children about their dimensions
     return (
-      <g className="graph-claim" onMouseUp={this.mouseUpHandler}>
-        <rect
-          className="grid-square"
-          rx="10"
-          ry="10"
-          width={gridSquareWidth}
-          height={gridSquareHeight}
+      <Group
+        className="graph-claim"
+        x={this.props.claimStore.x}
+        y={this.props.claimStore.y}
+      >
+
+        <Group
+          className="graph-claim__claim"
+          x={GraphConfig.padding}
+          y={GraphConfig.padding}
+        >
+          <rect
+            rx="5"
+            ry="5"
+            width={this.props.claimStore.w - (GraphConfig.padding * 2)}
+            height={this.props.claimStore.h - (GraphConfig.padding * 2)}
+            className="graph-claim__claim"
+          />
+
+          <SVGtext
+            x={0}
+            y={0}
+            width={this.props.claimStore.w - (GraphConfig.padding * 2)}
+            height={this.props.claimStore.h - (GraphConfig.padding * 2)}
+            text={this.props.claimStore.claim.text}
+          />
+
+          {(this.state.isFocused &&
+            <SVGbutton
+              clickHandler={() => {
+                this.props.claimStore.loadArgs();
+              }}
+              text="+"
+              x={this.props.claimStore.w - 50}
+              y={this.props.claimStore.h - 50}
+            />
+          )}
+        </Group>
+
+        <GraphClaimArgs
+          claimStore={this.props.claimStore}
+          loadPremiseClickHandler={this.loadPremiseClickHandler}
         />
 
-        <ClickerDragger
-          className="graph-claim__claim"
-          x={this.props.padUnit}
-          y={this.props.padUnit}
-        >
-          <g>
-            <rect
-              rx="5"
-              ry="5"
-              width={claimWidth}
-              height={claimHeight}
-              className="graph-claim__claim"
-            />
-
-            <SVGtext
-              x={0}
-              y={0}
-              width={claimWidth}
-              height={claimHeight}
-              text={this.props.claim.text}
-            />
-
-            {(this.state.isFocused &&
-              <SVGbutton
-                clickHandler={this.loadArguments}
-                text="+"
-                x={claimWidth - 44}
-                y={claimHeight - 44}
-              />
-            )}
-          </g>
-        </ClickerDragger>
-
-        {this.renderArguments()}
-      </g>
+        {this.renderChildren(this.props.claimStore.childClaims)}
+      </Group>
     );
   }
 }
-
-GraphClaim.propTypes = {
-  claim: React.PropTypes.shape({
-    text: React.PropTypes.string.isRequired,
-    _id: React.PropTypes.string.isRequired,
-    _key: React.PropTypes.string.isRequired,
-    arguments: React.PropTypes.array
-  }).isRequired,
-  gridUnit: React.PropTypes.number.isRequired,
-  padUnit: React.PropTypes.number.isRequired
-};

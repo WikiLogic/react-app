@@ -1,9 +1,9 @@
 import React from 'react';
-import Argument from 'WlComponents/Argument/Argument.jsx';
-import API from 'WlAPI/api.js';
-import SearchForm from 'WlComponents/SearchForm/SearchForm.jsx';
-import Claim from 'WlComponents/Claim/Claim.jsx';
-import Validate from 'WlServices/validate.js';
+import PropTypes from 'prop-types';
+import Argument from '../Argument/Argument.jsx';
+import API from '../../API/api.js';
+import SearchForm from '../SearchForm/SearchForm.jsx';
+import Claim from '../Claim/Claim.jsx';
 
 /* Search & select claims to add as premises to an argument
  */
@@ -54,10 +54,8 @@ export default class AddExplanationForm extends React.Component {
     // a premis in the premis search - add it to the new argument when it's clicked
     const newArgument = this.state.argument;
 
-    if (Validate.newPremis(premis, newArgument, this.props.parentClaim)) {
-      newArgument.premises.push(premis);
-      this.setState({ argument: newArgument });
-    }
+    newArgument.premises.push(premis);
+    this.setState({ argument: newArgument });
   }
 
   handleArgumentPremisClick(premis) {
@@ -157,9 +155,9 @@ export default class AddExplanationForm extends React.Component {
 }
 
 AddExplanationForm.propTypes = {
-  parentClaim: React.PropTypes.shape({
-    _id: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
+  parentClaim: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
   }).isRequired,
-  updatedClaimHandler: React.PropTypes.func.isRequired,
+  updatedClaimHandler: PropTypes.func.isRequired,
 };

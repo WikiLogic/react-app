@@ -1,40 +1,19 @@
 import React from 'react';
-import User from '../services/user.js';
+import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 
 /**
  * The User profile & settings page
  * Here you will be able to change the theme / alert settings / your username / password / etc...
  * @prop {*} name 
  */
+
+
+@observer
 export default class UserProfileScene extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      signUpDate: '',
-      username: ''
-    };
-
-    this.logoutHandler = this.logoutHandler.bind(this);
-  }
-
-  componentDidMount() {
-    User.get().then((data) => {
-      console.log('Got user data!', data);
-      this.setState({
-        email: data.email,
-        signUpDate: data.signUpDate,
-        username: data.username
-      });
-    }).catch((err) => {
-      console.error('get user data failed', err);
-    });
-  }
-
-  logoutHandler() {
-    this.props.logoutHandler();
-  }
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  };
 
   render() {
     return (
@@ -43,10 +22,10 @@ export default class UserProfileScene extends React.Component {
           <div className="max-width-wrap">
             <div className="layout-cols-2">
               <div className="layout-cols-2__left">
-                <h1>{this.state.username}</h1>
+                <h1>{this.props.store.username}</h1>
               </div>
               <div className="layout-cols-2__right">
-                <button onClick={this.logoutHandler}>LOGOUT</button>
+                <button onClick={this.props.store.logOut}>LOGOUT</button>
               </div>
             </div>
           </div>
@@ -55,8 +34,8 @@ export default class UserProfileScene extends React.Component {
           <div className="max-width-wrap">
             Currently only the demo login is running, it has no profile data. Proper profiles will be coming!
             <ul>
-              <li>Email: {this.state.email}</li>
-              <li>Signup date: {this.state.signUpDate}</li>
+              <li>Email: {this.props.store.email}</li>
+              <li>Signup date: {this.props.store.signUpDate}</li>
             </ul>
           </div>
         </div>
@@ -64,16 +43,3 @@ export default class UserProfileScene extends React.Component {
     );
   }
 }
-
-UserProfileScene.propTypes = {
-  logoutHandler: React.PropTypes.func.isRequired,
-  user: React.PropTypes.shape({
-    name: React.PropTypes.string,
-  }),
-};
-
-UserProfileScene.defaultProps = {
-  user: {
-    name: 'Not Logged In',
-  },
-};

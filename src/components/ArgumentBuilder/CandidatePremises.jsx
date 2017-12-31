@@ -1,5 +1,6 @@
 import React from 'react';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import PropTypes from 'prop-types';
+import Claim from '../Claim/Claim.jsx';
 
 /* The Candidate Premises
  * Takes an array of claims from the argument builder.
@@ -12,7 +13,6 @@ export default class CandidatePremises extends React.Component {
   }
 
   handleAddCandidateToArgument(claim) {
-    console.log('add claim to argument click!', claim);
     this.props.premisSelectionHandler(claim);
   }
 
@@ -50,8 +50,8 @@ export default class CandidatePremises extends React.Component {
 }
 
 CandidatePremises.propTypes = {
-  premises: React.PropTypes.arrayOf(React.PropTypes.object),
-  premisSelectionHandler: React.PropTypes.func.isRequired
+  premises: PropTypes.arrayOf(PropTypes.object),
+  premisSelectionHandler: PropTypes.func.isRequired
 };
 
 CandidatePremises.defaultProps = {

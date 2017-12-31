@@ -1,5 +1,6 @@
 import React from 'react';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import PropTypes from 'prop-types';
+import Claim from '../Claim/Claim.jsx';
 
 /* The Argument Premises
  * Displays the claims that have been selected to be a part of the new argument.
@@ -52,8 +53,8 @@ export default class ArgumentPremises extends React.Component {
 }
 
 ArgumentPremises.propTypes = {
-  premises: React.PropTypes.arrayOf(React.PropTypes.object),
-  removePremise: React.PropTypes.func.isRequired
+  premises: PropTypes.arrayOf(PropTypes.object),
+  removePremise: PropTypes.func.isRequired
 };
 
 ArgumentPremises.defaultProps = {

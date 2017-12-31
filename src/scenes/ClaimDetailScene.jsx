@@ -1,9 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
-import API from 'WlAPI/api.js';
-import Argument from 'WlComponents/Argument/Argument.jsx';
-import StatusIndicator from 'WlComponents/StatusIndicator/StatusIndicator.jsx';
-import ArgumentBuilder from 'WlComponents/ArgumentBuilder/ArgumentBuilder.jsx';
+import PropTypes from 'prop-types';
+import API from 'src/API/api.js';
+import Argument from 'src/components/Argument/Argument.jsx';
+import StatusIndicator from 'src/components/StatusIndicator/StatusIndicator.jsx';
+import ArgumentBuilder from 'src/components/ArgumentBuilder/ArgumentBuilder.jsx';
 
 /**
  * The Search Results page
@@ -27,13 +27,12 @@ export default class ClaimDetailScene extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props', this.props.routeProps.match.params.claimId);
     //get the claim for this detail to show
     API.getClaimDetailById(this.props.routeProps.match.params.claimId)
       .then((data) => {
         this.setState({ claim: data.claim });
       }).catch((err) => {
-        console.log('error', err);
+        console.error('claim detail scene component did mount error: ', err);
       });
   }
 
@@ -79,19 +78,16 @@ export default class ClaimDetailScene extends React.Component {
   }
 
   newArgumentSubmissionHandler(newArgument) {
-    console.log('new argument submission!', newArgument);
     const premiseIds = [];
-    _.forEach(newArgument.premises, (premise) => {
-      console.log('premise', premise);
+    newArgument.premises.forEach((premise) => {
       premiseIds.push(premise._id);
     });
-    console.log('premiseIds', premiseIds);
+
     API.postNewArgument({
       parentClaimId: this.state.claim._id,
       type: newArgument.type,
       premiseIds: premiseIds
     }).then((res) => {
-      console.log('claim with new argument returned!', res);
       this.setState({
         claims: res.data.claim
       });
@@ -180,12 +176,12 @@ export default class ClaimDetailScene extends React.Component {
 }
 
 ClaimDetailScene.propTypes = {
-  routeProps: React.PropTypes.shape({
-    match: React.PropTypes.shape({
-      params: React.PropTypes.shape({
-        claimId: React.PropTypes.string.isRequired,
+  routeProps: PropTypes.shape({
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        claimId: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
-  isLoggedIn: React.PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired
 };

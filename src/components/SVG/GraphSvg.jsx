@@ -1,5 +1,6 @@
 import React from 'react';
-import GraphControls from 'WlComponents/GraphControls/GraphControls.jsx';
+import PropTypes from 'prop-types';
+import GraphControls from '../GraphControls/GraphControls.jsx';
 
 /**
  * The amazing pannable / zoomable SVG!
@@ -43,7 +44,6 @@ export default class GraphSvg extends React.Component {
   }
 
   onKeyDownHandler(e) {
-    console.log('key down', e.keyCode);
     if (e.keyCode === 16) {
       this.setState({
         zoomEnguaged: true
@@ -81,7 +81,6 @@ export default class GraphSvg extends React.Component {
 
   wheelHandler(e) {
     if (this.state.zoomEnguaged) {
-      console.log('wheel', e.deltaY);
       this.zoomHandler(e.deltaY);
     }
   }
@@ -160,8 +159,8 @@ export default class GraphSvg extends React.Component {
 }
 
 GraphSvg.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.arrayOf(React.PropTypes.node),
-    React.PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
   ]).isRequired
 };

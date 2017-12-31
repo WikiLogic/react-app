@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /** 
  * Controlling our position on the graph!
@@ -35,6 +36,6 @@ export default class GraphControls extends React.Component {
 }
 
 GraphControls.propTypes = {
-  panHandler: React.PropTypes.func.isRequired,
-  zoomHandler: React.PropTypes.func.isRequired
+  panHandler: PropTypes.func.isRequired,
+  zoomHandler: PropTypes.func.isRequired
 };

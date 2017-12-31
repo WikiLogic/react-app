@@ -1,5 +1,6 @@
 import React from 'react';
-import InputRange from 'WlComponents/_Atoms/InputRange.jsx';
+import PropTypes from 'prop-types';
+import InputRange from '../_Atoms/InputRange.jsx';
 
 /* Each Claim in the list of search results
  */
@@ -64,10 +65,10 @@ export default class AddClaimForm extends React.Component {
 }
 
 AddClaimForm.propTypes = {
-  submitHandler: React.PropTypes.func.isRequired,
-  textboxLabel: React.PropTypes.string,
-  submitBtnLabel: React.PropTypes.string,
-  showValueSetter: React.PropTypes.bool
+  submitHandler: PropTypes.func.isRequired,
+  textboxLabel: PropTypes.string,
+  submitBtnLabel: PropTypes.string,
+  showValueSetter: PropTypes.bool
 };
 
 AddClaimForm.defaultProps = {

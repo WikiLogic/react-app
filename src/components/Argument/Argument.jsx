@@ -1,5 +1,6 @@
 import React from 'react';
-import Claim from 'WlComponents/Claim/Claim.jsx';
+import PropTypes from 'prop-types';
+import Claim from '../Claim/Claim.jsx';
 
 /* An argument group
  */
@@ -18,7 +19,6 @@ export default class Argument extends React.Component {
   render() {
     // loop through the premises in this argument
     const premises = this.props.argumentObject.premises.map((premis) => {
-      console.log('');
       return (
         <div className="argument__premis" key={premis.id}>
           <Claim
@@ -43,9 +43,9 @@ export default class Argument extends React.Component {
 }
 
 Argument.propTypes = {
-  premisClickHandler: React.PropTypes.func.isRequired,
-  argumentObject: React.PropTypes.shape({
-    type: React.PropTypes.string.isRequired,
-    premises: React.PropTypes.array.isRequired,
+  premisClickHandler: PropTypes.func.isRequired,
+  argumentObject: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    premises: PropTypes.array.isRequired,
   }).isRequired
 };

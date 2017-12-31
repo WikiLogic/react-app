@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* A status between 1 and 100
  */
@@ -42,8 +43,8 @@ export default function StatusIndicator(props) {
 }
 
 StatusIndicator.propTypes = {
-  probability: React.PropTypes.number,
-  type: React.PropTypes.string,
+  probability: PropTypes.number,
+  type: PropTypes.string,
 };
 
 StatusIndicator.defaultProps = {

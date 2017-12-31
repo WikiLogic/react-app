@@ -1,89 +1,79 @@
 import React from 'react';
-import ClickerDragger from 'WlComponents/ClickerDragger/ClickerDragger.jsx';
-// import GraphPremise from 'WlComponents/SVG/GraphPremise.jsx';
-import GraphClaim from 'WlComponents/SVG/GraphClaim.jsx';
+import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+import Group from './group.jsx';
+import GraphPremise from '../SVG/GraphPremise.jsx';
+import GraphConfig from 'src/stores/_graphConfig.js';
 
-/* An argument! In an SVG!
+/**
+ * An argument with it's own premises
  */
+
+@observer
 export default class GraphArg extends React.Component {
+  static propTypes = {
+    argStore: PropTypes.shape({
+      premises: PropTypes.object.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      w: PropTypes.number.isRequired,
+      h: PropTypes.number.isRequired
+    }).isRequired,
+    loadPremiseClickHandler: PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-
     };
+    this.loadPremiseClickHandler = this.loadPremiseClickHandler.bind(this);
+  }
+
+  loadPremiseClickHandler(premiseStore) {
+    this.props.loadPremiseClickHandler(premiseStore);
   }
 
   render() {
-    let premiseCounter = 0;
     const premisesMarkup = [];
 
-    console.log('this.props.arg', this.props.arg);
-    for (let p = 0; p < this.props.arg.premises.length; p++) {
-
-      const thisPremisX = (premiseCounter * this.props.gridUnit) + (this.props.padUnit * 2); //premises sit on th innermost box
-      const thisPremiseY = this.props.padUnit * 2;
+    this.props.argStore.premises.forEach((premise) => {
       premisesMarkup.push(
-        <ClickerDragger
-          x={thisPremisX}
-          y={thisPremiseY}
-          key={p}
-        >
-          {/* <GraphPremise
-            claim={this.props.arg.premises[p]}
-            gridUnit={this.props.gridUnit}
-            padUnit={this.props.padUnit}
-          /> */}
-
-          <GraphClaim
-            claim={this.props.arg.premises[p]}
-            premiseClickHandler={this.loadClaim}
-            gridUnit={this.props.gridUnit}
-            padUnit={this.props.padUnit}
-          />
-
-        </ClickerDragger>
+        <GraphPremise
+          key={premise._key}
+          premiseStore={premise}
+          loadPremiseClickHandler={this.loadPremiseClickHandler}
+        />
       );
-
-      premiseCounter += this.props.arg.premises.length;
-    }
-
-    //the width and height of the rect that will wrap all of the premises in this argument
-    const argWidth = (premiseCounter * this.props.gridUnit) - (2 * this.props.padUnit);
-    const argHeight = this.props.gridUnit - (2 * this.props.padUnit);
-    const gridSquareWidth = premiseCounter * this.props.gridUnit;
-    const gridSquareHeight = this.props.gridUnit;
+    });
 
     return (
-      <g className="graph-arg">
+      <Group
+        className="graph-arg"
+        x={this.props.argStore.x}
+        y={this.props.argStore.y}
+      >
         <rect
           rx="10"
           ry="10"
-          width={gridSquareWidth}
-          height={gridSquareHeight}
+          x={this.props.argStore.x + GraphConfig.padding}
+          y={this.props.argStore.y + GraphConfig.padding}
+          width={this.props.argStore.w - (GraphConfig.padding * 2)}
+          height={this.props.argStore.h - (GraphConfig.padding * 2)}
           className="grid-square"
         />
         <rect
           rx="5"
           ry="5"
-          x={this.props.padUnit}
-          y={this.props.padUnit}
-          width={argWidth}
-          height={argHeight}
+          x={this.props.argStore.x + GraphConfig.padding}
+          y={this.props.argStore.y + GraphConfig.padding}
+          width={this.props.argStore.w - (GraphConfig.padding * 2)}
+          height={this.props.argStore.h - (GraphConfig.padding * 2)}
           className="graph-arg__rect"
         />
 
-        {/* for each claim in the argument, add it! */}
         {premisesMarkup}
 
-      </g >
+      </Group>
     );
   }
 }
-
-GraphArg.propTypes = {
-  arg: React.PropTypes.shape({
-    premises: React.PropTypes.array
-  }).isRequired,
-  gridUnit: React.PropTypes.number.isRequired,
-  padUnit: React.PropTypes.number.isRequired
-};

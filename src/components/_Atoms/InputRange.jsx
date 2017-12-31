@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class InputRange extends React.Component {
   constructor(props) {
@@ -123,13 +124,13 @@ export default class InputRange extends React.Component {
 }
 
 InputRange.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  min: React.PropTypes.number,
-  max: React.PropTypes.number,
-  step: React.PropTypes.number,
-  initValue: React.PropTypes.number,
-  labelText: React.PropTypes.string.isRequired,
-  changeHandler: React.PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  step: PropTypes.number,
+  initValue: PropTypes.number,
+  labelText: PropTypes.string.isRequired,
+  changeHandler: PropTypes.func.isRequired,
 };
 
 InputRange.defaultProps = {

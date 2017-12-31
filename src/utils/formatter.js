@@ -28,7 +28,13 @@ function apiResponceToJSON(response) {
   return returnObject;
 }
 
+function init() {
+  window.wl.utils.formatter = {
+    objectToFormData,
+    apiResponceToJSON
+  };
+}
+
 export default {
-  objectToFormData,
-  apiResponceToJSON,
+  init
 };

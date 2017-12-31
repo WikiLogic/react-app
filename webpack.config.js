@@ -7,10 +7,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      WlAPI: path.resolve(__dirname, 'src/API'),
-      WlScenes: path.resolve(__dirname, 'src/scenes'),
-      WlComponents: path.resolve(__dirname, 'src/components'),
-      WlServices: path.resolve(__dirname, 'src/services'),
+      src: path.resolve(__dirname, 'src')
     },
   },
   entry: {
