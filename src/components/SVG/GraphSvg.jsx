@@ -6,7 +6,15 @@ import GraphControls from '../GraphControls/GraphControls.jsx';
  * The amazing pannable / zoomable SVG!
  * TODO: make the controls pretty & accessible
  */
+
 export default class GraphSvg extends React.Component {
+  static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]).isRequired
+  }
+
   constructor(props) {
     super(props);
 
@@ -18,14 +26,12 @@ export default class GraphSvg extends React.Component {
       panEnguaged: false,
       panOriginX: 0,
       panOriginY: 0,
-      zoomEnguaged: false,
       svgFocused: false
     };
 
-    this.focus = this.focus.bind(this);
+    // this.svgRef;
     this.zoomHandler = this.zoomHandler.bind(this);
     this.onKeyDownHandler = this.onKeyDownHandler.bind(this);
-    this.onKeyUpHandler = this.onKeyUpHandler.bind(this);
     this.svgFocusHandler = this.svgFocusHandler.bind(this);
     this.svgBlurHandler = this.svgBlurHandler.bind(this);
     this.wheelHandler = this.wheelHandler.bind(this);
@@ -36,26 +42,16 @@ export default class GraphSvg extends React.Component {
   }
 
   onKeyDownHandler(e) {
+    let killEvent = false;
 
-    if (e.keyCode === 16) {
-      this.setState({
-        zoomEnguaged: true
-      });
-    }
+    if (e.key === 'ArrowUp') { this.panHandler(0, 10); killEvent = true; }
+    if (e.key === 'ArrowDown') { this.panHandler(0, -10); killEvent = true; }
+    if (e.key === 'ArrowLeft') { this.panHandler(10, 0); killEvent = true; }
+    if (e.key === 'ArrowRight') { this.panHandler(-10, 0); killEvent = true; }
 
-    if (e.key === 'ArrowUp') { this.panHandler(0, 10); }
-    if (e.key === 'ArrowDown') { this.panHandler(0, -10); }
-    if (e.key === 'ArrowLeft') { this.panHandler(10, 0); }
-    if (e.key === 'ArrowRight') { this.panHandler(-10, 0); }
-
-    e.preventDefault();
-    e.stopPropagation();
-  }
-  onKeyUpHandler(e) {
-    if (e.keyCode === 16) {
-      this.setState({
-        zoomEnguaged: false
-      });
+    if (killEvent) {
+      e.preventDefault();
+      e.stopPropagation();
     }
   }
 
@@ -70,11 +66,19 @@ export default class GraphSvg extends React.Component {
     });
   }
 
-  zoomHandler(value) {
-    const newTopLeftX = this.state.topLeftX + value;
-    const newTopLeftY = this.state.topLeftY + value;
-    const newWidth = this.state.width - (value * 2);
-    const newHeight = this.state.height - (value * 2);
+  zoomHandler(zoom, x, y) {
+    //x y are the zoom point from the top left of the svg
+    //how far is x along the width of the svg - use that as the ratio of the change
+    const svgEl = this.svgRef.getBoundingClientRect();
+
+    const xRatio = x / svgEl.width;
+    const yRatio = y / svgEl.height;
+
+    const newTopLeftX = this.state.topLeftX + (zoom * xRatio);
+    const newTopLeftY = this.state.topLeftY + (zoom * yRatio);
+    const newWidth = this.state.width - zoom;
+    const newHeight = this.state.height - zoom;
+
     this.setState({
       topLeftX: newTopLeftX,
       topLeftY: newTopLeftY,
@@ -83,16 +87,17 @@ export default class GraphSvg extends React.Component {
     });
   }
 
-  focus(x, y) {
-    this.setState({
-      topLeftX: x,
-      topLeftY: y,
-    });
-  }
-
   wheelHandler(e) {
+    // console.log('clientX', e.clientX);
+    //get svg offset
+    // console.log('svgRef', this.svgRef.getBoundingClientRect());
+    //client coords are distance from the top left point of the browser window (not includng scrollbars)
+
     if (this.state.svgFocused) {
-      this.zoomHandler(-e.deltaY);
+      const svgOffset = this.svgRef.getBoundingClientRect();
+      const xOffset = e.clientX - svgOffset.x;
+      const yOffset = e.clientY - svgOffset.y;
+      this.zoomHandler(-e.deltaY, xOffset, yOffset);
       e.preventDefault();
       e.stopPropagation();
     }
@@ -157,8 +162,8 @@ export default class GraphSvg extends React.Component {
         <svg
           tabIndex="0"
           className="graph-svg__svg"
+          ref={(el) => { this.svgRef = el; }}
           xmlns="http://www.w3.org/2000/svg"
-          //xmlns:html="http://www.w3.org/1999/xhtml"
           version="1.1"
           viewBox={`${this.state.topLeftX} ${this.state.topLeftY} ${this.state.width} ${this.state.height}`}
           onMouseMove={this.mouseMoveHandler}
@@ -166,7 +171,6 @@ export default class GraphSvg extends React.Component {
           onMouseUp={this.mouseUpHandler}
           onWheel={this.wheelHandler}
           onKeyDown={this.onKeyDownHandler}
-          onKeyUp={this.onKeyUpHandler}
           onFocus={this.svgFocusHandler}
           onBlur={this.svgBlurHandler}
         >
@@ -176,10 +180,3 @@ export default class GraphSvg extends React.Component {
     );
   }
 }
-
-GraphSvg.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
-};
