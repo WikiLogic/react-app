@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 // import { action } from 'mobx';
 import { observer } from 'mobx-react';
 import Claim from '../Claim/Claim.jsx';
+import AddClaimForm from 'src/components/AddClaimForm/AddClaimForm.jsx';
+import NewClaimStore from 'src/stores/newClaim.js';
 
-/* The Argument Premises
+/**
+ * The Argument Premises
  * Displays the claims that have been selected to be a part of the new argument.
  */
+
 @observer
 export default class GraphSearchResults extends React.Component {
   static propTypes = {
@@ -16,7 +20,6 @@ export default class GraphSearchResults extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.resultClickHandler = this.resultClickHandler.bind(this);
   }
 
@@ -25,12 +28,18 @@ export default class GraphSearchResults extends React.Component {
   }
 
   render() {
-    if (!this.props.store.results) {
-      return <p>No results</p>;
-    }
+    let newClaimMarkup = null;
 
-    if (this.props.store.results.length === 0) {
-      return <p>No results</p>;
+    if (this.props.store.results.length === 0 && this.props.store.term !== '') {
+      newClaimMarkup = (
+        <div>
+          <p>No results for {this.props.store.term}</p>
+          <div className="pad" />
+          <AddClaimForm
+            newClaimStore={new NewClaimStore(this.props.store.term)}
+          />
+        </div>
+      );
     }
 
     const premisesMarkup = [];
@@ -51,17 +60,9 @@ export default class GraphSearchResults extends React.Component {
 
     return (
       <div className="graph-search-results">
+        {newClaimMarkup}
         {premisesMarkup}
       </div>
     );
   }
 }
-
-// GraphSearchResults.propTypes = {
-//   results: PropTypes.arrayOf(PropTypes.object),
-//   resultClickHandler: PropTypes.func.isRequired
-// };
-
-// GraphSearchResults.defaultProps = {
-//   results: [],
-// };

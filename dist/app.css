@@ -595,7 +595,8 @@ input[type='text'], input[type='password'], input[type='number'], input[type='se
     border-color: #0a88c5; }
 
 textarea {
-  min-height: 200px; }
+  min-height: 200px;
+  display: block; }
 
 select {
   background-color: white;
@@ -615,9 +616,6 @@ label {
 input {
   display: block;
   margin-bottom: 7px; }
-
-.form-group + .form-group {
-  margin-top: 1rem; }
 
 img {
   display: block; }
@@ -943,7 +941,14 @@ styles are set in sass alongside the components. (in the components folder).
       margin-bottom: 0; }
     .InputRange input {
       width: 80px;
-      margin-left: 1rem; } }
+      margin-left: 1rem; }
+    .InputRange--small .InputRange__input {
+      display: block; }
+    .InputRange--small .InputRange__slider {
+      margin-bottom: 0.5rem; }
+    .InputRange--small input {
+      width: 100%;
+      margin-left: 0; } }
 
 .argument {
   padding: 0.5rem;

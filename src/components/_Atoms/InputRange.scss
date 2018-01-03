@@ -31,6 +31,7 @@
         border-radius: 100%;
     }
 
+    
     @include breakpoint(small) {
         &__input {
             display: flex;
@@ -38,10 +39,25 @@
         &__slider {
             margin-bottom: 0;
         }
-
+        
         input {
             width: 80px;
             margin-left: rem($pad);
+        }
+
+        &--small {
+            
+            .InputRange__input {
+                display: block;
+            }
+            .InputRange__slider {
+                margin-bottom: rem($pad / 2);
+            }
+    
+            input {
+                width: 100%;
+                margin-left: 0;
+            }
         }
     }
 }

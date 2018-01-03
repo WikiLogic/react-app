@@ -2,6 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class InputRange extends React.Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    step: PropTypes.number,
+    initValue: PropTypes.number,
+    labelText: PropTypes.string.isRequired,
+    changeHandler: PropTypes.func.isRequired,
+    classModifiers: PropTypes.string
+  };
+
+  static defaultProps = {
+    min: 1,
+    max: 99,
+    step: 1,
+    initValue: 50,
+    classModifiers: ''
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -88,14 +107,12 @@ export default class InputRange extends React.Component {
     const left = (this.state.value / this.props.max) * 100;
 
     return (
-      <div
-        className="InputRange"
-      >
+      <div className={`InputRange ${this.props.classModifiers}`}>
         <label htmlFor={this.props.id}>{this.props.labelText}</label>
         <div className="InputRange__input">
 
           <div className="InputRange__slider">
-            <button onClick={() => { this.updateValue(false); }}>-</button>
+            <button type="button" onClick={() => { this.updateValue(false); }}>-</button>
             <div
               className="InputRange__bar"
               ref={this.renderBarHandler}
@@ -108,7 +125,7 @@ export default class InputRange extends React.Component {
                 style={{ left: `${left}%` }}
               />
             </div>
-            <button onClick={() => { this.updateValue(true); }}>+</button>
+            <button type="button" onClick={() => { this.updateValue(true); }}>+</button>
           </div>
 
           <input
@@ -122,20 +139,3 @@ export default class InputRange extends React.Component {
     );
   }
 }
-
-InputRange.propTypes = {
-  id: PropTypes.string.isRequired,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  step: PropTypes.number,
-  initValue: PropTypes.number,
-  labelText: PropTypes.string.isRequired,
-  changeHandler: PropTypes.func.isRequired,
-};
-
-InputRange.defaultProps = {
-  min: 1,
-  max: 99,
-  step: 1,
-  initValue: 50
-};

@@ -3,6 +3,7 @@ import Claim from 'src/components/Claim/Claim.jsx';
 import Input from 'src/components/_Atoms/Input.jsx';
 import InputButton from 'src/components/_Atoms/InputButton.jsx';
 import InputRange from 'src/components/_Atoms/InputRange.jsx';
+import StatusIndicator from 'src/components/StatusIndicator/StatusIndicator.jsx';
 
 /**
  * The Search Results page
@@ -104,6 +105,9 @@ export default class StyleguideScene extends React.Component {
 
             </section>
             <hr />
+            <section>
+              <StatusIndicator probability={50} type="circle" />
+            </section>
             <section>
               <h2>Claims</h2>
               <div className="layout-cols-2">

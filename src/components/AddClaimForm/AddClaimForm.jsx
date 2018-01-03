@@ -1,15 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 import InputRange from '../_Atoms/InputRange.jsx';
 
-/* Each Claim in the list of search results
+/**
+ * Creating a new claim from scratch
  */
 
+@observer
 export default class AddClaimForm extends React.Component {
+  static propTypes = {
+    newClaimStore: PropTypes.object.isRequired,
+    textboxLabel: PropTypes.string,
+    submitBtnLabel: PropTypes.string
+  }
+
+  static defaultProps = {
+    textboxLabel: 'Create a new claim:',
+    submitBtnLabel: 'Publish'
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
       value: 50,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -18,23 +31,16 @@ export default class AddClaimForm extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({
-      text: event.target.value,
-    });
+    this.props.newClaimStore.setText(event.target.value);
   }
 
   handleProbabilityUpdate(newProbability) {
-    this.setState({
-      probability: newProbability,
-    });
+    this.props.newClaimStore.setProbability(newProbability);
   }
 
   submitHandler(event) {
     event.preventDefault();
-    this.props.submitHandler({
-      text: this.state.text,
-      probability: this.state.probability,
-    });
+    this.props.newClaimStore.submit();
   }
 
   render() {
@@ -45,35 +51,31 @@ export default class AddClaimForm extends React.Component {
           <label className="form__label-text" htmlFor="new-claim-text">
             {this.props.textboxLabel}
           </label>
-          <textarea className="form__input" id="new-claim-text" onChange={this.handleChange} />
-          {(this.props.showValueSetter &&
-            <InputRange
-              id="new-claim-value"
-              initValue={Number(this.state.probability)}
-              labelText="Assign a value"
-              changeHandler={this.handleProbabilityUpdate}
-            />
-          )}
+          <textarea
+            className="form__input"
+            id="new-claim-text"
+            onChange={this.handleChange}
+            value={this.props.newClaimStore.text}
+          />
         </div>
+
+        <div className="pad" />
+
+        <InputRange
+          id="new-claim-value"
+          initValue={Number(this.props.newClaimStore.probability)}
+          labelText="Set your confidence:"
+          changeHandler={this.handleProbabilityUpdate}
+          classModifiers="InputRange--small"
+        />
+
+        <div className="pad" />
 
         <div className="form__submit text-right">
           <input className="form__submit-button" type="submit" value={this.props.submitBtnLabel} />
         </div>
+
       </form>
     );
   }
 }
-
-AddClaimForm.propTypes = {
-  submitHandler: PropTypes.func.isRequired,
-  textboxLabel: PropTypes.string,
-  submitBtnLabel: PropTypes.string,
-  showValueSetter: PropTypes.bool
-};
-
-AddClaimForm.defaultProps = {
-  textboxLabel: 'Write up your new claim',
-  submitBtnLabel: 'Publish',
-  showValueSetter: false
-};
-

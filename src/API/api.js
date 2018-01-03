@@ -51,28 +51,28 @@ function getClaimDetailById(claimId) {
   return claimDetailPromise;
 }
 
-function postNewClaim(claim) {
-  const newClaimPromise = new Promise((resolve, reject) => {
-    fetch(`${apiRouteRoot}/claims`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: Cookies.get('JWT'),
-      },
-      body: JSON.stringify(claim),
-    })
-      .then(checkStatus)
-      .then(Formatter.apiResponceToJSON)
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+// function postNewClaim(claim) {
+//   const newClaimPromise = new Promise((resolve, reject) => {
+//     fetch(`${apiRouteRoot}/claims`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: Cookies.get('JWT'),
+//       },
+//       body: JSON.stringify(claim),
+//     })
+//       .then(checkStatus)
+//       .then(Formatter.apiResponceToJSON)
+//       .then((res) => {
+//         resolve(res);
+//       })
+//       .catch((err) => {
+//         reject(err);
+//       });
+//   });
 
-  return newClaimPromise;
-}
+//   return newClaimPromise;
+// }
 
 function postNewArgument(argument) {
   const newArgumentPromise = new Promise((resolve, reject) => {
@@ -175,7 +175,7 @@ function post(url, data) {
 export default {
   searchClaimsByTerm,
   getClaimDetailById,
-  postNewClaim,
+  // postNewClaim,
   postNewArgument,
   postNewExplanation,
   get,
