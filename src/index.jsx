@@ -16,7 +16,6 @@ import User from './stores/user.js';
 import GraphScene from './scenes/GraphScene.jsx';
 import GraphSceneStore from './scenes/GraphScene.js';
 import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
-import ClaimCreateScene from './scenes/ClaimCreateScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
 import AuthenticationScene from './scenes/AuthenticationScene.jsx';
 import UserProfileScene from './scenes/UserProfileScene.jsx';
@@ -67,10 +66,6 @@ class Wikilogic extends React.Component {
             <div className="header__links">
 
               {(this.state.UserStore.isLoggedIn &&
-                <Link to="/new-claim">New claim</Link>
-              )}
-
-              {(this.state.UserStore.isLoggedIn &&
                 <Link to="/profile">Profile</Link>
               )}
 
@@ -110,18 +105,6 @@ class Wikilogic extends React.Component {
                   routeProps={routeProps}
                   history={history}
                   isLoggedIn={this.state.UserStore.isLoggedIn}
-                />
-              );
-            }}
-          />
-
-          <Route
-            path="/new-claim"
-            exact
-            render={() => {
-              return (
-                <ClaimCreateScene
-                  history={history}
                 />
               );
             }}
