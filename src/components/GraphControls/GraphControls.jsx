@@ -24,12 +24,12 @@ export default class GraphControls extends React.Component {
   render() {
     return (
       <div className="graph-controls">
-      {/*  
-        <button onClick={() => { this.panHandler(-10, 0); }}>🡸Pan</button>
-        <button onClick={() => { this.panHandler(10, 0); }}>Pan🡺</button>
-        <button onClick={() => { this.panHandler(0, -10); }}>🡹Pan🡹</button>
-        <button onClick={() => { this.panHandler(0, 10); }}>🡻Pan🡻</button>
-      */}
+        {/*  
+          <button onClick={() => { this.panHandler(-10, 0); }}>🡸Pan</button>
+          <button onClick={() => { this.panHandler(10, 0); }}>Pan🡺</button>
+          <button onClick={() => { this.panHandler(0, -10); }}>🡹Pan🡹</button>
+          <button onClick={() => { this.panHandler(0, 10); }}>🡻Pan🡻</button>
+        */}
         <button onClick={() => { this.zoomHandler(10); }}>+</button>
         <button onClick={() => { this.zoomHandler(-10); }}>-</button>
       </div>

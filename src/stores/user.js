@@ -4,13 +4,21 @@ const Formatter = window.wl.utils.formatter;
 const Cookies = window.wl.utils.cookies;
 
 export default class User {
-  @observable isLoggedIn = false;
-  @observable history = [];
-  @observable JWT = '';
-  @observable username = '';
-  @observable email = '';
-  @observable signUpDate = '';
+  @observable isLoggedIn;
+  @observable history;
+  @observable JWT;
+  @observable username;
+  @observable email;
+  @observable signUpDate;
 
+  constructor() {
+    this.isLoggedIn = false;
+    this.history = [];
+    this.JWT = '';
+    this.username = '';
+    this.email = '';
+    this.signUpDate = '';
+  }
 
   @action
   logIn(username, password) {
