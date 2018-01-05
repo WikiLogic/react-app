@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LoadingButton from 'src/components/Loader/LoadingButton.jsx';
 
 /**
  * Logging in!
@@ -87,7 +88,7 @@ export default class LoginForm extends React.Component {
 
         <div className="pad" />
 
-        <input type="submit" value="Sign up!" onClick={this.handleFormSubmit} />
+        <LoadingButton type="submit" value="Sign up!" onClick={this.handleFormSubmit} />
 
       </form>
     );

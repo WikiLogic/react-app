@@ -1104,6 +1104,64 @@ styles are set in sass alongside the components. (in the components folder).
     .loader--is-loading .loader__dot-wrapper--4 .loader__dot {
       animation: streatching 3s 0.75s infinite; }
 
+.LoadingButton {
+  position: relative; }
+  .LoadingButton__loader {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    line-height: 100%;
+    font-size: 100%;
+    padding: 10px;
+    background: rgba(17, 31, 46, 0.96);
+    border-radius: 2px;
+    box-shadow: inset 0 0 5px #000, 0 1px 1px rgba(255, 255, 255, 0.1); }
+  .LoadingButton__loader-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 2px black;
+    animation: loadingFade 1s infinite; }
+    .LoadingButton__loader-dot:nth-child(1) {
+      animation-delay: 0s; }
+    .LoadingButton__loader-dot:nth-child(2) {
+      animation-delay: 0.1s; }
+    .LoadingButton__loader-dot:nth-child(3) {
+      animation-delay: 0.2s; }
+    .LoadingButton__loader-dot:nth-child(4) {
+      animation-delay: 0.3s; }
+
+@-webkit-keyframes loadingFade {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 0.8; }
+  100% {
+    opacity: 0; } }
+
+@-moz-keyframes loadingFade {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 0.8; }
+  100% {
+    opacity: 0; } }
+
+@keyframes loadingFade {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 0.8; }
+  100% {
+    opacity: 0; } }
+
 .modal {
   position: fixed;
   z-index: 5;
