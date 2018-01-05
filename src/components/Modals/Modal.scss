@@ -13,11 +13,11 @@
         border: 1px solid $grey-light;
         border-radius: 5px;
         max-height: 100%;
+        min-width: 40%;
         // overflow: auto;
     }
         &__header {
             background-color: $grey-light;
-            border-bottom: 1px solid $grey-dark;
             padding: rem($pad / 2);
             display: flex;
             align-items: center;
@@ -28,6 +28,5 @@
             }
         &__content {
             padding: rem($pad);
-
         }
 }
