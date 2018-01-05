@@ -10,7 +10,12 @@ import SignUpForm from 'src/components/Forms/SignUpForm.jsx';
 
 export default class AuthModal extends React.Component {
   static propTypes = {
-    userStore: PropTypes.object.isRequired
+    userStore: PropTypes.object.isRequired,
+    ctrl: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string
+    ]).isRequired,
+    onClose: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -22,21 +27,25 @@ export default class AuthModal extends React.Component {
   }
 
   render() {
+    if (this.props.ctrl !== 'Signup' && this.props.ctrl !== 'Login') {
+      return null;
+    }
+
     let modalContent = null;
 
-    if (this.state.showSignup) {
+    if (this.props.ctrl === 'Signup') {
       modalContent = <SignUpForm userStore={this.props.userStore} />;
     }
 
-    if (this.state.showLogin) {
+    if (this.props.ctrl === 'Login') {
       modalContent = <LoginForm userStore={this.props.userStore} />;
     }
 
     return (
       <Modal
-        show="true"
-        title="auth"
-        onClose={() => {}}
+        show={(typeof this.props.ctrl === 'string')}
+        title={this.props.ctrl}
+        onClose={this.props.onClose}
       >
         {modalContent}
       </Modal>

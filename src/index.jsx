@@ -14,7 +14,6 @@ import RootStore from 'src/stores/root.js';
 
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
-import GraphSceneStore from './scenes/GraphScene.js';
 import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
 import UserProfileScene from './scenes/UserProfileScene.jsx';
@@ -66,11 +65,15 @@ class Wikilogic extends React.Component {
               )}
 
               {(!this.props.RootStore.UserStore.isLoggedIn &&
-                <Link to="/login">Login</Link>
+                <button
+                  onClick={() => { this.props.RootStore.authModal = 'Login'; }}
+                >Login</button>
               )}
 
               {(!this.props.RootStore.UserStore.isLoggedIn &&
-                <Link to="/signup">Signup</Link>
+                <button
+                  onClick={() => { this.props.RootStore.authModal = 'Signup'; }}
+                >Signup</button>
               )}
             </div>
           </header>
@@ -85,7 +88,7 @@ class Wikilogic extends React.Component {
             render={(routeProps) => {
               return (
                 <GraphScene
-                  store={new GraphSceneStore()}
+                  store={this.props.RootStore.GraphSceneStore}
                   routeProps={routeProps}
                 />
               );
@@ -199,7 +202,13 @@ class Wikilogic extends React.Component {
           ...
         </div>
 
-        <AuthModal userStore={this.props.RootStore.UserStore} />
+        <AuthModal
+          userStore={this.props.RootStore.UserStore}
+          ctrl={this.props.RootStore.authModal}
+          onClose={() => {
+            this.props.RootStore.authModal = false;
+          }}
+        />
       </div>
     );
   }
