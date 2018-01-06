@@ -1106,7 +1106,11 @@ styles are set in sass alongside the components. (in the components folder).
 
 .LoadingButton {
   position: relative; }
+  .LoadingButton--is-loading .LoadingButton__loader {
+    opacity: 1; }
   .LoadingButton__loader {
+    opacity: 0;
+    transition: opacity 0.2s ease;
     position: absolute;
     left: 0;
     right: 0;

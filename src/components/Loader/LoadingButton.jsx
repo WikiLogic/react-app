@@ -10,6 +10,7 @@ export default class Loader extends React.Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired
   }
 
@@ -28,8 +29,12 @@ export default class Loader extends React.Component {
     //   cssClass = 'loader--is-loading';
     // }
 
+    let modifyerClass = '';
+    if (this.props.isLoading) {
+      modifyerClass = 'LoadingButton--is-loading';
+    }
     return (
-      <button className="LoadingButton" type={this.props.type} onClick={this.props.onClick}>
+      <button className={`LoadingButton ${modifyerClass}`} type={this.props.type} onClick={this.props.onClick}>
         {this.props.value}
         <div className="LoadingButton__loader">
           <div className="LoadingButton__loader-dot" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 import LoadingButton from 'src/components/Loader/LoadingButton.jsx';
 
 /**
@@ -7,6 +8,7 @@ import LoadingButton from 'src/components/Loader/LoadingButton.jsx';
  * The API uses JSON Web Tokens which we'll have to pass with every request
  */
 
+@observer
 export default class LoginForm extends React.Component {
   static propTypes = {
     userStore: PropTypes.object.isRequired
@@ -54,7 +56,7 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <form>
-        
+
         <label htmlFor="email">Email</label>
         <input
           type="text"

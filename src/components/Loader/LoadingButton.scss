@@ -1,7 +1,14 @@
 .LoadingButton {
     position: relative;
 
+    &--is-loading {
+        .LoadingButton__loader {
+            opacity: 1;
+        }       
+    }
     &__loader {
+        opacity: 0;
+        transition: opacity 0.2s ease;
         position: absolute;
         left: 0; right: 0;
         top: 0; bottom: 0;

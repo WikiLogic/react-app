@@ -1,7 +1,7 @@
 // React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Link, Route } from 'react-router-dom';
+import { Router, Link, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import createHashHistory from 'history/createHashHistory';
@@ -27,6 +27,7 @@ import AuthModal from 'src/components/Modals/AuthModal.jsx';
 
 const history = createHashHistory();
 
+@withRouter
 @observer
 class Wikilogic extends React.Component {
   static propTypes = {

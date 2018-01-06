@@ -18465,7 +18465,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var history = (0, _createHashHistory2.default)();
 
-var Wikilogic = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
+var Wikilogic = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
   _inherits(Wikilogic, _React$Component);
 
   function Wikilogic(props) {
@@ -18679,7 +18679,7 @@ var Wikilogic = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_
   return Wikilogic;
 }(_react2.default.Component), _class2.propTypes = {
   RootStore: _propTypes2.default.object.isRequired
-}, _temp)) || _class;
+}, _temp)) || _class) || _class;
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRouterDom.Router,
@@ -19813,7 +19813,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _temp;
+var _class, _class2, _temp;
 
 var _react = __webpack_require__(1);
 
@@ -19822,6 +19822,12 @@ var _react2 = _interopRequireDefault(_react);
 var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _mobxReact = __webpack_require__(14);
+
+var _LoadingButton = __webpack_require__(141);
+
+var _LoadingButton2 = _interopRequireDefault(_LoadingButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19835,7 +19841,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * Logging in!
  */
 
-var LoginForm = (_temp = _class = function (_React$Component) {
+var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
   _inherits(LoginForm, _React$Component);
 
   function LoginForm(props) {
@@ -19843,41 +19849,23 @@ var LoginForm = (_temp = _class = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
 
-    _this.state = {
-      username: '',
-      password: '',
-      message: ''
-    };
+    _this.state = {};
 
-    _this.handleUsernameChange = _this.handleUsernameChange.bind(_this);
-    _this.handlePasswordChange = _this.handlePasswordChange.bind(_this);
     _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
     return _this;
   }
 
   _createClass(LoginForm, [{
-    key: 'handleUsernameChange',
-    value: function handleUsernameChange(event) {
-      this.setState({
-        username: event.target.value
-      });
-    }
-  }, {
-    key: 'handlePasswordChange',
-    value: function handlePasswordChange(event) {
-      this.setState({
-        password: event.target.value
-      });
-    }
-  }, {
     key: 'handleFormSubmit',
     value: function handleFormSubmit(event) {
       event.preventDefault();
-      this.props.userStore.logIn(this.state.username, this.state.password);
+      this.props.userStore.logIn();
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'form',
         null,
@@ -19890,8 +19878,10 @@ var LoginForm = (_temp = _class = function (_React$Component) {
           type: 'text',
           id: 'username',
           name: 'username',
-          value: this.state.username,
-          onChange: this.handleUsernameChange
+          value: this.props.userStore.username,
+          onChange: function onChange(event) {
+            _this2.props.userStore.username = event.target.value;
+          }
         }),
         _react2.default.createElement('div', { className: 'pad' }),
         _react2.default.createElement(
@@ -19903,19 +19893,27 @@ var LoginForm = (_temp = _class = function (_React$Component) {
           type: 'password',
           id: 'password',
           name: 'password',
-          value: this.state.password,
-          onChange: this.handlePasswordChange
+          value: this.props.userStore.password,
+          onChange: function onChange(event) {
+            _this2.props.userStore.password = event.target.value;
+          }
         }),
         _react2.default.createElement('div', { className: 'pad' }),
-        _react2.default.createElement('input', { type: 'submit', value: 'login', onClick: this.handleFormSubmit })
+        _react2.default.createElement(_LoadingButton2.default, {
+          type: 'submit',
+          value: this.props.userStore.loginResponceMessage,
+          isLoading: this.props.userStore.isLoggingIn,
+          onClick: this.handleFormSubmit
+        })
       );
     }
   }]);
 
   return LoginForm;
-}(_react2.default.Component), _class.propTypes = {
+}(_react2.default.Component), _class2.propTypes = {
   userStore: _propTypes2.default.object.isRequired
-}, _temp);
+}, _temp)) || _class;
+
 exports.default = LoginForm;
 
 /***/ }),
@@ -19932,7 +19930,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _temp;
+var _class, _class2, _temp;
 
 var _react = __webpack_require__(1);
 
@@ -19941,6 +19939,8 @@ var _react2 = _interopRequireDefault(_react);
 var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _mobxReact = __webpack_require__(14);
 
 var _LoadingButton = __webpack_require__(141);
 
@@ -19959,7 +19959,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * The API uses JSON Web Tokens which we'll have to pass with every request
  */
 
-var LoginForm = (_temp = _class = function (_React$Component) {
+var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
   _inherits(LoginForm, _React$Component);
 
   function LoginForm(props) {
@@ -20059,9 +20059,10 @@ var LoginForm = (_temp = _class = function (_React$Component) {
   }]);
 
   return LoginForm;
-}(_react2.default.Component), _class.propTypes = {
+}(_react2.default.Component), _class2.propTypes = {
   userStore: _propTypes2.default.object.isRequired
-}, _temp);
+}, _temp)) || _class;
+
 exports.default = LoginForm;
 
 /***/ }),
@@ -20450,9 +20451,13 @@ var Loader = (_temp = _class = function (_React$Component) {
       //   cssClass = 'loader--is-loading';
       // }
 
+      var modifyerClass = '';
+      if (this.props.isLoading) {
+        modifyerClass = 'LoadingButton--is-loading';
+      }
       return _react2.default.createElement(
         'button',
-        { className: 'LoadingButton', type: this.props.type, onClick: this.props.onClick },
+        { className: 'LoadingButton ' + modifyerClass, type: this.props.type, onClick: this.props.onClick },
         this.props.value,
         _react2.default.createElement(
           'div',
@@ -20470,6 +20475,7 @@ var Loader = (_temp = _class = function (_React$Component) {
 }(_react2.default.Component), _class.propTypes = {
   type: _propTypes2.default.string.isRequired,
   value: _propTypes2.default.string.isRequired,
+  isLoading: _propTypes2.default.bool.isRequired,
   onClick: _propTypes2.default.func.isRequired
 }, _temp);
 exports.default = Loader;
@@ -24155,7 +24161,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8;
 
 var _mobx = __webpack_require__(10);
 
@@ -24213,17 +24219,23 @@ var User = (_class = function () {
 
     _initDefineProp(this, 'isLoggedIn', _descriptor, this);
 
-    _initDefineProp(this, 'history', _descriptor2, this);
+    _initDefineProp(this, 'isLoggingIn', _descriptor2, this);
 
-    _initDefineProp(this, 'JWT', _descriptor3, this);
+    _initDefineProp(this, 'loginResponceMessage', _descriptor3, this);
 
-    _initDefineProp(this, 'username', _descriptor4, this);
+    _initDefineProp(this, 'history', _descriptor4, this);
 
-    _initDefineProp(this, 'email', _descriptor5, this);
+    _initDefineProp(this, 'JWT', _descriptor5, this);
 
-    _initDefineProp(this, 'signUpDate', _descriptor6, this);
+    _initDefineProp(this, 'username', _descriptor6, this);
+
+    _initDefineProp(this, 'email', _descriptor7, this);
+
+    _initDefineProp(this, 'signUpDate', _descriptor8, this);
 
     this.isLoggedIn = false;
+    this.isLoggingIn = false;
+    this.loginResponceMessage = 'Login';
     this.history = [];
     this.JWT = '';
     this.username = '';
@@ -24233,25 +24245,28 @@ var User = (_class = function () {
 
   _createClass(User, [{
     key: 'logIn',
-    value: function logIn(username, password) {
+    value: function logIn() {
       var _this = this;
 
+      this.isLoggingIn = true;
       fetch('/api/v1/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: Formatter.objectToFormData({
-          username: username,
-          password: password
+          username: this.username,
+          password: this.password
         })
       }).then(Formatter.apiResponceToJSON).then(function (res) {
         _this.JWT = res.data.token;
         _this.isLoggedIn = true;
-        _this.username = username;
-        //TODO: go to profile page? or home
+        _this.isLoggingIn = false;
+        _this.loginResponceMessage = 'Success!';
         Cookies.set('JWT', 'JWT ' + res.data.token);
       }).catch(function (err) {
+        _this.isLoggingIn = false;
+        _this.loginResponceMessage = 'login failed :(';
         console.error('user log in error: ', err);
       });
     }
@@ -24292,19 +24307,25 @@ var User = (_class = function () {
 }(), (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'isLoggedIn', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'history', [_mobx.observable], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'isLoggingIn', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'JWT', [_mobx.observable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'loginResponceMessage', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'username', [_mobx.observable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'history', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, 'email', [_mobx.observable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, 'JWT', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, 'username', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, 'email', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'logIn', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logIn'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logOut', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logOut'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'signUp', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'signUp'), _class.prototype)), _class);

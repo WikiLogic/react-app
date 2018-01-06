@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+import LoadingButton from 'src/components/Loader/LoadingButton.jsx';
 
 /**
  * Logging in!
  */
 
+@observer
 export default class LoginForm extends React.Component {
   static propTypes = {
     userStore: PropTypes.object.isRequired
@@ -14,31 +17,14 @@ export default class LoginForm extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
-      password: '',
-      message: '',
     };
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
-
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value,
-    });
-  }
-
-  handlePasswordChange(event) {
-    this.setState({
-      password: event.target.value,
-    });
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.props.userStore.logIn(this.state.username, this.state.password);
+    this.props.userStore.logIn();
   }
 
   render() {
@@ -50,8 +36,8 @@ export default class LoginForm extends React.Component {
           type="text"
           id="username"
           name="username"
-          value={this.state.username}
-          onChange={this.handleUsernameChange}
+          value={this.props.userStore.username}
+          onChange={(event) => { this.props.userStore.username = event.target.value; }}
         />
 
         <div className="pad" />
@@ -61,13 +47,18 @@ export default class LoginForm extends React.Component {
           type="password"
           id="password"
           name="password"
-          value={this.state.password}
-          onChange={this.handlePasswordChange}
+          value={this.props.userStore.password}
+          onChange={(event) => { this.props.userStore.password = event.target.value; }}
         />
 
         <div className="pad" />
 
-        <input type="submit" value="login" onClick={this.handleFormSubmit} />
+        <LoadingButton
+          type="submit"
+          value={this.props.userStore.loginResponceMessage}
+          isLoading={this.props.userStore.isLoggingIn}
+          onClick={this.handleFormSubmit}
+        />
 
       </form>
     );

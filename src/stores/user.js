@@ -5,6 +5,8 @@ const Cookies = window.wl.utils.cookies;
 
 export default class User {
   @observable isLoggedIn;
+  @observable isLoggingIn;
+  @observable loginResponceMessage;
   @observable history;
   @observable JWT;
   @observable username;
@@ -13,6 +15,8 @@ export default class User {
 
   constructor() {
     this.isLoggedIn = false;
+    this.isLoggingIn = false;
+    this.loginResponceMessage = 'Login';
     this.history = [];
     this.JWT = '';
     this.username = '';
@@ -21,26 +25,29 @@ export default class User {
   }
 
   @action
-  logIn(username, password) {
+  logIn() {
+    this.isLoggingIn = true;
     fetch('/api/v1/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: Formatter.objectToFormData({
-        username,
-        password,
+        username: this.username,
+        password: this.password
       }),
     })
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
         this.JWT = res.data.token;
         this.isLoggedIn = true;
-        this.username = username;
-        //TODO: go to profile page? or home
+        this.isLoggingIn = false;
+        this.loginResponceMessage = 'Success!';
         Cookies.set('JWT', `JWT ${res.data.token}`);
       })
       .catch((err) => {
+        this.isLoggingIn = false;
+        this.loginResponceMessage = 'login failed :(';
         console.error('user log in error: ', err);
       });
   }
