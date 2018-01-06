@@ -24,28 +24,7 @@ export default class LoginForm extends React.Component {
       message: '',
     };
 
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
-
-  handleEmailChange(event) {
-    this.setState({
-      email: event.target.value,
-    });
-  }
-
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value,
-    });
-  }
-
-  handlePasswordChange(event) {
-    this.setState({
-      password: event.target.value,
-    });
   }
 
   handleFormSubmit(event) {
@@ -62,8 +41,8 @@ export default class LoginForm extends React.Component {
           type="text"
           id="email"
           name="email"
-          value={this.state.email}
-          onChange={this.handleEmailChange}
+          value={this.props.userStore.email}
+          onChange={(event) => { this.props.userStore.email = event.target.value; }}
         />
 
         <div className="pad" />
@@ -73,8 +52,8 @@ export default class LoginForm extends React.Component {
           type="text"
           id="username"
           name="username"
-          value={this.state.username}
-          onChange={this.handleUsernameChange}
+          value={this.props.userStore.username}
+          onChange={(event) => { this.props.userStore.username = event.target.value; }}
         />
 
         <div className="pad" />
@@ -84,13 +63,18 @@ export default class LoginForm extends React.Component {
           type="password"
           id="password"
           name="password"
-          value={this.state.password}
-          onChange={this.handlePasswordChange}
+          value={this.props.userStore.password}
+          onChange={(event) => { this.props.userStore.password = event.target.value; }}
         />
 
         <div className="pad" />
 
-        <LoadingButton type="submit" value="Sign up!" onClick={this.handleFormSubmit} />
+        <LoadingButton
+          type="submit"
+          value={this.props.userStore.signupResponceMessage}
+          isLoading={this.props.userStore.isLoggingIn}
+          onClick={this.handleFormSubmit}
+        />
 
       </form>
     );

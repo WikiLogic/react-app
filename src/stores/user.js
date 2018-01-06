@@ -7,6 +7,7 @@ export default class User {
   @observable isLoggedIn;
   @observable isLoggingIn;
   @observable loginResponceMessage;
+  @observable signupResponceMessage;
   @observable history;
   @observable JWT;
   @observable username;
@@ -17,6 +18,7 @@ export default class User {
     this.isLoggedIn = false;
     this.isLoggingIn = false;
     this.loginResponceMessage = 'Login';
+    this.signupResponceMessage = 'Signup!';
     this.history = [];
     this.JWT = '';
     this.username = '';
@@ -61,7 +63,7 @@ export default class User {
   }
 
   @action
-  signUp(email, username, password) {
+  signup(email, username, password) {
     fetch('/api/v1/user/signup', {
       method: 'POST',
       headers: {
@@ -77,10 +79,14 @@ export default class User {
       .then((res) => {
         this.JWT = res.data.token;
         this.isLoggedIn = true;
+        this.isLoggingIn = false;
+        this.signupResponceMessage = 'Success!';
         Cookies.set('JWT', `JWT ${res.data.token}`);
       })
       .catch((err) => {
         console.error('User sign up error: ', err);
+        this.isLoggingIn = false;
+        this.signupResponceMessage = 'Sign up failed :(';
       });
   }
 }
