@@ -11,6 +11,7 @@ export default class User {
   @observable history;
   @observable JWT;
   @observable username;
+  @observable password;
   @observable email;
   @observable signUpDate;
 
@@ -22,6 +23,7 @@ export default class User {
     this.history = [];
     this.JWT = '';
     this.username = '';
+    this.password = '';
     this.email = '';
     this.signUpDate = '';
   }
@@ -41,11 +43,19 @@ export default class User {
     })
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
-        this.JWT = res.data.token;
-        this.isLoggedIn = true;
+        console.log('res', res);
         this.isLoggingIn = false;
-        this.loginResponceMessage = 'Success!';
-        Cookies.set('JWT', `JWT ${res.data.token}`);
+        if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
+          if (res.errors.length > 0) {
+            this.loginResponceMessage = res.errors[0].title;
+            this.isLoggedIn = true;
+          }
+        } else {
+          this.JWT = res.data.token;
+          this.isLoggedIn = true;
+          this.loginResponceMessage = 'Success!';
+          Cookies.set('JWT', `JWT ${res.data.token}`);
+        }
       })
       .catch((err) => {
         this.isLoggingIn = false;

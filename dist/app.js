@@ -24150,7 +24150,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
 
 var _mobx = __webpack_require__(11);
 
@@ -24220,9 +24220,11 @@ var User = (_class = function () {
 
     _initDefineProp(this, 'username', _descriptor7, this);
 
-    _initDefineProp(this, 'email', _descriptor8, this);
+    _initDefineProp(this, 'password', _descriptor8, this);
 
-    _initDefineProp(this, 'signUpDate', _descriptor9, this);
+    _initDefineProp(this, 'email', _descriptor9, this);
+
+    _initDefineProp(this, 'signUpDate', _descriptor10, this);
 
     this.isLoggedIn = false;
     this.isLoggingIn = false;
@@ -24231,6 +24233,7 @@ var User = (_class = function () {
     this.history = [];
     this.JWT = '';
     this.username = '';
+    this.password = '';
     this.email = '';
     this.signUpDate = '';
   }
@@ -24251,11 +24254,19 @@ var User = (_class = function () {
           password: this.password
         })
       }).then(Formatter.apiResponceToJSON).then(function (res) {
-        _this.JWT = res.data.token;
-        _this.isLoggedIn = true;
+        console.log('res', res);
         _this.isLoggingIn = false;
-        _this.loginResponceMessage = 'Success!';
-        Cookies.set('JWT', 'JWT ' + res.data.token);
+        if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
+          if (res.errors.length > 0) {
+            _this.loginResponceMessage = res.errors[0].title;
+            _this.isLoggedIn = true;
+          }
+        } else {
+          _this.JWT = res.data.token;
+          _this.isLoggedIn = true;
+          _this.loginResponceMessage = 'Success!';
+          Cookies.set('JWT', 'JWT ' + res.data.token);
+        }
       }).catch(function (err) {
         _this.isLoggingIn = false;
         _this.loginResponceMessage = 'login failed :(';
@@ -24321,10 +24332,13 @@ var User = (_class = function () {
 }), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, 'username', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'email', [_mobx.observable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'password', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, 'email', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'logIn', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logIn'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logOut', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logOut'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'signup', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'signup'), _class.prototype)), _class);
