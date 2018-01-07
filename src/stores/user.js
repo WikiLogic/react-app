@@ -1,5 +1,7 @@
 import { observable, action } from 'mobx';
+import Api from 'src/utils/api.js';
 
+const userApi = new Api('/api/v1/user');
 const Formatter = window.wl.utils.formatter;
 const Cookies = window.wl.utils.cookies;
 
@@ -22,12 +24,12 @@ export default class User {
     this.loginResponceMessage = 'Login';
     this.signupResponceMessage = 'Signup!';
     this.history = [];
-    this.JWT = '';
     this.username = '';
     this.password = '';
     this.email = '';
     this.signUpDate = '';
     this.authModal = false;
+    this.JWT = '';
   }
 
   @action
@@ -67,6 +69,9 @@ export default class User {
           this.isLoggedIn = true;
           this.loginResponceMessage = 'Success!';
           Cookies.set('JWT', `JWT ${res.data.token}`);
+          this.username = res.data.user.username;
+          this.email = res.data.user.email;
+          this.signUpDate = res.data.user.signUpDate;
         }
       })
       .catch((err) => {
@@ -78,7 +83,6 @@ export default class User {
 
   @action
   logOut() {
-    this.JWT = '';
     this.isLoggedIn = false;
     Cookies.set('JWT', '');
     // tell the server?
@@ -105,11 +109,33 @@ export default class User {
         this.isLoggingIn = false;
         this.signupResponceMessage = 'Success!';
         Cookies.set('JWT', `JWT ${res.data.token}`);
+        this.username = res.data.user.username;
+        this.email = res.data.user.email;
+        this.signUpDate = res.data.user.signUpDate;
       })
       .catch((err) => {
         console.error('User sign up error: ', err);
         this.isLoggingIn = false;
         this.signupResponceMessage = 'Sign up failed :(';
       });
+  }
+
+  @action
+  getUserData() {
+    const cookieJWT = Cookies.get('JWT');
+    if (cookieJWT) {
+      this.isLoggingIn = true;
+      this.JWT = cookieJWT;
+      userApi.get('').then((res) => {
+        this.username = res.data.user.username;
+        this.email = res.data.user.email;
+        this.signUpDate = res.data.user.signUpDate;
+        this.isLoggedIn = true;
+        this.isLoggingIn = false;
+      }).catch((err) => {
+        console.log('get user data err', err);
+      });
+      //TODO try to get userdata with this JWT, if it works - we're logged in!
+    }
   }
 }

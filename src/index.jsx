@@ -45,6 +45,10 @@ class Wikilogic extends React.Component {
     this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
   }
 
+  componentDidMount() {
+    window.wl.user.getUserData();
+  }
+
   setNewClaimFocus(claim) {
     //TODO: mobxify this
     console.log('hihihih ehh - todo here!', claim);
@@ -114,11 +118,7 @@ class Wikilogic extends React.Component {
             path="/profile"
             exact
             render={() => {
-              if (this.props.RootStore.UserStore.isLoggedIn) {
-                return <UserProfileScene store={this.props.RootStore.UserStore} />;
-              }
-              history.push('/login');
-              return null;
+              return <UserProfileScene store={this.props.RootStore.UserStore} />;
             }}
           />
 

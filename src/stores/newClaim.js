@@ -30,8 +30,6 @@ export default class NewClaim {
     claimApi.post('', claimData).then((res) => {
       console.log('New claim returned! ', res);
     }).catch((err) => {
-      console.log(typeof err);
-      
       if (typeof err === 'number') {
         if (err === 401) {
           this.statusMessage = '401: log in to submit new claims';
