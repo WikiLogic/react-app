@@ -20,11 +20,14 @@ export default class Api {
 
     return new Promise((resolve, reject) => {
       fetch(this.baseUrl + url, fetchConfig).then((res) => {
+        if (!res.ok) {
+          reject(res.status);
+        }
         return res.json();
       }).then((jsonizedRes) => {
         resolve(jsonizedRes);
       }).catch((err) => {
-        console.error(`REQUEST FAIL ${url}`, err);
+        console.error(`REQUEST FAIL ${this.baseUrl + url}`, err);
         reject(err);
       });
     });

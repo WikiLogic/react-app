@@ -44,6 +44,20 @@ export default class AddClaimForm extends React.Component {
   }
 
   render() {
+    if (!window.wl.user.isLoggedIn) {
+      return (
+        <div>
+          <button
+            className="link"
+            onClick={() => { window.wl.user.authModal = 'Login'; }}
+          >Login</button>
+            or
+          <button
+            onClick={() => { window.wl.user.authModal = 'Signup'; }}
+          >Signup</button>to add this as a new claim.
+        </div>
+      );
+    }
     return (
       <form className="form" onSubmit={this.submitHandler}>
 
@@ -74,6 +88,8 @@ export default class AddClaimForm extends React.Component {
         <div className="form__submit text-right">
           <input className="form__submit-button" type="submit" value={this.props.submitBtnLabel} />
         </div>
+        <div className="pad" />
+        {this.props.newClaimStore.statusMessage}
 
       </form>
     );

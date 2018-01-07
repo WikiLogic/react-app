@@ -19,8 +19,8 @@ export default class GraphSvg extends React.Component {
     super(props);
 
     this.state = {
-      topLeftX: -500,
-      topLeftY: -500,
+      topLeftX: -10,
+      topLeftY: -10,
       width: 1000,
       height: 1000,
       panEnguaged: false,

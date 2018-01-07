@@ -10363,11 +10363,14 @@ var Api = function () {
 
       return new Promise(function (resolve, reject) {
         fetch(_this.baseUrl + url, fetchConfig).then(function (res) {
+          if (!res.ok) {
+            reject(res.status);
+          }
           return res.json();
         }).then(function (jsonizedRes) {
           resolve(jsonizedRes);
         }).catch(function (err) {
-          console.error('REQUEST FAIL ' + url, err);
+          console.error('REQUEST FAIL ' + (_this.baseUrl + url), err);
           reject(err);
         });
       });
@@ -18607,7 +18610,7 @@ var Wikilogic = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.observer
                 'button',
                 {
                   onClick: function onClick() {
-                    _this2.props.RootStore.authModal = 'Login';
+                    _this2.props.RootStore.UserStore.authModal = 'Login';
                   }
                 },
                 'Login'
@@ -18616,7 +18619,7 @@ var Wikilogic = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.observer
                 'button',
                 {
                   onClick: function onClick() {
-                    _this2.props.RootStore.authModal = 'Signup';
+                    _this2.props.RootStore.UserStore.authModal = 'Signup';
                   }
                 },
                 'Signup'
@@ -18632,7 +18635,7 @@ var Wikilogic = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.observer
             exact: true,
             render: function render(routeProps) {
               return _react2.default.createElement(_GraphScene2.default, {
-                store: _this2.props.RootStore.GraphSceneStore,
+                graphSceneStore: _this2.props.RootStore.GraphSceneStore,
                 routeProps: routeProps
               });
             }
@@ -18755,9 +18758,9 @@ var Wikilogic = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.observer
         ),
         _react2.default.createElement(_AuthModal2.default, {
           userStore: this.props.RootStore.UserStore,
-          ctrl: this.props.RootStore.authModal,
+          ctrl: this.props.RootStore.UserStore.authModal,
           onClose: function onClose() {
-            _this2.props.RootStore.authModal = false;
+            _this2.props.RootStore.UserStore.authModal = false;
           }
         })
       );
@@ -18859,6 +18862,33 @@ var AddClaimForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function
   }, {
     key: 'render',
     value: function render() {
+      if (!window.wl.user.isLoggedIn) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'link',
+              onClick: function onClick() {
+                window.wl.user.authModal = 'Login';
+              }
+            },
+            'Login'
+          ),
+          'or',
+          _react2.default.createElement(
+            'button',
+            {
+              onClick: function onClick() {
+                window.wl.user.authModal = 'Signup';
+              }
+            },
+            'Signup'
+          ),
+          'to add this as a new claim.'
+        );
+      }
       return _react2.default.createElement(
         'form',
         { className: 'form', onSubmit: this.submitHandler },
@@ -18890,7 +18920,9 @@ var AddClaimForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function
           'div',
           { className: 'form__submit text-right' },
           _react2.default.createElement('input', { className: 'form__submit-button', type: 'submit', value: this.props.submitBtnLabel })
-        )
+        ),
+        _react2.default.createElement('div', { className: 'pad' }),
+        this.props.newClaimStore.statusMessage
       );
     }
   }]);
@@ -20314,7 +20346,7 @@ var GraphSearchResults = (0, _mobxReact.observer)(_class = (_temp = _class2 = fu
 
       var newClaimMarkup = null;
 
-      if (this.props.store.results.length === 0 && this.props.store.term !== '') {
+      if (this.props.store.results.length === 0 && this.props.store.searchHasRun) {
         newClaimMarkup = _react2.default.createElement(
           'div',
           null,
@@ -21303,8 +21335,8 @@ var GraphSvg = (_temp = _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (GraphSvg.__proto__ || Object.getPrototypeOf(GraphSvg)).call(this, props));
 
     _this.state = {
-      topLeftX: -500,
-      topLeftY: -500,
+      topLeftX: -10,
+      topLeftY: -10,
       width: 1000,
       height: 1000,
       panEnguaged: false,
@@ -22495,7 +22527,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
   _createClass(GraphScene, [{
     key: 'loadClaim',
     value: function loadClaim(result) {
-      this.props.store.loadClaim(result);
+      this.props.graphSceneStore.loadClaim(result);
     }
   }, {
     key: 'newArgumentSubmissionHandler',
@@ -22531,7 +22563,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
             'div',
             { className: 'max-width-wrap' },
             _react2.default.createElement(_SearchForm2.default, {
-              store: this.props.store.searchStore,
+              store: this.props.graphSceneStore.searchStore,
               placeholder: 'Search Claims',
               label: 'Search',
               id: 'graph-scene-search-input'
@@ -22548,7 +22580,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
               'div',
               { className: 'sidebar-layout__side padding' },
               _react2.default.createElement(_GraphSearchResults2.default, {
-                store: this.props.store.searchStore,
+                store: this.props.graphSceneStore.searchStore,
                 resultClickHandler: this.loadClaim
               })
             ),
@@ -22558,11 +22590,11 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
               _react2.default.createElement(
                 _GraphSvg2.default,
                 null,
-                this.props.store.hasGraphData && _react2.default.createElement(_Graph2.default, { store: this.props.store.graphStore }),
-                !this.props.store.hasGraphData && _react2.default.createElement(_SVGtext2.default, {
+                this.props.graphSceneStore.hasGraphData && _react2.default.createElement(_Graph2.default, { store: this.props.graphSceneStore.graphStore }),
+                !this.props.graphSceneStore.hasGraphData && _react2.default.createElement(_SVGtext2.default, {
                   text: 'Message to search claims and click them to load into this graph. Also a button to load an example',
-                  x: -200,
-                  y: -300,
+                  x: 0,
+                  y: 0,
                   width: 400,
                   height: 20
                 })
@@ -22576,7 +22608,7 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
 
   return GraphScene;
 }(_react2.default.Component), _class3.propTypes = {
-  store: _propTypes2.default.object.isRequired
+  graphSceneStore: _propTypes2.default.object.isRequired
 }, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'loadClaim', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'loadClaim'), _class2.prototype)), _class2)) || _class;
 
 exports.default = GraphScene;
@@ -23788,9 +23820,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3;
 
 var _mobx = __webpack_require__(11);
 
@@ -23855,8 +23889,11 @@ var NewClaim = (_class = function () {
 
     _initDefineProp(this, 'probability', _descriptor2, this);
 
+    _initDefineProp(this, 'statusMessage', _descriptor3, this);
+
     this.text = text;
     this.probability = 50;
+    this.statusMessage = '';
   }
 
   _createClass(NewClaim, [{
@@ -23871,11 +23908,24 @@ var NewClaim = (_class = function () {
     }
   }, {
     key: 'submit',
-    value: function submit(claim) {
-      claimApi.post('', JSON.stringify(claim)).then(function (res) {
+    value: function submit() {
+      var _this = this;
+
+      var claimData = JSON.stringify({ text: this.text, probability: this.probability });
+      console.log('claimData', claimData);
+      claimApi.post('/', claimData).then(function (res) {
         console.log('New claim returned! ', res);
       }).catch(function (err) {
-        console.error('New claim error: ', err);
+        console.log(typeof err === 'undefined' ? 'undefined' : _typeof(err));
+
+        if (typeof err === 'number') {
+          if (err === 401) {
+            _this.statusMessage = '401: log in to submit new claims';
+          }
+          console.error('http error', err);
+        } else {
+          console.error('New claim error: ', err);
+        }
       });
     }
   }]);
@@ -23885,6 +23935,9 @@ var NewClaim = (_class = function () {
   enumerable: true,
   initializer: null
 }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'probability', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'statusMessage', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'setText', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setText'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'setProbability', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'setProbability'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'submit', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'submit'), _class.prototype)), _class);
@@ -23902,9 +23955,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3;
 
 var _mobx = __webpack_require__(11);
 
@@ -23968,39 +24019,21 @@ function _initializerWarningHelper(descriptor, context) {
 
 // const claimApi = new Api('/api/v1/claims');
 
-var Root = (_class = function () {
-  function Root() {
-    _classCallCheck(this, Root);
+var Root = (_class = function Root() {
+  _classCallCheck(this, Root);
 
-    _initDefineProp(this, 'isLoggedIn', _descriptor, this);
+  _initDefineProp(this, 'isLoggedIn', _descriptor, this);
 
-    _initDefineProp(this, 'UserStore', _descriptor2, this);
+  _initDefineProp(this, 'UserStore', _descriptor2, this);
 
-    _initDefineProp(this, 'GraphSceneStore', _descriptor3, this);
+  _initDefineProp(this, 'GraphSceneStore', _descriptor3, this);
 
-    _initDefineProp(this, 'authModal', _descriptor4, this);
-
-    this.isLoggedIn = false;
-    this.UserStore = new _user2.default();
-    this.GraphSceneStore = new _GraphScene2.default();
-    this.authModal = false;
-    // Find out if the user is logged in
-  }
-
-  _createClass(Root, [{
-    key: 'openAuthModal',
-    value: function openAuthModal(type) {
-      this.authModal = type; //Login or Signup
-    }
-  }, {
-    key: 'closeAuthModal',
-    value: function closeAuthModal() {
-      this.authModal = false;
-    }
-  }]);
-
-  return Root;
-}(), (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'isLoggedIn', [_mobx.observable], {
+  this.isLoggedIn = false;
+  this.UserStore = new _user2.default();
+  window.wl.user = this.UserStore;
+  this.GraphSceneStore = new _GraphScene2.default();
+  // Find out if the user is logged in
+}, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'isLoggedIn', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'UserStore', [_mobx.observable], {
@@ -24009,10 +24042,7 @@ var Root = (_class = function () {
 }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'GraphSceneStore', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'authModal', [_mobx.observable], {
-  enumerable: true,
-  initializer: null
-}), _applyDecoratedDescriptor(_class.prototype, 'openAuthModal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'openAuthModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'closeAuthModal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'closeAuthModal'), _class.prototype)), _class);
+})), _class);
 exports.default = Root;
 
 /***/ }),
@@ -24029,7 +24059,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4;
 
 var _mobx = __webpack_require__(11);
 
@@ -24098,7 +24128,13 @@ var Search = (_class = function () {
 
     _initDefineProp(this, 'results', _descriptor2, this);
 
+    _initDefineProp(this, 'searchIsRunning', _descriptor3, this);
+
+    _initDefineProp(this, 'searchHasRun', _descriptor4, this);
+
     this.term = '';
+    this.searchIsRunning = false;
+    this.searchHasRun = false;
     this.results = [];
 
     claimApi.get('/').then(function (res) {
@@ -24113,6 +24149,8 @@ var Search = (_class = function () {
     value: function submit() {
       var _this2 = this;
 
+      this.searchIsRunning = true;
+      console.log('search submitted');
       var url = '/';
       if (this.term !== '') {
         url = '/search?s=' + this.term;
@@ -24120,8 +24158,12 @@ var Search = (_class = function () {
 
       claimApi.get(url).then(function (res) {
         _this2.results = res.data.results;
+        _this2.searchIsRunning = false;
+        _this2.searchHasRun = true;
       }).catch(function (err) {
         console.error('Claim search error: ', err);
+        _this2.searchIsRunning = false;
+        _this2.searchHasRun = true;
       });
     }
   }]);
@@ -24131,6 +24173,12 @@ var Search = (_class = function () {
   enumerable: true,
   initializer: null
 }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'results', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'searchIsRunning', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'searchHasRun', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'submit', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'submit'), _class.prototype)), _class);
@@ -24150,7 +24198,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
 
 var _mobx = __webpack_require__(11);
 
@@ -24226,6 +24274,8 @@ var User = (_class = function () {
 
     _initDefineProp(this, 'signUpDate', _descriptor10, this);
 
+    _initDefineProp(this, 'authModal', _descriptor11, this);
+
     this.isLoggedIn = false;
     this.isLoggingIn = false;
     this.loginResponceMessage = 'Login';
@@ -24236,9 +24286,20 @@ var User = (_class = function () {
     this.password = '';
     this.email = '';
     this.signUpDate = '';
+    this.authModal = false;
   }
 
   _createClass(User, [{
+    key: 'openAuthModal',
+    value: function openAuthModal(type) {
+      this.authModal = type; //Login or Signup
+    }
+  }, {
+    key: 'closeAuthModal',
+    value: function closeAuthModal() {
+      this.authModal = false;
+    }
+  }, {
     key: 'logIn',
     value: function logIn() {
       var _this = this;
@@ -24341,7 +24402,10 @@ var User = (_class = function () {
 }), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _applyDecoratedDescriptor(_class.prototype, 'logIn', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logIn'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logOut', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logOut'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'signup', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'signup'), _class.prototype)), _class);
+}), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'authModal', [_mobx.observable], {
+  enumerable: true,
+  initializer: null
+}), _applyDecoratedDescriptor(_class.prototype, 'openAuthModal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'openAuthModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'closeAuthModal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'closeAuthModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logIn', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logIn'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logOut', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logOut'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'signup', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'signup'), _class.prototype)), _class);
 exports.default = User;
 
 /***/ }),

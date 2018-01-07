@@ -7,9 +7,13 @@ const claimApi = new Api('/api/v1/claims');
 export default class Search {
   @observable term;
   @observable results;
+  @observable searchIsRunning;
+  @observable searchHasRun;
 
   constructor() {
     this.term = '';
+    this.searchIsRunning = false;
+    this.searchHasRun = false;
     this.results = [];
 
     claimApi.get('/').then((res) => {
@@ -21,6 +25,8 @@ export default class Search {
 
   @action
   submit() {
+    this.searchIsRunning = true;
+    console.log('search submitted');
     let url = '/';
     if (this.term !== '') {
       url = `/search?s=${this.term}`;
@@ -28,8 +34,12 @@ export default class Search {
 
     claimApi.get(url).then((res) => {
       this.results = res.data.results;
+      this.searchIsRunning = false;
+      this.searchHasRun = true;
     }).catch((err) => {
       console.error('Claim search error: ', err);
+      this.searchIsRunning = false;
+      this.searchHasRun = true;
     });
   }
 }

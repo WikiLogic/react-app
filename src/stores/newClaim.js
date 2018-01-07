@@ -6,10 +6,12 @@ const claimApi = new Api('/api/v1/claims');
 export default class NewClaim {
   @observable text;
   @observable probability;
+  @observable statusMessage;
 
   constructor(text) {
     this.text = text;
     this.probability = 50;
+    this.statusMessage = '';
   }
 
   @action
@@ -23,11 +25,22 @@ export default class NewClaim {
   }
 
   @action
-  submit(claim) {
-    claimApi.post('', JSON.stringify(claim)).then((res) => {
+  submit() {
+    const claimData = JSON.stringify({ text: this.text, probability: this.probability });
+    console.log('claimData', claimData);
+    claimApi.post('/', claimData).then((res) => {
       console.log('New claim returned! ', res);
     }).catch((err) => {
-      console.error('New claim error: ', err);
+      console.log(typeof err);
+      
+      if (typeof err === 'number') {
+        if (err === 401) {
+          this.statusMessage = '401: log in to submit new claims';
+        }
+        console.error('http error', err);
+      } else {
+        console.error('New claim error: ', err);
+      }
     });
   }
 }

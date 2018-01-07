@@ -14,6 +14,7 @@ export default class User {
   @observable password;
   @observable email;
   @observable signUpDate;
+  @observable authModal;
 
   constructor() {
     this.isLoggedIn = false;
@@ -26,6 +27,17 @@ export default class User {
     this.password = '';
     this.email = '';
     this.signUpDate = '';
+    this.authModal = false;
+  }
+
+  @action
+  openAuthModal(type) {
+    this.authModal = type; //Login or Signup
+  }
+
+  @action
+  closeAuthModal() {
+    this.authModal = false;
   }
 
   @action

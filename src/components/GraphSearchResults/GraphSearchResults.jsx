@@ -30,7 +30,7 @@ export default class GraphSearchResults extends React.Component {
   render() {
     let newClaimMarkup = null;
 
-    if (this.props.store.results.length === 0 && this.props.store.term !== '') {
+    if (this.props.store.results.length === 0 && this.props.store.searchHasRun) {
       newClaimMarkup = (
         <div>
           <p>No results for {this.props.store.term}</p>

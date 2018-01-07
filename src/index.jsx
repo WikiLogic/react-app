@@ -67,13 +67,13 @@ class Wikilogic extends React.Component {
 
               {(!this.props.RootStore.UserStore.isLoggedIn &&
                 <button
-                  onClick={() => { this.props.RootStore.authModal = 'Login'; }}
+                  onClick={() => { this.props.RootStore.UserStore.authModal = 'Login'; }}
                 >Login</button>
               )}
 
               {(!this.props.RootStore.UserStore.isLoggedIn &&
                 <button
-                  onClick={() => { this.props.RootStore.authModal = 'Signup'; }}
+                  onClick={() => { this.props.RootStore.UserStore.authModal = 'Signup'; }}
                 >Signup</button>
               )}
             </div>
@@ -89,7 +89,7 @@ class Wikilogic extends React.Component {
             render={(routeProps) => {
               return (
                 <GraphScene
-                  store={this.props.RootStore.GraphSceneStore}
+                  graphSceneStore={this.props.RootStore.GraphSceneStore}
                   routeProps={routeProps}
                 />
               );
@@ -205,9 +205,9 @@ class Wikilogic extends React.Component {
 
         <AuthModal
           userStore={this.props.RootStore.UserStore}
-          ctrl={this.props.RootStore.authModal}
+          ctrl={this.props.RootStore.UserStore.authModal}
           onClose={() => {
-            this.props.RootStore.authModal = false;
+            this.props.RootStore.UserStore.authModal = false;
           }}
         />
       </div>

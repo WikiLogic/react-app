@@ -21,7 +21,7 @@ import SVGtext from 'src/components/SVGels/SVGtext.jsx';
 @observer
 export default class GraphScene extends React.Component {
   static propTypes = {
-    store: PropTypes.object.isRequired
+    graphSceneStore: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -33,7 +33,7 @@ export default class GraphScene extends React.Component {
 
   @action
   loadClaim(result) {
-    this.props.store.loadClaim(result);
+    this.props.graphSceneStore.loadClaim(result);
   }
 
   newArgumentSubmissionHandler(newArgument) {
@@ -61,7 +61,7 @@ export default class GraphScene extends React.Component {
           <div className="max-width-wrap">
 
             <SearchForm
-              store={this.props.store.searchStore}
+              store={this.props.graphSceneStore.searchStore}
               placeholder="Search Claims"
               label="Search"
               id="graph-scene-search-input"
@@ -74,7 +74,7 @@ export default class GraphScene extends React.Component {
 
             <div className="sidebar-layout__side padding">
               <GraphSearchResults
-                store={this.props.store.searchStore}
+                store={this.props.graphSceneStore.searchStore}
                 resultClickHandler={this.loadClaim}
               />
               {/* <ArgumentBuilder submissionHandler={this.newArgumentSubmissionHandler} /> */}
@@ -83,14 +83,14 @@ export default class GraphScene extends React.Component {
             <div className="sidebar-layout__main no-padding">
               <GraphSvg>
 
-                {(this.props.store.hasGraphData &&
-                  <Graph store={this.props.store.graphStore} />
+                {(this.props.graphSceneStore.hasGraphData &&
+                  <Graph store={this.props.graphSceneStore.graphStore} />
                 )}
-                {(!this.props.store.hasGraphData &&
+                {(!this.props.graphSceneStore.hasGraphData &&
                   <SVGtext
                     text="Message to search claims and click them to load into this graph. Also a button to load an example"
-                    x={-200}
-                    y={-300}
+                    x={0}
+                    y={0}
                     width={400}
                     height={20}
                   />
