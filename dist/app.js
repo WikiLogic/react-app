@@ -13201,6 +13201,8 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _class, _temp;
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -13217,15 +13219,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/* 
-+------------------------+
-|label         +--------+|
-|Input         | Button ||
-|              +--------+|
-+------------------------+
+/**
+ * |Input|Button|
  */
 
-var InputButton = function (_React$Component) {
+var InputButton = (_temp = _class = function (_React$Component) {
   _inherits(InputButton, _React$Component);
 
   function InputButton(props) {
@@ -13233,33 +13231,11 @@ var InputButton = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (InputButton.__proto__ || Object.getPrototypeOf(InputButton)).call(this, props));
 
-    var setInputValue = '';
-    if (Object.prototype.hasOwnProperty.call(props, 'inputInitValue')) {
-      setInputValue = props.inputInitValue;
-    } else {
-      setInputValue = '';
-    }
-
-    _this.state = {
-      value: setInputValue
-    };
-
-    _this.changeHandler = _this.changeHandler.bind(_this);
+    _this.state = {};
     return _this;
   }
 
   _createClass(InputButton, [{
-    key: 'changeHandler',
-    value: function changeHandler(e) {
-      this.setState({
-        value: e.target.value
-      });
-
-      if (Object.prototype.hasOwnProperty.call(this.props, 'inputChangeHandler')) {
-        this.props.inputChangeHandler(e.target.value);
-      }
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -13267,7 +13243,7 @@ var InputButton = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'InputButton' },
-        _react2.default.createElement(
+        this.props.labelText && _react2.default.createElement(
           'label',
           { htmlFor: this.props.id },
           this.props.labelText
@@ -13279,19 +13255,23 @@ var InputButton = function (_React$Component) {
             id: this.props.id,
             type: this.props.inputType,
             placeholder: this.props.inputPlaceholder,
-            value: this.state.value,
-            onChange: this.changeHandler,
+            value: this.props.value,
+            onChange: function onChange(e) {
+              _this2.props.changeHandler(e.target.value);
+            },
             onKeyPress: function onKeyPress(e) {
               if (e.key === 'Enter') {
-                _this2.props.submitHandler(_this2.state.value);
+                e.preventDefault();
+                _this2.props.submitHandler(_this2.props.value);
               }
             }
           }),
           _react2.default.createElement(
             'button',
             {
+              type: 'button',
               onClick: function onClick() {
-                _this2.props.submitHandler(_this2.state.value);
+                _this2.props.submitHandler(_this2.props.value);
               }
             },
             this.props.btnText
@@ -13302,26 +13282,20 @@ var InputButton = function (_React$Component) {
   }]);
 
   return InputButton;
-}(_react2.default.Component);
-
-exports.default = InputButton;
-
-
-InputButton.propTypes = {
+}(_react2.default.Component), _class.propTypes = {
   id: _propTypes2.default.string.isRequired,
-  labelText: _propTypes2.default.string.isRequired,
+  labelText: _propTypes2.default.string,
   inputType: _propTypes2.default.string.isRequired,
   inputPlaceholder: _propTypes2.default.string.isRequired,
-  inputInitValue: _propTypes2.default.string,
-  inputChangeHandler: _propTypes2.default.func,
+  value: _propTypes2.default.string.isRequired,
   btnText: _propTypes2.default.string.isRequired,
-  submitHandler: _propTypes2.default.func.isRequired
-};
-
-InputButton.defaultProps = {
-  inputChangeHandler: function inputChangeHandler() {},
+  submitHandler: _propTypes2.default.func.isRequired,
+  changeHandler: _propTypes2.default.func.isRequired
+}, _class.defaultProps = {
+  labelText: null,
   inputInitValue: ''
-};
+}, _temp);
+exports.default = InputButton;
 
 /***/ }),
 /* 79 */
@@ -18871,24 +18845,25 @@ var AddClaimForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function
           _react2.default.createElement(
             'button',
             {
-              className: 'link',
+              className: 'a',
               onClick: function onClick() {
                 window.wl.user.authModal = 'Login';
               }
             },
             'Login'
           ),
-          'or',
+          ' or ',
           _react2.default.createElement(
             'button',
             {
+              className: 'a',
               onClick: function onClick() {
                 window.wl.user.authModal = 'Signup';
               }
             },
             'Signup'
           ),
-          'to add this as a new claim.'
+          ' to add this as a new claim.'
         );
       }
       return _react2.default.createElement(
@@ -18918,13 +18893,13 @@ var AddClaimForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function
           classModifiers: 'InputRange--small'
         }),
         _react2.default.createElement('div', { className: 'pad' }),
+        this.props.newClaimStore.statusMessage,
         _react2.default.createElement(
           'div',
           { className: 'form__submit text-right' },
           _react2.default.createElement('input', { className: 'form__submit-button', type: 'submit', value: this.props.submitBtnLabel })
         ),
-        _react2.default.createElement('div', { className: 'pad' }),
-        this.props.newClaimStore.statusMessage
+        _react2.default.createElement('div', { className: 'pad' })
       );
     }
   }]);
@@ -21563,9 +21538,9 @@ var _mobx = __webpack_require__(11);
 
 var _mobxReact = __webpack_require__(9);
 
-var _SearchIconSvg = __webpack_require__(153);
+var _InputButton = __webpack_require__(78);
 
-var _SearchIconSvg2 = _interopRequireDefault(_SearchIconSvg);
+var _InputButton2 = _interopRequireDefault(_InputButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21604,6 +21579,8 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
+// import SearchIcon from '../_Icons/SearchIcon.svg.jsx';
+
 var SearchForm = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 = function (_React$Component) {
   _inherits(SearchForm, _React$Component);
 
@@ -21612,15 +21589,15 @@ var SearchForm = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
 
     var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
 
-    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleTermSubmit = _this.handleTermSubmit.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
   _createClass(SearchForm, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.props.store.term = event.target.value;
+    key: 'handleTermSubmit',
+    value: function handleTermSubmit() {
+      this.props.store.submit();
     }
   }, {
     key: 'handleSubmit',
@@ -21631,27 +21608,22 @@ var SearchForm = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'form',
         { className: 'SearchForm', onSubmit: this.handleSubmit },
-        _react2.default.createElement(
-          'label',
-          { htmlFor: this.props.id, className: 'SearchForm__label' },
-          this.props.label
-        ),
-        _react2.default.createElement('input', {
+        _react2.default.createElement(_InputButton2.default, {
           id: this.props.id,
-          className: 'SearchForm__input',
-          type: 'text',
-          placeholder: this.props.placeholder,
+          inputType: 'text',
+          inputPlaceholder: this.props.placeholder,
           value: this.props.store.term,
-          onChange: this.handleChange
-        }),
-        _react2.default.createElement(
-          'button',
-          { className: 'SearchForm__submit', onClick: this.handleSubmit },
-          _react2.default.createElement(_SearchIconSvg2.default, null)
-        )
+          btnText: 'Search',
+          changeHandler: function changeHandler(term) {
+            _this2.props.store.term = term;
+          },
+          submitHandler: this.handleTermSubmit
+        })
       );
     }
   }]);
@@ -21660,9 +21632,8 @@ var SearchForm = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
 }(_react2.default.Component), _class3.propTypes = {
   store: _propTypes2.default.object.isRequired,
   placeholder: _propTypes2.default.string.isRequired,
-  id: _propTypes2.default.string.isRequired,
-  label: _propTypes2.default.string.isRequired
-}, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'handleChange', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleChange'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'handleSubmit', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleSubmit'), _class2.prototype)), _class2)) || _class;
+  id: _propTypes2.default.string.isRequired
+}, _temp), (_applyDecoratedDescriptor(_class2.prototype, 'handleTermSubmit', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleTermSubmit'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'handleSubmit', [_mobx.action], Object.getOwnPropertyDescriptor(_class2.prototype, 'handleSubmit'), _class2.prototype)), _class2)) || _class;
 
 exports.default = SearchForm;
 
@@ -21888,37 +21859,7 @@ Input.defaultProps = {
 };
 
 /***/ }),
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = SearchIcon;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* The search icon
- * 
- */
-
-function SearchIcon() {
-  return _react2.default.createElement(
-    "svg",
-    { version: "1.1", id: "Capa_1", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 339.921 339.921", className: "svgicon" },
-    _react2.default.createElement("path", { d: "M335.165,292.071l-81.385-84.077c-5.836-6.032-13.13-8.447-16.29-5.363\r c-3.171,3.062-10.47,0.653-16.306-5.379l-1.164-1.207c36.425-47.907,32.89-116.499-10.851-160.24\r c-47.739-47.739-125.142-47.739-172.875,0c-47.739,47.739-47.739,125.131,0,172.87c44.486,44.492,114.699,47.472,162.704,9.045\r l0.511,0.533c5.825,6.032,7.995,13.402,4.814,16.469c-3.166,3.068-1.012,10.443,4.83,16.464l81.341,84.11\r c5.836,6.016,15.452,6.195,21.49,0.354l22.828-22.088C340.827,307.735,340.99,298.125,335.165,292.071z M182.306,181.81\r c-32.852,32.857-86.312,32.857-119.159,0.011c-32.852-32.852-32.847-86.318,0-119.164c32.847-32.852,86.307-32.847,119.148,0.005\r C215.152,95.509,215.152,148.964,182.306,181.81z"
-    })
-  );
-}
-
-/***/ }),
+/* 153 */,
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22567,7 +22508,6 @@ var GraphScene = (0, _mobxReact.observer)(_class = (_class2 = (_temp = _class3 =
             _react2.default.createElement(_SearchForm2.default, {
               store: this.props.graphSceneStore.searchStore,
               placeholder: 'Search Claims',
-              label: 'Search',
               id: 'graph-scene-search-input'
             })
           )

@@ -131,6 +131,7 @@ export default class AddExplanationForm extends React.Component {
             <SearchForm
               submissionHandler={this.handlePremisSearch}
               placeholder="Search Premises"
+              id="add-explanation"
             />
 
             <div className="premis-finder__results">

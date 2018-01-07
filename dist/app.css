@@ -365,10 +365,15 @@ th {
 
 .a, a {
   text-decoration: none;
-  color: #0a88c5; }
+  color: #0a88c5;
+  background-color: transparent;
+  text-transform: none;
+  padding: 0; }
   .a:hover, .a:active, a:hover, a:active {
-    text-decoration: underline; }
+    text-decoration: underline;
+    background-color: transparent; }
   .a:focus, a:focus {
+    background-color: transparent;
     outline-color: #0a88c5;
     outline-offset: 2px;
     outline-style: solid;
@@ -899,18 +904,21 @@ the eeeeee footer
 COMPONENTS
 styles are set in sass alongside the components. (in the components folder).
 */
-.InputButton__input {
-  display: flex; }
-  .InputButton__input input {
-    flex: 1;
-    vertical-align: middle;
-    margin-bottom: 0;
-    border-right-width: 0; }
-  .InputButton__input button {
-    vertical-align: middle;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-right: 0; }
+.InputButton {
+  display: block;
+  width: 100%; }
+  .InputButton__input {
+    display: flex; }
+    .InputButton__input input {
+      flex: 1;
+      vertical-align: middle;
+      margin-bottom: 0;
+      border-right-width: 0; }
+    .InputButton__input button {
+      vertical-align: middle;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-right: 0; }
 
 .InputRange {
   width: 100%; }
@@ -1195,7 +1203,7 @@ styles are set in sass alongside the components. (in the components folder).
     padding: 1rem; }
 
 .SearchForm {
-  display: block;
+  display: flex;
   width: 100%;
   position: relative; }
   .SearchForm__label {
@@ -1205,15 +1213,8 @@ styles are set in sass alongside the components. (in the components folder).
     display: block;
     padding-right: 50px;
     width: 100%; }
-  .SearchForm__submit {
-    position: absolute;
-    height: 44px;
-    right: 0;
-    bottom: 0;
-    background-color: transparent;
-    border-color: transparent; }
-    .SearchForm__submit svg {
-      fill: #111F2E; }
+  .SearchForm__submit svg {
+    fill: #111F2E; }
 
 .search-results__result {
   display: block;

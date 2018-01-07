@@ -48,13 +48,12 @@ export default class AddClaimForm extends React.Component {
       return (
         <div>
           <button
-            className="link"
+            className="a"
             onClick={() => { window.wl.user.authModal = 'Login'; }}
-          >Login</button>
-            or
-          <button
+          >Login</button> or <button
+            className="a"
             onClick={() => { window.wl.user.authModal = 'Signup'; }}
-          >Signup</button>to add this as a new claim.
+          >Signup</button> to add this as a new claim.
         </div>
       );
     }
@@ -85,11 +84,11 @@ export default class AddClaimForm extends React.Component {
 
         <div className="pad" />
 
+        {this.props.newClaimStore.statusMessage}
         <div className="form__submit text-right">
           <input className="form__submit-button" type="submit" value={this.props.submitBtnLabel} />
         </div>
         <div className="pad" />
-        {this.props.newClaimStore.statusMessage}
 
       </form>
     );
