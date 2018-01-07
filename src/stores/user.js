@@ -85,20 +85,21 @@ export default class User {
   }
 
   @action
-  signup(email, username, password) {
+  signup() {
     fetch('/api/v1/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: Formatter.objectToFormData({
-        email,
-        username,
-        password,
+        email: this.email,
+        username: this.username,
+        password: this.password
       }),
     })
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
+        console.log('res', res);
         this.JWT = res.data.token;
         this.isLoggedIn = true;
         this.isLoggingIn = false;

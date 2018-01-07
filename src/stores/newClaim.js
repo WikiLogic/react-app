@@ -27,8 +27,7 @@ export default class NewClaim {
   @action
   submit() {
     const claimData = JSON.stringify({ text: this.text, probability: this.probability });
-    console.log('claimData', claimData);
-    claimApi.post('/', claimData).then((res) => {
+    claimApi.post('', claimData).then((res) => {
       console.log('New claim returned! ', res);
     }).catch((err) => {
       console.log(typeof err);
@@ -36,6 +35,8 @@ export default class NewClaim {
       if (typeof err === 'number') {
         if (err === 401) {
           this.statusMessage = '401: log in to submit new claims';
+        } else if (err === 400) {
+          this.statusMessage = '400: Not sure but something\'s wrong';
         }
         console.error('http error', err);
       } else {

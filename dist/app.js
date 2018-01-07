@@ -10364,6 +10364,7 @@ var Api = function () {
       return new Promise(function (resolve, reject) {
         fetch(_this.baseUrl + url, fetchConfig).then(function (res) {
           if (!res.ok) {
+            console.log('http fail: ', res);
             reject(res.status);
           }
           return res.json();
@@ -23912,8 +23913,7 @@ var NewClaim = (_class = function () {
       var _this = this;
 
       var claimData = JSON.stringify({ text: this.text, probability: this.probability });
-      console.log('claimData', claimData);
-      claimApi.post('/', claimData).then(function (res) {
+      claimApi.post('', claimData).then(function (res) {
         console.log('New claim returned! ', res);
       }).catch(function (err) {
         console.log(typeof err === 'undefined' ? 'undefined' : _typeof(err));
@@ -23921,6 +23921,8 @@ var NewClaim = (_class = function () {
         if (typeof err === 'number') {
           if (err === 401) {
             _this.statusMessage = '401: log in to submit new claims';
+          } else if (err === 400) {
+            _this.statusMessage = '400: Not sure but something\'s wrong';
           }
           console.error('http error', err);
         } else {
@@ -24344,7 +24346,7 @@ var User = (_class = function () {
     }
   }, {
     key: 'signup',
-    value: function signup(email, username, password) {
+    value: function signup() {
       var _this2 = this;
 
       fetch('/api/v1/user/signup', {
@@ -24353,11 +24355,12 @@ var User = (_class = function () {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: Formatter.objectToFormData({
-          email: email,
-          username: username,
-          password: password
+          email: this.email,
+          username: this.username,
+          password: this.password
         })
       }).then(Formatter.apiResponceToJSON).then(function (res) {
+        console.log('res', res);
         _this2.JWT = res.data.token;
         _this2.isLoggedIn = true;
         _this2.isLoggingIn = false;
