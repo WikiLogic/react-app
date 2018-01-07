@@ -958,6 +958,27 @@ styles are set in sass alongside the components. (in the components folder).
       width: 100%;
       margin-left: 0; } }
 
+.alert {
+  display: table;
+  margin: 5px 0;
+  padding: 5px 1rem;
+  border-radius: 4px;
+  background-color: #eeeeee; }
+  .alert__icon {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 1rem; }
+  .alert svg {
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: -2px; }
+  .alert__body {
+    display: table-cell;
+    vertical-align: top; }
+  .alert__title {
+    font-weight: bold; }
+
 .argument {
   padding: 0.5rem;
   border-radius: 5px; }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import InputRange from '../_Atoms/InputRange.jsx';
+import Errors from 'src/components/Alerts/Errors.jsx';
 
 /**
  * Creating a new claim from scratch
@@ -85,6 +86,14 @@ export default class AddClaimForm extends React.Component {
         <div className="pad" />
 
         {this.props.newClaimStore.statusMessage}
+
+        {this.props.newClaimStore.errors.length > 0 &&
+          <div>
+            <Errors errors={this.props.newClaimStore.errors} />
+            <div className="pad" />
+          </div>
+        }
+
         <div className="form__submit text-right">
           <input className="form__submit-button" type="submit" value={this.props.submitBtnLabel} />
         </div>

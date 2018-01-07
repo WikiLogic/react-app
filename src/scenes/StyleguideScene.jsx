@@ -4,6 +4,7 @@ import Input from 'src/components/_Atoms/Input.jsx';
 import InputButton from 'src/components/_Atoms/InputButton.jsx';
 import InputRange from 'src/components/_Atoms/InputRange.jsx';
 import StatusIndicator from 'src/components/StatusIndicator/StatusIndicator.jsx';
+import Errors from 'src/components/Alerts/Errors.jsx';
 
 /**
  * The Search Results page
@@ -131,6 +132,16 @@ export default class StyleguideScene extends React.Component {
                   />
                 </div>
               </div>
+            </section>
+            <section>
+              <h2>Alerts</h2>
+              <Errors
+                errors={[
+                  { title: 'Error Title', message: 'Error message' },
+                  { title: 'Error Title 2' },
+                  { title: 'Error Title 3', message: 'Error message' }
+                ]}
+              />
             </section>
           </div>
         </div>

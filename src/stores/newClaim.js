@@ -7,11 +7,13 @@ export default class NewClaim {
   @observable text;
   @observable probability;
   @observable statusMessage;
+  @observable errors;
 
   constructor(text) {
     this.text = text;
     this.probability = 50;
     this.statusMessage = '';
+    this.errors = [];
   }
 
   @action
@@ -27,8 +29,13 @@ export default class NewClaim {
   @action
   submit() {
     const claimData = JSON.stringify({ text: this.text, probability: this.probability });
+    console.log('claimData', claimData);
     claimApi.post('', claimData).then((res) => {
-      console.log('New claim returned! ', res);
+      if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
+        this.errors = res.errors;
+      } else {
+        console.log('New claim returned! ', res);
+      }
     }).catch((err) => {
       if (typeof err === 'number') {
         if (err === 401) {

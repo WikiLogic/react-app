@@ -1,0 +1,33 @@
+.alerts {
+    
+}
+
+.alert {
+    display: table;
+    margin: 5px 0;
+    padding: 5px rem($pad);
+    border-radius: 4px;
+    background-color: $grey-light;
+    
+    &__icon {
+        display: table-cell;
+        vertical-align: top;
+        padding-right: rem($pad);
+    }
+
+    svg {
+        width: 1em;
+        height: 1em;
+        position: relative;
+        top: -2px;
+    }
+
+    &__body {
+        display: table-cell;
+        vertical-align: top;
+    }
+    
+    &__title {
+        font-weight: bold;
+    }
+}
