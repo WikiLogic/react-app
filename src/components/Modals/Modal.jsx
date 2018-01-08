@@ -12,7 +12,7 @@ export default function Modal(props) {
   }
 
   return (
-    <div className="modal">
+    <div className={`modal ${props.classModifier}`}>
       <div className="modal__body">
         <div className="modal__header">
           <h3 className="modal__title">{props.title}</h3>
@@ -33,4 +33,9 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
+  classModifier: PropTypes.string
+};
+
+Modal.defaultProps = {
+  classModifier: ''
 };

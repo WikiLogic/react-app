@@ -44,8 +44,12 @@ class Wikilogic extends React.Component {
   }
 
   render() {
+    let noScrollClass = '';
+    if (this.props.RootStore.claimDetailModal.isOpen) {
+      noScrollClass = 'main--no-scroll';
+    }
     return (
-      <div className="main">
+      <div className={`main ${noScrollClass}`}>
         <div className="main__header">
 
           <header className="header">
@@ -162,9 +166,6 @@ class Wikilogic extends React.Component {
         />
         <ClaimDetailModal
           modalCtrl={this.props.RootStore.claimDetailModal}
-          onClose={() => {
-            this.props.RootStore.UserStore.authModal = false;
-          }}
         />
       </div>
     );

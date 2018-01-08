@@ -12,8 +12,7 @@ import ClaimDetail from 'src/components/Claim/Detail.jsx';
 @observer
 export default class ClaimDetailModal extends React.Component {
   static propTypes = {
-    modalCtrl: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired
+    modalCtrl: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -31,7 +30,8 @@ export default class ClaimDetailModal extends React.Component {
       <Modal
         show={this.props.modalCtrl.isOpen}
         title="Claim detail"
-        onClose={this.props.onClose}
+        onClose={() => { this.props.modalCtrl.isOpen = false; }}
+        classModifier="modal--scroller"
       >
         <ClaimDetail
           claimStore={this.props.modalCtrl.claim}

@@ -900,6 +900,9 @@ the eeeeee footer
   .main__status-bar {
     background-color: #111F2E;
     transition: height 0.2s ease; }
+  .main--no-scroll {
+    height: 100vh;
+    overflow: hidden; }
 
 /*
 COMPONENTS
@@ -1258,6 +1261,13 @@ styles are set in sass alongside the components. (in the components folder).
     margin: 0 1rem 0 0; }
   .modal__content {
     padding: 1rem; }
+  .modal--scroller .modal__body {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    overflow: auto; }
 
 .SearchForm {
   display: flex;
