@@ -8,6 +8,8 @@
 	&__side { 
 		width: rem(300);
 		flex: none;
+		padding: rem($pad / 2);
+		padding-bottom: 0;
 	}
 	
 	&__main { 

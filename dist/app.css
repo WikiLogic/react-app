@@ -619,8 +619,7 @@ label {
   margin-bottom: 7px; }
 
 input {
-  display: block;
-  margin-bottom: 7px; }
+  display: block; }
 
 img {
   display: block; }
@@ -798,7 +797,9 @@ columns, sidebars, grids, layout things!
   align-items: streatch; }
   .sidebar-layout__side {
     width: 18.75rem;
-    flex: none; }
+    flex: none;
+    padding: 0.5rem;
+    padding-bottom: 0; }
   .sidebar-layout__main {
     flex-grow: 1;
     padding: 0.5rem; }
@@ -960,14 +961,16 @@ styles are set in sass alongside the components. (in the components folder).
 
 .alert {
   display: table;
-  margin: 5px 0;
-  padding: 5px 1rem;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px 0.75rem;
   border-radius: 4px;
   background-color: #eeeeee; }
   .alert__icon {
     display: table-cell;
     vertical-align: top;
-    padding-right: 1rem; }
+    width: 1em;
+    padding-right: 0.6rem; }
   .alert svg {
     width: 1em;
     height: 1em;

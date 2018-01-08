@@ -9,7 +9,7 @@ import AlertIcon from 'src/components/_Icons/Alert.svg.jsx';
 
 export default class Argument extends React.Component {
   static propTypes = {
-    errors: PropTypes.array.isRequired
+    errors: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -19,9 +19,10 @@ export default class Argument extends React.Component {
 
   render() {
     const errorsMarkup = [];
-    this.props.errors.forEach((err) => {
+    this.props.errors.forEach((err, i) => {
+      const key = `${i}${err.title}`;
       errorsMarkup.push(
-        <div className="alert">
+        <div className="alert" key={key}>
           <div className="alert__icon">
             <AlertIcon />
           </div>

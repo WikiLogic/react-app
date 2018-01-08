@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { action } from 'mobx';
 import { observer } from 'mobx-react';
-import Claim from '../Claim/Claim.jsx';
+import Claim from 'src/components/Claim/Claim.jsx';
 import AddClaimForm from 'src/components/AddClaimForm/AddClaimForm.jsx';
-import NewClaimStore from 'src/stores/newClaim.js';
 
 /**
  * The Argument Premises
@@ -23,8 +22,8 @@ export default class GraphSearchResults extends React.Component {
     this.resultClickHandler = this.resultClickHandler.bind(this);
   }
 
-  resultClickHandler(premise) {
-    this.props.resultClickHandler(premise);
+  resultClickHandler(claim) {
+    this.props.resultClickHandler(claim);
   }
 
   render() {
@@ -36,7 +35,9 @@ export default class GraphSearchResults extends React.Component {
           <p>No results for {this.props.store.term}</p>
           <div className="pad" />
           <AddClaimForm
-            newClaimStore={new NewClaimStore(this.props.store.term)}
+            // newClaimStore={new NewClaimStore(this.props.store.term)}
+            newClaimStore={this.props.store.NewClaimStore}
+            initText={this.props.store.term}
           />
         </div>
       );

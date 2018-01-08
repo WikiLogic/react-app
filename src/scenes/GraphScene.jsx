@@ -71,7 +71,7 @@ export default class GraphScene extends React.Component {
         <div className="page__body no-padding">
           <div className="sidebar-layout">
 
-            <div className="sidebar-layout__side padding">
+            <div className="sidebar-layout__side">
               <GraphSearchResults
                 store={this.props.graphSceneStore.searchStore}
                 resultClickHandler={this.loadClaim}

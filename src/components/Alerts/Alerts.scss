@@ -4,15 +4,17 @@
 
 .alert {
     display: table;
-    margin: 5px 0;
-    padding: 5px rem($pad);
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 5px rem($pad * 0.75); // special case :)
     border-radius: 4px;
     background-color: $grey-light;
     
     &__icon {
         display: table-cell;
         vertical-align: top;
-        padding-right: rem($pad);
+        width: 1em;
+        padding-right: rem($pad * 0.6);
     }
 
     svg {

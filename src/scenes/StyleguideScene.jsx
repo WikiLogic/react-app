@@ -138,8 +138,8 @@ export default class StyleguideScene extends React.Component {
               <Errors
                 errors={[
                   { title: 'Error Title', message: 'Error message' },
-                  { title: 'Error Title 2' },
-                  { title: 'Error Title 3', message: 'Error message' }
+                  { title: 'Test Error Title 2' },
+                  { title: 'Oh another Error Title 3', message: 'Error message' }
                 ]}
               />
             </section>

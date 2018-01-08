@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import InputRange from '../_Atoms/InputRange.jsx';
 import Errors from 'src/components/Alerts/Errors.jsx';
-
+import Claim from 'src/components/Claim/Claim.jsx';
 /**
  * Creating a new claim from scratch
  */
@@ -13,15 +13,18 @@ export default class AddClaimForm extends React.Component {
   static propTypes = {
     newClaimStore: PropTypes.object.isRequired,
     textboxLabel: PropTypes.string,
-    submitBtnLabel: PropTypes.string
+    submitBtnLabel: PropTypes.string,
+    initText: PropTypes.string
   }
 
   static defaultProps = {
     textboxLabel: 'Create a new claim:',
-    submitBtnLabel: 'Publish'
+    submitBtnLabel: 'Publish',
+    initText: ''
   }
 
   constructor(props) {
+    props.newClaimStore.text = props.initText;
     super(props);
     this.state = {
       value: 50,
@@ -58,6 +61,20 @@ export default class AddClaimForm extends React.Component {
         </div>
       );
     }
+
+    // if (this.props.newClaimStore.isPublished) {
+    //   return (
+    //     <Claim claim={this.props.newClaimStore.publishedClaim} isSelected={false}>
+    //       <button
+    //         className="button--secondary"
+    //         onClick={() => {
+    //           this.props.newClaimClickHandler(this.props.newClaimStore.publishedClaim);
+    //         }}
+    //       >🡺</button>
+    //     </Claim>
+    //   );
+    // }
+
     return (
       <form className="form" onSubmit={this.submitHandler}>
 

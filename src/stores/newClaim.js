@@ -8,12 +8,16 @@ export default class NewClaim {
   @observable probability;
   @observable statusMessage;
   @observable errors;
+  @observable publishedClaim;
+  @observable isPublished;
 
-  constructor(text) {
-    this.text = text;
+  constructor() {
+    this.text = '';
     this.probability = 50;
     this.statusMessage = '';
     this.errors = [];
+    this.publishedClaim = null;
+    this.isPublished = false;
   }
 
   @action
@@ -28,25 +32,21 @@ export default class NewClaim {
 
   @action
   submit() {
-    const claimData = JSON.stringify({ text: this.text, probability: this.probability });
-    console.log('claimData', claimData);
-    claimApi.post('', claimData).then((res) => {
+    claimApi.post('', { text: this.text, probability: this.probability }).then((res) => {
       if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
         this.errors = res.errors;
       } else {
-        console.log('New claim returned! ', res);
+        // this.publishedClaim = res.data.claim;
+        // this.isPublished = true;
+        this.creationHandler(res.data.claim);
       }
     }).catch((err) => {
-      if (typeof err === 'number') {
-        if (err === 401) {
-          this.statusMessage = '401: log in to submit new claims';
-        } else if (err === 400) {
-          this.statusMessage = '400: Not sure but something\'s wrong';
-        }
-        console.error('http error', err);
-      } else {
-        console.error('New claim error: ', err);
-      }
+      console.error('New claim error: ', err);
     });
+  }
+
+  @action
+  creationHandler(claim) {
+    this.publishedClaim = claim;
   }
 }

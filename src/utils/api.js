@@ -14,11 +14,14 @@ export default class Api {
     const JWT = window.wl.utils.cookies.get('JWT');
     if (JWT.length > 0) {
       fetchConfig.headers = {
-        Authorization: JWT
+        Authorization: JWT,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       };
     }
 
     return new Promise((resolve, reject) => {
+      console.log('fetchConfig', fetchConfig);
       fetch(this.baseUrl + url, fetchConfig).then((res) => {
         if (!res.ok) {
           console.log('http fail: ', res);
@@ -26,6 +29,7 @@ export default class Api {
         }
         return res.json();
       }).then((jsonizedRes) => {
+        console.log('res', jsonizedRes);
         resolve(jsonizedRes);
       }).catch((err) => {
         console.error(`REQUEST FAIL ${this.baseUrl + url}`, err);
@@ -43,6 +47,6 @@ export default class Api {
   }
 
   post(url, data) {
-    return this.call(url, { method: 'POST', body: data });
+    return this.call(url, { method: 'POST', body: JSON.stringify(data) });
   }
 }
