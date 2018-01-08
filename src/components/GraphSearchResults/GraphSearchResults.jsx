@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import Claim from 'src/components/Claim/Claim.jsx';
 import AddClaimForm from 'src/components/AddClaimForm/AddClaimForm.jsx';
+import DetailModalIcon from 'src/components/_Icons/DetailModal.svg.jsx';
 
 /**
  * The Argument Premises
@@ -54,6 +55,12 @@ export default class GraphSearchResults extends React.Component {
                 this.resultClickHandler(this.props.store.results[r]);
               }}
             >🡺</button>
+            <button
+              className="button--secondary"
+              onClick={() => {
+                this.resultClickHandler(this.props.store.results[r]);
+              }}
+            ><DetailModalIcon /></button>
           </Claim>
         </div>
       );
