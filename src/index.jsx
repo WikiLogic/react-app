@@ -14,7 +14,7 @@ import RootStore from 'src/stores/root.js';
 
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
-import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
+// import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
 import UserProfileScene from './scenes/UserProfileScene.jsx';
 import LegalScene from './scenes/LegalScene.jsx';
@@ -24,6 +24,7 @@ import ApiDev from './scenes/ApiDev.jsx';
 import SearchResults from './components/SearchResults/SearchResults.jsx';
 import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import AuthModal from 'src/components/Modals/AuthModal.jsx';
+import ClaimDetailModal from 'src/components/Modals/ClaimDetailModal.jsx';
 
 const history = createHashHistory();
 
@@ -100,7 +101,7 @@ class Wikilogic extends React.Component {
             }}
           />
 
-          <Route
+          {/* <Route
             path="/claim/:claimId"
             exact
             render={(routeProps) => {
@@ -112,7 +113,7 @@ class Wikilogic extends React.Component {
                 />
               );
             }}
-          />
+          /> */}
 
           <Route
             path="/profile"
@@ -206,6 +207,12 @@ class Wikilogic extends React.Component {
         <AuthModal
           userStore={this.props.RootStore.UserStore}
           ctrl={this.props.RootStore.UserStore.authModal}
+          onClose={() => {
+            this.props.RootStore.UserStore.authModal = false;
+          }}
+        />
+        <ClaimDetailModal
+          modalCtrl={this.props.RootStore.claimDetailModal}
           onClose={() => {
             this.props.RootStore.UserStore.authModal = false;
           }}
