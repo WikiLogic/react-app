@@ -14,15 +14,12 @@ import RootStore from 'src/stores/root.js';
 
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
-// import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
 import UserProfileScene from './scenes/UserProfileScene.jsx';
 import LegalScene from './scenes/LegalScene.jsx';
 import ApiDev from './scenes/ApiDev.jsx';
 
 // React components
-import SearchResults from './components/SearchResults/SearchResults.jsx';
-import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import AuthModal from 'src/components/Modals/AuthModal.jsx';
 import ClaimDetailModal from 'src/components/Modals/ClaimDetailModal.jsx';
 
@@ -39,20 +36,11 @@ class Wikilogic extends React.Component {
     super(props);
 
     this.state = {
-      searchResults: [],
-      focused_claim: {}
     };
-
-    this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
   }
 
   componentDidMount() {
     window.wl.user.getUserData();
-  }
-
-  setNewClaimFocus(claim) {
-    //TODO: mobxify this
-    console.log('hihihih ehh - todo here!', claim);
   }
 
   render() {
@@ -101,20 +89,6 @@ class Wikilogic extends React.Component {
             }}
           />
 
-          {/* <Route
-            path="/claim/:claimId"
-            exact
-            render={(routeProps) => {
-              return (
-                <ClaimDetailScene
-                  routeProps={routeProps}
-                  history={history}
-                  isLoggedIn={this.props.RootStore.UserStore.isLoggedIn}
-                />
-              );
-            }}
-          /> */}
-
           <Route
             path="/profile"
             exact
@@ -149,31 +123,6 @@ class Wikilogic extends React.Component {
             render={() => {
               return (
                 <ApiDev />
-              );
-            }}
-          />
-
-          {/* Edit claim page ... not sure if this should really be a thing */}
-          <Route
-            path="/edit-claim"
-            exact
-            render={() => {
-              return (
-                <div className="sidebar-layout">
-                  <div className="sidebar-layout__main">
-
-                    <EditClaimForm />
-
-                  </div>
-                  <div className="sidebar-layout__side">
-
-                    <SearchResults
-                      searchResults={this.state.searchResults}
-                      resultClickHandler={this.setNewClaimFocus}
-                    />
-
-                  </div>
-                </div>
               );
             }}
           />

@@ -49,18 +49,20 @@ export default class GraphSearchResults extends React.Component {
       premisesMarkup.push(
         <div key={this.props.store.results[r]._id} className="graph-search-results__result">
           <Claim claim={this.props.store.results[r]} isSelected={false}>
-            <button
-              className="button--secondary"
-              onClick={() => {
-                this.resultClickHandler(this.props.store.results[r]);
-              }}
-            >🡺</button>
-            <button
-              className="button--secondary"
-              onClick={() => {
-                this.resultClickHandler(this.props.store.results[r]);
-              }}
-            ><DetailModalIcon /></button>
+            <div>
+              <button
+                className="button--secondary"
+                onClick={() => {
+                  this.resultClickHandler(this.props.store.results[r]);
+                }}
+              >🡺</button>
+              <button
+                className="button--secondary"
+                onClick={() => {
+                  window.wl.claimDetailModal.openClaim(this.props.store.results[r]);
+                }}
+              ><DetailModalIcon /></button>
+            </div>
           </Claim>
         </div>
       );

@@ -1,7 +1,7 @@
-import { observable, action } from 'mobx';
+import { observable } from 'mobx';
 // import Api from '../utils/api.js';
 
-class Claim {
+export default class Claim {
   @observable text;
 
   //0. or % ? 0. would give us more flexability - the ability to extend "accuracy"
@@ -11,6 +11,7 @@ class Claim {
   @observable labels;
   @observable _key;
   @observable _id;
+  @observable args;
 
   constructor(claim) {
     this.text = claim.text;
@@ -18,14 +19,7 @@ class Claim {
     this.labels = claim.labels;
     this._key = claim._key;
     this._id = claim._id;
-  }
-}
-
-export default class ClaimList {
-  @observable claims = [];
-
-  @action
-  addClaim(claim) {
-    this.claims.push(new Claim(claim));
+    this.arguments = claim.args || [];
+    console.log('TODO: check claim with arguments:', this);
   }
 }

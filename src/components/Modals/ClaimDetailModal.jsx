@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 import Modal from './Modal.jsx';
 import ClaimDetail from 'src/components/Claim/Detail.jsx';
 
@@ -8,6 +9,7 @@ import ClaimDetail from 'src/components/Claim/Detail.jsx';
  * Or at least handing up responsibility for controlling it back up to the graph, but handling the ui / interaction events
  */
 
+@observer
 export default class ClaimDetailModal extends React.Component {
   static propTypes = {
     modalCtrl: PropTypes.object.isRequired,
@@ -21,6 +23,9 @@ export default class ClaimDetailModal extends React.Component {
   }
 
   render() {
+    if (!this.props.modalCtrl.claim) {
+      return null;
+    }
 
     return (
       <Modal

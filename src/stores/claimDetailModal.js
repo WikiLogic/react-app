@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 // import Api from 'src/utils/api.js';
 //Holds onto all the searches & their settings
@@ -12,5 +12,11 @@ export default class ClaimDetailModal {
   constructor() {
     this.isOpen = true;
     this.claim = null;
+  }
+
+  @action
+  openClaim(claim) {
+    this.claim = claim;
+    this.isOpen = true;
   }
 }

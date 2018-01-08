@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import InputRange from '../_Atoms/InputRange.jsx';
 import Errors from 'src/components/Alerts/Errors.jsx';
-import Claim from 'src/components/Claim/Claim.jsx';
+
 /**
  * Creating a new claim from scratch
  */

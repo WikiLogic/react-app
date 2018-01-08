@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 import API from 'src/API/api.js';
 import Argument from 'src/components/Argument/Argument.jsx';
 import StatusIndicator from 'src/components/StatusIndicator/StatusIndicator.jsx';
@@ -9,6 +10,7 @@ import ArgumentBuilder from 'src/components/ArgumentBuilder/ArgumentBuilder.jsx'
  * The claim detail view
  */
 
+@observer
 export default class ClaimDetail extends React.Component {
   static propTypes = {
     claimStore: PropTypes.object.isRequired,
@@ -53,6 +55,7 @@ export default class ClaimDetail extends React.Component {
 
   renderArguments() {
     let argumentMarkup = <div>No arguments</div>;
+    console.log('this.props.claimStore', this.props.claimStore);
     if (this.props.claimStore.arguments.length > 0) {
       argumentMarkup = [];
       for (let a = 0; a < this.props.claimStore.arguments.length; a++) {

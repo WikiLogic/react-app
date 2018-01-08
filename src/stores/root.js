@@ -21,5 +21,6 @@ export default class Root {
     this.GraphSceneStore = new GraphSceneStore();
     // Find out if the user is logged in
     this.claimDetailModal = new ClaimDetailModal();
+    window.wl.claimDetailModal = this.claimDetailModal;
   }
 }
