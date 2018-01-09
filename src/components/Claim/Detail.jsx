@@ -54,8 +54,20 @@ export default class ClaimDetail extends React.Component {
   }
 
   renderArguments() {
-    let argumentMarkup = <div>No arguments</div>;
-    console.log('this.props.claimStore', this.props.claimStore);
+    let argumentMarkup = <div>No arguments yet</div>;
+    if (!window.wl.user.isLoggedIn) {
+      argumentMarkup = (
+        <div className="text-center">No arguments yet, <br />
+          <button
+            className="a"
+            onClick={() => { window.wl.user.authModal = 'Login'; }}
+          >Login</button> or <button
+            className="a"
+            onClick={() => { window.wl.user.authModal = 'Signup'; }}
+          >Signup</button> to add your own arguments.
+        </div>
+      );
+    }
     if (this.props.claimStore.arguments.length > 0) {
       argumentMarkup = [];
       for (let a = 0; a < this.props.claimStore.arguments.length; a++) {
@@ -84,7 +96,7 @@ export default class ClaimDetail extends React.Component {
           </div>
         </div>
 
-        {(this.props.isLoggedIn &&
+        {(window.wl.user.isLoggedIn &&
           <div className="bg-pattern-checkered">
             <div className="max-width-wrap">
 

@@ -157,15 +157,16 @@ class Wikilogic extends React.Component {
           ...
         </div>
 
+        <ClaimDetailModal
+          modalCtrl={this.props.RootStore.claimDetailModal}
+        />
+
         <AuthModal
           userStore={this.props.RootStore.UserStore}
           ctrl={this.props.RootStore.UserStore.authModal}
           onClose={() => {
             this.props.RootStore.UserStore.authModal = false;
           }}
-        />
-        <ClaimDetailModal
-          modalCtrl={this.props.RootStore.claimDetailModal}
         />
       </div>
     );

@@ -1790,6 +1790,9 @@ styles are set in sass alongside the components. (in the components folder).
 .text-align-left, .text-left {
   text-align: left !important; }
 
+.text-center {
+  text-align: center !important; }
+
 .text-right {
   text-align: right !important; }
 
