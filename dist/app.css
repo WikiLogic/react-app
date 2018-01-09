@@ -577,6 +577,23 @@ input[type='button'],
       input[type='button'].button--secondary[disabled] text,
       .button.button--secondary[disabled] text {
         fill: white; }
+  button.button--icon,
+  input[type='submit'].button--icon,
+  input[type='button'].button--icon,
+  .button.button--icon {
+    padding: 3px 5px 4px;
+    border: none;
+    fill: white; }
+  button.button--icon.button--secondary,
+  input[type='submit'].button--icon.button--secondary,
+  input[type='button'].button--icon.button--secondary,
+  .button.button--icon.button--secondary {
+    fill: #111F2E; }
+    button.button--icon.button--secondary:hover,
+    input[type='submit'].button--icon.button--secondary:hover,
+    input[type='button'].button--icon.button--secondary:hover,
+    .button.button--icon.button--secondary:hover {
+      fill: white; }
 
 pre {
   font-family: monospace, monospace;
@@ -1794,6 +1811,9 @@ styles are set in sass alongside the components. (in the components folder).
 .pad {
   margin: 1rem 1rem -1px 0;
   padding: 1px 1px 0 0; }
+  .pad--half {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem; }
 
 .hi {
   color: black;

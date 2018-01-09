@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import Claim from 'src/components/Claim/Claim.jsx';
 import AddClaimForm from 'src/components/AddClaimForm/AddClaimForm.jsx';
 import DetailModalIcon from 'src/components/_Icons/DetailModal.svg.jsx';
+import GraphIcon from 'src/components/_Icons/Graph.svg.jsx';
 
 /**
  * The Argument Premises
@@ -51,17 +52,18 @@ export default class GraphSearchResults extends React.Component {
           <Claim claim={this.props.store.results[r]} isSelected={false}>
             <div>
               <button
-                className="button--secondary"
-                onClick={() => {
-                  this.resultClickHandler(this.props.store.results[r]);
-                }}
-              >🡺</button>
-              <button
-                className="button--secondary"
+                className="xbutton--secondary button--icon"
                 onClick={() => {
                   window.wl.claimDetailModal.openClaim(this.props.store.results[r]);
                 }}
               ><DetailModalIcon /></button>
+              <span className="pad pad--half" />
+              <button
+                className="xbutton--secondary button--icon"
+                onClick={() => {
+                  this.resultClickHandler(this.props.store.results[r]);
+                }}
+              ><GraphIcon /></button>
             </div>
           </Claim>
         </div>
