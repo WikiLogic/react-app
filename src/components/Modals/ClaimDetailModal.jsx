@@ -35,7 +35,6 @@ export default class ClaimDetailModal extends React.Component {
       >
         <ClaimDetail
           claimStore={this.props.modalCtrl.claim}
-          isLoggedIn
         />
       </Modal>
     );

@@ -10,7 +10,7 @@ export default class ClaimDetailModal {
   @observable claim;
 
   constructor() {
-    this.isOpen = true;
+    this.isOpen = false;
     this.claim = null;
   }
 

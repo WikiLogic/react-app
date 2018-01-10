@@ -19981,8 +19981,7 @@ var ClaimDetail = (0, _mobxReact.observer)(_class = (_temp = _class2 = function 
 
   return ClaimDetail;
 }(_react2.default.Component), _class2.propTypes = {
-  claimStore: _propTypes2.default.object.isRequired,
-  isLoggedIn: _propTypes2.default.bool.isRequired
+  claimStore: _propTypes2.default.object.isRequired
 }, _temp)) || _class;
 
 exports.default = ClaimDetail;
@@ -20934,8 +20933,7 @@ var ClaimDetailModal = (0, _mobxReact.observer)(_class = (_temp = _class2 = func
           classModifier: 'modal--scroller'
         },
         _react2.default.createElement(_Detail2.default, {
-          claimStore: this.props.modalCtrl.claim,
-          isLoggedIn: true
+          claimStore: this.props.modalCtrl.claim
         })
       );
     }
@@ -23384,7 +23382,7 @@ var ClaimDetailModal = (_class = function () {
 
     _initDefineProp(this, 'claim', _descriptor2, this);
 
-    this.isOpen = true;
+    this.isOpen = false;
     this.claim = null;
   }
 

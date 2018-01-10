@@ -13,8 +13,7 @@ import ArgumentBuilder from 'src/components/ArgumentBuilder/ArgumentBuilder.jsx'
 @observer
 export default class ClaimDetail extends React.Component {
   static propTypes = {
-    claimStore: PropTypes.object.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired
+    claimStore: PropTypes.object.isRequired
   };
 
   constructor(props) {
