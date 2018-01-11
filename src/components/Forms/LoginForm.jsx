@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import LoadingButton from 'src/components/Loader/LoadingButton.jsx';
+import Errors from 'src/components/Alerts/Errors.jsx';
 
 /**
  * Logging in!
@@ -24,10 +25,16 @@ export default class LoginForm extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.props.userStore.logIn();
+    if (!this.props.userStore.isLoggingIn) {
+      this.props.userStore.logIn();
+    }
   }
 
   render() {
+    let buttonText = 'Login';
+    if (this.props.userStore.isLoggedIn) {
+      buttonText = 'Success!';
+    }
     return (
       <form>
 
@@ -53,9 +60,16 @@ export default class LoginForm extends React.Component {
 
         <div className="pad" />
 
+        { (this.props.userStore.errors.length > 0) &&
+          <div>
+            <Errors errors={this.props.userStore.errors} />
+            <div className="pad" />
+          </div>
+        }
+
         <LoadingButton
           type="submit"
-          value={this.props.userStore.loginResponceMessage}
+          value={buttonText}
           isLoading={this.props.userStore.isLoggingIn}
           onClick={this.handleFormSubmit}
         />

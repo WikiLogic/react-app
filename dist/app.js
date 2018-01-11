@@ -20180,6 +20180,10 @@ var _LoadingButton = __webpack_require__(78);
 
 var _LoadingButton2 = _interopRequireDefault(_LoadingButton);
 
+var _Errors = __webpack_require__(77);
+
+var _Errors2 = _interopRequireDefault(_Errors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20210,13 +20214,19 @@ var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_
     key: 'handleFormSubmit',
     value: function handleFormSubmit(event) {
       event.preventDefault();
-      this.props.userStore.logIn();
+      if (!this.props.userStore.isLoggingIn) {
+        this.props.userStore.logIn();
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
+      var buttonText = 'Login';
+      if (this.props.userStore.isLoggedIn) {
+        buttonText = 'Success!';
+      }
       return _react2.default.createElement(
         'form',
         null,
@@ -20250,9 +20260,15 @@ var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_
           }
         }),
         _react2.default.createElement('div', { className: 'pad' }),
+        this.props.userStore.errors.length > 0 && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_Errors2.default, { errors: this.props.userStore.errors }),
+          _react2.default.createElement('div', { className: 'pad' })
+        ),
         _react2.default.createElement(_LoadingButton2.default, {
           type: 'submit',
-          value: this.props.userStore.loginResponceMessage,
+          value: buttonText,
           isLoading: this.props.userStore.isLoggingIn,
           onClick: this.handleFormSubmit
         })
@@ -20297,6 +20313,10 @@ var _LoadingButton = __webpack_require__(78);
 
 var _LoadingButton2 = _interopRequireDefault(_LoadingButton);
 
+var _Errors = __webpack_require__(77);
+
+var _Errors2 = _interopRequireDefault(_Errors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20340,6 +20360,10 @@ var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_
     value: function render() {
       var _this2 = this;
 
+      var buttonText = 'Signup';
+      if (this.props.userStore.isLoggedIn) {
+        buttonText = 'Success!';
+      }
       return _react2.default.createElement(
         'form',
         null,
@@ -20388,9 +20412,15 @@ var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_
           }
         }),
         _react2.default.createElement('div', { className: 'pad' }),
+        this.props.userStore.errors.length > 0 && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_Errors2.default, { errors: this.props.userStore.errors }),
+          _react2.default.createElement('div', { className: 'pad' })
+        ),
         _react2.default.createElement(_LoadingButton2.default, {
           type: 'submit',
-          value: this.props.userStore.signupResponceMessage,
+          value: buttonText,
           isLoading: this.props.userStore.isLoggingIn,
           onClick: this.handleFormSubmit
         })
@@ -24441,7 +24471,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
 
 var _mobx = __webpack_require__(10);
 
@@ -24508,28 +24538,25 @@ var User = (_class = function () {
 
     _initDefineProp(this, 'isLoggingIn', _descriptor2, this);
 
-    _initDefineProp(this, 'loginResponceMessage', _descriptor3, this);
+    _initDefineProp(this, 'errors', _descriptor3, this);
 
-    _initDefineProp(this, 'signupResponceMessage', _descriptor4, this);
+    _initDefineProp(this, 'history', _descriptor4, this);
 
-    _initDefineProp(this, 'history', _descriptor5, this);
+    _initDefineProp(this, 'JWT', _descriptor5, this);
 
-    _initDefineProp(this, 'JWT', _descriptor6, this);
+    _initDefineProp(this, 'username', _descriptor6, this);
 
-    _initDefineProp(this, 'username', _descriptor7, this);
+    _initDefineProp(this, 'password', _descriptor7, this);
 
-    _initDefineProp(this, 'password', _descriptor8, this);
+    _initDefineProp(this, 'email', _descriptor8, this);
 
-    _initDefineProp(this, 'email', _descriptor9, this);
+    _initDefineProp(this, 'signUpDate', _descriptor9, this);
 
-    _initDefineProp(this, 'signUpDate', _descriptor10, this);
-
-    _initDefineProp(this, 'authModal', _descriptor11, this);
+    _initDefineProp(this, 'authModal', _descriptor10, this);
 
     this.isLoggedIn = false;
     this.isLoggingIn = false;
-    this.loginResponceMessage = 'Login';
-    this.signupResponceMessage = 'Signup!';
+    this.errors = [];
     this.history = [];
     this.username = '';
     this.password = '';
@@ -24569,21 +24596,24 @@ var User = (_class = function () {
         _this.isLoggingIn = false;
         if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
           if (res.errors.length > 0) {
-            _this.loginResponceMessage = res.errors[0].title;
-            _this.isLoggedIn = true;
+            _this.errors = res.errors;
           }
         } else {
           _this.JWT = res.data.token;
           _this.isLoggedIn = true;
-          _this.loginResponceMessage = 'Success!';
-          Cookies.set('JWT', 'JWT ' + res.data.token);
           _this.username = res.data.user.username;
           _this.email = res.data.user.email;
           _this.signUpDate = res.data.user.signUpDate;
+          Cookies.set('JWT', 'JWT ' + res.data.token);
+          _this.errors = [];
+          //wait a few then close the modal
+          setTimeout(function () {
+            _this.authModal = false;
+          }, 1500);
         }
       }).catch(function (err) {
         _this.isLoggingIn = false;
-        _this.loginResponceMessage = 'login failed :(';
+        _this.errors = [{ title: 'Whoa, HTTP error - check the log.' }];
         console.error('user log in error: ', err);
       });
     }
@@ -24611,18 +24641,27 @@ var User = (_class = function () {
         })
       }).then(Formatter.apiResponceToJSON).then(function (res) {
         console.log('res', res);
-        _this2.JWT = res.data.token;
-        _this2.isLoggedIn = true;
         _this2.isLoggingIn = false;
-        _this2.signupResponceMessage = 'Success!';
-        Cookies.set('JWT', 'JWT ' + res.data.token);
-        _this2.username = res.data.user.username;
-        _this2.email = res.data.user.email;
-        _this2.signUpDate = res.data.user.signUpDate;
+        if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
+          if (res.errors.length > 0) {
+            _this2.errors = res.errors;
+          }
+        } else {
+          _this2.JWT = res.data.token;
+          _this2.isLoggedIn = true;
+          Cookies.set('JWT', 'JWT ' + res.data.token);
+          _this2.username = res.data.user.username;
+          _this2.email = res.data.user.email;
+          _this2.signUpDate = res.data.user.signUpDate;
+          _this2.errors = [];
+          setTimeout(function () {
+            _this2.authModal = false;
+          }, 1500);
+        }
       }).catch(function (err) {
         console.error('User sign up error: ', err);
+        _this2.errors = [{ title: 'Whoa, HTTP error - check the log.' }];
         _this2.isLoggingIn = false;
-        _this2.signupResponceMessage = 'Sign up failed :(';
       });
     }
   }, {
@@ -24655,31 +24694,28 @@ var User = (_class = function () {
 }), _descriptor2 = _applyDecoratedDescriptor(_class.prototype, 'isLoggingIn', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'loginResponceMessage', [_mobx.observable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'errors', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'signupResponceMessage', [_mobx.observable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'history', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, 'history', [_mobx.observable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class.prototype, 'JWT', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, 'JWT', [_mobx.observable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class.prototype, 'username', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, 'username', [_mobx.observable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class.prototype, 'password', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'password', [_mobx.observable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class.prototype, 'email', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, 'email', [_mobx.observable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
   enumerable: true,
   initializer: null
-}), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'signUpDate', [_mobx.observable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class.prototype, 'authModal', [_mobx.observable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class.prototype, 'authModal', [_mobx.observable], {
   enumerable: true,
   initializer: null
 }), _applyDecoratedDescriptor(_class.prototype, 'openAuthModal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'openAuthModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'closeAuthModal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'closeAuthModal'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logIn', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logIn'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'logOut', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'logOut'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'signup', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'signup'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getUserData', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'getUserData'), _class.prototype)), _class);
