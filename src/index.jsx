@@ -14,16 +14,14 @@ import RootStore from 'src/stores/root.js';
 
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
-import ClaimDetailScene from './scenes/ClaimDetailScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
 import UserProfileScene from './scenes/UserProfileScene.jsx';
 import LegalScene from './scenes/LegalScene.jsx';
 import ApiDev from './scenes/ApiDev.jsx';
 
 // React components
-import SearchResults from './components/SearchResults/SearchResults.jsx';
-import EditClaimForm from './components/EditClaimForm/EditClaimForm.jsx';
 import AuthModal from 'src/components/Modals/AuthModal.jsx';
+import ClaimDetailModal from 'src/components/Modals/ClaimDetailModal.jsx';
 
 const history = createHashHistory();
 
@@ -38,25 +36,20 @@ class Wikilogic extends React.Component {
     super(props);
 
     this.state = {
-      searchResults: [],
-      focused_claim: {}
     };
-
-    this.setNewClaimFocus = this.setNewClaimFocus.bind(this);
   }
 
   componentDidMount() {
     window.wl.user.getUserData();
   }
 
-  setNewClaimFocus(claim) {
-    //TODO: mobxify this
-    console.log('hihihih ehh - todo here!', claim);
-  }
-
   render() {
+    let noScrollClass = '';
+    if (this.props.RootStore.claimDetailModal.isOpen) {
+      noScrollClass = 'main--no-scroll';
+    }
     return (
-      <div className="main">
+      <div className={`main ${noScrollClass}`}>
         <div className="main__header">
 
           <header className="header">
@@ -101,20 +94,6 @@ class Wikilogic extends React.Component {
           />
 
           <Route
-            path="/claim/:claimId"
-            exact
-            render={(routeProps) => {
-              return (
-                <ClaimDetailScene
-                  routeProps={routeProps}
-                  history={history}
-                  isLoggedIn={this.props.RootStore.UserStore.isLoggedIn}
-                />
-              );
-            }}
-          />
-
-          <Route
             path="/profile"
             exact
             render={() => {
@@ -152,31 +131,6 @@ class Wikilogic extends React.Component {
             }}
           />
 
-          {/* Edit claim page ... not sure if this should really be a thing */}
-          <Route
-            path="/edit-claim"
-            exact
-            render={() => {
-              return (
-                <div className="sidebar-layout">
-                  <div className="sidebar-layout__main">
-
-                    <EditClaimForm />
-
-                  </div>
-                  <div className="sidebar-layout__side">
-
-                    <SearchResults
-                      searchResults={this.state.searchResults}
-                      resultClickHandler={this.setNewClaimFocus}
-                    />
-
-                  </div>
-                </div>
-              );
-            }}
-          />
-
           <Route path="/styleguide" exact component={StyleguideScene} />
 
         </main>
@@ -202,6 +156,10 @@ class Wikilogic extends React.Component {
         <div className="main__status-bar">
           ...
         </div>
+
+        <ClaimDetailModal
+          modalCtrl={this.props.RootStore.claimDetailModal}
+        />
 
         <AuthModal
           userStore={this.props.RootStore.UserStore}

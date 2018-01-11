@@ -8,8 +8,7 @@ const Cookies = window.wl.utils.cookies;
 export default class User {
   @observable isLoggedIn;
   @observable isLoggingIn;
-  @observable loginResponceMessage;
-  @observable signupResponceMessage;
+  @observable errors;
   @observable history;
   @observable JWT;
   @observable username;
@@ -21,8 +20,7 @@ export default class User {
   constructor() {
     this.isLoggedIn = false;
     this.isLoggingIn = false;
-    this.loginResponceMessage = 'Login';
-    this.signupResponceMessage = 'Signup!';
+    this.errors = [];
     this.history = [];
     this.username = '';
     this.password = '';
@@ -61,22 +59,25 @@ export default class User {
         this.isLoggingIn = false;
         if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
           if (res.errors.length > 0) {
-            this.loginResponceMessage = res.errors[0].title;
-            this.isLoggedIn = true;
+            this.errors = res.errors;
           }
         } else {
           this.JWT = res.data.token;
           this.isLoggedIn = true;
-          this.loginResponceMessage = 'Success!';
-          Cookies.set('JWT', `JWT ${res.data.token}`);
           this.username = res.data.user.username;
           this.email = res.data.user.email;
           this.signUpDate = res.data.user.signUpDate;
+          Cookies.set('JWT', `JWT ${res.data.token}`);
+          this.errors = [];
+          //wait a few then close the modal
+          setTimeout(() => {
+            this.authModal = false;
+          }, 1500);
         }
       })
       .catch((err) => {
         this.isLoggingIn = false;
-        this.loginResponceMessage = 'login failed :(';
+        this.errors = [{ title: 'Whoa, HTTP error - check the log.' }];
         console.error('user log in error: ', err);
       });
   }
@@ -104,19 +105,28 @@ export default class User {
       .then(Formatter.apiResponceToJSON)
       .then((res) => {
         console.log('res', res);
-        this.JWT = res.data.token;
-        this.isLoggedIn = true;
         this.isLoggingIn = false;
-        this.signupResponceMessage = 'Success!';
-        Cookies.set('JWT', `JWT ${res.data.token}`);
-        this.username = res.data.user.username;
-        this.email = res.data.user.email;
-        this.signUpDate = res.data.user.signUpDate;
+        if (Object.prototype.hasOwnProperty.call(res, 'errors')) {
+          if (res.errors.length > 0) {
+            this.errors = res.errors;
+          }
+        } else {
+          this.JWT = res.data.token;
+          this.isLoggedIn = true;
+          Cookies.set('JWT', `JWT ${res.data.token}`);
+          this.username = res.data.user.username;
+          this.email = res.data.user.email;
+          this.signUpDate = res.data.user.signUpDate;
+          this.errors = [];
+          setTimeout(() => {
+            this.authModal = false;
+          }, 1500);
+        }
       })
       .catch((err) => {
         console.error('User sign up error: ', err);
+        this.errors = [{ title: 'Whoa, HTTP error - check the log.' }];
         this.isLoggingIn = false;
-        this.signupResponceMessage = 'Sign up failed :(';
       });
   }
 

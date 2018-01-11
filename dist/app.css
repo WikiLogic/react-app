@@ -577,6 +577,23 @@ input[type='button'],
       input[type='button'].button--secondary[disabled] text,
       .button.button--secondary[disabled] text {
         fill: white; }
+  button.button--icon,
+  input[type='submit'].button--icon,
+  input[type='button'].button--icon,
+  .button.button--icon {
+    padding: 3px 5px 4px;
+    border: none;
+    fill: white; }
+  button.button--icon.button--secondary,
+  input[type='submit'].button--icon.button--secondary,
+  input[type='button'].button--icon.button--secondary,
+  .button.button--icon.button--secondary {
+    fill: #111F2E; }
+    button.button--icon.button--secondary:hover,
+    input[type='submit'].button--icon.button--secondary:hover,
+    input[type='button'].button--icon.button--secondary:hover,
+    .button.button--icon.button--secondary:hover {
+      fill: white; }
 
 pre {
   font-family: monospace, monospace;
@@ -900,6 +917,9 @@ the eeeeee footer
   .main__status-bar {
     background-color: #111F2E;
     transition: height 0.2s ease; }
+  .main--no-scroll {
+    height: 100vh;
+    overflow: hidden; }
 
 /*
 COMPONENTS
@@ -1198,6 +1218,39 @@ styles are set in sass alongside the components. (in the components folder).
   100% {
     opacity: 0; } }
 
+.claim-detail {
+  width: 100%; }
+  .claim-detail + .claim-detail {
+    margin-top: 1rem; }
+  .claim-detail__header {
+    width: 100%;
+    margin-bottom: 1rem;
+    overflow: hidden; }
+  .claim-detail__status {
+    display: block;
+    float: left;
+    margin-right: 10px; }
+  .claim-detail__text {
+    font-size: 1.75rem;
+    position: relative;
+    top: 4px; }
+  .claim-detail__arg-buttons {
+    padding-top: 1rem;
+    padding-bottom: 1rem; }
+  .claim-detail__arg-builder {
+    padding-top: 1rem;
+    padding-bottom: 1rem; }
+  .claim-detail__arguments {
+    padding: 1rem;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; }
+    .claim-detail__arguments .argument {
+      width: 21%;
+      min-width: 290px;
+      margin: 0.5rem; }
+
 .modal {
   position: fixed;
   z-index: 5;
@@ -1225,6 +1278,13 @@ styles are set in sass alongside the components. (in the components folder).
     margin: 0 1rem 0 0; }
   .modal__content {
     padding: 1rem; }
+  .modal--scroller .modal__body {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    overflow: auto; }
 
 .SearchForm {
   display: flex;
@@ -1723,45 +1783,15 @@ styles are set in sass alongside the components. (in the components folder).
     cursor: move;
     user-select: none; }
 
-.claim-detail {
-  width: 100%; }
-  .claim-detail + .claim-detail {
-    margin-top: 1rem; }
-  .claim-detail__header {
-    width: 100%;
-    margin-bottom: 1rem;
-    overflow: hidden; }
-  .claim-detail__status {
-    display: block;
-    float: left;
-    margin-right: 10px; }
-  .claim-detail__text {
-    font-size: 1.75rem;
-    position: relative;
-    top: 4px; }
-  .claim-detail__arg-buttons {
-    padding-top: 1rem;
-    padding-bottom: 1rem; }
-  .claim-detail__arg-builder {
-    padding-top: 1rem;
-    padding-bottom: 1rem; }
-  .claim-detail__arguments {
-    padding: 1rem;
-    overflow-x: auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; }
-    .claim-detail__arguments .argument {
-      width: 21%;
-      min-width: 290px;
-      margin: 0.5rem; }
-
 .grid-square {
   fill: transparent; }
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left {
   text-align: left !important; }
+
+.text-center {
+  text-align: center !important; }
 
 .text-right {
   text-align: right !important; }
@@ -1784,6 +1814,9 @@ styles are set in sass alongside the components. (in the components folder).
 .pad {
   margin: 1rem 1rem -1px 0;
   padding: 1px 1px 0 0; }
+  .pad--half {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem; }
 
 .hi {
   color: black;

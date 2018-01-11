@@ -98,4 +98,17 @@ input[type='button'],
 			text { fill: white; }
 		}
 	}
+
+	&.button--icon {
+		padding: 3px 5px 4px;
+		border: none;
+		fill: white;
+	}
+
+	&.button--icon.button--secondary {
+		fill: $blue-dark;
+		&:hover {
+			fill: white;
+		}
+	}
 }

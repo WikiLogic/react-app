@@ -1,6 +1,7 @@
 import { observable, action } from 'mobx';
 import Api from 'src/utils/api.js';
 import NewClaimStore from 'src/stores/newClaim.js';
+import Claim from 'src/stores/claim.js';
 //Holds onto all the searches & their settings
 
 const claimApi = new Api('/api/v1/claims');
@@ -21,7 +22,10 @@ export default class Search {
     this.NewClaimStore.creationHandler = ((claim) => { this.addClaimsToResults(claim); });
 
     claimApi.get('/').then((res) => {
-      this.results = res.data.results;
+      this.results = [];
+      res.data.results.forEach((claim) => {
+        this.results.push(new Claim(claim));
+      });
     }).catch((err) => {
       console.error('Plain claim get error: ', err);
     });
@@ -49,6 +53,6 @@ export default class Search {
 
   @action
   addClaimsToResults(claim) {
-    this.results.push(claim);
+    this.results.push(new Claim(claim));
   }
 }

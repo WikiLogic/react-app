@@ -27,4 +27,9 @@ the eeeeee footer
     background-color: $header-background;
     transition: height 0.2s ease;
   }
+
+  &--no-scroll {
+    height: 100vh;
+    overflow: hidden;
+  }
 }

@@ -31,6 +31,7 @@ styles are set in sass alongside the components. (in the components folder).
 
 /* UTILITIES - single responsability classes */
 .text-align-left, .text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
 .text-right { text-align: right !important; }
 
 .display-inline-block { display: inline-block; }
@@ -44,6 +45,11 @@ styles are set in sass alongside the components. (in the components folder).
 .pad { 
   margin: rem($pad) rem($pad) -1px 0; 
   padding: 1px 1px 0 0;
+
+  &--half {
+    margin-top: rem($pad / 2);
+    margin-right: rem($pad / 2);  
+  }
 }
 
 .hi {
