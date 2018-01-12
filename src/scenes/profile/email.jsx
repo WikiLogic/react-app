@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import ProfileForm from 'src/components/Forms/Profileform.jsx';
-import SidebarNav from 'src/components/Sidebar/Nav.jsx';
+import ProfileNav from './_profileNav.jsx';
 
 /**
  * The User profile & settings page
@@ -46,12 +45,7 @@ export default class UserProfileScene extends React.Component {
               <div className="sidebar-layout__side">
                 {window.wl.user.isLoggedIn &&
                   <div>
-                    <SidebarNav links={[
-                      { to: '/profile', text: 'Public profile' },
-                      { to: '/profile/account', text: 'Account details' },
-                      { to: '/profile/emails', text: 'Emails' }
-                    ]}
-                    />
+                    <ProfileNav />
                     <ProfileForm userStore={this.props.store} />
                   </div>
                 }

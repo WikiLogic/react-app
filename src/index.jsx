@@ -15,7 +15,7 @@ import RootStore from 'src/stores/root.js';
 // Scenes
 import GraphScene from './scenes/GraphScene.jsx';
 import StyleguideScene from './scenes/StyleguideScene.jsx';
-import UserProfileScene from './scenes/UserProfileScene.jsx';
+import UserProfileScene from './scenes/profile/_index.jsx';
 import LegalScene from './scenes/LegalScene.jsx';
 import ApiDev from './scenes/ApiDev.jsx';
 
@@ -95,7 +95,6 @@ class Wikilogic extends React.Component {
 
           <Route
             path="/profile"
-            exact
             render={() => {
               return <UserProfileScene store={this.props.RootStore.UserStore} />;
             }}
