@@ -5,12 +5,11 @@ import LoadingButton from 'src/components/Loader/LoadingButton.jsx';
 import Errors from 'src/components/Alerts/Errors.jsx';
 
 /**
- * Logging in!
- * The API uses JSON Web Tokens which we'll have to pass with every request
+ * Profile details - use to update them
  */
 
 @observer
-export default class LoginForm extends React.Component {
+export default class ProfileForm extends React.Component {
   static propTypes = {
     userStore: PropTypes.object.isRequired
   };
@@ -19,9 +18,7 @@ export default class LoginForm extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
-      username: '',
-      password: ''
+      buttonText: 'Update'
     };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -29,16 +26,25 @@ export default class LoginForm extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.props.userStore.signup(this.state.email, this.state.username, this.state.password);
+    this.props.userStore.updateUserData();
   }
 
   render() {
-    let buttonText = 'Signup';
-    if (this.props.userStore.isLoggedIn) {
-      buttonText = 'Success!';
-    }
     return (
       <form>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={this.props.userStore.username}
+          onChange={(event) => {
+            this.props.userStore.username = event.target.value;
+
+          }}
+        />
+
+        <div className="pad" />
 
         <label htmlFor="email">Email</label>
         <input
@@ -47,17 +53,6 @@ export default class LoginForm extends React.Component {
           name="email"
           value={this.props.userStore.email}
           onChange={(event) => { this.props.userStore.email = event.target.value; }}
-        />
-
-        <div className="pad" />
-
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={this.props.userStore.username}
-          onChange={(event) => { this.props.userStore.username = event.target.value; }}
         />
 
         <div className="pad" />
@@ -80,12 +75,14 @@ export default class LoginForm extends React.Component {
           </div>
         }
 
-        <LoadingButton
-          type="submit"
-          value={buttonText}
-          isLoading={this.props.userStore.isLoggingIn}
-          onClick={this.handleFormSubmit}
-        />
+        <div className="text-right">
+          <LoadingButton
+            type="submit"
+            value={this.state.buttonText}
+            isLoading={this.props.userStore.isUpdating}
+            onClick={this.handleFormSubmit}
+          />
+        </div>
 
       </form>
     );

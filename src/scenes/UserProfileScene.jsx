@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
+import ProfileForm from 'src/components/Forms/Profileform.jsx';
+import SidebarNav from 'src/components/Sidebar/Nav.jsx';
 
 /**
  * The User profile & settings page
@@ -38,15 +41,26 @@ export default class UserProfileScene extends React.Component {
         </div>
         <div className="page__body">
           <div className="max-width-wrap">
-            {window.wl.user.isLoggedIn &&
-              <div>
-                <p>Currently only the demo login is running, it has no profile data. Proper profiles will be coming!</p>
-                <ul>
-                  <li>Email: {this.props.store.email}</li>
-                  <li>Signup date: {this.props.store.signUpDate}</li>
-                </ul>
+            <div className="sidebar-layout">
+
+              <div className="sidebar-layout__side">
+                {window.wl.user.isLoggedIn &&
+                  <div>
+                    <SidebarNav links={[
+                      { to: '/profile', text: 'Public profile' },
+                      { to: '/profile/account', text: 'Account details' },
+                      { to: '/profile/emails', text: 'Emails' }
+                    ]}
+                    />
+                    <ProfileForm userStore={this.props.store} />
+                  </div>
+                }
               </div>
-            }
+              <div className="sidebar-layout__main">
+                Signup date: {this.props.store.signUpDate}
+
+              </div>
+            </div>
           </div>
         </div>
       </div>

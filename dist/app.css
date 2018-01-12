@@ -1304,6 +1304,15 @@ styles are set in sass alongside the components. (in the components folder).
   display: block;
   margin-bottom: 10px; }
 
+.sidebar-nav {
+  border: 1px solid #eeeeee;
+  border-radius: 2px;
+  padding: 1rem; }
+  .sidebar-nav a {
+    display: block; }
+    .sidebar-nav a + a {
+      margin-top: 0.5rem; }
+
 /* The status bar indicator
  * a bar between 1 and 100
  */

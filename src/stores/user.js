@@ -8,20 +8,20 @@ const Cookies = window.wl.utils.cookies;
 export default class User {
   @observable isLoggedIn;
   @observable isLoggingIn;
-  @observable errors;
-  @observable history;
-  @observable JWT;
+  @observable isUpdating;
   @observable username;
   @observable password;
   @observable email;
   @observable signUpDate;
+  @observable errors;
+  @observable JWT;
   @observable authModal;
 
   constructor() {
     this.isLoggedIn = false;
     this.isLoggingIn = false;
+    this.isUpdating = false;
     this.errors = [];
-    this.history = [];
     this.username = '';
     this.password = '';
     this.email = '';
@@ -147,5 +147,10 @@ export default class User {
       });
       //TODO try to get userdata with this JWT, if it works - we're logged in!
     }
+  }
+
+  @action
+  updateUserData(updates) {
+
   }
 }
