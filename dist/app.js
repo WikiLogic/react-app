@@ -774,47 +774,6 @@ module.exports = ReactDOMComponentTree;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-/**
- * Simple, lightweight module assisting with the detection and context of
- * Worker. Helps avoid circular dependencies and allows code to reason about
- * whether or not they are in a Worker, even if they never include the main
- * `ReactWorker` dependency.
- */
-var ExecutionEnvironment = {
-
-  canUseDOM: canUseDOM,
-
-  canUseWorkers: typeof Worker !== 'undefined',
-
-  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
-
-  canUseViewport: canUseDOM && !!window.screen,
-
-  isInWorker: !canUseDOM // For now, this is true - might change in the future.
-
-};
-
-module.exports = ExecutionEnvironment;
-
-/***/ }),
-/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1823,6 +1782,47 @@ if ((typeof __MOBX_DEVTOOLS_GLOBAL_HOOK__ === "undefined" ? "undefined" : _typeo
 
 
 
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+/**
+ * Simple, lightweight module assisting with the detection and context of
+ * Worker. Helps avoid circular dependencies and allows code to reason about
+ * whether or not they are in a Worker, even if they never include the main
+ * `ReactWorker` dependency.
+ */
+var ExecutionEnvironment = {
+
+  canUseDOM: canUseDOM,
+
+  canUseWorkers: typeof Worker !== 'undefined',
+
+  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
+
+  canUseViewport: canUseDOM && !!window.screen,
+
+  isInWorker: !canUseDOM // For now, this is true - might change in the future.
+
+};
+
+module.exports = ExecutionEnvironment;
 
 /***/ }),
 /* 10 */
@@ -8108,7 +8108,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRouterDom = __webpack_require__(46);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _StatusIndicator = __webpack_require__(50);
 
@@ -10228,7 +10228,7 @@ module.exports = escapeTextContentForBrowser;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var DOMNamespaces = __webpack_require__(58);
 
 var WHITESPACE_TEST = /^[ \r\n\t\f]/;
@@ -12278,7 +12278,7 @@ module.exports = getEventTarget;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var useHasFeature;
 if (ExecutionEnvironment.canUseDOM) {
@@ -16771,7 +16771,7 @@ module.exports = getHostComponentFromComposite;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var contentKey = null;
 
@@ -17128,7 +17128,7 @@ module.exports = isTextInputElement;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var escapeTextContentForBrowser = __webpack_require__(44);
 var setInnerHTML = __webpack_require__(45);
 
@@ -18648,7 +18648,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _createHashHistory = __webpack_require__(86);
 
@@ -18912,7 +18912,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _InputRange = __webpack_require__(82);
 
@@ -19808,7 +19808,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _api = __webpack_require__(36);
 
@@ -20173,7 +20173,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _LoadingButton = __webpack_require__(49);
 
@@ -20283,154 +20283,7 @@ var LoginForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_
 exports.default = LoginForm;
 
 /***/ }),
-/* 140 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _class, _class2, _temp;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(2);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _mobxReact = __webpack_require__(9);
-
-var _LoadingButton = __webpack_require__(49);
-
-var _LoadingButton2 = _interopRequireDefault(_LoadingButton);
-
-var _Errors = __webpack_require__(29);
-
-var _Errors2 = _interopRequireDefault(_Errors);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Profile details - use to update them
- */
-
-var ProfileForm = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
-  _inherits(ProfileForm, _React$Component);
-
-  function ProfileForm(props) {
-    _classCallCheck(this, ProfileForm);
-
-    var _this = _possibleConstructorReturn(this, (ProfileForm.__proto__ || Object.getPrototypeOf(ProfileForm)).call(this, props));
-
-    _this.state = {
-      buttonText: 'Update'
-    };
-
-    _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(ProfileForm, [{
-    key: 'handleFormSubmit',
-    value: function handleFormSubmit(event) {
-      event.preventDefault();
-      this.props.userStore.updateUserData();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'form',
-        null,
-        _react2.default.createElement(
-          'label',
-          { htmlFor: 'username' },
-          'Username'
-        ),
-        _react2.default.createElement('input', {
-          type: 'text',
-          id: 'username',
-          name: 'username',
-          value: this.props.userStore.username,
-          onChange: function onChange(event) {
-            _this2.props.userStore.username = event.target.value;
-          }
-        }),
-        _react2.default.createElement('div', { className: 'pad' }),
-        _react2.default.createElement(
-          'label',
-          { htmlFor: 'email' },
-          'Email'
-        ),
-        _react2.default.createElement('input', {
-          type: 'text',
-          id: 'email',
-          name: 'email',
-          value: this.props.userStore.email,
-          onChange: function onChange(event) {
-            _this2.props.userStore.email = event.target.value;
-          }
-        }),
-        _react2.default.createElement('div', { className: 'pad' }),
-        _react2.default.createElement(
-          'label',
-          { htmlFor: 'password' },
-          'Password'
-        ),
-        _react2.default.createElement('input', {
-          type: 'password',
-          id: 'password',
-          name: 'password',
-          value: this.props.userStore.password,
-          onChange: function onChange(event) {
-            _this2.props.userStore.password = event.target.value;
-          }
-        }),
-        _react2.default.createElement('div', { className: 'pad' }),
-        this.props.userStore.errors.length > 0 && _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_Errors2.default, { errors: this.props.userStore.errors }),
-          _react2.default.createElement('div', { className: 'pad' })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'text-right' },
-          _react2.default.createElement(_LoadingButton2.default, {
-            type: 'submit',
-            value: this.state.buttonText,
-            isLoading: this.props.userStore.isUpdating,
-            onClick: this.handleFormSubmit
-          })
-        )
-      );
-    }
-  }]);
-
-  return ProfileForm;
-}(_react2.default.Component), _class2.propTypes = {
-  userStore: _propTypes2.default.object.isRequired
-}, _temp)) || _class;
-
-exports.default = ProfileForm;
-
-/***/ }),
+/* 140 */,
 /* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20454,7 +20307,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _LoadingButton = __webpack_require__(49);
 
@@ -20702,7 +20555,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _Claim = __webpack_require__(30);
 
@@ -21054,7 +20907,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _Modal = __webpack_require__(80);
 
@@ -21146,7 +20999,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _GraphClaim = __webpack_require__(149);
 
@@ -21226,7 +21079,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _group = __webpack_require__(37);
 
@@ -21353,7 +21206,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _SVGbutton = __webpack_require__(81);
 
@@ -21524,7 +21377,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _GraphArg = __webpack_require__(148);
 
@@ -22011,7 +21864,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _mobx = __webpack_require__(10);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _InputButton = __webpack_require__(51);
 
@@ -22644,7 +22497,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _mobx = __webpack_require__(10);
 
-var _mobxReact = __webpack_require__(9);
+var _mobxReact = __webpack_require__(8);
 
 var _api = __webpack_require__(36);
 
@@ -23220,15 +23073,23 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _mobxReact = __webpack_require__(9);
-
-var _Profileform = __webpack_require__(140);
-
-var _Profileform2 = _interopRequireDefault(_Profileform);
+var _mobxReact = __webpack_require__(8);
 
 var _Nav = __webpack_require__(154);
 
 var _Nav2 = _interopRequireDefault(_Nav);
+
+var _public = __webpack_require__(328);
+
+var _public2 = _interopRequireDefault(_public);
+
+var _settings = __webpack_require__(329);
+
+var _settings2 = _interopRequireDefault(_settings);
+
+var _details = __webpack_require__(327);
+
+var _details2 = _interopRequireDefault(_details);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23312,7 +23173,7 @@ var UserProfileScene = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.o
                 window.wl.user.isLoggedIn && _react2.default.createElement(
                   'div',
                   null,
-                  _react2.default.createElement(_Nav2.default, { links: [{ to: '/profile', text: 'Public profile' }, { to: '/profile/account', text: 'Account details' }, { to: '/profile/emails', text: 'Emails' }]
+                  _react2.default.createElement(_Nav2.default, { links: [{ to: '/profile', text: 'Public profile' }, { to: '/profile/settings', text: 'WL Settings' }, { to: '/profile/details', text: 'Your details' }]
                   })
                 )
               ),
@@ -23323,30 +23184,21 @@ var UserProfileScene = (0, _reactRouterDom.withRouter)(_class = (0, _mobxReact.o
                   path: '/profile',
                   exact: true,
                   render: function render() {
-                    return _react2.default.createElement(
-                      'div',
-                      null,
-                      'Signup date: ',
-                      _this2.props.store.signUpDate
-                    );
+                    return _react2.default.createElement(_public2.default, { userStore: _this2.props.store });
                   }
                 }),
                 _react2.default.createElement(_reactRouterDom.Route, {
-                  path: '/profile/account',
+                  path: '/profile/settings',
                   exact: true,
                   render: function render() {
-                    return _react2.default.createElement(_Profileform2.default, { userStore: _this2.props.store });
+                    return _react2.default.createElement(_settings2.default, { userStore: _this2.props.store });
                   }
                 }),
                 _react2.default.createElement(_reactRouterDom.Route, {
-                  path: '/profile/emails',
+                  path: '/profile/details',
                   exact: true,
                   render: function render() {
-                    return _react2.default.createElement(
-                      'div',
-                      null,
-                      'email'
-                    );
+                    return _react2.default.createElement(_details2.default, { userStore: _this2.props.store });
                   }
                 })
               )
@@ -27537,7 +27389,7 @@ module.exports = AutoFocusUtils;
 
 
 var EventPropagators = __webpack_require__(32);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var FallbackCompositionState = __webpack_require__(201);
 var SyntheticCompositionEvent = __webpack_require__(244);
 var SyntheticInputEvent = __webpack_require__(247);
@@ -27926,7 +27778,7 @@ module.exports = BeforeInputEventPlugin;
 
 
 var CSSProperty = __webpack_require__(91);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var ReactInstrumentation = __webpack_require__(12);
 
 var camelizeStyleName = __webpack_require__(264);
@@ -28148,7 +28000,7 @@ module.exports = CSSPropertyOperations;
 
 var EventPluginHub = __webpack_require__(31);
 var EventPropagators = __webpack_require__(32);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactUpdates = __webpack_require__(15);
 var SyntheticEvent = __webpack_require__(17);
@@ -28466,7 +28318,7 @@ module.exports = ChangeEventPlugin;
 var _prodInvariant = __webpack_require__(4);
 
 var DOMLazyTree = __webpack_require__(23);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var createNodesFromMarkup = __webpack_require__(267);
 var emptyFunction = __webpack_require__(18);
@@ -30140,7 +29992,7 @@ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVT
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  var ExecutionEnvironment = __webpack_require__(8);
+  var ExecutionEnvironment = __webpack_require__(9);
   if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
     // First check if devtools is not installed
     if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
@@ -31956,7 +31808,7 @@ module.exports = ReactDOMOption;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var getNodeForCharacterOffset = __webpack_require__(259);
 var getTextContentAccessor = __webpack_require__(107);
@@ -32771,7 +32623,7 @@ module.exports = ReactDOMUnknownPropertyHook;
 var ReactInvalidSetStateWarningHook = __webpack_require__(229);
 var ReactHostOperationHistoryHook = __webpack_require__(227);
 var ReactComponentTreeHook = __webpack_require__(11);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var performanceNow = __webpack_require__(276);
 var warning = __webpack_require__(5);
@@ -33363,7 +33215,7 @@ module.exports = ReactEventEmitterMixin;
 var _assign = __webpack_require__(6);
 
 var EventListener = __webpack_require__(113);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var PooledClass = __webpack_require__(20);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactUpdates = __webpack_require__(15);
@@ -35124,7 +34976,7 @@ module.exports = SVGDOMPropertyConfig;
 
 
 var EventPropagators = __webpack_require__(32);
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactInputSelection = __webpack_require__(99);
 var SyntheticEvent = __webpack_require__(17);
@@ -36656,7 +36508,7 @@ module.exports = getNodeForCharacterOffset;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 /**
  * Generate a mapping of standard vendor prefixes using the defined style property and event name.
@@ -37077,7 +36929,7 @@ module.exports = createArrayFromMixed;
 
 /*eslint-disable fb-www/unsafe-html*/
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var createArrayFromMixed = __webpack_require__(266);
 var getMarkupWrap = __webpack_require__(268);
@@ -37166,7 +37018,7 @@ module.exports = createNodesFromMarkup;
 
 /*eslint-disable fb-www/unsafe-html */
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var invariant = __webpack_require__(3);
 
@@ -37487,7 +37339,7 @@ module.exports = memoizeStringOnly;
 
 
 
-var ExecutionEnvironment = __webpack_require__(8);
+var ExecutionEnvironment = __webpack_require__(9);
 
 var performance;
 
@@ -41135,6 +40987,338 @@ module.exports = g;
 __webpack_require__(129);
 module.exports = __webpack_require__(130);
 
+
+/***/ }),
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _class2, _temp;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _mobxReact = __webpack_require__(8);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * Personal details & updating them
+ */
+
+var AccountScene = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
+  _inherits(AccountScene, _React$Component);
+
+  function AccountScene() {
+    _classCallCheck(this, AccountScene);
+
+    return _possibleConstructorReturn(this, (AccountScene.__proto__ || Object.getPrototypeOf(AccountScene)).apply(this, arguments));
+  }
+
+  _createClass(AccountScene, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        window.wl.user.isLoggedIn && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'section',
+            null,
+            _react2.default.createElement(
+              'h2',
+              { className: 'section-title' },
+              'Change username'
+            ),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'username' },
+              'Username'
+            ),
+            _react2.default.createElement('input', {
+              type: 'text',
+              id: 'username',
+              name: 'username',
+              value: this.props.userStore.username,
+              onChange: function onChange(event) {
+                _this2.props.userStore.username = event.target.value;
+              }
+            }),
+            _react2.default.createElement('div', { className: 'pad' }),
+            _react2.default.createElement(
+              'button',
+              null,
+              'Update username'
+            )
+          ),
+          _react2.default.createElement(
+            'section',
+            null,
+            _react2.default.createElement(
+              'h2',
+              { className: 'section-title' },
+              'Change email'
+            ),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'email' },
+              'Email'
+            ),
+            _react2.default.createElement('input', {
+              type: 'text',
+              id: 'email',
+              name: 'email',
+              value: this.props.userStore.email,
+              onChange: function onChange(event) {
+                _this2.props.userStore.email = event.target.value;
+              }
+            }),
+            _react2.default.createElement('div', { className: 'pad' }),
+            _react2.default.createElement(
+              'button',
+              null,
+              'Update email'
+            )
+          ),
+          _react2.default.createElement(
+            'section',
+            null,
+            _react2.default.createElement(
+              'h2',
+              { className: 'section-title' },
+              'Change password'
+            ),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'oldpassword' },
+              'Old Password'
+            ),
+            _react2.default.createElement('input', {
+              type: 'password',
+              id: 'oldpassword',
+              name: 'oldpassword',
+              value: this.props.userStore.password,
+              onChange: function onChange(event) {
+                _this2.props.userStore.password = event.target.value;
+              }
+            }),
+            _react2.default.createElement('div', { className: 'pad' }),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'newpassword' },
+              'New Password'
+            ),
+            _react2.default.createElement('input', {
+              type: 'password',
+              id: 'newpassword',
+              name: 'newpassword',
+              value: this.props.userStore.password,
+              onChange: function onChange(event) {
+                _this2.props.userStore.password = event.target.value;
+              }
+            }),
+            _react2.default.createElement('div', { className: 'pad' }),
+            _react2.default.createElement(
+              'button',
+              null,
+              'Update password'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return AccountScene;
+}(_react2.default.Component), _class2.propTypes = {
+  userStore: _propTypes2.default.object.isRequired
+}, _temp)) || _class;
+
+exports.default = AccountScene;
+
+/***/ }),
+/* 328 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _class2, _temp;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _mobxReact = __webpack_require__(8);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * Your profile as others see it
+ */
+
+var ProfileScene = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
+  _inherits(ProfileScene, _React$Component);
+
+  function ProfileScene() {
+    _classCallCheck(this, ProfileScene);
+
+    return _possibleConstructorReturn(this, (ProfileScene.__proto__ || Object.getPrototypeOf(ProfileScene)).apply(this, arguments));
+  }
+
+  _createClass(ProfileScene, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        window.wl.user.isLoggedIn && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            null,
+            'Signup date: ',
+            this.props.userStore.signUpDate
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            this.props.userStore.username
+          )
+        )
+      );
+    }
+  }]);
+
+  return ProfileScene;
+}(_react2.default.Component), _class2.propTypes = {
+  userStore: _propTypes2.default.object.isRequired
+}, _temp)) || _class;
+
+exports.default = ProfileScene;
+
+/***/ }),
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _class, _class2, _temp;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _mobxReact = __webpack_require__(8);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * The User profile & settings page
+ * Here you will be able to change the theme / alert settings / your username / password / etc...
+ * @prop {*} name 
+ */
+
+var ProfileScene = (0, _mobxReact.observer)(_class = (_temp = _class2 = function (_React$Component) {
+  _inherits(ProfileScene, _React$Component);
+
+  function ProfileScene() {
+    _classCallCheck(this, ProfileScene);
+
+    return _possibleConstructorReturn(this, (ProfileScene.__proto__ || Object.getPrototypeOf(ProfileScene)).apply(this, arguments));
+  }
+
+  _createClass(ProfileScene, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        window.wl.user.isLoggedIn && _react2.default.createElement(
+          'div',
+          null,
+          'TODO: color scheme / font size / notifications'
+        )
+      );
+    }
+  }]);
+
+  return ProfileScene;
+}(_react2.default.Component), _class2.propTypes = {
+  userStore: _propTypes2.default.object.isRequired
+}, _temp)) || _class;
+
+exports.default = ProfileScene;
 
 /***/ })
 /******/ ]);

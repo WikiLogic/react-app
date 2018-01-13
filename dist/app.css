@@ -399,9 +399,6 @@ body {
   background-color: white;
   color: black; }
 
-section {
-  margin: 1rem 0; }
-
 br {
   display: block;
   padding: 0;
@@ -720,6 +717,13 @@ hr {
   border: 0;
   border-top: 1px solid #cccccc;
   margin: 0 0 -1px 0; }
+
+section {
+  margin-bottom: 2.5rem; }
+
+.section-title {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #cccccc; }
 
 ul {
   font-size: 1rem;

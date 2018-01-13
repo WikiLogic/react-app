@@ -2,8 +2,10 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import ProfileForm from 'src/components/Forms/Profileform.jsx';
 import SidebarNav from 'src/components/Sidebar/Nav.jsx';
+import PublicScene from './public.jsx';
+import SettingsScene from './settings.jsx';
+import DetailsScene from './details.jsx';
 
 /**
  * The User profile & settings page
@@ -48,33 +50,39 @@ export default class UserProfileScene extends React.Component {
                   <div>
                     <SidebarNav links={[
                       { to: '/profile', text: 'Public profile' },
-                      { to: '/profile/account', text: 'Account details' },
-                      { to: '/profile/emails', text: 'Emails' }
+                      { to: '/profile/settings', text: 'WL Settings' },
+                      { to: '/profile/details', text: 'Your details' }
                     ]}
                     />
                   </div>
                 }
               </div>
               <div className="sidebar-layout__main">
+
+                {/* Your profile as others see it */}
                 <Route
                   path="/profile"
                   exact
                   render={() => {
-                    return <div>Signup date: {this.props.store.signUpDate}</div>;
+                    return <PublicScene userStore={this.props.store} />;
                   }}
                 />
+
+                {/* Your WL settings */}
                 <Route
-                  path="/profile/account"
+                  path="/profile/settings"
                   exact
                   render={() => {
-                    return <ProfileForm userStore={this.props.store} />;
+                    return <SettingsScene userStore={this.props.store} />;
                   }}
                 />
+
+                {/* Your personal details */}
                 <Route
-                  path="/profile/emails"
+                  path="/profile/details"
                   exact
                   render={() => {
-                    return <div>email</div>;
+                    return <DetailsScene userStore={this.props.store} />;
                   }}
                 />
 
