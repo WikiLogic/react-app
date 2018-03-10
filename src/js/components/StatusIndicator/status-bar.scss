@@ -1,0 +1,24 @@
+/* The status bar indicator
+ * a bar between 1 and 100
+ */
+.status-bar {
+    width: 100%;
+    height: 6px;
+    position: relative;
+    background-color: $WL_Red;
+
+    &__bar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 3px;
+        background-color: $WL_Green;
+
+        @for $i from 1 through 100 {
+            &--#{$i} {
+                width: $i * 1%;
+            }
+        }
+    }
+}

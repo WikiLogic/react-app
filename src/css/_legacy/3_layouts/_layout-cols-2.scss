@@ -1,0 +1,39 @@
+.layout-cols-2 {
+    width: 100%;
+
+    &__left {
+        margin-bottom: rem(20);
+    }
+    &__right {
+        margin-bottom: rem(20);
+    }
+
+    @include breakpoint("small") {
+        display: table;
+
+        &__left,
+        &__gap,
+        &__right {
+            display: table-cell;
+            vertical-align: top;
+            margin-bottom: 0;
+        }
+
+        &__left {
+            width: 50%;
+        }
+        &__gap {
+            width: rem($pad);
+        }
+        &__right {
+            text-align: right;
+        }
+
+        &--vertical-center {
+            .layout-cols-2__left,
+            .layout-cols-2__right {
+                vertical-align: middle;
+            }
+        }
+    }
+}

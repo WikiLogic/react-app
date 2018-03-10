@@ -1,0 +1,11 @@
+.sidebar-nav {
+    border: 1px solid $grey-light;
+    border-radius: 2px;
+    padding: rem($pad);
+    a {
+        display: block;
+        + a {
+            margin-top: rem($pad / 2);
+        }
+    }
+}

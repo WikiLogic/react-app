@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: $site-width;
+    margin: 0 auto;
+
+    a {
+        color: $header-color;
+        @include occluded-underline($header-color, $header-background);
+        &:focus {
+            outline-color: white;
+        }
+    }
+
+    a.header__title {
+        margin: rem(9) rem($pad);
+        text-align: center;
+        display: block;
+        font-family: $fancy;
+        font-size: rem(24);
+        background-position: 0 1.2em;
+    }
+
+    &__links {
+        padding: 0 rem($pad);
+        text-transform: uppercase;
+        font-size: rem(15);
+        a + a {
+            margin-left: rem($pad);
+        }
+    }
+}

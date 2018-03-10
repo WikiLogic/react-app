@@ -1,0 +1,59 @@
+/* colors */
+
+$blue-dark: #111f2e;
+$blue-light: #0a88c5;
+
+$grey-dark: #cccccc;
+$grey-light: #eeeeee;
+
+.bg-blue-dark {
+    background-color: $blue-dark;
+}
+.bg-blue-light {
+    background-color: $blue-light;
+}
+.bg-grey-dark {
+    background-color: $grey-dark;
+}
+.bg-grey-light {
+    background-color: $grey-light;
+}
+
+.color-white {
+    color: white;
+}
+.color-black {
+    color: black;
+}
+
+// Main block colors
+$header-background: $blue-dark;
+$page-title-background: $grey-light;
+$body-background: white;
+$footer-background: $grey-light;
+
+$header-color: white;
+$page-title-color: black;
+$body-color: black;
+$footer-color: black;
+
+//component colors
+$state-primary: $blue-dark;
+$state-bg: $grey-light;
+
+$input-border: $grey-dark;
+
+//graph colors
+$claim-fill: white;
+$claim-stroke: $grey-dark;
+$argument-fill: $grey-light;
+$argument-stroke: $grey-light;
+$premise-fill: white;
+$premise-stroke: $grey-dark;
+
+//$light-blue:    #0a4471;
+$WL_Red: #f05d65;
+$WL_Red-light: #fce1e2;
+$WL_Green: #31d332;
+$WL_Green-light: #d9f7d9;
+$WL_Blue: #5f9aec;

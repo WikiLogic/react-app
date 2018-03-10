@@ -1,0 +1,24 @@
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: $body-background;
+    color: $body-color;
+}

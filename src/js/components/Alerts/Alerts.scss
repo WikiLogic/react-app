@@ -1,0 +1,34 @@
+.alerts {
+}
+
+.alert {
+    display: table;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 5px rem($pad * 0.75); // special case :)
+    border-radius: 4px;
+    background-color: $grey-light;
+
+    &__icon {
+        display: table-cell;
+        vertical-align: top;
+        width: 1em;
+        padding-right: rem($pad * 0.6);
+    }
+
+    svg {
+        width: 1em;
+        height: 1em;
+        position: relative;
+        top: -2px;
+    }
+
+    &__body {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+}

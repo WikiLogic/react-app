@@ -1,0 +1,7 @@
+.graph-arg {
+    &__rect {
+        fill: $argument-fill;
+        stroke-width: 1px;
+        stroke: $argument-stroke;
+    }
+}

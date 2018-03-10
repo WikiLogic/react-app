@@ -1,0 +1,30 @@
+.claim-chain {
+    width: 100%;
+
+    &__top-claim {
+        //inside a row
+        text-align: center;
+        width: 100%;
+
+        &-text {
+            font-size: rem(28);
+        }
+
+        &-status {
+        }
+    }
+
+    //css only dos scroll properly vertically. so we're going to do a bit of rotation :P
+    &__row {
+        padding: rem($pad);
+        overflow-x: auto;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        .argument {
+            width: 21%;
+            min-width: 300px;
+        }
+    }
+}

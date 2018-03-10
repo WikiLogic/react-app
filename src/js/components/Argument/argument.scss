@@ -1,0 +1,35 @@
+.argument {
+    padding: rem($pad / 2);
+    border-radius: 5px;
+
+    &__header {
+        margin-bottom: rem($pad / 2);
+    }
+
+    &__body {
+    }
+
+    &__premis {
+        cursor: pointer;
+
+        + .argument__premis {
+            margin-top: rem($pad / 2);
+        }
+
+        &:hover {
+            //color: blue;
+        }
+    }
+
+    &--SUPPORTS {
+        //border-color: green;
+        background-color: rgba($WL_Green, 0.2);
+        border: 1px solid $WL_Green;
+    }
+
+    &--OPPOSES {
+        //border-color: red;
+        background-color: rgba($WL_Red, 0.2);
+        border: 1px solid $WL_Red;
+    }
+}
