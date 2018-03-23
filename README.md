@@ -49,3 +49,6 @@ SSH into the dockerised host
 
 Quit the SSH session
 `exit`
+
+https://github.com/igorprado/react-notification-system  
+https://github.com/brillout/awesome-react-components  
